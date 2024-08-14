@@ -1,13 +1,5 @@
-<script setup>
-import carousel from '@/components/Carousel.vue'
-
-</script>
-
 <template>
-  <carousel />
+  <main>
+     <RouterView />
+    </main>
 </template>
-
-<style scoped>
-
-
-</style>

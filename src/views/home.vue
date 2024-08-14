@@ -6,15 +6,16 @@ import bread3 from '@/assets/image/backg.avif'
 </script>
 
 <template>
+  
   <div class="container">
     <header class="header">
       <div class="logo">Take a Deep Bread</div>
       <nav>
         <ul class="nav-links">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Product</a></li>
-          <li><a href="#">Store</a></li>
-          <li><a href="#">Contact Us</a></li>
+          <li><router-link to="/contato">sla descido depoiso </router-link></li>
+          <li><router-link to="/contato">produtos</router-link></li>
+          <li><router-link to="/contato"></router-link></li>
+          <li><router-link to="/contato">Contato</router-link></li>
         </ul>
       </nav>
     </header>
@@ -147,6 +148,7 @@ import bread3 from '@/assets/image/backg.avif'
 .product-card {
   position: relative;
   background: rgba(255, 255, 255, 0.9);
+  border: solid 5px rgb(110, 58, 27);
   border-radius: 10px;
   overflow: hidden;
   text-align: center;
