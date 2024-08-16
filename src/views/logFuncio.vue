@@ -28,7 +28,7 @@
       
       <div class="form-group">
         <label for="cargo" >Cargo:</label>
-        <input type="text" id="Cargo" name="cargo" required placeholder="Insira o seu cargo"
+        <input type="text" id="Cargo" name="cargo" required placeholder="Insira o seu cargo">
       </div>
 
       <button type="submit">Cadastrar</button>

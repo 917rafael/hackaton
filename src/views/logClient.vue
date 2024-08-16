@@ -49,12 +49,12 @@ body {
 }
 
 .entre {
-    color: #d9534f; /* Vermelho suave */
+    color: #d9534f;
     text-align: center;
 }
 
 .santo {
-    color: #c9302c; /* Vermelho mais intenso */
+    color: #c9302c;
 }
 
 .background {
@@ -122,6 +122,6 @@ button {
 }
 
 button:hover {
-    background-color: #c9302c; /* Cor de fundo do botão ao passar o mouse */
+    background-color: #c9302c; 
 }
 </style>
