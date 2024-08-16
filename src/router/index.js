@@ -1,21 +1,25 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+
 
 //import logClient from '@/views/logClient.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+
+  
+    {
+      path: '/contato',
+      name: 'contato',
+      component: () => import('../views/Contato.vue')
+    },
     {
       path: '/',
       name: 'home',
-      component: HomeView
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: () => import('../views/AboutView.vue')
-    },
+      component: () => import('../views/home.vue')
+    }
+
     {
       path: '/logFuncio',
       name: 'logFuncio',
@@ -26,6 +30,7 @@ const router = createRouter({
       name: 'logClient',
       component: () => import('../views/logClient.vue')
     },
+
 
   ]
 })
