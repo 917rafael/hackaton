@@ -3,11 +3,15 @@
 </script>
 
 <template>
-    <main>
+   <main>
       <RouterView />
     </main>
+  
+
 </template>
 
 <style scoped>
 
+
 </style>
+
