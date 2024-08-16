@@ -1,4 +1,5 @@
 <script setup>
+import headers from '@/components/header.vue'
 import back from '@/assets/image/back.jpg'
 import bread1 from '@/assets/image/backg.avif'
 import bread2 from '@/assets/image/back.jpg'
@@ -7,23 +8,12 @@ import bread3 from '@/assets/image/backg.avif'
 
 <template>
   
-  <div class="container">
-    <header class="header">
-      <div class="logo">Take a Deep Bread</div>
-      <nav>
-        <ul class="nav-links">
-          <li><router-link to="/contato">sla descido depoiso </router-link></li>
-          <li><router-link to="/contato">produtos</router-link></li>
-          <li><router-link to="/contato"></router-link></li>
-          <li><router-link to="/contato">Contato</router-link></li>
-        </ul>
-      </nav>
-    </header>
+  <headers />
 
     <section class="hero" :style="{ backgroundImage: `url(${back})` }">
       <div class="hero-text">
         <h1>Whole Grain Goodness in Every Slice of Wheat Bread</h1>
-        <p>One bite and you'll switch to whole wheat bread</p>
+        <p class="hero-p">One bite and you'll switch to whole wheat bread</p>
         <button class="cta-button">Learn More</button>
       </div>
       
@@ -56,53 +46,17 @@ import bread3 from '@/assets/image/backg.avif'
         </div>
       </div>
     </section>
-  </div>
+ 
+    <div class="">
+
+    </div>
+
 </template>
 
 <style scoped>
+.hero-p{
+  color: white;
 
-.container {
-  font-family: 'Arial', sans-serif;
-  color: #fff;
-}
-
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  background-color: rgba(0, 0, 0, 0.85);
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #ff5722;
-}
-
-.nav-links {
-  display: flex;
-  list-style: none;
-}
-
-.nav-links li {
-  margin-right: 20px;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: #fff;
-  font-weight: bold;
-  font-size: 16px;
-  padding: 8px 16px;
-  transition: background-color 0.3s ease;
-}
-
-.nav-links a:hover {
-  background-color: #ff5722;
-  border-radius: 4px;
 }
 
 
@@ -122,6 +76,7 @@ import bread3 from '@/assets/image/backg.avif'
   font-size: 48px;
   margin-bottom: 20px;
   font-weight: bold;
+  color: white;
 }
 
 .hero-text p {
@@ -188,7 +143,7 @@ import bread3 from '@/assets/image/backg.avif'
   padding: 10px 20px;
   background-color: #ff5722;
   border: none;
-  color: #fff;
+  color: #ffffff;
   cursor: pointer;
   border-radius: 25px;
   transition: background-color 0.3s ease;
