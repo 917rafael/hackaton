@@ -1,9 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 
+//import logClient from '@/views/logClient.vue'
+
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+
   
     {
       path: '/contato',
@@ -15,7 +19,21 @@ const router = createRouter({
       name: 'home',
       component: () => import('../views/home.vue')
     }
+
+    {
+      path: '/logFuncio',
+      name: 'logFuncio',
+      component: () => import('../views/logFuncio.vue')
+    },
+    {
+      path: '/logClient',
+      name: 'logClient',
+      component: () => import('../views/logClient.vue')
+    },
+
+
   ]
 })
 
 export default router
+

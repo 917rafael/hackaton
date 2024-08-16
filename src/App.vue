@@ -1,5 +1,13 @@
+
+<script setup>
+</script>
+
 <template>
-  <main>
-     <RouterView />
+   <main>
+      <RouterView />
     </main>
 </template>
+
+<style scoped>
+</style>
+
