@@ -1,5 +1,6 @@
 <script setup>
-import headers from '@/components/header.vue'
+import inputs from '@/components/input.vue';
+import headers from '@/components/header.vue';
 </script>
 
 <template>
@@ -9,14 +10,16 @@ import headers from '@/components/header.vue'
     <div class="contato">
       <div class="info"></div>
       <div class="contate">
-        <input type="text" id="cnome" name="cname" placeholder="Digite seu nome">
-        <input type="email" id="cemail" name="cemail" placeholder="Digite um email válido" class="custom-input">
+        <inputs  />
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+.nome{
+  margin-left: 50px;
+}
 .custom-input {
   padding: 10px 15px;
   font-size: 16px;
@@ -45,7 +48,7 @@ import headers from '@/components/header.vue'
   justify-content: center;
   height: 50vh;
   width: 95vh;
-  background-color: black;
+  background-color: rgb(230, 176, 176);
   border-radius: 2.567%;
 }
 
@@ -60,6 +63,7 @@ import headers from '@/components/header.vue'
   margin-right: 15px;
   height: 90%;
   width: 50%;
+  background-color: rgb(25, 0, 255);
   
 }
 </style>

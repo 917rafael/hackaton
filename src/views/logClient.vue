@@ -2,7 +2,6 @@
 </script>
 
 <template>
-    <router-link></router-link>
   <div class="background">
     <img src="/src/assets/image/padaria.jpg" alt="Padaria" class="padaria-img">
   </div>
