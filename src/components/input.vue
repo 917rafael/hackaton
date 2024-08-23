@@ -1,10 +1,12 @@
 
 <script setup>
+defineProps({pergunta: Object})
 </script>
 <template>
-<div class="form__group field">
-  <input type="input" class="form__field"  name="name" id='name' required />
-  <label for="name" class="form__label">Name</label>
+<div class="form__group">
+  <textarea v-if="pergunta.type === 'textarea'" class="form__field"/>
+  <input v-else type="text" class="form__field" :name="pergunta.description" :id="pergunta.id" required />
+  <label :for="pergunta.id" class="form__label">{{ pergunta.description }}</label>
 </div>
 </template>
 
@@ -14,6 +16,7 @@
   padding: 15px 0 0;
   margin-top: 10px;
   width: 50%;
+  margin-left: 80px;
 }
 
 .form__field {

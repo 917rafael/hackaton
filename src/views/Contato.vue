@@ -1,6 +1,9 @@
 <script setup>
-import inputs from '@/components/input.vue';
+import Input from '@/components/input.vue';
 import headers from '@/components/header.vue';
+
+import {perguntas} from '@/data/perguntas.js'
+
 </script>
 
 <template>
@@ -10,7 +13,7 @@ import headers from '@/components/header.vue';
     <div class="contato">
       <div class="info"></div>
       <div class="contate">
-        <inputs  />
+        <Input v-for="pergunta in perguntas" :key="pergunta.id" :pergunta="pergunta" />
       </div>
     </div>
   </div>
@@ -64,6 +67,6 @@ import headers from '@/components/header.vue';
   height: 90%;
   width: 50%;
   background-color: rgb(25, 0, 255);
-  
+ 
 }
 </style>
