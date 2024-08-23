@@ -1,6 +1,7 @@
 <script setup>
 import Input from '@/components/input.vue';
 import headers from '@/components/header.vue';
+import fundo from '@/assets/image/fundopadaria.avif'
 
 import {perguntas} from '@/data/perguntas.js'
 
@@ -8,7 +9,7 @@ import {perguntas} from '@/data/perguntas.js'
 
 <template>
   <headers />
-
+  <section class="hero" :style="{ backgroundImage: `url(${fundo})` }">
   <div class="container">
     <div class="contato">
       <div class="info"></div>
@@ -17,6 +18,7 @@ import {perguntas} from '@/data/perguntas.js'
       </div>
     </div>
   </div>
+  </section>
 </template>
 
 <style scoped>
@@ -66,7 +68,18 @@ import {perguntas} from '@/data/perguntas.js'
   margin-right: 15px;
   height: 90%;
   width: 50%;
-  background-color: rgb(25, 0, 255);
+  background-color: rgb(221, 187, 149);
  
+}
+.hero {
+  position: relative;
+  height: 100vh;
+  
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
 }
 </style>

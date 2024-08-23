@@ -20,12 +20,12 @@ defineProps({pergunta: Object})
 }
 
 .form__field {
-  font-family: inherit;
+  font-family: Arial, Helvetica, sans-serif;
   width: 100%;
   border: 0;
   border-bottom: 2px solid #9b9b9b;
   outline: 0;
-  font-size: 1.3rem;
+  font-size: 1rem;
   color: #fff;
   padding: 7px 0;
   background: transparent;
@@ -47,7 +47,7 @@ defineProps({pergunta: Object})
   top: 0;
   display: block;
   transition: 0.2s;
-  font-size: 1rem;
+  font-size: 2rem;
   color: #9b9b9b;
 }
 
@@ -73,7 +73,7 @@ defineProps({pergunta: Object})
 }
 
 body {
-  font-family: 'Poppins', sans-serif; 
+  font-family: 'Times New Roman', Times, serif; 
   display: flex;
   flex-direction: column;
   justify-content: center;
