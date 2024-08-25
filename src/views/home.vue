@@ -20,6 +20,11 @@ import { produtos } from '@/data/produtos'
         <product-card v-for="produto in produtos" :key="produto.id" :produto="produto" />
       </div>
     </section>
+    <div class="container">
+      <article class="produtos">
+
+      </article>
+    </div>
 </template>
 
 <style scoped>
@@ -29,7 +34,7 @@ import { produtos } from '@/data/produtos'
 
 .hero {
   position: relative;
-  height: 100vh;
+  height: 83vh;
   background-size: cover;
   background-position: center;
   display: flex;
@@ -73,3 +78,4 @@ import { produtos } from '@/data/produtos'
 }
 
 </style>
+
