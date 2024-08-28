@@ -1,9 +1,11 @@
 <script setup>
 import headers from '@/components/header.vue'
 import ProductCard from '@/components/ProductCard.vue'
-import back from '@/assets/image/back.jpg'
+import back from '@/assets/image/fundohome.jpg'
+import navbar from '@/components/NavDireita.vue'
 
 import { produtos } from '@/data/produtos'
+
 
 </script>
 
@@ -20,6 +22,14 @@ import { produtos } from '@/data/produtos'
         <product-card v-for="produto in produtos" :key="produto.id" :produto="produto" />
       </div>
     </section>
+    <div class="container">
+      <article class="produtos">
+
+      </article>
+    </div>
+    <div>
+    <navbar />
+    </div>
 </template>
 
 <style scoped>
@@ -73,3 +83,4 @@ import { produtos } from '@/data/produtos'
 }
 
 </style>
+

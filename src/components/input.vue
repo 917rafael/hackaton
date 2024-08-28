@@ -1,22 +1,21 @@
-
 <script setup>
-defineProps({pergunta: Object})
+defineProps({ pergunta: Object })
 </script>
+
 <template>
-<div class="form__group">
-  <textarea v-if="pergunta.type === 'textarea'" class="form__field"/>
-  <input v-else type="text" class="form__field" :name="pergunta.description" :id="pergunta.id" required />
-  <label :for="pergunta.id" class="form__label">{{ pergunta.description }}</label>
-</div>
+  <div class="form__group">
+    <textarea v-if="pergunta.type === 'textarea'" class="form__field" :id="pergunta.id" :placeholder="pergunta.description" :minlength="pergunta.minlength":maxlength="pergunta.maxlength"></textarea>
+    <input v-else type="text" class="form__field" :name="pergunta.description" :placeholder="pergunta.description" :id="pergunta.id" required />
+    <label :for="pergunta.id" class="form__label">{{ pergunta.description }}</label>
+  </div>
 </template>
 
 <style scoped>
 .form__group {
   position: relative;
   padding: 15px 0 0;
-  margin-top: 10px;
-  width: 50%;
-  margin-left: 80px;
+  margin-top: 20px;
+  width: 100%;
 }
 
 .form__field {
@@ -26,60 +25,63 @@ defineProps({pergunta: Object})
   border-bottom: 2px solid #9b9b9b;
   outline: 0;
   font-size: 1rem;
-  color: #fff;
+  color: #333;
   padding: 7px 0;
   background: transparent;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, border-width 0.2s;
+  resize: none; /* Remove a possibilidade de redimensionar o textarea */
+}
 
-  &::placeholder {
-    color: transparent;
-  }
+.form__field::placeholder {
+  color: transparent; /* Torna o placeholder invisível */
+}
 
-  &:placeholder-shown ~ .form__label {
-    font-size: 1.3rem;
-    cursor: text;
-    top: 20px;
-  }
+.form__field:placeholder-shown ~ .form__label {
+  font-size: 1.3rem;
+  cursor: text;
+  top: 20px; /* Posição inicial do label quando o placeholder é mostrado */
 }
 
 .form__label {
   position: absolute;
-  top: 0;
+  top: 10px;
+  left: 0;
   display: block;
   transition: 0.2s;
-  font-size: 2rem;
+  font-size: 1rem;
   color: #9b9b9b;
+  pointer-events: none;
+}
+
+.form__field:focus ~ .form__label,
+.form__field:not(:placeholder-shown) ~ .form__label {
+  font-size: 0.85rem;
+  color: #11998e;
+  top: -15px; /* Posição do label quando o campo é focado ou preenchido */
+  font-weight: 700;
 }
 
 .form__field:focus {
-  ~ .form__label {
-    position: absolute;
-    top: 0;
-    display: block;
-    transition: 0.2s;
-    font-size: 1rem;
-    color: #11998e;
-    font-weight:700;    
-  }
-  padding-bottom: 6px;  
-  font-weight: 700;
-  border-width: 3px;
-  border-image: linear-gradient(to right, #11998e,#38ef7d);
-  border-image-slice: 1;
+  border-bottom: 2px solid #38ef7d;
 }
 
-.form__field{
-  &:required,&:invalid { box-shadow:none; }
+textarea.form__field {
+  min-height: 100px;
+}
+
+.form__field:required,
+.form__field:invalid {
+  box-shadow: none;
 }
 
 body {
-  font-family: 'Times New Roman', Times, serif; 
+  font-family: 'Times New Roman', Times, serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   font-size: 1.5rem;
-  background-color:#222222;
+  background-color: #222222;
 }
 </style>
