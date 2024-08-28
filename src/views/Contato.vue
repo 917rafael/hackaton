@@ -14,13 +14,12 @@ import { perguntas } from '@/data/perguntas.js';
       
         <div class="info">
           <h2>Contate-Nos</h2>
-          <p>3240, 16 Sunrise Avenue, 123-456-7890</p>
+          <p>665, Rua Tecnicos Agricola, +55 47 4002-8922</p>
           <p>Seg - Sex: 9h - 20h</p>
           <p>Sáb - Dom: 9h - 12h</p>
           <p><a href="mailto:email@exemplo.com">email@exemplo.com</a></p>
           <div>
-            <h2>siga-nos</h2>
-            <!--local de para colocar icones-->
+            <h2>Siga-nos</h2>
           </div>
         </div>
 
@@ -50,7 +49,7 @@ import { perguntas } from '@/data/perguntas.js';
   text-align: center;
   padding: 20px;
   overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro translúcido */
+  background-color: rgba(0, 0, 0, 0.5); 
 }
 
 .overlay {
@@ -59,12 +58,12 @@ import { perguntas } from '@/data/perguntas.js';
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('@/assets/image/fundopadaria.avif');
-  background-size: cover;
+  background-image: url('@/assets/image/Fundocontato.jpg');
+  background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  filter: brightness(0.5); 
+  filter: brightness(0.7); 
   z-index: -1; 
 }
 

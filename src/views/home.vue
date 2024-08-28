@@ -1,9 +1,11 @@
 <script setup>
 import headers from '@/components/header.vue'
 import ProductCard from '@/components/ProductCard.vue'
-import back from '@/assets/image/back.jpg'
+import back from '@/assets/image/fundohome.jpg'
+import navbar from '@/components/NavDireita.vue'
 
 import { produtos } from '@/data/produtos'
+
 
 </script>
 
@@ -25,6 +27,9 @@ import { produtos } from '@/data/produtos'
 
       </article>
     </div>
+    <div>
+    <navbar />
+    </div>
 </template>
 
 <style scoped>
@@ -34,7 +39,7 @@ import { produtos } from '@/data/produtos'
 
 .hero {
   position: relative;
-  height: 83vh;
+  height: 100vh;
   background-size: cover;
   background-position: center;
   display: flex;

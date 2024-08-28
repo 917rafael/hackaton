@@ -7,21 +7,70 @@
   <script setup>
   import back from '@/assets/image/back.jpg'
   import ProductCard from '@/components/Produtos.vue';
-  import produto2 from '@/components/produto2.vue';
+
   
   const products = [
     {
       id: 1,
       name: 'pega o pao caraio',
-      image: back, // Substitua pelo link da imagem real
+      image: back,
       rating: 2,
       reviews: 1,
-      oldPrice: 229.99, //desconto
+      oldPrice: 229.99, 
       currentPrice: 179.99,
-      discount: 21, //desconto porcentagem de desconto
+      discount: 21,
       discountText: 'Mais barato no app!',
-      installments: '3x de R$ 59,99 sem juros no cartão de crédito', //escrita em baixo do preço 
+      installments: '3x de R$ 59,99 sem juros no cartão de crédito',  
     },
+    {
+      id: 1,
+      name: 'pega o pao caraio',
+      image: back,
+      rating: 2,
+      reviews: 1,
+      oldPrice: 229.99, 
+      currentPrice: 179.99,
+      discount: 21,
+      discountText: 'Mais barato no app!',
+      installments: '3x de R$ 59,99 sem juros no cartão de crédito',  
+    },
+    {
+      id: 1,
+      name: 'pega o pao caraio',
+      image: back,
+      rating: 2,
+      reviews: 1,
+      oldPrice: 229.99, 
+      currentPrice: 179.99,
+      discount: 21,
+      discountText: 'Mais barato no app!',
+      installments: '3x de R$ 59,99 sem juros no cartão de crédito',  
+    },
+    {
+      id: 1,
+      name: 'pega o pao caraio',
+      image: back,
+      rating: 5,
+      reviews: 1,
+      oldPrice: 229.99, 
+      currentPrice: 179.99,
+      discount: 21,
+      discountText: 'Mais barato no app!',
+      installments: '3x de R$ 59,99 sem juros no cartão de crédito',  
+    },
+    {
+      id: 1,
+      name: 'pega o pao caraio',
+      image: back,
+      rating: 2,
+      reviews: 1,
+      oldPrice: 229.99, 
+      currentPrice: 179.99,
+      discount: 21,
+      discountText: 'Mais barato no app!',
+      installments: '3x de R$ 59,99 sem juros no cartão de crédito',  
+    },
+    
     
 
     // Adicione mais produtos conforme necessário
