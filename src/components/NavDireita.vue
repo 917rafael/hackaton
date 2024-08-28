@@ -9,7 +9,8 @@ const toggleMenu = () => {
 
 <template>
   <aside>
-    <button class="hamburger" @click="toggleMenu">&#9776; </button>    
+    <button class="hamburger" @click="toggleMenu">
+      &#9776; </button>    
     <div class="nav-bar" :class="{ open: isMenuOpen }">
       <div class="nav-item">Doces</div>
       <div class="nav-item">Salgados</div>

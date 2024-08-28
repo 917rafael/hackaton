@@ -11,16 +11,22 @@ import { perguntas } from '@/data/perguntas.js';
     <div class="overlay"></div>
 
       <div class="contato">
-      
+        
         <div class="info">
+          <router-link to="/">
+            <img src="@/assets/image/logo.png" class="image-contato" alt="">
+          </router-link>
+
           <h2>Contate-Nos</h2>
           <p>665, Rua Tecnicos Agricola, +55 47 4002-8922</p>
           <p>Seg - Sex: 9h - 20h</p>
           <p>Sáb - Dom: 9h - 12h</p>
           <p><a href="mailto:email@exemplo.com">email@exemplo.com</a></p>
+         
           <div>
             <h2>Siga-nos</h2>
           </div>
+        
         </div>
 
         <div class="contate">
@@ -33,6 +39,9 @@ import { perguntas } from '@/data/perguntas.js';
 </template>
 
 <style scoped>
+.image-contato{
+  width: 190px;
+}
 
 .social h2{
   font-size: 22px;
