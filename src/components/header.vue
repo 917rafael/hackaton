@@ -3,14 +3,13 @@
 
 <template>
   <header class="header">
-    <!-- Use router-link para navegação interna -->
     <router-link to="/">
       <img src="/src/assets/image/logo.png" alt="Logo" class="logo">
     </router-link>
     <nav>
       <ul class="nav-links">
         <li><router-link to="/contato">Contato</router-link></li>
-        <li><router-link to="/contato">Contato</router-link></li>
+        <li><router-link to="/logClient">Login</router-link></li>
         <li><router-link to="/contato">Contato</router-link></li>
         <li><router-link to="/contato">Contato</router-link></li>
       </ul>
@@ -33,8 +32,8 @@
 }
 
 .logo {
-  max-width: 139px; /* Define um tamanho máximo para a logo */
-  height: 110px; /* Mantém a proporção da logo */
+  max-width: 139px; 
+  height: 110px; 
   margin-left: 60px;
 }
 

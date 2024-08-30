@@ -4,11 +4,9 @@
 <template>
     <router-link></router-link>
   <div class="background">
-    <!--salvar imagens dentro do assets/image -->
-    <!-- <img src="/src/assets/image/padaria.jpg" alt="Padaria" class="padaria-img"> procurar outra img -->
   </div>
   <div class="container">
-    <h1 class="entre">           <!--mudar o texto para um texto de funcionario-->
+    <h1 class="entre">           
       ENTRE OU CADASTRE-SE NA 
       <h1 class="santo">PADARIA SANTO PÃO</h1>
     </h1> 
@@ -33,7 +31,7 @@
 
       <button type="submit">Cadastrar</button>
     </form>
-    <router-link to="/logFuncio" class="funcio">Funcionarios</router-link>
+    <router-link to="/logClient" class="cliente">Cliente</router-link>
 </div>
 </template>
 
