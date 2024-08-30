@@ -27,8 +27,11 @@ import { produtos } from '@/data/produtos'
 
       </article>
     </div>
-    <div>
+    <div class="NavBar">
     <navbar />
+    </div>
+    <div class="Produtos">
+
     </div>
 </template>
 
