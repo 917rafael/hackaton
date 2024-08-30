@@ -2,7 +2,7 @@
 import headers from '@/components/header.vue'
 import ProductCard from '@/components/ProductCard.vue'
 import back from '@/assets/image/fundohome.jpg'
-import navbar from '@/components/NavDireita.vue'
+import navbar from '@/components/NavHamb.vue'
 
 import { produtos } from '@/data/produtos'
 
@@ -27,8 +27,11 @@ import { produtos } from '@/data/produtos'
 
       </article>
     </div>
-    <div>
+    <div class="NavBar">
     <navbar />
+    </div>
+    <div class="Produtos">
+
     </div>
 </template>
 

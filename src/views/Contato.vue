@@ -1,8 +1,9 @@
 <script setup>
 import Input from '@/components/input.vue';
 import headers from '@/components/header.vue';
-//import fundo from '@/assets/image/fundopadaria.avif';
 import { perguntas } from '@/data/perguntas.js';
+import Footer from '@/components/Footer.vue';
+
 </script>
 
 <template>
@@ -25,6 +26,7 @@ import { perguntas } from '@/data/perguntas.js';
          
           <div>
             <h2>Siga-nos</h2>
+              
           </div>
         
         </div>
@@ -36,6 +38,9 @@ import { perguntas } from '@/data/perguntas.js';
 
       </div>
   </section>
+  <div class='footer'>
+    <Footer />
+  </div>
 </template>
 
 <style scoped>
