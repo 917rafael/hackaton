@@ -1,6 +1,6 @@
 <template>
     <div class="product-list">
-      <ProductCard v-for="product in products":key="product.id":product="product"/>
+      <ProductCard v-for="product in products" :key="product.id" :product="product"/>
     </div>
   </template>
   
@@ -73,7 +73,7 @@
     
     
 
-    // Adicione mais produtos conforme necessário
+   
   ];
   </script>
   
