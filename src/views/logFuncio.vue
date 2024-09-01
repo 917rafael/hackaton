@@ -2,42 +2,40 @@
 </script>
 
 <template>
-    <router-link></router-link>
-  <div class="background">
-  </div>
-  <div class="container">
-    <h1 class="entre">           
-      ENTRE OU CADASTRE-SE NA 
-      <h1 class="santo">PADARIA SANTO PÃO</h1>
-    </h1> 
-    <h2>E</h2>
-    <h2>APROVEITE TODAS AS NOSSAS PROMOÇÕES</h2>
-    
-    <form class="form">
-      <div class="form-group">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required placeholder="Insira seu nome:">
-      </div>
-      
-      <div class="form-group">
-        <label for="cpf" >Código:</label>
-        <input type="text" id="codigo" name="codigo" required placeholder="Insira o seu código: ">
-      </div>
-      
-      <div class="form-group">
-        <label for="cargo" >Cargo:</label>
-        <input type="text" id="Cargo" name="cargo" required placeholder="Insira o seu cargo">
-      </div>
+    <div class="background"></div>
+    <div class="container">
+        <h1 class="entre">
+            ENTRE OU CADASTRE-SE NA
+            <h1 class="santo">PADARIA SANTO PÃO</h1>
+        </h1>
+        <h2>E</h2>
+        <h2>APROVEITE TODAS AS NOSSAS PROMOÇÕES</h2>
 
-      <button type="submit">Cadastrar</button>
-    </form>
-    <router-link to="/logClient" class="cliente">Cliente</router-link>
-</div>
+        <form class="form">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required placeholder="Insira seu nome:" />
+            </div>
+
+            <div class="form-group">
+                <label for="cpf">Código:</label>
+                <input type="text" id="codigo" name="codigo" required placeholder="Insira o seu código: " />
+            </div>
+
+            <div class="form-group">
+                <label for="cargo">Cargo:</label>
+                <input type="text" id="Cargo" name="cargo" required placeholder="Insira o seu cargo" />
+            </div>
+            <router-link to="/homeFuncio">
+                <button type="submit" router-link="/homeFuncio">Cadastrar</button>
+            </router-link>
+        </form>
+        <router-link to="/logClient" class="cliente">Cliente</router-link>
+    </div>
 </template>
 
 <style scoped>
-
-.form{
+.form {
     margin-top: 35px;
 }
 
@@ -48,12 +46,12 @@ body {
 }
 
 .entre {
-    color: #d9534f; 
+    color: #d9534f;
     text-align: center;
 }
 
 .santo {
-    color: #c9302c; 
+    color: #c9302c;
 }
 
 .background {
@@ -62,7 +60,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1; 
+    z-index: -1;
 }
 
 .padaria-img {
@@ -77,7 +75,7 @@ body {
     right: 0;
     height: 100%;
     width: 40%;
-    background-color: #f4e1d2; 
+    background-color: #f4e1d2;
     color: #333;
     padding: 20px;
     border-top-left-radius: 20px;
@@ -96,7 +94,7 @@ body {
 label {
     margin-bottom: 5px;
     font-weight: bold;
-    color: #555; 
+    color: #555;
 }
 
 input {
@@ -105,13 +103,13 @@ input {
     border-radius: 8px;
     font-size: 16px;
     width: 100%;
-    background-color: #f8d3d3; 
+    background-color: #f8d3d3;
 }
 
 button {
     padding: 12px 20px;
-    background-color: #e24f4a; 
-    color: #fff; 
+    background-color: #e24f4a;
+    color: #fff;
     border: none;
     border-radius: 25px;
     cursor: pointer;
@@ -121,6 +119,6 @@ button {
 }
 
 button:hover {
-    background-color: #c9302c; 
+    background-color: #c9302c;
 }
 </style>
