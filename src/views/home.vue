@@ -3,8 +3,9 @@ import headers from '@/components/header.vue'
 import ProductCard from '@/components/ProductCard.vue'
 import back from '@/assets/image/fundohome.jpg'
 import navbar from '@/components/NavHamb.vue'
+import { produtos } from '@/data/produtos';
+import CarModal from '@/components/CarModal.vue'
 
-import { produtos } from '@/data/produtos'
 
 
 </script>
@@ -20,19 +21,20 @@ import { produtos } from '@/data/produtos'
       
       <div class="products">
         <product-card v-for="produto in produtos" :key="produto.id" :produto="produto" />
-      </div>
+      </div>    
     </section>
-    <div class="container">
-      <article class="produtos">
-
-      </article>
-    </div>
+    
     <div class="NavBar">
-    <navbar />
+      <navbar />
     </div>
+    
     <div class="Produtos">
-
     </div>
+    
+    <div class="carbutton">
+      <CarModal />
+    </div>
+    
 </template>
 
 <style scoped>

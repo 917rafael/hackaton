@@ -4,11 +4,10 @@
       <div class="discount-tag" v-if="product.discount">
         <span>{{ product.discountText }}</span>
       </div>
-  
-      <!-- Imagem do produto -->
+     
       <img :src="product.image" :alt="product.name" class="product-image" />
   
-      <!-- Informações do produto -->
+     
       <div class="product-info">
         <h2 class="product-name">{{ product.name }}</h2>
         

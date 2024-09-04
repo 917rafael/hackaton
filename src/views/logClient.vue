@@ -29,7 +29,10 @@
         <input type="date" id="data-nascimento" name="data-nascimento" required>
       </div>
 
-      <button type="submit">Cadastrar</button>
+       
+        <button type="submit">Cadastrar</button>
+      
+    
     </form>
     <router-link to="/logFuncio" class="funcio">Funcionarios</router-link>
 </div>

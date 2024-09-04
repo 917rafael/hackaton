@@ -12,6 +12,9 @@
         <li><router-link to="/logClient">Login</router-link></li>
         <li><router-link to="/contato">Contato</router-link></li>
         <li><router-link to="/contato">Contato</router-link></li>
+        <router-link to="/">
+         
+        </router-link> 
       </ul>
     </nav>
   </header>

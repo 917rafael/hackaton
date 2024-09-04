@@ -26,5 +26,5 @@ export const produtos = [
       price: 22,
       img: bread3,
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-    }
+    },
   ]
