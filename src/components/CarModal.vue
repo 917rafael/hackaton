@@ -1,25 +1,24 @@
 <template>
   <div>
-    <!-- Botão de carrinho -->
+
     <div class="cart-button">
       <button class="cart-btn" @click="toggleModal">
         <i class="fas fa-shopping-cart"></i>
       </button>
     </div>
 
-    <!-- Modal do carrinho -->
     <div v-if="isModalVisible" class="modal-overlay" @click="closeModal">
+     
       <div class="modal-content" @click.stop>
-        <!-- Cabeçalho do modal -->
+
         <div class="modal-header">
           <h2>{{ title }}</h2>
           <button class="close-button" @click="closeModal">&times;</button>
         </div>
 
-        <!-- Corpo do modal -->
         <div class="modal-body">
           <div class="modal-body-content">
-            <!-- Seção de imagem -->
+
             <div class="modal-image">
               <img src="../assets/image/desenhofundo.avif" alt="Descrição da imagem" />
               <p class="image-description">
@@ -27,32 +26,37 @@
               </p>
             </div>
 
-            <!-- Seção de opções e controle -->
+
             <div class="modal-options-content">
               <div class="modal-options">
+          
                 <div v-for="(option, index) in options" :key="index" class="option">
                   <label class="option-label">{{ option.text }}</label>
                 </div>
+          
               </div>
-              <textarea
-                class="observation-input"
-                placeholder="Alguma observação?"
-                v-model="observation"
-              ></textarea>
+              <textarea class="observation-input" placeholder="Alguma observação?" v-model="observation"></textarea>
             </div>
+          
           </div>
         </div>
 
-        <!-- Rodapé do modal -->
+
         <div class="modal-footer">
           <div class="footer-controls">
             <div class="option-controls">
+          
               <span class="control-text">Quantidade de kits:</span>
+
               <button @click="decreaseCount(0)" class="control-button decrement">− Remover</button>
+              
               <span class="option-count">{{ options[0].count }}</span>
               <button @click="increaseCount(0)" class="control-button increment">+ Adicionar</button>
+          
             </div>
+            
             <button class="add-button">Adicionar ao Pedido R$ {{ totalPrice.toFixed(2) }}</button>
+          
           </div>
         </div>
       </div>
@@ -67,7 +71,7 @@ import { ref, computed } from 'vue';
 const title = ref('Mini Coxinha de Frango - Combo de 10 unidades');
 const isModalVisible = ref(false);
 
-// Estado reativo para as opções e observação
+
 const options = ref([
   {
     text: 'Deseja Adicionar 1 kit de Sachês com Molhos? Kit Sachês (1 Catchup, 1 Maionese, 1 Mostarda) (R$ 1,00)',
@@ -114,7 +118,7 @@ const decreaseCount = (index) => {
 }
 
 .cart-btn {
-  background-color: #ff6347; /* Cor de fundo do botão */
+  background-color: #ff6347; 
   color: white;
   border: none;
   padding: 15px;
@@ -126,7 +130,7 @@ const decreaseCount = (index) => {
 }
 
 .cart-btn:hover {
-  background-color: #e5533d; /* Cor ao passar o mouse */
+  background-color: #e5533d; 
 }
 
 .cart-btn i {

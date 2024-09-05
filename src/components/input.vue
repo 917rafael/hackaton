@@ -1,3 +1,5 @@
+<!--inputs da area de contato-->
+
 <script setup>
 defineProps({ pergunta: Object })
 </script>
@@ -29,17 +31,17 @@ defineProps({ pergunta: Object })
   padding: 7px 0;
   background: transparent;
   transition: border-color 0.2s, border-width 0.2s;
-  resize: none; /* Remove a possibilidade de redimensionar o textarea */
+  resize: none; 
 }
 
 .form__field::placeholder {
-  color: transparent; /* Torna o placeholder invisível */
+  color: transparent; 
 }
 
 .form__field:placeholder-shown ~ .form__label {
   font-size: 1.3rem;
   cursor: text;
-  top: 20px; /* Posição inicial do label quando o placeholder é mostrado */
+  top: 20px; 
 }
 
 .form__label {
@@ -57,7 +59,7 @@ defineProps({ pergunta: Object })
 .form__field:not(:placeholder-shown) ~ .form__label {
   font-size: 0.85rem;
   color: #11998e;
-  top: -15px; /* Posição do label quando o campo é focado ou preenchido */
+  top: -15px; 
   font-weight: 700;
 }
 

@@ -1,3 +1,5 @@
+<!--esse componente são os cards de promoçoes da nav-->
+
 <script setup>
 defineProps(['produto'])
 </script>
@@ -27,6 +29,7 @@ defineProps(['produto'])
   width: 30%;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   transition: 0.5s
+
 }
 
 .product-card img {
