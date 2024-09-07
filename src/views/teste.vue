@@ -1,6 +1,6 @@
   <script setup>
   import back from '@/assets/image/back.jpg'
-  import ProductCard from '@/components/Produtos.vue';
+  import Product from '@/components/Cardap.vue';
 
   
   const products = [
@@ -21,9 +21,9 @@
 
 <template>
     <div class="product-list">
-      <ProductCard v-for="product in products" :key="product.id" :product="product"/>
-    </div>
-  </template>
+      <Product v-for="product in products" :key="product.id" :product="product"/>
+    </div> 
+    </template>
   
   
   <style scoped>

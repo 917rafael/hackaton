@@ -10,10 +10,7 @@ const toggleCart = () => {
 };
 
 // Dados do carrinho 
-const cart = ref([
-  { id: 1, name: "Sonho de padaria - Delícia ;)", price: 7.65, quantity: 1 },
-  { id: 2, name: "Sonho de padaria - Delícia ;)", price: 7, quantity: 1 }
-]);
+const cart = ref([]);
 
 // Funções para gerenciar os itens no carrinho
 const addItem = (item) => {
