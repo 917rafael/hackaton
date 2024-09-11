@@ -4,6 +4,7 @@ import headers from '@/components/header.vue';
 import { perguntas } from '@/data/perguntas.js';
 import Footer from '@/components/Footer.vue';
 
+
 </script>
 
 <template>
@@ -37,10 +38,10 @@ import Footer from '@/components/Footer.vue';
         </div> 
 
       </div>
-  </section>
-  <div class='footer'>
-    <Footer />
-  </div>
+    </section>
+    <div class='footer'>
+      <Footer />
+    </div>
 </template>
 
 <style scoped>

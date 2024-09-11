@@ -1,13 +1,6 @@
-<template>
-    <div class="product-list">
-      <ProductCard v-for="product in products" :key="product.id" :product="product"/>
-    </div>
-  </template>
-  
   <script setup>
-  
   import back from '@/assets/image/back.jpg'
-  import ProductCard from '@/components/Produtos.vue';
+  import Product from '@/components/Cardap.vue';
 
   
   const products = [
@@ -23,9 +16,15 @@
       discountText: 'Mais barato no app!',
       installments: '3x de R$ 59,99 sem juros no cartão de crédito',  
     },
-   
   ];
   </script>
+
+<template>
+    <div class="product-list">
+      <Product v-for="product in products" :key="product.id" :product="product"/>
+    </div> 
+    </template>
+  
   
   <style scoped>
 .product-list {

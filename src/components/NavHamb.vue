@@ -1,3 +1,6 @@
+<!--esse componente são os dados da nav do home -->
+
+
 <script setup>
 import { ref } from 'vue';
 const isMenuOpen = ref(false);
@@ -12,6 +15,7 @@ const toggleMenu = () => {
       &#9776;
     </button>
     <div class="nav-bar" :class="{ open: isMenuOpen }">
+
       <div class="nav-item">Doces</div>
       <div class="nav-item">Salgados</div>
       <div class="nav-item">Pães</div>
@@ -20,24 +24,24 @@ const toggleMenu = () => {
 </template>
 
 <style scoped>
-/* Estilo para telas grandes */
+
 @media (min-width: 768px) {
   .hamburger {
-    display: none; /* Oculta o botão de hambúrguer em telas grandes */
+    display: none; 
   }
 
   .nav-bar {
-    display: flex; /* Mostra a barra de navegação em telas grandes */
-    flex-direction: row; /* Alinha os itens horizontalmente */
-    position: static; /* Posiciona a barra de navegação no fluxo normal do documento */
+    display: flex; 
+    flex-direction: row; 
+    position: static; 
   }
 }
 
-/* Estilo para telas pequenas */
+
 @media (max-width: 767px) {
   .nav-bar {
-    display: none; /* Oculta a navegação por padrão em telas pequenas */
-    flex-direction: column; /* Organiza os itens em coluna */
+    display: none; 
+    flex-direction: column; 
     padding: 20px;
     background-color: white; /* Cor de fundo para a navegação */
     position: absolute; /* Posiciona a navegação em relação ao pai */
