@@ -1,3 +1,77 @@
+<script setup>
+const props = defineProps({
+  product: {
+    type: Object,
+    required: true,
+  },
+});
+
+import { ref, computed } from 'vue';
+ import back from '@/assets/image/back.jpg'
+
+
+const title = ref('Mini Coxinha de Frango - Combo de 10 unidades');
+const isModalVisible = ref(false);
+
+const options = ref([
+  {
+    text: 'Deseja Adicionar 1 kit de Sachês com Molhos? Kit Sachês (1 Catchup, 1 Maionese, 1 Mostarda) (R$ 1,00)',
+    count: 0,
+    price: 1.00,
+  },
+]);
+
+const observation = ref('');
+
+const totalPrice = computed(() =>
+  options.value.reduce((total, option) => total + option.count * option.price, 0)
+);
+
+
+const toggleModal = () => {
+  isModalVisible.value = !isModalVisible.value;
+};
+
+
+const closeModal = () => {
+  isModalVisible.value = false;
+};
+
+
+const increaseCount = (index) => {
+  options.value[index].count++;
+};
+
+const decreaseCount = (index) => {
+  if (options.value[index].count > 0) {
+    options.value[index].count--;
+  }
+};
+const addToCart = () => {
+  addToCart(product, options.value[0].count);
+  closeModal();
+};
+
+const products = [
+    {
+      id: 1,
+      name: 'pega o pao caraio',
+      image: back,
+      rating: 2,
+      reviews: 1,
+      oldPrice: 229.99, 
+      currentPrice: 179.99,
+      discount: 21,
+      discountText: 'Mais barato no app!',
+      installments: '3x de R$ 59,99 sem juros no cartão de crédito',  
+    },
+  ];
+</script>
+
+<!------------------------------------------------------------------------------------------------------------------------------->
+<!------------------------------------------------------------------------------------------------------------------------------->
+
+
 <template>
   <div class="product-card" role="button" tabindex="0" @click="toggleModal">
 
@@ -83,78 +157,8 @@
 
 </template>
 
-
-<script setup>
-const props = defineProps({
-  product: {
-    type: Object,
-    required: true,
-  },
-});
-
-import { ref, computed } from 'vue';
- import back from '@/assets/image/back.jpg'
-
-// Estado reativo para o título e visibilidade do modal
-const title = ref('Mini Coxinha de Frango - Combo de 10 unidades');
-const isModalVisible = ref(false);
-
-const options = ref([
-  {
-    text: 'Deseja Adicionar 1 kit de Sachês com Molhos? Kit Sachês (1 Catchup, 1 Maionese, 1 Mostarda) (R$ 1,00)',
-    count: 0,
-    price: 1.00,
-  },
-]);
-
-const observation = ref('');
-
-// Computed para calcular o preço total
-const totalPrice = computed(() =>
-  options.value.reduce((total, option) => total + option.count * option.price, 0)
-);
-
-// Função para alternar a visibilidade do modal
-const toggleModal = () => {
-  isModalVisible.value = !isModalVisible.value;
-};
-
-// Função para fechar o modal
-const closeModal = () => {
-  isModalVisible.value = false;
-};
-
-// Funções para manipular a contagem de opções
-const increaseCount = (index) => {
-  options.value[index].count++;
-};
-
-const decreaseCount = (index) => {
-  if (options.value[index].count > 0) {
-    options.value[index].count--;
-  }
-};
-const addToCart = () => {
-  addToCart(product, options.value[0].count);
-  closeModal();
-};
-
-const products = [
-    {
-      id: 1,
-      name: 'pega o pao caraio',
-      image: back,
-      rating: 2,
-      reviews: 1,
-      oldPrice: 229.99, 
-      currentPrice: 179.99,
-      discount: 21,
-      discountText: 'Mais barato no app!',
-      installments: '3x de R$ 59,99 sem juros no cartão de crédito',  
-    },
-  ];
-</script>
-
+<!------------------------------------------------------------------------------------------------------------------------------->
+<!------------------------------------------------------------------------------------------------------------------------------->
 
 <style scoped>
 .product-card {
@@ -167,11 +171,12 @@ const products = [
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   padding: 10px;
-  cursor: pointer; /* Add cursor pointer to indicate it is clickable */
+  cursor: pointer;
+  
 }
 
 .product-card:focus {
-  outline: 2px solid #007bff; /* Add a focus outline for accessibility */
+  outline: 2px solid #007bff;
 }
 
 .discount-tag {
