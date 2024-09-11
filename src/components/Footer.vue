@@ -1,18 +1,17 @@
 <template>
     <footer class="footer">
       <div class="footer-container">
-        <!-- Adicione a logo da padaria com efeito de pulsação ao passar o mouse -->
         <div class="footer-logo">
           <img src="@/assets/image/logo.png" alt="Logo da Padaria" class="logo">
         </div>
         
-        <!-- Seção Sobre Nós -->
+      
         <div class="footer-column">
           <h3>Sobre Nós</h3>
           <p>Na nossa padaria, combinamos tradição e qualidade para oferecer os melhores pães e doces artesanais. Feitos com ingredientes frescos e muito amor.</p>
         </div>
         
-        <!-- Seção Contato -->
+   
         <div class="footer-column">
           <h3>Contato</h3>
           <p><i class="fas fa-map-marker-alt"></i> 121 Rock Street, 21 Avenue, Nova York, NY 92103-9000</p>
@@ -20,7 +19,7 @@
           <p><i class="fas fa-envelope"></i> contato@padariaexemplo.com</p>
         </div>
         
-        <!-- Seção Horário de Funcionamento -->
+   
         <div class="footer-column">
           <h3>Horário de Funcionamento</h3>
           <p>Segunda a Sexta: 7h - 19h</p>
@@ -28,7 +27,7 @@
           <p>Domingo: Fechado</p>
         </div>
         
-        <!-- Seção Redes Sociais -->
+     
         <div class="footer-column">
           <h3>Siga-nos</h3>
           <div class="social-icons">
@@ -39,7 +38,7 @@
         </div>
       </div>
       
-      <!-- Rodapé inferior -->
+    
       <div class="footer-bottom">
         <p>&copy; 2024 Padaria Exemplo. Todos os direitos reservados.</p>
       </div>
@@ -58,9 +57,9 @@
     color: #333;
     padding: 20px 0;
     font-family: 'Arial', sans-serif;
-    border-top: 4px solid #d35400; /* Cor da borda do topo igual ao cabeçalho */
-    width: 100%; /* Faz com que o footer tenha largura total */
-    margin-top: 20px; /* Adiciona espaçamento superior se necessário */
+    border-top: 4px solid #d35400; 
+    width: 100%; 
+    margin-top: 20px; 
   }
   
   .footer-container {
@@ -84,11 +83,11 @@
   .logo {
     width: 100px;
     height: auto;
-    transition: transform 0.3s ease-in-out; /* Transição suave para o efeito de pulsação */
+    transition: transform 0.3s ease-in-out;
   }
   
   .logo:hover {
-    animation: pulsate 1.5s infinite; /* Ativa a animação de pulsação ao passar o mouse */
+    animation: pulsate 1.5s infinite; 
   }
   
   .footer-column {
@@ -131,7 +130,7 @@
     text-align: center;
     padding: 10px 0;
     margin: 0;
-    width: 100%; /* Certifica-se de que o rodapé inferior ocupe toda a largura */
+    width: 100%;
   }
   
   .footer-bottom p {
@@ -148,7 +147,7 @@
     text-decoration: underline;
   }
   
-  /* Animação de pulsação */
+  
   @keyframes pulsate {
     0% {
       transform: scale(1);

@@ -1,6 +1,6 @@
 <script setup>
 import Heade from '@/components/header.vue';
-import Input from '@/components/input.vue';
+import Input from '@/components/pergunta.vue';
 </script>
 
 <template>
