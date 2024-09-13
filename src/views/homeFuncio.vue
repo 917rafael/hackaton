@@ -18,7 +18,6 @@ function clone(usuario) {
 <template>
     <heade />
     <div class="head">
-        <h1>Registro de vendas - Padaria Santo Pão</h1>
     </div>
     <div class="container">
     </div>
