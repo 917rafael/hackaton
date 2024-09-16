@@ -89,68 +89,98 @@ const usuario = reactive({
 </template>
 
 <style scoped>
-.h2 {
-  color: black;
-  text-align: center;
-  margin-top: 20px;
+/* Geral */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.main {
-  margin-left: 10px;
-}
-
+/* Container Principal */
 .container {
-  color: #f4e1d2;
-  background-color: blue;
-  border-radius: 6px;
-  height: 100%;
-  width: 100%;
-  border: solid 1px;
+  background-color: #f4f4f4;
+  color: #333;
+  border-radius: 8px;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.button {
-  color: white;
-  background-color: rgb(53, 53, 53);
-  margin-left: 24%;
-  margin-top: 10px;
-  padding: 8px 80px;
+/* Título */
+.h2 {
+  color: #333;
   text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  cursor: pointer;
-  border-radius: 25px;
-  font-size: 16px;
-  transition: background-color 1s ease;
-  border: solid 1px rgb(53, 53, 53);
+  margin: 0;
+  padding-bottom: 20px;
+}
+
+/* Main */
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Layout dos Campos */
+.field-group {
+  margin-bottom: 15px;
 }
 
 .form-label {
-  display: flex;
-  color: rgb(0, 0, 0)te;
-  width: 100%;
-  height: 100%;
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
 .form-control {
-  display: flex;
-  border: 1px solid black;
-  align-items: center;
-  width: 93%;
-  margin-left: 2%;
-  margin-top: 10px;
-  padding: 8px;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  border-radius: 25px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   font-size: 16px;
 }
-input {
-  display: flex;
-  border: 1px solid black;
-  border-radius: 5px;
-  align-items: center;
-  margin-left: 30px;
-  width: 30%;
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="time"] {
+  width: calc(100% - 22px); /* Ajuste para compensar o padding e border */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Botão */
+.button {
+  display: inline-block;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s;
+  margin: 20px auto 0;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .form-control {
+    font-size: 14px;
+  }
+  
+  .button {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+  }
 }
 </style>
