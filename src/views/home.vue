@@ -4,8 +4,6 @@ import ProductCard from '@/components/ProductCard.vue'
 import back from '@/assets/image/fundohome.jpg'
 import Product from '@/components/Cardap.vue';
 import sacola from '@/components/sacola.vue';
-
-//import navbar from '@/components/NavHamb.vue'
 import { produtos } from '@/data/produtos';
 import { products } from '@/data/cardapio';
 
