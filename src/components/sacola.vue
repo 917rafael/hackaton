@@ -1,9 +1,9 @@
 <!--ESSE COMPONENTE É A SACOLA DO LADO DIREITO DA PAGINA-->
 
 <script setup>
-import { ref } from 'vue';
-
-// Controle de estado do carrinho (aberto/fechado)
+import { onMounted, ref } from 'vue';
+import { sacola } from '@/data/sacola';
+// Controle do carrinho
 const isCartOpen = ref(false);
 
 // abertura/fechamento
@@ -28,6 +28,10 @@ const addItemToCart = (item) => {
   }
 };
 
+function teste(){
+  console.log(sacola.value)
+}
+
 const removeItem = (item) => {
   if (item.quantity > 1) {
     item.quantity--;
@@ -38,6 +42,10 @@ const deleteItem = (index) => {
   cart.value.splice(index, 1);
 };
 
+onMounted(() =>{
+  console.log(sacola.value)
+})
+
 // Calcular o total da compra
 const calculateTotal = () => {
   return cart.value.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
@@ -45,7 +53,8 @@ const calculateTotal = () => {
 </script>
 
 <template>
-  <!-- Botão da sacola flutuante -->
+  <!-- Botão da sacola.vue?t=1727121181780:58 
+sacola flutuante -->
   <div class="cart-toggle-container">
     <button @click="toggleCart" class="cart-btn">
       <i class="fas fa-shopping-bag"></i>
@@ -63,15 +72,15 @@ const calculateTotal = () => {
 
     <div class="cart-divider"></div>
 
-    <div v-if="cart.length" class="cart-items">
-      <div class="cart-item" v-for="(item, index) in cart" :key="item.id">
+    <div class="cart-items">
+      <div class="cart-item" v-for="(item) in sacola" :key="item.item.id">
         <div class="item-info">
-          <span class="item-name">{{ item.name }}</span>
-          <span class="item-price">R$ {{ item.price.toFixed(2) }}</span>
+          <span class="item-name">{{ item.item.name }}</span>
+          <span class="item-price">R$ {{ item.item.price }}</span>
         </div>
         <div class="item-controls">
           <button @click="removeItem(item)" class="btn-remove"><i class="fas fa-minus"></i></button>
-          <span>{{ item.quantity }}</span>
+          <span>{{ item.item.quantity }}</span>
           <button @click="addItem(item)" class="btn-add"><i class="fas fa-plus"></i></button>
           <button @click="deleteItem(index)" class="btn-delete"><i class="fas fa-trash"></i></button>
         </div>
@@ -79,15 +88,11 @@ const calculateTotal = () => {
     </div>
 
 
-    <div v-else class="empty-cart">
+    <div  class="empty-cart">
       <p>Sua sacola está vazia!</p>
+      <button @click="teste">teste</button>
     </div> 
-    
-    <div>
-    <button @click="addItemToCart({ id: 1, name: 'Produto 1', price: 100 })">Adicionar Produto 1</button>
-    <button @click="addItemToCart({ id: 2, name: 'Produto 2', price: 150 })">Adicionar Produto 2</button>
-  </div>
-
+  
     <div v-if="cart.length" class="cart-divider"></div>
 
     <!-- Total da compra -->
