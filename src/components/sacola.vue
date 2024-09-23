@@ -1,3 +1,5 @@
+<!--ESSE COMPONENTE É A SACOLA DO LADO DIREITO DA PAGINA-->
+
 <script setup>
 import { ref } from 'vue';
 
@@ -15,6 +17,15 @@ const cart = ref([]);
 // Funções para gerenciar os itens no carrinho
 const addItem = (item) => {
   item.quantity++;
+};
+
+const addItemToCart = (item) => {
+  const existingItem = cart.value.find(i => i.id === item.id);
+  if (existingItem) {
+    existingItem.quantity++;
+  } else {
+    cart.value.push({ ...item, quantity: 1 });
+  }
 };
 
 const removeItem = (item) => {
@@ -50,10 +61,8 @@ const calculateTotal = () => {
       <button class="close-btn" @click="toggleCart">&times;</button>
     </div>
 
-    <!-- Separador criativo -->
     <div class="cart-divider"></div>
 
-    <!-- Lista de itens no carrinho -->
     <div v-if="cart.length" class="cart-items">
       <div class="cart-item" v-for="(item, index) in cart" :key="item.id">
         <div class="item-info">
@@ -69,12 +78,16 @@ const calculateTotal = () => {
       </div>
     </div>
 
-    <!-- Mensagem caso o carrinho esteja vazio -->
+
     <div v-else class="empty-cart">
       <p>Sua sacola está vazia!</p>
-    </div>
+    </div> 
+    
+    <div>
+    <button @click="addItemToCart({ id: 1, name: 'Produto 1', price: 100 })">Adicionar Produto 1</button>
+    <button @click="addItemToCart({ id: 2, name: 'Produto 2', price: 150 })">Adicionar Produto 2</button>
+  </div>
 
-    <!-- Separador criativo -->
     <div v-if="cart.length" class="cart-divider"></div>
 
     <!-- Total da compra -->
@@ -88,12 +101,14 @@ const calculateTotal = () => {
       <button class="btn-finalize">FECHAR PEDIDO</button>
     </div>
   </div>
+
+ 
 </template>
 
 <style scoped>
-/* Botão da sacola flutuante */
+
 .cart-btn {
-  background-color: #009688; /* Cor diferenciada */
+  background-color: #009688; 
   color: white;
   border: none;
   padding: 12px;
@@ -112,7 +127,6 @@ const calculateTotal = () => {
   background-color: #00796b;
 }
 
-/* Animação de pulsação no número da sacola */
 @keyframes pulse {
   0% {
     transform: scale(1);
@@ -137,7 +151,7 @@ const calculateTotal = () => {
   animation: pulse 1s infinite;
 }
 
-/* Estilo da caixa do carrinho */
+
 .cart-box {
   background-color: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -155,7 +169,6 @@ const calculateTotal = () => {
   right: 20px;
 }
 
-/* Cabeçalho do carrinho */
 .cart-header {
   display: flex;
   justify-content: space-between;
@@ -173,7 +186,6 @@ const calculateTotal = () => {
   color: #333;
 }
 
-/* Estilo das divisões criativas */
 .cart-divider {
   background-color: #e0e0e0;
   height: 1px;
@@ -186,7 +198,7 @@ const calculateTotal = () => {
   align-items: center;
   margin-bottom: 10px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #f0f0f0; /* Separador mais leve entre os itens */
+  border-bottom: 1px solid #f0f0f0; 
 }
 
 .item-info {
@@ -240,13 +252,12 @@ const calculateTotal = () => {
   background-color: #e64a19;
 }
 
-/* Carrinho vazio */
 .empty-cart {
   text-align: center;
   color: #666;
 }
 
-/* Total da compra */
+
 .cart-total {
   display: flex;
   justify-content: space-between;
@@ -254,7 +265,6 @@ const calculateTotal = () => {
   margin-top: 10px;
 }
 
-/* Botão de finalizar */
 .checkout {
   margin-top: 15px;
 }
