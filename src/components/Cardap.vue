@@ -6,8 +6,12 @@ const props = defineProps({
   },
 });
 
-import { ref, computed } from 'vue';
+import { products } from '@/data/cardapio';
+import { sacola } from '@/data/sacola';
+
+import { ref, computed, reactive } from 'vue';
  import back from '@/assets/image/back.jpg'
+
 
 
 const title = ref('Mini Coxinha de Frango - Combo de 10 unidades');
@@ -21,6 +25,14 @@ const options = ref([
   },
 ]);
 
+const productselected = ref([])
+
+const suasacola = reactive({
+  qtd: 0,
+  observacao: null,
+  item: productselected.value
+})
+
 const observation = ref('');
 
 const totalPrice = computed(() =>
@@ -28,15 +40,13 @@ const totalPrice = computed(() =>
 );
 
 
-const toggleModal = () => {
-  isModalVisible.value = !isModalVisible.value;
+
+const toggleModal = (id) => {
+  const findproduct = products.find(product => product.id === id)
+  productselected.value = [findproduct]
+  isModalVisible.value = !isModalVisible.value
+
 };
-
-
-const closeModal = () => {
-  isModalVisible.value = false;
-};
-
 
 const increaseCount = (index) => {
   options.value[index].count++;
@@ -47,25 +57,12 @@ const decreaseCount = (index) => {
     options.value[index].count--;
   }
 };
-const addToCart = () => {
-  addToCart(product, options.value[0].count);
-  closeModal();
+const addToCart = (id) => {
+  sacola.value.push(suasacola)
+  const findproduct = products.find(product => product.id === id)
+  suasacola.item = findproduct
+  sacola.value.push(suasacola)
 };
-
-const products = [
-    {
-      id: 1,
-      name: 'pega o pao caraio',
-      image: back,
-      rating: 2,
-      reviews: 1,
-      oldPrice: 229.99, 
-      currentPrice: 179.99,
-      discount: 21,
-      discountText: 'Mais barato no app!',
-      installments: '3x de R$ 59,99 sem juros no cartão de crédito',  
-    },
-  ];
 </script>
 
 <!------------------------------------------------------------------------------------------------------------------------------->
@@ -73,7 +70,7 @@ const products = [
 
 
 <template>
-  <div class="product-card" role="button" tabindex="0" @click="toggleModal">
+  <div class="product-card" role="button" tabindex="0" @click="toggleModal(product.id)">
 
     <div class="discount-tag" v-if="product.discount">
       <span>{{ product.discountText }}</span>
@@ -109,8 +106,8 @@ const products = [
  
     <div class="modal-content" @click.stop>
       <div class="modal-header">
-        <h2>{{ title }}</h2>
-        <button class="close-button" @click="closeModal">&times;</button>
+        <h2>{{ productselected[0].name }}</h2>
+        <button class="close-button" @click="isModalVisible = !isModalVisible">&times;</button>
       </div>
 
       <div class="modal-body">
@@ -144,7 +141,7 @@ const products = [
             <button @click="increaseCount(0)" class="control-button increment">+ Adicionar</button>
           
           </div>
-          <button class="add-button" @click="addToCart" >Adicionar ao Pedido R$ {{ totalPrice.toFixed(2) }}</button>
+          <button class="add-button" @click="addToCart(product.id)" >Adicionar ao Pedido R$ {{ totalPrice.toFixed(2) }}</button>
         </div>
       
       </div>
