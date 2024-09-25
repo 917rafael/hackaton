@@ -18,9 +18,9 @@ import { products } from '@/data/cardapio';
 
     <section class="hero" :style="{ backgroundImage: `url(${back})` }">
       <div class="hero-text">
-        <h1>Whole Grain Goodness in Every Slice of Wheat Bread</h1>
-        <p class="hero-p">One bite and you'll switch to whole wheat bread</p>
-        <button class="cta-button">Learn More</button>
+        <h1>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</h1>
+        <p class="hero-p">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        <button class="cta-button">Saiba mais</button>
       </div>
       
       <div class="products">

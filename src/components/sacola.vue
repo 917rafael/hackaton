@@ -19,14 +19,6 @@ const addItem = (item) => {
   item.quantity++;
 };
 
-const addItemToCart = (item) => {
-  const existingItem = cart.value.find(i => i.id === item.id);
-  if (existingItem) {
-    existingItem.quantity++;
-  } else {
-    cart.value.push({ ...item, quantity: 1 });
-  }
-};
 
 function teste(){
   console.log(sacola.value)
@@ -90,7 +82,7 @@ sacola flutuante -->
 
     <div  class="empty-cart">
       <p>Sua sacola está vazia!</p>
-      <button @click="teste">teste</button>
+      <button @click="">teste</button>
     </div> 
   
     <div v-if="cart.length" class="cart-divider"></div>
