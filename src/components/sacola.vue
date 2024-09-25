@@ -1,7 +1,9 @@
-<script setup>
-import { ref } from 'vue';
+<!--ESSE COMPONENTE É A SACOLA DO LADO DIREITO DA PAGINA-->
 
-// Controle de estado do carrinho (aberto/fechado)
+<script setup>
+import { onMounted, ref } from 'vue';
+import { sacola } from '@/data/sacola';
+// Controle do carrinho
 const isCartOpen = ref(false);
 
 // abertura/fechamento
@@ -17,6 +19,11 @@ const addItem = (item) => {
   item.quantity++;
 };
 
+
+function teste(){
+  console.log(sacola.value)
+}
+
 const removeItem = (item) => {
   if (item.quantity > 1) {
     item.quantity--;
@@ -27,6 +34,10 @@ const deleteItem = (index) => {
   cart.value.splice(index, 1);
 };
 
+onMounted(() =>{
+  console.log(sacola.value)
+})
+
 // Calcular o total da compra
 const calculateTotal = () => {
   return cart.value.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
@@ -34,7 +45,8 @@ const calculateTotal = () => {
 </script>
 
 <template>
-  <!-- Botão da sacola flutuante -->
+  <!-- Botão da sacola.vue?t=1727121181780:58 
+sacola flutuante -->
   <div class="cart-toggle-container">
     <button @click="toggleCart" class="cart-btn">
       <i class="fas fa-shopping-bag"></i>
@@ -50,31 +62,29 @@ const calculateTotal = () => {
       <button class="close-btn" @click="toggleCart">&times;</button>
     </div>
 
-    <!-- Separador criativo -->
     <div class="cart-divider"></div>
 
-    <!-- Lista de itens no carrinho -->
-    <div v-if="cart.length" class="cart-items">
-      <div class="cart-item" v-for="(item, index) in cart" :key="item.id">
+    <div class="cart-items">
+      <div class="cart-item" v-for="(item) in sacola" :key="item.item.id">
         <div class="item-info">
-          <span class="item-name">{{ item.name }}</span>
-          <span class="item-price">R$ {{ item.price.toFixed(2) }}</span>
+          <span class="item-name">{{ item.item.name }}</span>
+          <span class="item-price">R$ {{ item.item.price }}</span>
         </div>
         <div class="item-controls">
           <button @click="removeItem(item)" class="btn-remove"><i class="fas fa-minus"></i></button>
-          <span>{{ item.quantity }}</span>
+          <span>{{ item.item.quantity }}</span>
           <button @click="addItem(item)" class="btn-add"><i class="fas fa-plus"></i></button>
           <button @click="deleteItem(index)" class="btn-delete"><i class="fas fa-trash"></i></button>
         </div>
       </div>
     </div>
 
-    <!-- Mensagem caso o carrinho esteja vazio -->
-    <div v-else class="empty-cart">
-      <p>Sua sacola está vazia!</p>
-    </div>
 
-    <!-- Separador criativo -->
+    <div  class="empty-cart">
+      <p>Sua sacola está vazia!</p>
+      <button @click="">teste</button>
+    </div> 
+  
     <div v-if="cart.length" class="cart-divider"></div>
 
     <!-- Total da compra -->
@@ -88,12 +98,14 @@ const calculateTotal = () => {
       <button class="btn-finalize">FECHAR PEDIDO</button>
     </div>
   </div>
+
+ 
 </template>
 
 <style scoped>
-/* Botão da sacola flutuante */
+
 .cart-btn {
-  background-color: #009688; /* Cor diferenciada */
+  background-color: #009688; 
   color: white;
   border: none;
   padding: 12px;
@@ -112,7 +124,6 @@ const calculateTotal = () => {
   background-color: #00796b;
 }
 
-/* Animação de pulsação no número da sacola */
 @keyframes pulse {
   0% {
     transform: scale(1);
@@ -137,7 +148,7 @@ const calculateTotal = () => {
   animation: pulse 1s infinite;
 }
 
-/* Estilo da caixa do carrinho */
+
 .cart-box {
   background-color: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -155,7 +166,6 @@ const calculateTotal = () => {
   right: 20px;
 }
 
-/* Cabeçalho do carrinho */
 .cart-header {
   display: flex;
   justify-content: space-between;
@@ -173,7 +183,6 @@ const calculateTotal = () => {
   color: #333;
 }
 
-/* Estilo das divisões criativas */
 .cart-divider {
   background-color: #e0e0e0;
   height: 1px;
@@ -186,7 +195,7 @@ const calculateTotal = () => {
   align-items: center;
   margin-bottom: 10px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #f0f0f0; /* Separador mais leve entre os itens */
+  border-bottom: 1px solid #f0f0f0; 
 }
 
 .item-info {
@@ -240,13 +249,12 @@ const calculateTotal = () => {
   background-color: #e64a19;
 }
 
-/* Carrinho vazio */
 .empty-cart {
   text-align: center;
   color: #666;
 }
 
-/* Total da compra */
+
 .cart-total {
   display: flex;
   justify-content: space-between;
@@ -254,7 +262,6 @@ const calculateTotal = () => {
   margin-top: 10px;
 }
 
-/* Botão de finalizar */
 .checkout {
   margin-top: 15px;
 }

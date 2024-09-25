@@ -3,6 +3,7 @@
 <script setup>
 import { ref } from 'vue';
 import Heade from '@/components/header.vue';
+
 import Formulario from '@/components/formulario.vue';
 import Resultado from '@/components/resultado.vue';
 
