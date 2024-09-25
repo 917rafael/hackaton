@@ -48,8 +48,8 @@ const usuario = reactive({
       </div>
 
       <div class="hora">
-        <label for="hora" class="formn-label">Hora:</label>
-        <input type="hour" class="form-control" id="hora" v-model="usuario.hora" />
+        <label for="hora" class="form-label">Hora:</label>
+        <input type="time" class="form-control" id="hora" v-model="usuario.hora" />
       </div>
 
       <div class="produto">
@@ -72,12 +72,12 @@ const usuario = reactive({
 
       <div class="desconto">
         <label for="desconto" class="form-label">Desconto:</label>
-        <input type="number" class="form-control" id="desconto" v-model="usuario.desconto"
+        <input type="text" class="form-control" id="desconto" v-model="usuario.desconto"
           placeholder="Coloque o seu desconto " />
       </div>
 
       <div class="obs">
-        <label for="obs">Obesrvações:</label>
+        <label for="obs" >Obesrvações:</label>
         <input type="text" v-model="usuario.obs" placeholder="Digite sua obs " />
       </div>
       <button class="button" @click="salvar">Restringir Venda</button>
@@ -140,6 +140,13 @@ body {
   border-radius: 4px;
   font-size: 16px;
 }
+.obs {
+  width: 100%; /* Ajuste para compensar o padding e border */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
 
 input[type="text"],
 input[type="number"],
@@ -155,7 +162,7 @@ input[type="time"] {
 /* Botão */
 .button {
   display: inline-block;
-  background-color: #007bff;
+  background-color: rgba(59, 24, 3, 0.85);
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -168,7 +175,7 @@ input[type="time"] {
 }
 
 .button:hover {
-  background-color: #0056b3;
+  background-color: #6e6e6e;
 }
 
 /* Responsividade */

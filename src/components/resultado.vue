@@ -19,7 +19,7 @@ const props = defineProps({
 <style scoped>
 .container {
     color: rgb(255, 255, 255);
-    background-color: blue;
+    background-color: rgb(102, 65, 16);
     border-radius: 6px;
     height: 375px;
     width: 450px;
@@ -28,7 +28,8 @@ const props = defineProps({
   }
 .ul{
   margin-top: 40px;
-  margin-left: 20px
+  margin-left: 20px;
+  color: black;
 }
 
 .h2{

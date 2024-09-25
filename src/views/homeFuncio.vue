@@ -50,7 +50,7 @@ function clone(usuario) {
 }
 
 .button {
-  background-color: #007bff;
+  background-color: rgba(59, 24, 3, 0.85);
   color: #fff;
   border: none;
   padding: 12px 24px;
@@ -61,7 +61,7 @@ function clone(usuario) {
 }
 
 .button:hover {
-  background-color: #0056b3;
+  background-color: #ff4800c0;
   transform: scale(1.05);
 }
 
