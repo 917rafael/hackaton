@@ -13,7 +13,6 @@
         <li><router-link to="/contato">Contato</router-link></li>
         <li><router-link to="/contato">Contato</router-link></li>
         <router-link to="/">
-         
         </router-link> 
       </ul>
     </nav>
