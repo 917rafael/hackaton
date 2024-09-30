@@ -6,7 +6,7 @@ export const products = [
       name: 'Compre pão caraio',
       image: back,
       rating: 2,
-      reviews: 1.5,
+      reviews: 1,
       oldPrice: 229.99, 
       currentPrice: 179.99,
       discount: 21,
