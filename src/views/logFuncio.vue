@@ -2,7 +2,9 @@
 </script>
 
 <template>
-    <div class="background"></div>
+    <div class="background">
+        <img src="/src/assets/image/backg.avif" alt="Padaria" class="padaria-img">
+    </div>
     <div class="container">
         <h1 class="entre">
             ENTRE OU CADASTRE-SE NA

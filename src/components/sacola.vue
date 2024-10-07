@@ -1,5 +1,4 @@
-<!--ESSE COMPONENTE É A SACOLA DO LADO DIREITO DA PAGINA-->
-
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import { onMounted, ref } from 'vue';
 import { sacola } from '@/data/sacola';
@@ -20,7 +19,7 @@ const addItem = (item) => {
 };
 
 
-function teste(){
+function teste (){
   console.log(sacola.value)
 }
 
@@ -82,7 +81,7 @@ sacola flutuante -->
 
     <div  class="empty-cart">
       <p>Sua sacola está vazia!</p>
-      <button @click="">teste</button>
+      <button @click="teste">teste</button>
     </div> 
   
     <div v-if="cart.length" class="cart-divider"></div>
