@@ -6,15 +6,9 @@ import { reactive } from 'vue';
 const emit = defineEmits(['adicinar'])
 
 function salvar() {
-  if (usuario.nome === '' || usuario.senha === '') {
-    alert('Por favor preencha todos os campos!!!!!!!!!!!')
+  if (usuario.nome === '' || usuario.data === '' || usuario.hora === '' || usuario.produto === '' || usuario.quantidade === '' || usuario.valor === '' || usuario.desconto === '')
+    { alert('Por favor preencha todos os campos!!!')
     return;
-  }
-  else if (usuario.senha !== usuario.confirmacao) {
-    alert('Crendencias Inválidas')
-  }
-  else {
-    emit('adicionar', { ...usuario })
   }
 }
 
@@ -55,13 +49,13 @@ const usuario = reactive({
       <div class="produto">
         <label for="produto" class="form-label">Produto:</label>
         <input type="text" class="form-control" id="produto" v-model="usuario.produto"
-          placeholder="Digite o produto do cliente" />
+          placeholder="Digite o nome do produto" />
       </div>
 
       <div class="quantidade">
         <label for="quantidade" class="form-label">Quantidade:</label>
         <input type="number" class="form-control" id="quantidade" v-model="usuario.quantidade"
-          placeholder="Digite a quantidade do cliente " />
+          placeholder="Digite a quantidade de produtos " />
       </div>
 
       <div class="valor">
@@ -80,7 +74,7 @@ const usuario = reactive({
         <label for="obs" >Obesrvações:</label>
         <input type="text" v-model="usuario.obs" placeholder="Digite sua obs " />
       </div>
-      <button class="button" @click="salvar">Restringir Venda</button>
+      <button class="button" @click="salvar">Enviar dados</button>
     </main>
 
   </div>
@@ -140,13 +134,7 @@ body {
   border-radius: 4px;
   font-size: 16px;
 }
-.obs {
-  width: 100%; /* Ajuste para compensar o padding e border */
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
+
 
 input[type="text"],
 input[type="number"],
