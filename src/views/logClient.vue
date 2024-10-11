@@ -29,10 +29,8 @@
         <input type="date" id="data-nascimento" name="data-nascimento" required>
       </div>
 
-       
         <button type="submit">Cadastrar</button>
       
-    
     </form>
     <router-link to="/logFuncio" class="funcio">Funcionarios</router-link>
 </div>
@@ -42,6 +40,21 @@
 
 .form{
     margin-top: 35px;
+}
+
+.funcio {
+  text-align: center;
+  text-decoration: none;
+  margin-top: 10px;
+  padding: 12px;
+  background-color: #e24f4a; 
+  color: #fff; 
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 18px;
+  width: 50%;
+  transition: background-color 0.3s ease;
 }
 
 body {
@@ -123,7 +136,10 @@ button {
     transition: background-color 0.3s ease;
 }
 
+.funcio:hover {
+  background-color: #c9302c; 
+}
 button:hover {
-    background-color: #c9302c; 
+  background-color: #c9302c; 
 }
 </style>

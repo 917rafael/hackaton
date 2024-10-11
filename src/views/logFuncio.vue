@@ -39,6 +39,21 @@
     margin-top: 35px;
 }
 
+.cliente {
+  text-align: center;
+  text-decoration: none;
+  margin-top: 10px;
+  padding: 12px;
+  background-color: #e24f4a; 
+  color: #fff; 
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 18px;
+  width: 50%;
+  transition: background-color 0.3s ease;
+}
+
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -118,6 +133,9 @@ button {
     transition: background-color 0.3s ease;
 }
 
+.cliente:hover {
+    background-color: #c9302c;
+}
 button:hover {
     background-color: #c9302c;
 }

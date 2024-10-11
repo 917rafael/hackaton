@@ -10,6 +10,12 @@ function salvar() {
     { alert('Por favor preencha todos os campos!!!')
     return;
   }
+  else if (usuario.senha !== usuario.confirmacao) {
+    alert('Crendencias Inválidas')
+  }
+  else {
+    emit('adicionar', { ...usuario })
+  }
 }
 
 const usuario = reactive({
@@ -20,7 +26,7 @@ const usuario = reactive({
   quantidade: '',
   valor: '',
   desconto: '',
-  obs: ''
+  obs: '',
 })
 
 </script>
@@ -31,7 +37,7 @@ const usuario = reactive({
       <h1 class="h2">Registro de vendas - Padaria Santo Pão</h1>
 
       <div class="nome">
-        <label for="Nome" class="form-label">Nome do Cliente:</label>
+        <label for="nome" class="form-label">Nome do Cliente:</label>
         <input type="text" class="form-control" id="nome" v-model="usuario.nome"
           placeholder="Digite o nome do cliente" />
       </div>
@@ -71,8 +77,8 @@ const usuario = reactive({
       </div>
 
       <div class="obs">
-        <label for="obs" >Obesrvações:</label>
-        <input type="text" v-model="usuario.obs" placeholder="Digite sua obs " />
+        <label for="obs" class="form-label">Obesrvações:</label>
+        <input type="text" class="form-control" v-model="usuario.obs" placeholder="Digite sua obs " />
       </div>
       <button class="button" @click="salvar">Enviar dados</button>
     </main>
@@ -163,7 +169,7 @@ input[type="time"] {
 }
 
 .button:hover {
-  background-color: #6e6e6e;
+  background-color: rgba(117, 52, 12, 0.85);
 }
 
 /* Responsividade */
