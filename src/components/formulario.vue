@@ -1,3 +1,5 @@
+<!--esse componente é responsavel pela area de -->
+
 <script setup>
 import InputForm from '@/components/input.vue'
 import { reactive } from 'vue';

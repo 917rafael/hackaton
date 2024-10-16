@@ -1,28 +1,13 @@
 <script setup>
-import headers from '@/components/header.vue'
-import ProductCard from '@/components/ProductCard.vue'
+import headers from '@/components/FoHea/header.vue'
+import ProductCard from '@/components/home/ProductCard.vue'
 import back from '@/assets/image/fundohome.jpg'
-//import navbar from '@/components/NavHamb.vue'
+import { products } from '@/data/cardapio';
 import { produtos } from '@/data/produtos';
-import Product from '@/components/Cardap.vue';
+import Product from '@/components/Product/Produtc.vue';
 import sacola from '@/components/sacola.vue';
 
 
-const products = [
-    {
-      id: 1,
-      name: 'pega o pao caraio',
-      image: back,
-      rating: 2,
-      reviews: 1,
-      oldPrice: 229.99, 
-      currentPrice: 179.99,
-      discount: 21,
-      discountText: 'Mais barato no app!',
-      installments: '3x de R$ 59,99 sem juros no cartão de crédito',  
-    },
-   
-  ];
 
 </script>
 
@@ -41,11 +26,11 @@ const products = [
         <product-card v-for="produto in produtos" :key="produto.id" :produto="produto" />
       </div>    
     </section>
-
+    <div class="product-main">
     <div class="product-list">
       <Product v-for="product in products" :key="product.id" :product="product"/>
     </div> 
-    
+  </div>
     
     <div>
       <sacola />
@@ -110,4 +95,20 @@ const products = [
   margin-top: 40px;
 }
 
+.product-list {
+  gap: 16px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 60%;
+  flex-wrap: wrap;
+}
+
+
+.product-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>
