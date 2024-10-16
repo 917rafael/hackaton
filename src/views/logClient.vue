@@ -10,8 +10,7 @@
       ENTRE OU CADASTRE-SE NA 
       <h1 class="santo">PADARIA SANTO PÃO</h1>
     </h1> 
-    <h2>E</h2>
-    <h2>APROVEITE TODAS AS NOSSAS PROMOÇÕES</h2>
+    <h2>E APROVEITE TODAS AS NOSSAS PROMOÇÕES</h2>
     
     <form class="form">
       <div class="form-group">
@@ -117,7 +116,7 @@ label {
 
 input {
     padding: 12px;
-    border: 1px solid #ddd;
+    border: 1px solid #838282;
     border-radius: 8px;
     font-size: 16px;
     width: 100%;

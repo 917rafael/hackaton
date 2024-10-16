@@ -2,14 +2,15 @@
 </script>
 
 <template>
-    <div class="background"></div>
+    <div class="background">
+        <img src="/src/assets/image/padaria.jpg" alt="Padaria" class="padaria-img">
+    </div>
     <div class="container">
         <h1 class="entre">
             ENTRE OU CADASTRE-SE NA
             <h1 class="santo">PADARIA SANTO PÃO</h1>
         </h1>
-        <h2>E</h2>
-        <h2>APROVEITE TODAS AS NOSSAS PROMOÇÕES</h2>
+        <h2>E APROVEITE TODAS AS NOSSAS PROMOÇÕES</h2>
 
         <form class="form">
             <div class="form-group">
@@ -18,7 +19,7 @@
             </div>
 
             <div class="form-group">
-                <label for="cpf">Código:</label>
+                <label for="cpf">Código Funcio:</label>
                 <input type="text" id="codigo" name="codigo" required placeholder="Insira o seu código: " />
             </div>
 
@@ -26,32 +27,31 @@
                 <label for="cargo">Cargo:</label>
                 <input type="text" id="Cargo" name="cargo" required placeholder="Insira o seu cargo" />
             </div>
-            <router-link to="/homeFuncio">
-                <button type="submit" router-link="/homeFuncio">Cadastrar</button>
-            </router-link>
         </form>
+        <router-link to="/homeFuncio"><button type="submit" router-link="/homeFuncio" @click="entrar">Cadastrar</button></router-link>
         <router-link to="/logClient" class="cliente">Cliente</router-link>
     </div>
 </template>
 
 <style scoped>
+
 .form {
-    margin-top: 35px;
+    margin-top: 30px;
 }
 
 .cliente {
-  text-align: center;
-  text-decoration: none;
-  margin-top: 10px;
-  padding: 12px;
-  background-color: #e24f4a; 
-  color: #fff; 
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  font-size: 18px;
-  width: 50%;
-  transition: background-color 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 10px;
+    padding: 12px;
+    background-color: #e24f4a;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 50%;
+    transition: background-color 0.3s ease;
 }
 
 body {
@@ -114,7 +114,7 @@ label {
 
 input {
     padding: 12px;
-    border: 1px solid #ddd;
+    border: 1px solid #838282;
     border-radius: 8px;
     font-size: 16px;
     width: 100%;
@@ -122,7 +122,10 @@ input {
 }
 
 button {
-    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 10px;
+    padding: 12px 100px;
     background-color: #e24f4a;
     color: #fff;
     border: none;
@@ -136,6 +139,7 @@ button {
 .cliente:hover {
     background-color: #c9302c;
 }
+
 button:hover {
     background-color: #c9302c;
 }

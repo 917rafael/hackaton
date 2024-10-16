@@ -33,8 +33,8 @@ const products = [
     <section class="hero" :style="{ backgroundImage: `url(${back})` }">
       <div class="hero-text">
         <h1>Whole Grain Goodness in Every Slice of Wheat Bread</h1>
-        <p class="hero-p">One bite and you'll switch to whole wheat bread</p>
-        <button class="cta-button">Learn More</button>
+        <p class="hero-p"></p>
+        <button class="cta-button">Aprender Mais</button>
       </div>
       
       <div class="products">
