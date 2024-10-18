@@ -42,10 +42,21 @@ const toggleCatalog = (product) => {
   product.catalog = !product.catalog;
 };
 
-// Função para lidar com upload de imagem
+// Função para lidar com upload de imagem, limitando a 2MB
 const handleFileUpload = (event) => {
   const file = event.target.files[0];
+  if (file.size > 2 * 1024 * 1024) {
+    alert('A imagem deve ser menor que 2MB.');
+    return;
+  }
   newProduct.value.image = URL.createObjectURL(file);
+};
+
+// Função para fechar o modal ao clicar fora dele
+const closeModal = (event) => {
+  if (event.target.classList.contains('modal')) {
+    showModal.value = false;
+  }
 };
 </script>
 
@@ -81,12 +92,10 @@ const handleFileUpload = (event) => {
           <td><input v-model="product.stock" type="number" placeholder="Estoque" /></td>
           <td><input v-model="product.price" type="number" step="0.01" placeholder="Preço" /></td>
           <td>
-            <!-- Switch moderno -->
             <label class="switch">
               <input type="checkbox" @change="toggleCatalog(product)" />
               <span class="slider"></span>
             </label>
-          
           </td>
           <td>
             <button class="delete-btn" @click="deleteProduct(product.id)">Excluir</button>
@@ -96,7 +105,7 @@ const handleFileUpload = (event) => {
     </table>
 
     <!-- Modal para adicionar um novo produto -->
-    <div v-if="showModal" class="modal">
+    <div v-if="showModal" class="modal" @click="closeModal">
       <div class="modal-content">
         <h2>Adicionar Produto</h2>
         <input v-model="newProduct.name" placeholder="Nome do Produto" />
@@ -114,6 +123,7 @@ const handleFileUpload = (event) => {
         <!-- Campo para upload de imagem -->
         <input type="file" @change="handleFileUpload" class="file-input"/>
         <img v-if="newProduct.image" :src="newProduct.image" alt="Imagem do Produto" class="product-image-preview" />
+
         <div class="modal-actions">
           <button class="save-btn" @click="saveProduct">Salvar</button>
           <button class="close-btn" @click="showModal = false">Fechar</button>
@@ -124,7 +134,7 @@ const handleFileUpload = (event) => {
 </template>
 
 <style scoped>
-/* Reset de estilos básicos */
+/* Reset e fonte personalizada */
 * {
   margin: 0;
   padding: 0;
@@ -132,8 +142,8 @@ const handleFileUpload = (event) => {
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f3f4f6;
+  font-family: 'Poppins', sans-serif;
+  background-color: #faf3e0;
   color: #333;
 }
 
@@ -151,18 +161,17 @@ body {
 }
 
 h1 {
-  font-size: 28px;
-  font-weight: 600;
-  color: #333;
+  font-size: 32px;
+  font-weight: 700;
+  color: #c45d4c;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  background-color: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 th, td {
@@ -172,49 +181,45 @@ th, td {
 }
 
 th {
-  background-color: #f9fafb;
+  background-color: #ffe5d4;
   font-weight: 600;
-  color: #333;
+  color: #c45d4c;
 }
 
 td input {
   width: 100%;
-  padding: 10px;
+  padding: 8px;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: 14px;
 }
 
 td button {
-  background-color: #ff4b4b;
+  background-color: #c45d4c;
   color: white;
-  border: none;
-  padding: 10px 16px;
+  padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 td button:hover {
-  background-color: #ff1a1a;
+  background-color: #a04b3a;
 }
 
 .add-product-btn {
-  background-color: #007bff;
+  background-color: #c45d4c;
   color: white;
-  padding: 12px 24px;
-  border: none;
-  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 8px;
   cursor: pointer;
-  border-radius: 5px;
   transition: background-color 0.3s ease;
 }
 
 .add-product-btn:hover {
-  background-color: #0056b3;
+  background-color: #a04b3a;
 }
 
-/* Switch moderno estilo slider */
 .switch {
   position: relative;
   display: inline-block;
@@ -235,7 +240,7 @@ td button:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: #ddd;
   transition: 0.4s;
   border-radius: 34px;
 }
@@ -253,14 +258,13 @@ td button:hover {
 }
 
 input:checked + .slider {
-  background-color: #007bff;
+  background-color: #c45d4c;
 }
 
 input:checked + .slider:before {
   transform: translateX(26px);
 }
 
-/* Modal */
 .modal {
   position: fixed;
   top: 0;
@@ -271,90 +275,107 @@ input:checked + .slider:before {
   display: flex;
   justify-content: center;
   align-items: center;
+  backdrop-filter: blur(6px);
+  z-index: 1000;
 }
 
 .modal-content {
-  background-color: white;
-  padding: 30px;
-  border-radius: 10px;
-  width: 450px;
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  width: 480px;
   max-width: 90%;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-  animation: fadeIn 0.3s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.3s ease-out;
+  position: relative;
 }
 
-@keyframes fadeIn {
+@keyframes slideIn {
   from {
     opacity: 0;
-    transform: scale(0.9);
+    transform: translateY(-50px);
   }
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: translateY(0);
   }
+}
+
+h2 {
+  font-size: 24px;
+  color: #c45d4c;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+input:focus {
+  border-color: #c45d4c;
+}
+
+.catalog-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  color: #555;
 }
 
 .modal-actions {
   display: flex;
+  justify-content: space-between;
   gap: 10px;
 }
 
 .save-btn, .close-btn {
   flex: 1;
   padding: 12px;
-  border-radius: 5px;
-  cursor: pointer;
+  border-radius: 8px;
   font-size: 16px;
+  cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .save-btn {
-  background-color: #007bff;
+  background-color: #c45d4c;
   color: white;
-  border: none;
 }
 
 .save-btn:hover {
-  background-color: #0056b3;
+  background-color: #a04b3a;
 }
 
 .close-btn {
-  background-color: #dc3545;
+  background-color: #ff6f61;
   color: white;
-  border: none;
 }
 
 .close-btn:hover {
-  background-color: #c82333;
+  background-color: #d96055;
 }
 
-/* Preview de imagem */
 .product-image-preview {
   width: 100px;
   height: 100px;
-  margin-top: 15px;
+  margin-top: 10px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .file-input {
   margin-top: 10px;
-}
-
-.catalog-label {
-  display: flex;
-  align-items: center;
-  margin: 10px 0;
+  padding: 10px;
   font-size: 14px;
   color: #555;
-}
-
-/* Imagem na tabela de produtos */
-.table-product-image {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 5px;
-  border: 1px solid #ddd;
 }
 </style>
