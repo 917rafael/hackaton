@@ -6,11 +6,8 @@ const props = defineProps({
   },
 });
 import Card from './Card.vue'
-
 import { products } from '@/data/cardapio';
-
 import { sacola } from '@/data/sacola';
-
 import { ref, computed, reactive } from 'vue';
 
 
@@ -38,10 +35,6 @@ const toggleModal = (id) => {
 
 <template>
     <div class="product-card" role="button" tabindex="0" @click="toggleModal(product.id)">
-  
-      <div class="discount-tag" v-if="product.discount">
-        <span>{{ product.discountText }}</span>
-      </div>
   
       <img :src="product.image" :alt="product.name" class="product-image" />
   
@@ -78,7 +71,7 @@ const toggleModal = (id) => {
 .product-card {
   background-color: #fff;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0.5, 0.5, 0.6);
   overflow: hidden;
   max-width: 200px;
   margin: 0 auto;
@@ -95,7 +88,7 @@ const toggleModal = (id) => {
   position: absolute;
   top: 10px;
   left: 10px;
-  background-color: red;
+  background-color: rgb(0, 0, 0);
   color: white;
   font-size: 0.8em;
   padding: 5px;
