@@ -4,25 +4,10 @@ import ProductCard from '@/components/ProductCard.vue'
 import back from '@/assets/image/fundohome.jpg'
 //import navbar from '@/components/NavHamb.vue'
 import { produtos } from '@/data/produtos';
+import { products } from '@/data/cardapio';
 import Product from '@/components/Cardap.vue';
 import sacola from '@/components/sacola.vue';
 
-
-const products = [
-    {
-      id: 1,
-      name: 'pega o pao caraio',
-      image: back,
-      rating: 2,
-      reviews: 1,
-      oldPrice: 229.99, 
-      currentPrice: 179.99,
-      discount: 21,
-      discountText: 'Mais barato no app!',
-      installments: '3x de R$ 59,99 sem juros no cartão de crédito',  
-    },
-   
-  ];
 
 </script>
 
@@ -42,9 +27,11 @@ const products = [
       </div>    
     </section>
 
+    <div class="div-product">
     <div class="product-list">
       <Product v-for="product in products" :key="product.id" :product="product"/>
     </div> 
+  </div>
     
     
     <div>
@@ -54,11 +41,17 @@ const products = [
 </template>
 
 <style scoped>
+.div-product {
+  max-width: 800px; /*a largura desejada */
+  margin: 0 auto; /*centralizar a div */
+  padding: 10px; /*separar a lista de produtos da borda */
+}
+
 .product-list {
   display: grid;
-  grid-template-columns: repeat(3, 200px);
-  gap: 16px;
-  padding: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 10px;
+  gap: 10px;
 }
 
 .hero-p{
