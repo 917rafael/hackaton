@@ -1,51 +1,48 @@
 <!--essa pagina é dedicada para os funcionarios somente-->
 
 <script setup>
-import { ref } from 'vue';
-import Heade from '@/components/header.vue';
-import Formulario from '@/components/formulario.vue';
-import Resultado from '@/components/resultado.vue';
+import { ref } from 'vue'
+import Heade from '@/components/FoHea/header.vue'
+import Formulario from '@/components/formulario.vue'
+import Resultado from '@/components/resultado.vue'
+import { RouterLink } from 'vue-router'
 
 const usuarios = ref({})
 const mostrarResultado = ref(false)
 
 function clone(usuario) {
-    usuarios.value = usuario;
-    mostrarResultado.value = true
+  usuarios.value = usuario
+  mostrarResultado.value = true
 }
-
 </script>
 
 <template>
-    <heade />
+  <heade />
 
-    <div class="nav">
-        <button class="button" @click="salvar">Produtos vendidos</button>
-        <button class="button" @click="salvar">Estoque de Produtos</button>
-        <button class="button" @click="salvar">Consumo de Produtos</button>
-        <button class="button" @click="salvar">Clientes Contribuintes</button>
-        <button class="button" @click="salvar">Fornecedores</button>
-        <button class="button" @click="salvar">Pedidos de Clientes</button>
-    </div>
-    <div class="head">
-    
-    </div>
-    <div class="container">
-    </div>
-    
-    <formulario @adicionar="clone" />
-    <resultado v-if="mostrarResultado" :usuarios="usuarios" />
+  <div class="nav">
+    <button class="button" @click="salvar">Produtos vendidos</button>
+    <router-link to="/estoque">
+      <button class="button" @click="salvar">Manipulação de produtos/estoque</button>
+    </router-link>
 
+    <button class="button" @click="salvar">Consumo de Produtos</button>
+    <button class="button" @click="salvar">Clientes Contribuintes</button>
+    <button class="button" @click="salvar">Fornecedores</button>
+    <button class="button" @click="salvar">Pedidos de Clientes</button>
+  </div>
+  <div class="head"></div>
+  <div class="container"></div>
+
+  <formulario @adicionar="clone" />
+  <resultado v-if="mostrarResultado" :usuarios="usuarios" />
 </template>
 
 <style scoped>
-/*essa partte é dedicada a div nav*/
-/* Navegação */
 .nav {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; /* Centraliza os botões horizontalmente */
-  gap: 15px; /* Espaçamento entre os botões */
+  justify-content: center; 
+  gap: 15px;
   margin: 20px 0;
 }
 
@@ -57,7 +54,9 @@ function clone(usuario) {
   border-radius: 4px;
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+  transition:
+    background-color 0.3s,
+    transform 0.2s;
 }
 
 .button:hover {
@@ -75,7 +74,7 @@ function clone(usuario) {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .button {
     width: 100%;
     max-width: 300px;
@@ -83,12 +82,11 @@ function clone(usuario) {
 }
 /**/
 
-
 .head {
-    background-color: #f4e1d2;
+  background-color: #f4e1d2;
 }
 
 .container {
-    background-color: #f4e1d2;
+  background-color: #f4e1d2;
 }
 </style>
