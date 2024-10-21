@@ -1,3 +1,5 @@
+
+
 <script setup>
 import { computed, ref } from 'vue';
 import { products } from '@/data/cardapio';

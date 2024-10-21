@@ -1,3 +1,4 @@
+
 <script setup>
 import { ref } from 'vue';
 
@@ -15,6 +16,12 @@ const cart = ref([]);
 // Funções para gerenciar os itens no carrinho
 const addItem = (item) => {
   item.quantity++;
+};
+
+
+
+function teste (){
+  console.log(sacola.value)
 };
 
 const removeItem = (item) => {
@@ -72,9 +79,12 @@ const calculateTotal = () => {
     <!-- Mensagem caso o carrinho esteja vazio -->
     <div v-else class="empty-cart">
       <p>Sua sacola está vazia!</p>
-    </div>
+
+      <button @click="teste">teste</button>
+    </div> 
 
     <!-- Separador criativo -->
+
     <div v-if="cart.length" class="cart-divider"></div>
 
     <!-- Total da compra -->

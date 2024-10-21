@@ -2,14 +2,15 @@
 </script>
 
 <template>
-    <div class="background"></div>
+    <div class="background">
+        <img src="/src/assets/image/padaria.jpg" alt="Padaria" class="padaria-img">
+    </div>
     <div class="container">
         <h1 class="entre">
             ENTRE OU CADASTRE-SE NA
             <h1 class="santo">PADARIA SANTO PÃO</h1>
         </h1>
-        <h2>E</h2>
-        <h2>APROVEITE TODAS AS NOSSAS PROMOÇÕES</h2>
+        <h2>E APROVEITE TODAS AS NOSSAS PROMOÇÕES</h2>
 
         <form class="form">
             <div class="form-group">
@@ -18,7 +19,7 @@
             </div>
 
             <div class="form-group">
-                <label for="cpf">Código:</label>
+                <label for="cpf">Código Funcio:</label>
                 <input type="text" id="codigo" name="codigo" required placeholder="Insira o seu código: " />
             </div>
 
@@ -26,17 +27,31 @@
                 <label for="cargo">Cargo:</label>
                 <input type="text" id="Cargo" name="cargo" required placeholder="Insira o seu cargo" />
             </div>
-            <router-link to="/homeFuncio">
-                <button type="submit" router-link="/homeFuncio">Cadastrar</button>
-            </router-link>
         </form>
+        <router-link to="/homeFuncio"><button type="submit" router-link="/homeFuncio" @click="entrar">Cadastrar</button></router-link>
         <router-link to="/logClient" class="cliente">Cliente</router-link>
     </div>
 </template>
 
 <style scoped>
+
 .form {
-    margin-top: 35px;
+    margin-top: 30px;
+}
+
+.cliente {
+    text-align: center;
+    text-decoration: none;
+    margin-top: 10px;
+    padding: 12px;
+    background-color: #e24f4a;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 42%;
+    transition: background-color 0.3s ease;
 }
 
 body {
@@ -44,7 +59,9 @@ body {
     margin: 0;
     padding: 0;
 }
-
+h2 {
+    color: #333;
+}
 .entre {
     color: #d9534f;
     text-align: center;
@@ -70,18 +87,14 @@ body {
 }
 
 .container {
+    display: flex;
     position: fixed;
     top: 0;
     right: 0;
     height: 100%;
     width: 40%;
     background-color: #f4e1d2;
-    color: #333;
     padding: 20px;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.2);
-    display: flex;
     flex-direction: column;
     align-items: center;
 }
@@ -99,7 +112,7 @@ label {
 
 input {
     padding: 12px;
-    border: 1px solid #ddd;
+    border: 1px solid #838282;
     border-radius: 8px;
     font-size: 16px;
     width: 100%;
@@ -107,7 +120,10 @@ input {
 }
 
 button {
-    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 10px;
+    padding: 12px 100px;
     background-color: #e24f4a;
     color: #fff;
     border: none;
@@ -116,6 +132,10 @@ button {
     font-size: 18px;
     width: 100%;
     transition: background-color 0.3s ease;
+}
+
+.cliente:hover {
+    background-color: #c9302c;
 }
 
 button:hover {

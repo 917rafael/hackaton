@@ -7,12 +7,12 @@ const props = defineProps({
 
 <template>
   <div class="container">
-    <h1 class="h2">Resultado</h1>
-    <ul class="ul">
-      <li v-for="(usuario, index) in props.usuarios" :key="index">
+    <h1 class="h1">Resultado</h1>
+    <p class="resultado">
+      <p v-for="(usuario, index) in props.usuarios" :key="index">
         {{ usuario }} 
-      </li>
-    </ul>
+      </p>
+    </p>
   </div>
 </template>
 
@@ -26,17 +26,17 @@ const props = defineProps({
     margin-left: 20px;
     border: solid 7px;
   }
-.ul{
+.resultado{
   margin-top: 40px;
   margin-left: 20px;
   color: black;
+  text-decoration: none;
 }
 
-.h2{
+.h1 {
   color: black;
   margin-top: 20px;
   margin-left: 37%
-
 }
 
 </style>

@@ -18,8 +18,8 @@ import sacola from '@/components/sacola.vue';
     <section class="hero" :style="{ backgroundImage: `url(${back})` }">
       <div class="hero-text">
         <h1>Whole Grain Goodness in Every Slice of Wheat Bread</h1>
-        <p class="hero-p">One bite and you'll switch to whole wheat bread</p>
-        <button class="cta-button">Learn More</button>
+        <p class="hero-p"></p>
+        <button class="cta-button">Aprender Mais</button>
       </div>
       
       <div class="products">
@@ -39,11 +39,17 @@ import sacola from '@/components/sacola.vue';
 </template>
 
 <style scoped>
+.div-product {
+  max-width: 800px; /*a largura desejada */
+  margin: 0 auto; /*centralizar a div */
+  padding: 10px; /*separar a lista de produtos da borda */
+}
+
 .product-list {
   display: grid;
-  grid-template-columns: repeat(3, 200px);
-  gap: 16px;
-  padding: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 10px;
+  gap: 10px;
 }
 
 .hero-p{
