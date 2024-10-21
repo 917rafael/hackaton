@@ -1,6 +1,5 @@
 
 <script setup>
-<!-- eslint-disable vue/multi-word-component-names -->
 import { ref } from 'vue';
 
 // Controle de estado do carrinho (aberto/fechado)

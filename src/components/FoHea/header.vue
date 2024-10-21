@@ -9,12 +9,9 @@
     <nav>
       <ul class="nav-links">
         <li><router-link to="/contato">Contato</router-link></li>
+        <li><router-link to="/">????</router-link></li>
+        <li><router-link to="/">Sobre</router-link></li>
         <li><router-link to="/logClient">Login</router-link></li>
-        <li><router-link to="/contato">Contato</router-link></li>
-        <li><router-link to="/contato">Contato</router-link></li>
-        <router-link to="/">
-         
-        </router-link> 
       </ul>
     </nav>
   </header>
@@ -35,8 +32,8 @@
 }
 
 .logo {
-  max-width: 139px; 
-  height: 110px; 
+  max-width: 139px;
+  height: 110px;
   margin-left: 60px;
 }
 

@@ -10,8 +10,7 @@
       ENTRE OU CADASTRE-SE NA 
       <h1 class="santo">PADARIA SANTO PÃO</h1>
     </h1> 
-    <h2>E</h2>
-    <h2>APROVEITE TODAS AS NOSSAS PROMOÇÕES</h2>
+    <h2>E APROVEITE TODAS AS NOSSAS PROMOÇÕES</h2>
     
     <form class="form">
       <div class="form-group">
@@ -29,10 +28,8 @@
         <input type="date" id="data-nascimento" name="data-nascimento" required>
       </div>
 
-       
         <button type="submit">Cadastrar</button>
       
-    
     </form>
     <router-link to="/logFuncio" class="funcio">Funcionarios</router-link>
 </div>
@@ -40,12 +37,30 @@
 
 <style scoped>
 
+h2 {
+  color: #333;
+}
 .form{
     margin-top: 35px;
 }
 
+.funcio {
+  text-align: center;
+  text-decoration: none;
+  margin-top: 10px;
+  padding: 12px;
+  background-color: #e24f4a; 
+  color: #fff; 
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 18px;
+  width: 57%;
+  transition: background-color 0.3s ease;
+}
+
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -75,18 +90,14 @@ body {
 }
 
 .container {
+  display: flex;
     position: fixed;
     top: 0;
     right: 0;
     height: 100%;
     width: 40%;
     background-color: #f4e1d2; 
-    color: #333;
     padding: 20px;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.2);
-    display: flex;
     flex-direction: column;
     align-items: center;
 }
@@ -104,7 +115,7 @@ label {
 
 input {
     padding: 12px;
-    border: 1px solid #ddd;
+    border: 1px solid #838282;
     border-radius: 8px;
     font-size: 16px;
     width: 100%;
@@ -123,7 +134,10 @@ button {
     transition: background-color 0.3s ease;
 }
 
+.funcio:hover {
+  background-color: #c9302c; 
+}
 button:hover {
-    background-color: #c9302c; 
+  background-color: #c9302c; 
 }
 </style>

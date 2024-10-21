@@ -1,14 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 
-//import logClient from '@/views/logClient.vue'
-
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
 
-  
+    {
+      path:'/Estoque',
+      name: 'estoque',
+      component: () => import('../views/Estoque.vue')
+    },  
     {
       path: '/contato',
       name: 'contato',
