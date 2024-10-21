@@ -50,7 +50,7 @@
     border-radius: 25px;
     cursor: pointer;
     font-size: 18px;
-    width: 50%;
+    width: 42%;
     transition: background-color 0.3s ease;
 }
 
@@ -59,7 +59,9 @@ body {
     margin: 0;
     padding: 0;
 }
-
+h2 {
+    color: #333;
+}
 .entre {
     color: #d9534f;
     text-align: center;
@@ -85,18 +87,14 @@ body {
 }
 
 .container {
+    display: flex;
     position: fixed;
     top: 0;
     right: 0;
     height: 100%;
     width: 40%;
     background-color: #f4e1d2;
-    color: #333;
     padding: 20px;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.2);
-    display: flex;
     flex-direction: column;
     align-items: center;
 }

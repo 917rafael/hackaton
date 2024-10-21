@@ -37,6 +37,9 @@
 
 <style scoped>
 
+h2 {
+  color: #333;
+}
 .form{
     margin-top: 35px;
 }
@@ -52,12 +55,12 @@
   border-radius: 25px;
   cursor: pointer;
   font-size: 18px;
-  width: 50%;
+  width: 57%;
   transition: background-color 0.3s ease;
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -87,18 +90,14 @@ body {
 }
 
 .container {
+  display: flex;
     position: fixed;
     top: 0;
     right: 0;
     height: 100%;
     width: 40%;
     background-color: #f4e1d2; 
-    color: #333;
     padding: 20px;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.2);
-    display: flex;
     flex-direction: column;
     align-items: center;
 }
