@@ -1,6 +1,45 @@
 <script setup>
 import Header from '@/components/FoHea/header.vue';
 import { ref } from 'vue';
+import { supabaseClient } from '@supabase/supabase-js';
+
+const id =  ref([]);
+const nome = ref('');
+const stock = ref('');
+const preco = ref('');
+const catalog = ref('');
+const imagem = ref([]);
+const message = ref('');
+
+
+
+
+
+const insertData = async () => {
+  if (!nome.value || !stock.value || !preco.value || !catalog.value  || !imagem.value) {
+    message.value = "Por favor, preencha todos os campos."
+    return
+  }
+const {data: pessoaData, pessoaError } = await supabase
+    .from('estoque')
+    .insert([{ 
+      stock: stock.value,
+      nome: nome.value, 
+      preco: preco.value, 
+      imagem: imagem.value,
+      catalog: catalog.value
+    }])
+ 
+    if (pessoaError) {
+    console.error('Erro ao inserir pessoa:', pessoaError.message)
+    message.value = `Erro ao inserir pessoa: ${pessoaError.message}`
+      return
+    }
+
+  message.value = 'Pessoa inserida com sucesso!'}
+
+
+
 
 // Lista de produtos gerenciada localmente
 const products = ref([

@@ -13,7 +13,9 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.6.0",
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
+    "@supabase/supabase-js": "^2.45.6",
     "pinia": "^2.2.4",
+    "supabase": "^1.207.9",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
   },
