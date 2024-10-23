@@ -7,6 +7,7 @@ import Formulario from '@/components/formulario.vue'
 import Resultado from '@/components/resultado.vue'
 import { RouterLink } from 'vue-router'
 
+
 const usuarios = ref({})
 const mostrarResultado = ref(false)
 
@@ -24,9 +25,6 @@ function clone(usuario) {
     <router-link to="/estoque">
       <button class="button" @click="salvar">Manipulação de produtos/estoque</button>
     </router-link>
-
-    <button class="button" @click="salvar">Consumo de Produtos</button>
-    <button class="button" @click="salvar">Clientes Contribuintes</button>
     <button class="button" @click="salvar">Fornecedores</button>
     <button class="button" @click="salvar">Pedidos de Clientes</button>
   </div>

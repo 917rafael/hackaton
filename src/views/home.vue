@@ -8,6 +8,8 @@ import Product from '@/components/Product/Produtc.vue';
 import sacola from '@/components/sacola.vue';
 
 
+import { useProductStore } from '@/store/productStore'
+const productStore = useProductStore()
 
 </script>
 
@@ -28,7 +30,7 @@ import sacola from '@/components/sacola.vue';
     </section>
     <div class="product-main">
     <div class="product-list">
-      <Product v-for="product in products" :key="product.id" :product="product"/>
+      <Product v-for="product in productStore.catalogProducts" :key="product.id" :product="product"/>
     </div> 
   </div>
     
