@@ -1,7 +1,7 @@
 <script setup>
 import Header from '@/components/FoHea/header.vue';
 import { ref } from 'vue';
-import { supabaseClient } from '@supabase/supabase-js';
+/*import { supabaseClient } from '@supabase/supabase-js';
 
 const id =  ref([]);
 const nome = ref('');
@@ -40,7 +40,7 @@ const {data: pessoaData, pessoaError } = await supabase
 
 
 
-
+*/
 // Lista de produtos gerenciada localmente
 const products = ref([
   { id: 1, name: 'Produto 1', category: 'Categoria 1', stock: 10, price: 99.99, catalog: true, image: null },
