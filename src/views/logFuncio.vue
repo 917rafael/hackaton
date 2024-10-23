@@ -1,4 +1,32 @@
 <script setup>
+import { ref } from "vue";
+import {supabase} from  '../lib/supabaseClient';
+const nome = ref([]);
+const codigofunc = ref([]);
+const cargo = ref([]);
+const message = ref('');
+
+const insertData = async () => {
+  if (!nome.value || !codigofunc.value || !cargo.value ) {
+    message.value = "Por favor, preencha todos os campos."
+    return
+  }
+const {data: pessoaData, pessoaError } = await supabase
+    .from('funcionario')
+    .insert([{ 
+      nome: nome.value, 
+      codigofunc: codigofunc.value, 
+      cargo: cargo.value
+    }])
+ 
+    if (pessoaError) {
+    console.error('Erro ao inserir pessoa:', pessoaError.message)
+    message.value = `Erro ao inserir pessoa: ${pessoaError.message}`
+      return
+    }
+
+  message.value = 'Pessoa inserida com sucesso!'}
+
 </script>
 
 <template>
@@ -12,23 +40,25 @@
         </h1>
         <h2>E APROVEITE TODAS AS NOSSAS PROMOÇÕES</h2>
 
-        <form class="form">
+        <form class="form" @submit.prevent="insertData">
             <div class="form-group">
                 <label for="nome">Nome:</label>
-                <input type="text" id="nome" name="nome" required placeholder="Insira seu nome:" />
+                <input type="text" id="nome" name="nome" v-model="nome" required placeholder="Insira seu nome:" />
             </div>
 
             <div class="form-group">
                 <label for="cpf">Código Funcio:</label>
-                <input type="text" id="codigo" name="codigo" required placeholder="Insira o seu código: " />
+                <input type="text" id="codigo" name="codigofunc" v-model="codigofunc"required placeholder="Insira o seu código: " />
             </div>
 
             <div class="form-group">
                 <label for="cargo">Cargo:</label>
-                <input type="text" id="Cargo" name="cargo" required placeholder="Insira o seu cargo" />
+                <input type="text" id="Cargo" name="cargo" v-model="cargo" required placeholder="Insira o seu cargo" />
             </div>
         </form>
-        <router-link to="/homeFuncio"><button type="submit" router-link="/homeFuncio" @click="entrar">Cadastrar</button></router-link>
+        <button type="submit" router-link="/homeFuncio" @click="entrar">Cadastrar</button>
+        <p>{{ message }}</p>
+        <!--<router-link to="/homeFuncio"></router-link>-->
         <router-link to="/logClient" class="cliente">Cliente</router-link>
     </div>
 </template>
