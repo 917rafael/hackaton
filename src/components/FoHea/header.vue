@@ -9,7 +9,7 @@
       <ul class="nav-links">
         <li><router-link to="/" class="link">HOME</router-link></li>
         <li><router-link to="/contato" class="link">CONTATO</router-link></li>
-        <li><router-link to="/" class="link">MAIS</router-link></li>
+        <li><router-link to="/estoque" class="link">MAIS</router-link></li>
         <li><button class="btn-login"><router-link to="/logClient" class="link-login">LOGIN</router-link></button></li>
       </ul>
     </nav>
