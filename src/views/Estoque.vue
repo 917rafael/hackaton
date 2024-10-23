@@ -1,12 +1,15 @@
 <script setup>
-import Header from '@/components/FoHea/header.vue';
 import { ref } from 'vue';
 
+import { useProductStore } from '@/store/productStore'
+import Header from '@/components/FoHea/header.vue';
+
+const productStore = useProductStore()
 // Lista de produtos gerenciada localmente
-const products = ref([
-  { id: 1, name: 'Produto 1', category: 'Categoria 1', stock: 10, price: 99.99, catalog: true, image: null },
-  { id: 2, name: 'Produto 2', category: 'Categoria 2', stock: 5, price: 49.99, catalog: false, image: null },
-]);
+// const products = ref([
+//   { id: 1, name: 'Produto 1', category: 'Categoria 1', stock: 10, price: 99.99, catalog: true, image: null },
+//   { id: 2, name: 'Produto 2', category: 'Categoria 2', stock: 5, price: 49.99, catalog: false, image: null },
+// ]);
 
 const showModal = ref(false);
 
@@ -39,7 +42,8 @@ const deleteProduct = (productId) => {
 
 // Função para alternar o status de exibição no catálogo
 const toggleCatalog = (product) => {
-  product.catalog = !product.catalog;
+  productStore.changeCatologVisibility(product.id)
+  // product.catalog = !product.catalog;
 };
 
 // Função para lidar com upload de imagem, limitando a 2MB
@@ -82,7 +86,7 @@ const closeModal = (event) => {
         </tr>
       </thead>
       <tbody>
-        <tr v-for="product in products" :key="product.id">
+        <tr v-for="product in productStore.products" :key="product.id">
           <td>
             <img v-if="product.image" :src="product.image" alt="Imagem do Produto" class="table-product-image" />
             <span v-else>Sem imagem</span>
@@ -92,8 +96,8 @@ const closeModal = (event) => {
           <td><input v-model="product.stock" type="number" placeholder="Estoque" /></td>
           <td><input v-model="product.price" type="number" step="0.01" placeholder="Preço" /></td>
           <td>
-            <label class="switch">
-              <input type="checkbox" @change="toggleCatalog(product)" />
+            <label class="switch">''
+              <input type="checkbox" v-model="product.catalog" />
               <span class="slider"></span>
             </label>
           </td>
@@ -362,7 +366,7 @@ input:focus {
   background-color: #d96055;
 }
 
-.product-image-preview {
+.table-product-image {
   width: 100px;
   height: 100px;
   margin-top: 10px;
