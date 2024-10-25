@@ -1,7 +1,8 @@
 
 <script setup>
 import { ref } from 'vue';
-
+import { useSacolaStore } from '@/store/sacola.js'
+const store = useSacolaStore()
 // Controle de estado do carrinho (aberto/fechado)
 const isCartOpen = ref(false);
 
@@ -17,8 +18,6 @@ const cart = ref([]);
 const addItem = (item) => {
   item.quantity++;
 };
-
-
 
 function teste (){
   console.log(sacola.value)
@@ -61,8 +60,8 @@ const calculateTotal = () => {
     <div class="cart-divider"></div>
 
     <!-- Lista de itens no carrinho -->
-    <div v-if="cart.length" class="cart-items">
-      <div class="cart-item" v-for="(item, index) in cart" :key="item.id">
+    <div v-if="store.sacola_cart.length > 0" class="cart-items">
+      <div class="cart-item" v-for="(item, index) in store.sacola_cart" :key="item.id">
         <div class="item-info">
           <span class="item-name">{{ item.name }}</span>
           <span class="item-price">R$ {{ item.price.toFixed(2) }}</span>
@@ -79,8 +78,6 @@ const calculateTotal = () => {
     <!-- Mensagem caso o carrinho esteja vazio -->
     <div v-else class="empty-cart">
       <p>Sua sacola está vazia!</p>
-
-      <button @click="teste">teste</button>
     </div> 
 
     <!-- Separador criativo -->
@@ -88,13 +85,13 @@ const calculateTotal = () => {
     <div v-if="cart.length" class="cart-divider"></div>
 
     <!-- Total da compra -->
-    <div v-if="cart.length" class="cart-total">
+    <div v-if="store.sacola_cart.length > 0" class="cart-total">
       <span>Valor total desta compra</span>
       <span>R$ {{ calculateTotal() }}</span>
     </div>
 
     <!-- Botão de fechar pedido -->
-    <div v-if="cart.length" class="checkout">
+    <div v-if="store.sacola_cart.length > 0" class="checkout">
       <button class="btn-finalize">FECHAR PEDIDO</button>
     </div>
   </div>
