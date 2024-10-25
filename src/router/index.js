@@ -37,15 +37,20 @@ const router = createRouter({
     },
 
     {
-      path: '/logFuncio',
-      name: 'logFuncio',
-      component: () => import('../views/logFuncio.vue')
+      path: '/CadastroFuncio',
+      name: 'CadastroFuncio',
+      component: () => import('../views/cadastroFuncio.vue')
     },
     {
       path: '/logClient',
       name: 'logClient',
       component: () => import('../views/logClient.vue')
     },
+    {
+      path: '/logFuncio',
+      name: 'logFuncio',
+      component: () => import('../views/logFuncio.vue')
+    }
 
 
   ]
