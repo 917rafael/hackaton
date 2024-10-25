@@ -29,7 +29,7 @@
             </div>
         </form>
         <router-link to="/homeFuncio"><button type="submit" router-link="/homeFuncio" @click="entrar">Cadastrar</button></router-link>
-        <router-link to="/logClient" class="cliente">Cliente</router-link>
+        <router-link to="/Login" class="cliente">Cliente</router-link>
     </div>
 </template>
 

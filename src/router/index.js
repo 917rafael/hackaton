@@ -42,9 +42,9 @@ const router = createRouter({
       component: () => import('../views/logFuncio.vue')
     },
     {
-      path: '/logClient',
-      name: 'logClient',
-      component: () => import('../views/logClient.vue')
+      path: '/Login',
+      name: 'Login',
+      component: () => import('../views/Login.vue')
     },
 
 
