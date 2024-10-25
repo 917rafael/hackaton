@@ -55,7 +55,6 @@ body {
   position: fixed;
   margin-left: 30%;
   margin-right: 30%;
-  margin-top: ;
   background-color: #f4e1d2;
   padding: 20px;
   flex-direction: column;
