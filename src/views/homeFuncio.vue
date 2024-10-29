@@ -42,6 +42,8 @@ function clone(usuario) {
   justify-content: center; 
   gap: 15px;
   margin: 20px 0;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .button {

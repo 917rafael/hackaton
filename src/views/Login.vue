@@ -10,6 +10,7 @@ import Footer from '@/components/FoHea/Footer.vue';
     <img src="/src/assets/image/padaria.jpg" alt="Padaria" class="padaria-img">
   </div>
   <div class="container">
+    <div class="caixa">
     <h1 class="txt-entre">
       ENTRE OU CADASTRE-SE NA PADARIA TRADIÇÃO NO FORNO E APROVEITE TODAS AS NOSSSAS PROMOÇÕES
     </h1>
@@ -31,14 +32,13 @@ import Footer from '@/components/FoHea/Footer.vue';
       </div>
 
       <button type="submit">Cadastrar</button>
-
     </form>
+
     <router-link to="/logFuncio" class="funcio">Funcionarios</router-link>
+
+  </div>
   </div>
 
-  <div class='footer'>
-    <Footer />
-  </div>
 </template>
 
 <style scoped>
@@ -49,16 +49,32 @@ body {
   padding: 0;
 }
 
-
 .container {
   display: flex;
-  position: fixed;
+  border-radius: 10px;
   margin-left: 30%;
   margin-right: 30%;
   background-color: #f4e1d2;
   padding: 20px;
+  margin-top: 30px;
+  width: 700px;
+  height: 750px;
   flex-direction: column;
-  align-items: center;
+  
+}
+
+.padaria-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.caixa {
+  margin-top: 30px;
+display: flex;
+flex-direction: column;
+align-items: center;
+border-radius: 10px;
 }
 
 .form {
@@ -98,13 +114,6 @@ body {
   height: 100%;
   z-index: -1;
 }
-
-.padaria-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 
 label {
   margin-bottom: 5px;

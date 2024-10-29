@@ -37,7 +37,7 @@ const productStore = useProductStore()
     <div>
       <sacola />
     </div>
-    
+
 </template>
 
 <style scoped>
