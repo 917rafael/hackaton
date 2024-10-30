@@ -96,7 +96,7 @@ const toggleModal = (id) => {
 }
 .product-image {
   width: 100%;
-  height: auto;
+  height: 120px;
   object-fit: cover;
   margin-bottom: 10px;
 }

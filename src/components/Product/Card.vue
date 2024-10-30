@@ -1,10 +1,8 @@
-
-
 <script setup>
 import { computed, ref } from 'vue';
 import { products } from '@/data/cardapio';
-
-
+import { useSacolaStore } from '@/store/sacola.js'
+const store = useSacolaStore()
 const props = defineProps(['productselected'])
 const options = ref([
   {
@@ -60,7 +58,7 @@ const decreaseCount = (index) => {
          <button @click="increaseCount(0)" class="control-button increment">+ Adicionar</button>
        
        </div>
-       <button class="add-button" @click="addToCart(product.id)" >Adicionar ao Pedido R$ {{ totalPrice.toFixed(2) }}</button>
+       <button class="add-button" @click="store.addProduct(props.productselected)" >Adicionar ao Pedido R$ {{ totalPrice.toFixed(2) }}</button>
      </div>
    
    </div>
