@@ -1,28 +1,32 @@
 <script setup>
 import { ref } from "vue";
 import {supabase} from  '../lib/supabaseClient';
+const nome = ref([]);
 const codigofunc = ref([]);
+const cargo = ref([]);
 const cpf = ref([]);
 const message = ref('');
 
-const LoginData = async () => {
-  if (!cpf.value || !codigofunc.value  ) {
+const insertData = async () => {
+  if (!nome.value || !codigofunc.value || !cargo.value || !cpf.value) {
     message.value = "Por favor, preencha todos os campos."
     return
   }
+const {data: pessoaError } = await supabase
+    .from('funcionario')
+    .insert([{ 
+      nome: nome.value, 
+      codigofunc: codigofunc.value, 
+      cargo: cargo.value,
+      cpf: cpf.value
+    }])
+ 
+    if (pessoaError) {
+    console.error('Erro ao inserir pessoa:', pessoaError.message)
+    message.value = `Erro ao inserir pessoa: ${pessoaError.message}`
+      return
+    }
 
-  const handleSignin = async () => {
-  try {
-    // Use the Supabase method to handle the signin
-    const { error } = await supabase.auth.funcionario({
-      cpf: cpf.value,
-      codigofunc: codigofunc.value,
-    });
-    if (error) throw error;
-  } catch (error) {
-    alert(error.error_description || error.message);
-  }
-};
   message.value = 'Pessoa inserida com sucesso!'}
 
 </script>
@@ -38,21 +42,34 @@ const LoginData = async () => {
         </h1>
         <h2>E APROVEITE TODAS AS NOSSAS PROMOÇÕES</h2>
 
-        <form class="form" @submit.prevent="handleSignin">
+        <form class="form" @submit.prevent="insertData">
             <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" v-model="nome" required placeholder="Insira seu nome:" />
+            </div>
+
+
+            <div class="form-group">    
                 <label for="CPF">CPF:</label>
-                <input type="number" id="cpf" name="cpf" v-model="cpf" required placeholder="Insira seu cpf:" />
+                <input type="number" id="cpf" name="cpf" v-model="cpf" required placeholder="Insira o seu cpf: " />
+            </div>
+
+
+            <div class="form-group">
+                <label for="codigoFunc">Código Funcio:</label>
+                <input type="number" id="codigo" name="codigofunc" v-model="codigofunc" required placeholder="Insira o seu código: " />
             </div>
 
             <div class="form-group">
-                <label for="cpf">Código Funcio:</label>
-                <input type="text" id="codigo" name="codigofunc" v-model="codigofunc" required placeholder="Insira o seu código: " />
+                <label for="cargo">Cargo:</label>
+                <input type="text" id="Cargo" name="cargo" v-model="cargo" required placeholder="Insira o seu cargo" />
             </div>
 
-            <router-link to="/homeFuncio"><button type="submit" router-link="/homeFuncio" @click="entrar">Cadastrar</button></router-link>
+            <router-link to="/homeFuncio"></router-link><button type="submit" router-link="/homeFuncio" @click="entrar">Cadastrar</button>
 
         </form>
         <p>{{ message }}</p>
+        <!--</router-link>-->
         <router-link to="/logClient" class="cliente">Cliente</router-link>
     </div>
 </template>

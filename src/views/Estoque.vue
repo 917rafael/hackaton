@@ -1,15 +1,10 @@
 <script setup>
 import { ref } from 'vue';
-
 import { useProductStore } from '@/store/productStore'
 import Header from '@/components/FoHea/header.vue';
 
 const productStore = useProductStore()
-// Lista de produtos gerenciada localmente
-// const products = ref([
-//   { id: 1, name: 'Produto 1', category: 'Categoria 1', stock: 10, price: 99.99, catalog: true, image: null },
-//   { id: 2, name: 'Produto 2', category: 'Categoria 2', stock: 5, price: 49.99, catalog: false, image: null },
-// ]);
+
 
 const showModal = ref(false);
 

@@ -1,4 +1,36 @@
 <script setup>
+import { ref } from "vue";
+import { supabase } from "../lib/supabaseClient";
+
+const nome = ref([])
+const email = ref([])
+const cpf = ref([])
+const senha =  ref([])
+const message = ref('')
+
+
+const insertData = async () => {
+  if (!nome.value || !email.value || !cpf.value || !senha.value) {
+    message.value = "Por favor, preencha todos os campos."
+    return
+  }
+const {data: pessoaData, pessoaError } = await supabase
+    .from('cliente')
+    .insert([{ 
+      cpf: cpf.value,
+      nome: nome.value, 
+      email: email.value, 
+      senha: senha.value
+    }])
+ 
+    if (pessoaError) {
+    console.error('Erro ao inserir pessoa:', pessoaError.message)
+    message.value = `Erro ao inserir pessoa: ${pessoaError.message}`
+      return
+    }
+
+  message.value = 'Pessoa inserida com sucesso!'}
+
 </script>
 
 <template>
@@ -12,23 +44,29 @@
     </h1> 
     <h2>E APROVEITE TODAS AS NOSSAS PROMOÇÕES</h2>
     
-    <form class="form">
+    <form @submit.prevent="insertData"  class="form">
       <div class="form-group">
         <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required placeholder="Insira seu nome:">
+        <input type="text" id="nome" name="nome" v-model="nome" required placeholder="Insira seu nome:">
       </div>
       
       <div class="form-group">
         <label for="cpf">CPF:</label>
-        <input type="text" id="cpf" name="cpf" required placeholder="Insira o seu CPF: ">
+        <input type="text" id="cpf" name="cpf" v-model="cpf" required placeholder="Insira o seu CPF: ">
       </div>
       
       <div class="form-group">
-        <label for="data-nascimento">Data de Nasc:</label>
-        <input type="date" id="data-nascimento" name="data-nascimento" required>
+        <label for="email">Email:</label>
+        <input type="text" id="email" v-model="email" name="email" required placeholder="Insira o seu email:">
+      </div>
+
+      <div class="form-group">
+        <label for="senha">senha:</label>
+        <input type="password" id="senha" v-model="senha" name="senha" required placeholder="Insira uma senha:">
       </div>
 
         <button type="submit">Cadastrar</button>
+        <p>  {{message}} </p>
       
     </form>
     <router-link to="/logFuncio" class="funcio">Funcionarios</router-link>
