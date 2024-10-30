@@ -3,14 +3,12 @@
 
 <template>
     <div class="background">
-        <img src="/src/assets/image/padaria.jpg" alt="Padaria" class="padaria-img">
+        <img src="/src/assets/image/padaria-transformed.jpeg" alt="Padaria" class="padaria-img">
     </div>
     <div class="container">
-        <h1 class="entre">
-            ENTRE OU CADASTRE-SE NA
-            <h1 class="santo">PADARIA SANTO PÃO</h1>
-        </h1>
-        <h2>E APROVEITE TODAS AS NOSSAS PROMOÇÕES</h2>
+        <div class="caixa">
+        <h1 class="txt-entre">ENTRE OU CADASTRE-SE NA</h1>
+        <h1 class="txt-entre">PADARIA TRADIÇÃO NO FORNO</h1>
 
         <form class="form">
             <div class="form-group">
@@ -31,12 +29,21 @@
         <router-link to="/homeFuncio"><button type="submit" router-link="/homeFuncio" @click="entrar">Cadastrar</button></router-link>
         <router-link to="/Login" class="cliente">Cliente</router-link>
     </div>
+</div>
 </template>
 
 <style scoped>
 
 .form {
     margin-top: 30px;
+}
+
+.caixa {
+margin-top: 30px;
+display: flex;
+flex-direction: column;
+align-items: center;
+border-radius: 10px;
 }
 
 .cliente {
@@ -50,7 +57,7 @@
     border-radius: 25px;
     cursor: pointer;
     font-size: 18px;
-    width: 42%;
+    width: 57%;
     transition: background-color 0.3s ease;
 }
 
@@ -59,16 +66,15 @@ body {
     margin: 0;
     padding: 0;
 }
+
 h2 {
     color: #333;
 }
-.entre {
-    color: #d9534f;
-    text-align: center;
-}
 
-.santo {
-    color: #c9302c;
+.txt-entre {
+  color: #d43519;
+  text-align: center;
+  font-size: 30px;
 }
 
 .background {
@@ -81,22 +87,22 @@ h2 {
 }
 
 .padaria-img {
-    width: 100%;
-    height: 100%;
+    width: 1530px;
+    height: 790px;
     object-fit: cover;
 }
 
 .container {
     display: flex;
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 40%;
-    background-color: #f4e1d2;
-    padding: 20px;
-    flex-direction: column;
-    align-items: center;
+  border-radius: 10px;
+  margin-left: 30%;
+  margin-right: 30%;
+  background-color: #f3d7b6;
+  padding: 20px;
+  margin-top: 30px;
+  width: 550px;
+  height: 720px;
+  flex-direction: column;
 }
 
 .form-group {
@@ -107,7 +113,7 @@ h2 {
 label {
     margin-bottom: 5px;
     font-weight: bold;
-    color: #555;
+    color: #3a3a3a;
 }
 
 input {

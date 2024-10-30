@@ -18,8 +18,8 @@ function clone(usuario) {
 </script>
 
 <template>
+  
   <heade />
-
   <div class="nav">
     <button class="button" @click="salvar">Produtos vendidos</button>
     <router-link to="/estoque">
@@ -28,9 +28,9 @@ function clone(usuario) {
     <button class="button" @click="salvar">Fornecedores</button>
     <button class="button" @click="salvar">Pedidos de Clientes</button>
   </div>
+  
   <div class="head"></div>
   <div class="container"></div>
-
   <formulario @adicionar="clone" />
   <resultado v-if="mostrarResultado" :usuarios="usuarios" />
 </template>
