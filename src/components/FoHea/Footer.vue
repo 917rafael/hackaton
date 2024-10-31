@@ -9,7 +9,7 @@
       <!-- Seção Sobre Nós -->
       <div class="footer-column">
         <h3>Sobre Nós</h3>
-        <p>Na nossa padaria, combinamos tradição e qualidade para oferecer os melhores pães e doces artesanais. Feitos com ingredientes frescos e muito amor.</p>
+        <p>Na nossa padaria, juntamos tradição e qualidade para oferecer os melhores pães e doces artesanais. Feitos com ingredientes frescos e muito amor.</p>
       </div>
       
       <!-- Seção Contato -->
@@ -58,7 +58,7 @@ export default {
   color: #333;
   padding: 20px 0;
   font-family: 'Arial', sans-serif;
-  border-top: 4px solid #d35400; /* Cor da borda do topo igual ao cabeçalho */
+  border-top: 5px solid #d35400; /* Cor da borda do topo igual ao cabeçalho */
   width: 100%; /* Faz com que o footer tenha largura total */
   margin-top: 20px; /* Adiciona espaçamento superior se necessário */
 }

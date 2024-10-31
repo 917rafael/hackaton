@@ -1,42 +1,60 @@
 <script setup>
+import Footer from "@/components/FoHea/Footer.vue"
 
 </script>
 
 <template>
   <div class="background">
-    <img src="/src/assets/image/padaria-transformed.jpeg" alt="Padaria" class="padaria-img">
+    <img src="/src/assets/image/Fundocontato.jpg" alt="Padaria" class="padaria-img">
   </div>
   <div class="container">
     <div class="caixa">
-    <h1 class="txt-entre"> ENTRE OU CADASTRE-SE NA</h1>
-    <h1 class="txt-entre">PADARIA TRADIÇÃO NO FORNO </h1>
-  
-    <form class="form">
-      <div class="form-group">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required placeholder="Insira seu nome:">
-      </div>
+      <h1 class="txt-entre"> ENTRE OU CADASTRE-SE NA</h1>
+      <h1 class="txt-entre">PADARIA TRADIÇÃO NO FORNO </h1>
 
-      <div class="form-group">
-        <label for="cpf">CPF:</label>
-        <input type="text" id="cpf" name="cpf" required placeholder="Insira o seu CPF: ">
-      </div>
+      <form class="form">
+        <div class="form-group">
+          <label for="nome">Nome:</label>
+          <input type="text" id="nome" name="nome" required placeholder="Insira seu nome:">
+        </div>
 
-      <div class="form-group">
-        <label for="data-nascimento">Data de Nasc:</label>
-        <input type="date" id="data-nascimento" name="data-nascimento" required>
-      </div>
+        <div class="form-group">
+          <label for="cpf">CPF:</label>
+          <input type="text" id="cpf" name="cpf" required placeholder="Insira o seu CPF: ">
+        </div>
 
-      <button type="submit">Cadastrar</button>
-    </form>
+        <div class="form-group">
+          <label for="data-nascimento">Data de Nasc:</label>
+          <input type="date" id="data-nascimento" name="data-nascimento" required>
+        </div>
 
-    <router-link to="/logFuncio" class="funcio">Funcionarios</router-link>
-</div>
-</div>
+        <button type="submit">Cadastrar</button>
+
+        <div class="funcionario">
+          <router-link to="/logFuncio"><img src="/src/assets/image/funcionarios.png" alt="Icone"
+              class="funcio"></router-link>
+
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    <Footer />
+  </div>
 
 </template>
 
 <style scoped>
+.funcionario {
+  margin-left: 290px;
+  margin-top: -42px;
+}
+
+.footer {
+  background-color: #f3d7b6;
+}
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -44,8 +62,12 @@ body {
   padding: 0;
 }
 
+h2 {
+  color: #333;
+}
+
 .txt-entre {
-  color: #d43519;
+  color: #1b1b1b;
   text-align: center;
   font-size: 30px;
 }
@@ -53,28 +75,29 @@ body {
 .container {
   display: flex;
   border-radius: 10px;
-  margin-left: 30%;
-  margin-right: 30%;
-  background-color: #f3d7b6;
+  margin-left: 33%;
+  margin-top: 140px;
+  margin-bottom: 200px;
+  background-color: #f8cb98;
   padding: 20px;
-  margin-top: 30px;
-  width: 550px;
-  height: 720px;
+  width: 540px;
+  height: 670px;
   flex-direction: column;
 }
 
 .padaria-img {
-  width: 1530px;
-  height: 790px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  filter: brightness(0.7);
 }
 
 .caixa {
-margin-top: 30px;
-display: flex;
-flex-direction: column;
-align-items: center;
-border-radius: 10px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
 }
 
 .form {
@@ -84,21 +107,6 @@ border-radius: 10px;
 .form-group {
   margin-bottom: 20px;
   width: 100%;
-}
-
-.funcio {
-  text-align: center;
-  text-decoration: none;
-  margin-top: 10px;
-  padding: 12px;
-  background-color: #e24f4a;
-  color: #fff;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  font-size: 18px;
-  width: 77%;
-  transition: background-color 0.3s ease;
 }
 
 .background {
@@ -125,23 +133,51 @@ input {
   background-color: #f8d3d3;
 }
 
+.funcio {
+  width: 35px;
+  height: 35px;
+  margin-left: 10px;
+  transition: background-color 0.3s ease;
+  transition: transform 0.3s ease-in-out;
+  /* Transição suave para o efeito de pulsação */
+  cursor: pointer;
+  border: none;
+}
+
 button {
-  padding: 12px 20px;
-  background-color: #e24f4a;
+  padding: 12px;
+  background-color: #ff6600;
   color: #fff;
   border: none;
   border-radius: 25px;
   cursor: pointer;
   font-size: 18px;
-  width: 100%;
+  margin-left: 29%;
+  width: 40%;
   transition: background-color 0.3s ease;
 }
 
 .funcio:hover {
-  background-color: #c9302c;
+  animation: pulsate 1.5s infinite;
+  /* Ativa a animação de pulsação ao passar o mouse */
 }
 
 button:hover {
-  background-color: #c9302c;
+  background-color: #ca4e1db9;
+}
+
+/* Animação de pulsação */
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 </style>
