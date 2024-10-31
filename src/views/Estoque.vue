@@ -86,8 +86,17 @@ const closeModal = (event) => {
             <img v-if="product.image" :src="product.image" alt="Imagem do Produto" class="table-product-image" />
             <span v-else>Sem imagem</span>
           </td>
-          <td><input v-model="product.name" placeholder="Nome do Produto" /></td>
-          <td><input v-model="product.category" placeholder="Categoria" /></td>
+          <td><input v-model="product.name" placeholder="Nome do Produto" /></td>  
+        <td>
+            <select v-model="newProduct.category" name="categoria"> 
+            <option value="categoria">sagado</option> 
+            <option value="ac">sagado</option> 
+            <option value="al">Alagoas</option> 
+            <option value="am">Amazonas</option> 
+            <option value="ap">Amapá</option>  
+          </select>
+        </td>
+      
           <td><input v-model="product.stock" type="number" placeholder="Estoque" /></td>
           <td><input v-model="product.price" type="number" step="0.01" placeholder="Preço" /></td>
           <td>
@@ -108,7 +117,16 @@ const closeModal = (event) => {
       <div class="modal-content">
         <h2>Adicionar Produto</h2>
         <input v-model="newProduct.name" placeholder="Nome do Produto" />
-        <input v-model="newProduct.category" placeholder="Categoria" />
+        <td>
+            <select placeholder="categoria do produto" v-model="newProduct.category" name="estado"> 
+            <option value="estado">safafpa</option> 
+            <option value="ac">sagado</option> 
+            <option value="al">Alagoas</option> 
+            <option value="am">Amazonas</option> 
+            <option value="ap">Amapá</option>  
+          </select>
+        </td>
+
         <input v-model="newProduct.stock" type="number" placeholder="Estoque" />
         <input v-model="newProduct.price" type="number" step="0.01" placeholder="Preço" />
 
@@ -177,6 +195,16 @@ th, td {
   padding: 16px;
   text-align: left;
   border-bottom: 1px solid #eaeaea;
+}
+select{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: #ffffff;
+  color:#000000;
+  margin-bottom: 16px;
 }
 
 th {
