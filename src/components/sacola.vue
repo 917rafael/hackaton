@@ -17,22 +17,24 @@ const toggleCart = () => {
 const addItem = (item) => {
   const product = store.sacola_cart.find(p => p.id === item.id);
   if (product) {
-    product.quantity += 1;
+    product.quantity += 1; // Aumenta a quantidade se o item já existe
   } else {
-    // Se o item não está na sacola, adicione-o com quantidade inicial 1
+    // Adiciona o item com quantidade inicial 1 se não estiver no carrinho
     store.sacola_cart.push({ ...item, quantity: 1 });
   }
 };
 
 const removeItem = (item) => {
   const product = store.sacola_cart.find(p => p.id === item.id);
-  if (product && product.quantity > 1) {
-    product.quantity -= 1;
-  } else if (product && product.quantity === 1) {
-    // Remove o item caso a quantidade seja 1
-    const index = store.sacola_cart.indexOf(product);
-    if (index !== -1) {
-      store.sacola_cart.splice(index, 1);
+  if (product) {
+    if (product.quantity > 1) {
+      product.quantity -= 1; // Diminui a quantidade se maior que 1
+    } else {
+      // Remove o item caso a quantidade seja 1
+      const index = store.sacola_cart.indexOf(product);
+      if (index !== -1) {
+        store.sacola_cart.splice(index, 1); // Remove o item do carrinho
+      }
     }
   }
 };
@@ -74,12 +76,14 @@ const calculateTotal = () => {
           <span class="item-name">{{ item.name }}</span>
           <span class="item-price">R$ {{ item.price.toFixed(2) }}</span>
         </div>
-        <div class="item-controls">
-          <button @click="removeItem(item)" class="btn-remove"><i class="fas fa-minus"></i></button>
-          <span>{{ item.quantity }}</span>
-          <button @click="addItem(item)" class="btn-add"><i class="fas fa-plus"></i></button>
-          <button @click="deleteItem(index)" class="btn-delete"><i class="fas fa-trash"></i></button>
-        </div>
+        
+          <div class="item-controls">
+          
+            <button @click="removeItem(item)" class="btn-remove"><i class="fas fa-minus"></i></button>
+              <span>{{ item.quantity }}</span>
+            <button @click="addItem(item)" class="btn-add"><i class="fas fa-plus"></i></button><button @click="deleteItem(index)" class="btn-delete"><i class="fas fa-trash"></i></button>
+        
+          </div>
       </div>
     </div>
 

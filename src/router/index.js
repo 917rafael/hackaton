@@ -5,6 +5,11 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path:'/Pagamento',
+      name: 'pagamento',
+      component: () => import('../views/CadEndereco.vue')
+    },  
+    {
       path:'/Rendimento',
       name: 'rendimento',
       component: () => import('../views/Rendimento.vue')
