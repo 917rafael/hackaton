@@ -17,7 +17,7 @@ const router = createRouter({
     {
       path:'/Rendimento',
       name: 'rendimento',
-      component: () => import('../views/Rendimento.vue')
+      component: () => import('../views/REndimento.vue')
     },  
     {
       path:'/Estoque',
