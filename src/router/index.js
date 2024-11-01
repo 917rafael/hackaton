@@ -4,7 +4,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-
+    {
+      path:'/Rendimento',
+      name: 'rendimento',
+      component: () => import('../views/Rendimento.vue')
+    },  
     {
       path:'/Estoque',
       name: 'estoque',
@@ -14,16 +18,6 @@ const router = createRouter({
       path: '/contato',
       name: 'contato',
       component: () => import('../views/Contato.vue')
-    },
-    {
-      path: '/teste',
-      name: 'teste',
-      component: () => import('../views/teste.vue')
-    },
-    {
-      path: '/teste2',
-      name: 'teste2',
-      component: () => import('../views/teste2.vue')
     },
     {
       path: '/homeFuncio',
@@ -37,15 +31,20 @@ const router = createRouter({
     },
 
     {
-      path: '/logFuncio',
-      name: 'logFuncio',
-      component: () => import('../views/logFuncio.vue')
+      path: '/CadastroFuncio',
+      name: 'CadastroFuncio',
+      component: () => import('../views/cadastroFuncio.vue')
     },
     {
       path: '/Login',
       name: 'Login',
       component: () => import('../views/Login.vue')
     },
+    {
+      path: '/logFuncio',
+      name: 'logFuncio',
+      component: () => import('../views/logFuncio.vue')
+    }
 
 
   ]

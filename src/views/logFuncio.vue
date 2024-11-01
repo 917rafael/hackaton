@@ -1,5 +1,30 @@
 <script setup>
-import Footer from "@/components/FoHea/Footer.vue"
+import { ref } from "vue";
+import {supabase} from  '../lib/supabaseClient';
+const codigofunc = ref([]);
+const cpf = ref([]);
+const message = ref('');
+
+const LoginData = async () => {
+  if (!cpf.value || !codigofunc.value  ) {
+    message.value = "Por favor, preencha todos os campos."
+    return
+  }
+
+  const handleSignin = async () => {
+  try {
+    // Use the Supabase method to handle the signin
+    const { error } = await supabase.auth.funcionario({
+      cpf: cpf.value,
+      codigofunc: codigofunc.value,
+    });
+    if (error) throw error;
+  } catch (error) {
+    alert(error.error_description || error.message);
+  }
+};
+  message.value = 'Pessoa inserida com sucesso!'}
+
 </script>
 
 <template>
@@ -10,35 +35,22 @@ import Footer from "@/components/FoHea/Footer.vue"
         <div class="caixa">
             <h1 class="txt-entre">LOGIN FUNCIONARIO</h1>
 
-            <form class="form">
-                <div class="form-group">
-                    <label for="nome">Nome:</label>
-                    <input type="text" id="nome" name="nome" required placeholder="Insira seu nome:">
-                </div>
+        <form class="form" @submit.prevent="handleSignin">
+            <div class="form-group">
+                <label for="CPF">CPF:</label>
+                <input type="number" id="cpf" name="cpf" v-model="cpf" required placeholder="Insira seu cpf:" />
+            </div>
 
                 <div class="form-group">
                     <label for="cpf">Código Funcio:</label>
-                    <input type="text" id="codigo" name="codigo" required placeholder="Informe o seu código: ">
+                    <input type="text" id="codigo" name="codigofunc" v-model="codigofunc" required placeholder="Informe o seu código: ">
                 </div>
 
-                <div class="form-group">
-                    <label for="cargo">Cargo:</label>
-                    <input type="text" id="Cargo" name="cargo" required placeholder="Informe o seu cargo">
-                </div>
-            </form>
+            <router-link to="/homeFuncio"><button type="submit" router-link="/homeFuncio" @click="entrar">Cadastrar</button></router-link>
 
-            <router-link to="/homeFuncio"><button class="button" type="submit" @click="entrar">Entrar</button></router-link>
-
-            <div class="funcionario">
-                <router-link to="/Login"><img src="/src/assets/image/funcionarios.png" alt="Icone"
-                        class="cliente"></router-link>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="footer">
-        <Footer />
+        </form>
+        <p>{{ message }}</p>
+        <router-link to="/logClient" class="cliente">Cliente</router-link>
     </div>
 
 </template>
