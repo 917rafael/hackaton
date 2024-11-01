@@ -52,7 +52,7 @@ const LoginData = async () => {
         <p>{{ message }}</p>
         <router-link to="/logClient" class="cliente">Cliente</router-link>
     </div>
-
+    </div>
 </template>
 
 <style scoped>
