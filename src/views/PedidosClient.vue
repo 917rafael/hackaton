@@ -98,7 +98,6 @@ const closeModal = (event) => {
           </td>
         </tr>
       </tbody>
-    </table>
 
     <!-- Modal para adicionar um novo produto -->
     <div v-if="showModal" class="modal" @click="closeModal">
