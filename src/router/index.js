@@ -36,9 +36,9 @@ const router = createRouter({
       component: () => import('../views/cadastroFuncio.vue')
     },
     {
-      path: '/logClient',
-      name: 'logClient',
-      component: () => import('../views/logClient.vue')
+      path: '/Login',
+      name: 'Login',
+      component: () => import('../views/Login.vue')
     },
     {
       path: '/logFuncio',
