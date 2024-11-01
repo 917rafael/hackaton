@@ -87,7 +87,6 @@ const usuario = reactive({
 
   </div>
 
-
 </template>
 
 <style scoped>
@@ -101,7 +100,17 @@ body {
 
 /* Container Principal */
 .container {
-  background-color: #f4f4f4;
+  background-color: #f8cb98;
+  color: #333;
+  border-radius: 8px;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.main {
+  background-color: #f8cb98;
   color: #333;
   border-radius: 8px;
   max-width: 800px;

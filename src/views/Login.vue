@@ -19,8 +19,8 @@ import Footer from "@/components/FoHea/Footer.vue"
         </div>
 
         <div class="form-group">
-          <label for="cpf">CPF:</label>
-          <input type="text" id="cpf" name="cpf" required placeholder="Insira o seu CPF: ">
+          <label for="telefone">Contato:</label>
+          <input type="text" id="telefone" name="telefone" required placeholder="Insira o seu número de contato:">
         </div>
 
         <div class="form-group">

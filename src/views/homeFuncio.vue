@@ -18,7 +18,9 @@ function clone(usuario) {
 </script>
 
 <template>
-  
+  <div class="background">
+    <img src="/src/assets/image/padaria-transformed.jpeg" alt="Padaria" class="padaria-img">
+  </div>
   <heade />
   <div class="nav">
     <button class="button" @click="salvar">Produtos vendidos</button>
@@ -46,8 +48,24 @@ function clone(usuario) {
   margin-bottom: 30px;
 }
 
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.padaria-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+}
+
 .button {
-  background-color: rgba(59, 24, 3, 0.85);
+  background-color: rgba(59, 24, 3, 0.808);
   color: #fff;
   border: none;
   padding: 12px 24px;
@@ -60,7 +78,7 @@ function clone(usuario) {
 }
 
 .button:hover {
-  background-color: #ff4800c0;
+  background-color: #ff4800;
   transform: scale(1.05);
 }
 
