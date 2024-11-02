@@ -10,14 +10,14 @@ const router = createRouter({
       component: () => import('../views/PedidosClient.vue')
     },
     {
-      path:'/Pagamento',
-      name: 'pagamento',
+      path:'/endereco',
+      name: 'endereco',
       component: () => import('../views/CadEndereco.vue')
     },  
     {
       path:'/Rendimento',
       name: 'rendimento',
-      component: () => import('../views/REndimento.vue')
+      component: () => import('../views/Rendimento.vue')
     },  
     {
       path:'/Estoque',
@@ -55,8 +55,6 @@ const router = createRouter({
       name: 'logFuncio',
       component: () => import('../views/logFuncio.vue')
     }
-
-
   ]
 })
 

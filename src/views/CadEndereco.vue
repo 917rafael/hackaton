@@ -1,5 +1,10 @@
 <script setup>
 import Header from "@/components/FoHea/header.vue";
+import Footer from "@/components/FoHea/Footer.vue";
+
+const handleSubmit = () => {
+  alert("Endereço salvo com sucesso!");
+};
 </script>
 
 <template>
@@ -7,51 +12,72 @@ import Header from "@/components/FoHea/header.vue";
   <div class="payment-page">
     <div class="payment-container">
       <div class="address-form">
-        <h1>Adicione um endereço</h1>
-        <form>
+        <h1>Adicionar Endereço</h1>
+        <form @submit.prevent="handleSubmit">
           <div class="form-group">
-            <label for="fullName">Nome completo</label>
-            <input type="text" id="fullName" placeholder="Como aparece no seu RG ou CNH" required />
+            <label for="fullName">Nome Completo</label>
+            <div class="input-with-icon">
+              <i class="fas fa-user"></i>
+              <input type="text" id="fullName" placeholder="Nome completo conforme RG ou CNH" required />
+            </div>
           </div>
           <div class="form-group">
             <label for="cep">CEP</label>
-            <input type="text" id="cep" placeholder="Digite seu CEP" required />
+            <div class="input-with-icon">
+              <i class="fas fa-map"></i>
+              <input type="text" id="cep" placeholder="Digite seu CEP" required />
+            </div>
             <a href="#" class="cep-help">Não sei o meu CEP</a>
           </div>
           <div class="form-group">
             <label for="state">Estado</label>
-            <input type="text" id="state" placeholder="Estado" required />
+            <div class="input-with-icon">
+              <i class="fas fa-map-marker-alt"></i>
+              <input type="text" id="state" placeholder="Estado" required />
+            </div>
           </div>
           <div class="form-group">
             <label for="city">Cidade</label>
-            <input type="text" id="city" placeholder="Cidade" required />
+            <div class="input-with-icon">
+              <i class="fas fa-city"></i>
+              <input type="text" id="city" placeholder="Cidade" required />
+            </div>
           </div>
           <div class="form-group">
             <label for="neighborhood">Bairro</label>
-            <input type="text" id="neighborhood" placeholder="Bairro" required />
+            <div class="input-with-icon">
+              <i class="fas fa-home"></i>
+              <input type="text" id="neighborhood" placeholder="Bairro" required />
+            </div>
           </div>
           <div class="form-group">
             <label for="street">Rua/Avenida</label>
-            <input type="text" id="street" placeholder="Rua/Avenida" required />
+            <div class="input-with-icon">
+              <i class="fas fa-road"></i>
+              <input type="text" id="street" placeholder="Rua/Avenida" required />
+            </div>
           </div>
           <div class="form-group">
             <label for="number">Número</label>
-            <input type="text" id="number" placeholder="Número" required />
+            <div class="input-with-icon">
+              <i class="fas fa-sort-numeric-up"></i>
+              <input type="text" id="number" placeholder="Número" required />
+            </div>
             <label class="no-number">
               <input type="checkbox" />
               Sem número
             </label>
           </div>
           <div class="form-group">
-            <label for="deliveryType">Tipo de entrega</label>
+            <label for="deliveryType">Tipo de Entrega</label>
             <select id="deliveryType" required>
               <option value="" disabled selected>Selecione uma opção</option>
-              <option value="home">Entrega em casa</option>
-              <option value="work">Entrega no trabalho</option>
+              <option value="home">Entrega em Casa</option>
+              <option value="work">Entrega no Trabalho</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="additionalInfo">Informações adicionais</label>
+            <label for="additionalInfo">Informações Adicionais</label>
             <textarea id="additionalInfo" placeholder="Instruções especiais (opcional)"></textarea>
           </div>
           <button type="submit" class="btn-submit">Salvar Endereço</button>
@@ -59,7 +85,7 @@ import Header from "@/components/FoHea/header.vue";
       </div>
       
       <div class="order-summary">
-        <h2>Resumo da compra</h2>
+        <h2>Resumo da Compra</h2>
         <div class="summary-item">
           <span>Produto</span>
           <span>R$ 250,20</span>
@@ -69,58 +95,77 @@ import Header from "@/components/FoHea/header.vue";
           <span>R$ --,--</span>
         </div>
         <div class="summary-total">
-          <span>Você pagará</span>
+          <span>Você Pagará</span>
           <span>R$ 250,20</span>
-          <button type="submit" class="btn-final">Finalizar a compra</button>
         </div>
+        <button type="submit" class="btn-final">Finalizar a Compra</button>
       </div>
     </div>
   </div>
+
+  <Footer />
 </template>
 
 <style scoped>
-    
-.btn-final{
-background-color: #007bff;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 8px;
-  font-size: 1em;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  width: 100%;
-  margin-top: 20px;
-}
-
 .payment-page {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 30px;
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+  font-family: 'Arial', sans-serif;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
 
 .payment-container {
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
 }
 
 .address-form,
 .order-summary {
-  background-color: #ffffff;
+  background-color: #f9f9f9;
   padding: 25px;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  flex: 1 1 300px;
+  min-width: 300px;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.address-form h1 {
+.address-form:hover,
+.order-summary:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.input-with-icon {
+  position: relative;
+}
+
+.input-with-icon input {
+  padding-left: 40px; /* Espaço para o ícone */
+}
+
+.input-with-icon i {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #007bff; /* Cor do ícone */
+}
+
+.address-form h1,
+.order-summary h2 {
   font-size: 2em;
   color: #333;
   margin-bottom: 20px;
   text-align: center;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 10px;
 }
 
 .form-group {
@@ -129,7 +174,7 @@ background-color: #007bff;
 
 .form-group label {
   display: block;
-  font-size: 1em;
+  font-size: 1.1em;
   font-weight: 600;
   color: #444;
   margin-bottom: 8px;
@@ -138,34 +183,44 @@ background-color: #007bff;
 .form-group input,
 .form-group select,
 .form-group textarea {
-  width : 100%;
+  width: 100%;
   padding: 12px 15px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 1em;
-  font-weight: 400;
   color: #333;
+  transition: border-color 0.3s, background-color 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.form-group input[type="checkbox"] {
-  width: auto;
-  margin-right: 10px;
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #007bff;
+  background-color: #f0f8ff;
+  outline: none;
 }
 
 .cep-help {
-  font-size: 0.8em;
-  color: #666;
+  font-size: 0.9em;
+  color: #007bff;
   text-decoration: underline;
   cursor: pointer;
+  transition: color 0.3s;
+}
+
+.cep-help:hover {
+  color: #0056b3;
 }
 
 .no-number {
-  font-size: 0.8em;
+  font-size: 0.9em;
   color: #666;
   margin-left: 10px;
 }
 
-.btn-submit {
+.btn-submit,
+.btn-final {
   background-color: #007bff;
   color: white;
   padding: 12px 20px;
@@ -173,13 +228,15 @@ background-color: #007bff;
   border-radius: 8px;
   font-size: 1em;
   cursor: pointer;
-  transition: background-color 0.3s;
-  width: 100%;
-  margin-top: 20px;
+  transition: background-color 0.3s, transform 0.2s;
+  width: 100%; /* O botão ocupa 100% da largura do contêiner */
+  margin-top: 20px; /* Espaçamento superior */
 }
 
-.btn-submit:hover {
+.btn-submit:hover,
+.btn-final:hover {
   background-color: #0056b3;
+  transform: scale(1.02);
 }
 
 .order-summary {
@@ -187,7 +244,7 @@ background-color: #007bff;
 }
 
 .order-summary h2 {
-  font-size: 1.5em;
+  font-size: 1.8em;
   color: #333;
   margin-bottom: 15px;
   text-align: center;
@@ -197,6 +254,8 @@ background-color: #007bff;
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
 }
 
 .summary-item span {
@@ -205,11 +264,142 @@ background-color: #007bff;
 }
 
 .summary-total {
-  font-size: 1.2em;
+  font-size: 1.4em;
   font-weight: 600;
   color: #333;
   margin-top: 10px;
   padding-top: 10px;
   border-top: 1px solid #ccc;
 }
+
+.btn-final {
+  margin-top: 20px; /* Espaçamento entre o botão e o restante do resumo */
+}
+
+@media (max-width: 1024px) {
+  .payment-page {
+    padding: 20px;
+  }
+
+  .address-form h1,
+  .order-summary h2 {
+    font-size: 1.7em;
+  }
+
+  .btn-submit,
+  .btn-final {
+    padding: 10px;
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 768px) {
+  .payment-container {
+    flex-direction: column;
+  }
+
+  .address-form,
+  .order-summary {
+    width: 100%;
+  }
+
+  .form-group label {
+    font-size: 1em;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 10px;
+    font-size: 0.9em;
+  }
+
+  .summary-item {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .payment-page {
+    padding: 15px;
+  }
+
+  .address-form h1,
+  .order-summary h2 {
+    font-size: 1.5em;
+  }
+
+  .form-group label {
+    font-size: 0.9em;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 10px;
+    font-size: 0.9em;
+  }
+
+  .btn-submit,
+  .btn-final {
+    padding: 10px;
+    font-size: 0.9em;
+  }
+
+  .summary-item {
+    font-size: 0.9em;
+  }
+
+  .payment-container {
+    gap: 10px;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #e9ecef;
+}
+
+h1, h2 {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.btn-submit:disabled,
+.btn-final:disabled {
+  background-color: #b0c4de;
+  cursor: not-allowed;
+}
+
+.summary-item:last-child {
+  border-bottom: none;
+}
+
+.summary-item:hover {
+  background-color: #f1f1f1;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.payment-container {
+  animation: fadeIn 0.5s;
+}
 </style>
+  

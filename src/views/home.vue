@@ -2,13 +2,13 @@
 import headers from '@/components/FoHea/header.vue'
 import ProductCard from '@/components/home/ProductCard.vue'
 import back from '@/assets/image/fundohome.jpg'
-//import { products } from '@/data/cardapio';
 import { produtos } from '@/data/produtos';
 import Product from '@/components/Product/Produtc.vue';
 import sacola from '@/components/sacola.vue';
 import Fotter from '@/components/FoHea/Footer.vue'
 import { useProductStore } from '@/store/productStore';
 import { ref, computed } from 'vue';
+
 
 const productStore = useProductStore();
 const searchQuery = ref('');
@@ -57,11 +57,25 @@ const filteredProducts = computed(() => {
   <Fotter />
 </template>
 
+<style>
+body {
+  background-image: url('../src/assets/image/FundoSite.png'); /* Use a imagem de fundo */
+  
+}
+</style>
+
 <style scoped>
+body {
+  background-image: url('@/assets/image/FundoSite.png'); /* Use a imagem de fundo */
+  background-size: cover; /* Faz a imagem cobrir toda a tela */
+  background-position: center; /* Centraliza a imagem */
+  background-repeat: no-repeat; /* Não repete a imagem */
+}
+
 .div-product {
-  max-width: 800px; /* largura desejada */
-  margin: 0 auto; /* centralizar a div */
-  padding: 10px; /* separar a lista de produtos da borda */
+  max-width: 800px; 
+  margin: 0 auto; 
+  padding: 10px; 
 }
 
 .product-list {
@@ -141,16 +155,21 @@ const filteredProducts = computed(() => {
   text-align: center;
   margin: 60px 0; /* Aumentar a margem superior e inferior */
   position: relative;
-  background-color: #e0f7fa; /* Fundo da seção de pesquisa */
+  background-color: #ffffff; /* Cor de fundo mais clara */
   padding: 20px; /* Espaçamento interno */
-  border-radius: 10px; /* Borda arredondada */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra */
+  border-radius: 15px; /* Bordas arredondadas */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra mais suave */
+  transition: background-color 0.3s ease; /* Transição suave para a cor de fundo */
+}
+
+.search-section:hover {
+  background-color: #5f4d2b; /* Mudar a cor de fundo ao passar o mouse */
 }
 
 .divider {
   width: 100%;
-  height: 2px;
-  background: #00796b; /* Cor da divisória */
+  height: 4px;
+  background: #ff9900; /* Cor da divisória */
   margin-bottom: 20px;
   border: none;
 }
@@ -182,4 +201,3 @@ const filteredProducts = computed(() => {
   box-shadow: 0 0 5px rgba(255, 87, 34, 0.5); /* Sombra ao focar */
 }
 </style>
-
