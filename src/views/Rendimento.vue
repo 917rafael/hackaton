@@ -1,19 +1,38 @@
 <script setup>
-import Header from "../components/FoHea/header.vue";
-import { Bar, Line, Doughnut } from 'vue-chartjs';
-import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, PointElement, LineElement, ArcElement, Tooltip, Legend } from 'chart.js';
-import { computed } from 'vue';
+import Header from '../components/FoHea/header.vue'
+import { Bar, Line, Doughnut } from 'vue-chartjs'
+import {
+  Chart as ChartJS,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  ArcElement,
+  Tooltip,
+  Legend
+} from 'chart.js'
+import { computed } from 'vue'
 
 // Registra componentes do Chart.js
-ChartJS.register(BarElement, CategoryScale, LinearScale, PointElement, LineElement, ArcElement, Tooltip, Legend);
+ChartJS.register(
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  ArcElement,
+  Tooltip,
+  Legend
+)
 
 // Dados simulados para gráficos
-const salesData = [1200, 1500, 1300, 1800, 2000, 2100, 1600];
-const expenseData = [800, 900, 1000, 750, 1200, 1150, 950];
-const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho'];
+const salesData = [1200, 1500, 1300, 1800, 2000, 2100, 1600]
+const expenseData = [800, 900, 1000, 750, 1200, 1150, 950]
+const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho']
 
 // Cálculo do lucro
-const profitData = computed(() => salesData.map((s, i) => s - expenseData[i]));
+const profitData = computed(() => salesData.map((s, i) => s - expenseData[i]))
 </script>
 
 <template>
@@ -38,44 +57,56 @@ const profitData = computed(() => salesData.map((s, i) => s - expenseData[i]));
       <section class="charts-section">
         <div class="chart-container">
           <h4>Gráfico de Vendas</h4>
-          <Bar :data="{
-            labels: months,
-            datasets: [{
-              label: 'Vendas',
-              data: salesData,
-              backgroundColor: 'rgba(54, 162, 235, 0.6)',
-              borderColor: 'rgba(54, 162, 235, 1)',
-              borderWidth: 1
-            }]
-          }" />
+          <Bar
+            :data="{
+              labels: months,
+              datasets: [
+                {
+                  label: 'Vendas',
+                  data: salesData,
+                  backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                  borderColor: 'rgba(54, 162, 235, 1)',
+                  borderWidth: 1
+                }
+              ]
+            }"
+          />
         </div>
         <div class="chart-container">
           <h4>Lucro por Mês</h4>
-          <Line :data="{
-            labels: months,
-            datasets: [{
-              label: 'Lucro',
-              data: profitData,
-              backgroundColor: 'rgba(75, 192, 192, 0.6)',
-              borderColor: 'rgba(75, 192, 192, 1)',
-              borderWidth: 1
-            }]
-          }" />
+          <Line
+            :data="{
+              labels: months,
+              datasets: [
+                {
+                  label: 'Lucro',
+                  data: profitData,
+                  backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                  borderColor: 'rgba(75, 192, 192, 1)',
+                  borderWidth: 1
+                }
+              ]
+            }"
+          />
         </div>
         <div class="chart-container">
           <h4>Distribuição de Despesas</h4>
-          <Doughnut :data="{
-            labels: ['Insumos', 'Funcionários', 'Manutenção', 'Outros'],
-            datasets: [{
-              data: [500, 300, 200, 150],
-              backgroundColor: [
-                'rgba(255, 99, 132, 0.6)',
-                'rgba(255, 159, 64, 0.6)',
-                'rgba(255, 206, 86, 0.6)',
-                'rgba(75, 192, 192, 0.6)'
+          <Doughnut
+            :data="{
+              labels: ['Insumos', 'Funcionários', 'Manutenção', 'Outros'],
+              datasets: [
+                {
+                  data: [500, 300, 200, 150],
+                  backgroundColor: [
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(255, 159, 64, 0.6)',
+                    'rgba(255, 206, 86, 0.6)',
+                    'rgba(75, 192, 192, 0.6)'
+                  ]
+                }
               ]
-            }]
-          }" />
+            }"
+          />
         </div>
       </section>
     </div>
@@ -131,7 +162,8 @@ const profitData = computed(() => salesData.map((s, i) => s - expenseData[i]));
   text-align: center;
 }
 
-h3, h4 {
+h3,
+h4 {
   margin: 0.5rem 0;
   color: #333;
 }

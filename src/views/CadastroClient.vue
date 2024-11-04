@@ -1,23 +1,25 @@
 <script setup>
+import Footer from '@/components/FoHea/Footer.vue'
 import { ref } from 'vue'
 import { supabase } from '../lib/supabaseClient'
+
 const nome = ref([])
-const senha = ref([])
-const cargo = ref([])
+const email = ref([])
 const cpf = ref([])
+const senha = ref([])
 const message = ref('')
 
 const insertData = async () => {
-  if (!nome.value || !senha.value || !cargo.value || !cpf.value) {
+  if (!nome.value || !email.value || !cpf.value || !senha.value) {
     message.value = 'Por favor, preencha todos os campos.'
     return
   }
-  const { data: pessoaError } = await supabase.from('funcionario').insert([
+  const { pessoaError } = await supabase.from('cliente').insert([
     {
+      cpf: cpf.value,
       nome: nome.value,
-      senha: senha.value,
-      cargo: cargo.value,
-      cpf: cpf.value
+      email: email.value,
+      senha: senha.value
     }
   ])
 
@@ -42,7 +44,7 @@ const insertData = async () => {
     </h1>
     <h2>E APROVEITE TODAS AS NOSSAS PROMOÇÕES</h2>
 
-    <form class="form" @submit.prevent="insertData">
+    <form @submit.prevent="insertData" class="form">
       <div class="form-group">
         <label for="nome">Nome:</label>
         <input
@@ -56,85 +58,112 @@ const insertData = async () => {
       </div>
 
       <div class="form-group">
-        <label for="CPF">CPF:</label>
+        <label for="cpf">CPF:</label>
         <input
           type="number"
           id="cpf"
           name="cpf"
           v-model="cpf"
           required
-          placeholder="Insira o seu cpf: "
+          placeholder="Insira o seu CPF: "
         />
       </div>
 
       <div class="form-group">
-        <label for="codigoFunc">Código Funcio:</label>
+        <label for="email">Email:</label>
         <input
           type="text"
-          id="codigo"
-          name="senha"
+          id="email"
+          v-model="email"
+          name="email"
+          required
+          placeholder="Insira o seu email:"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="senha">senha:</label>
+        <input
+          type="text"
+          id="senha"
           v-model="senha"
+          name="senha"
           required
-          placeholder="Insira o seu código: "
+          placeholder="Insira uma senha:"
         />
       </div>
 
-      <div class="form-group">
-        <label for="cargo">Cargo:</label>
-        <input
-          type="text"
-          id="Cargo"
-          name="cargo"
-          v-model="cargo"
-          required
-          placeholder="Insira o seu cargo"
-        />
-      </div>
-
-      <router-link to="/homeFuncio"></router-link
-      ><button type="submit" router-link="/homeFuncio" @click="entrar">Cadastrar</button>
+      <button type="submit">Cadastrar</button>
+      <p>{{ message }}</p>
     </form>
-    <p>{{ message }}</p>
-    <!--</router-link>-->
-    <router-link to="/logClient" class="cliente">Cliente</router-link>
+  </div>
+
+  <div class="footer">
+    <Footer />
   </div>
 </template>
 
 <style scoped>
-.form {
-  margin-top: 30px;
+.funcionario {
+  margin-left: 290px;
+  margin-top: -42px;
 }
 
-.cliente {
-  text-align: center;
-  text-decoration: none;
-  margin-top: 10px;
-  padding: 12px;
-  background-color: #e24f4a;
-  color: #fff;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  font-size: 18px;
-  width: 42%;
-  transition: background-color 0.3s ease;
+.footer {
+  background-color: #f3d7b6;
 }
 
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
 }
+
 h2 {
   color: #333;
 }
-.entre {
-  color: #d9534f;
+
+.txt-entre {
+  color: #1b1b1b;
   text-align: center;
+  font-size: 30px;
 }
 
-.santo {
-  color: #c9302c;
+.container {
+  display: flex;
+  border-radius: 10px;
+  margin-left: 33%;
+  margin-top: 140px;
+  margin-bottom: 200px;
+  background-color: #f8cb98;
+  padding: 20px;
+  width: 540px;
+  height: 670px;
+  flex-direction: column;
+}
+
+.padaria-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+}
+
+.caixa {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.form {
+  margin-top: 35px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  width: 100%;
 }
 
 .background {
@@ -146,34 +175,10 @@ h2 {
   z-index: -1;
 }
 
-.padaria-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.container {
-  display: flex;
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 100%;
-  width: 40%;
-  background-color: #f4e1d2;
-  padding: 20px;
-  flex-direction: column;
-  align-items: center;
-}
-
-.form-group {
-  margin-bottom: 20px;
-  width: 100%;
-}
-
 label {
   margin-bottom: 5px;
   font-weight: bold;
-  color: #555;
+  color: #3a3a3a;
 }
 
 input {
@@ -185,26 +190,51 @@ input {
   background-color: #f8d3d3;
 }
 
+.funcio {
+  width: 35px;
+  height: 35px;
+  margin-left: 10px;
+  transition: background-color 0.3s ease;
+  transition: transform 0.3s ease-in-out;
+  /* Transição suave para o efeito de pulsação */
+  cursor: pointer;
+  border: none;
+}
+
 button {
-  text-align: center;
-  text-decoration: none;
-  margin-top: 10px;
-  padding: 12px 100px;
-  background-color: #e24f4a;
+  padding: 12px;
+  background-color: #ff6600;
   color: #fff;
   border: none;
   border-radius: 25px;
   cursor: pointer;
   font-size: 18px;
-  width: 100%;
+  margin-left: 29%;
+  width: 40%;
   transition: background-color 0.3s ease;
 }
 
-.cliente:hover {
-  background-color: #c9302c;
+.funcio:hover {
+  animation: pulsate 1.5s infinite;
+  /* Ativa a animação de pulsação ao passar o mouse */
 }
 
 button:hover {
-  background-color: #c9302c;
+  background-color: #ca4e1db9;
+}
+
+/* Animação de pulsação */
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 </style>

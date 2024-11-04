@@ -2,20 +2,25 @@
 
 <script setup>
 import InputForm from '@/components/input.vue'
-import { reactive } from 'vue';
-
+import { reactive } from 'vue'
 
 const emit = defineEmits(['adicinar'])
 
 function salvar() {
-  if (usuario.nome === '' || usuario.data === '' || usuario.hora === '' || usuario.produto === '' || usuario.quantidade === '' || usuario.valor === '' || usuario.desconto === '')
-    { alert('Por favor preencha todos os campos!!!')
-    return;
-  }
-  else if (usuario.senha !== usuario.confirmacao) {
+  if (
+    usuario.nome === '' ||
+    usuario.data === '' ||
+    usuario.hora === '' ||
+    usuario.produto === '' ||
+    usuario.quantidade === '' ||
+    usuario.valor === '' ||
+    usuario.desconto === ''
+  ) {
+    alert('Por favor preencha todos os campos!!!')
+    return
+  } else if (usuario.senha !== usuario.confirmacao) {
     alert('Crendencias Inválidas')
-  }
-  else {
+  } else {
     emit('adicionar', { ...usuario })
   }
 }
@@ -28,9 +33,8 @@ const usuario = reactive({
   quantidade: '',
   valor: '',
   desconto: '',
-  obs: '',
+  obs: ''
 })
-
 </script>
 
 <template>
@@ -40,8 +44,13 @@ const usuario = reactive({
 
       <div class="nome">
         <label for="nome" class="form-label">NOME :</label>
-        <input type="text" class="form-control" id="nome" v-model="usuario.nome"
-          placeholder="Digite o nome do cliente" />
+        <input
+          type="text"
+          class="form-control"
+          id="nome"
+          v-model="usuario.nome"
+          placeholder="Digite o nome do cliente"
+        />
       </div>
 
       <div class="data">
@@ -56,37 +65,60 @@ const usuario = reactive({
 
       <div class="produto">
         <label for="produto" class="form-label">PRODUTO:</label>
-        <input type="text" class="form-control" id="produto" v-model="usuario.produto"
-          placeholder="Digite o nome do produto" />
+        <input
+          type="text"
+          class="form-control"
+          id="produto"
+          v-model="usuario.produto"
+          placeholder="Digite o nome do produto"
+        />
       </div>
 
       <div class="quantidade">
         <label for="quantidade" class="form-label">QUANTIDADE:</label>
-        <input type="number" class="form-control" id="quantidade" v-model="usuario.quantidade"
-          placeholder="Digite a quantidade de produtos " />
+        <input
+          type="number"
+          class="form-control"
+          id="quantidade"
+          v-model="usuario.quantidade"
+          placeholder="Digite a quantidade de produtos "
+        />
       </div>
 
       <div class="valor">
         <label for="valor" class="form-label">VALOR UNITÁRIO:</label>
-        <input type="number" class="form-control" id="valor" v-model="usuario.valor"
-          placeholder="Insira o valor do produto" />
+        <input
+          type="number"
+          class="form-control"
+          id="valor"
+          v-model="usuario.valor"
+          placeholder="Insira o valor do produto"
+        />
       </div>
 
       <div class="desconto">
         <label for="desconto" class="form-label">DESCONTO:</label>
-        <input type="text" class="form-control" id="desconto" v-model="usuario.desconto"
-          placeholder="Coloque o seu desconto " />
+        <input
+          type="text"
+          class="form-control"
+          id="desconto"
+          v-model="usuario.desconto"
+          placeholder="Coloque o seu desconto "
+        />
       </div>
 
       <div class="obs">
         <label for="obs" class="form-label">OBSERVAÇÕES:</label>
-        <input type="text" class="form-control" v-model="usuario.obs" placeholder="Digite sua obs " />
+        <input
+          type="text"
+          class="form-control"
+          v-model="usuario.obs"
+          placeholder="Digite sua obs "
+        />
       </div>
       <button class="button" @click="salvar">Enviar dados</button>
     </main>
-
   </div>
-
 </template>
 
 <style scoped>
@@ -152,11 +184,10 @@ body {
   font-size: 16px;
 }
 
-
-input[type="text"],
-input[type="number"],
-input[type="date"],
-input[type="time"] {
+input[type='text'],
+input[type='number'],
+input[type='date'],
+input[type='time'] {
   width: calc(100% - 22px); /* Ajuste para compensar o padding e border */
   padding: 10px;
   border: 1px solid #ccc;
@@ -188,7 +219,7 @@ input[type="time"] {
   .form-control {
     font-size: 14px;
   }
-  
+
   .button {
     width: 100%;
     padding: 15px;

@@ -1,100 +1,125 @@
 <script setup>
-import { ref } from "vue";
-import {supabase} from  '../lib/supabaseClient';
-const codigofunc = ref([]);
-const cpf = ref([]);
-const message = ref('');
+import { ref } from 'vue'
+import { supabase } from '../lib/supabaseClient'
 
-const LoginData = async () => {
-  if (!cpf.value || !codigofunc.value  ) {
-    message.value = "Por favor, preencha todos os campos."
+const cpf = ref([])
+const senha = ref([])
+const error = ref('')
+
+const login = async () => {
+  const { data, error: loginError } = await supabase
+    .from('funcionario')
+    .select('*')
+    .eq('cpf', cpf.value)
+    .eq('senha', senha.value)
+    .single()
+
+  const { error: loginErrorClient } = await supabase
+    .from('cliente')
+    .select('*')
+    .eq('cpf', cpf.value)
+    .eq('senha', senha.value)
+    .single()
+
+  if (loginError || !data) {
+    error.value = 'Credenciais inválidas!'
     return
   }
-
-  const handleSignin = async () => {
-  try {
-    // Use the Supabase method to handle the signin
-    const { error } = await supabase.auth.funcionario({
-      cpf: cpf.value,
-      codigofunc: codigofunc.value,
-    });
-    if (error) throw error;
-  } catch (error) {
-    alert(error.error_description || error.message);
+  if (loginError == false) {
+    if (loginErrorClient) {
+      error.value = 'Credenciais inválidas!'
+    }
   }
-};
-  message.value = 'Pessoa inserida com sucesso!'}
+ 
+}
 
+/* funcao para logout
+  const logout = async () => {
+    await supabase.auth.signOut();
+    router.push('/Login'); // Redireciona para a página de login
+  };*/
 </script>
 
 <template>
-    <div class="background">
-        <img src="/src/assets/image/Fundocontato.jpg" alt="Padaria" class="padaria-img">
+  <div class="background">
+    <img src="/src/assets/image/Fundocontato.jpg" alt="Padaria" class="padaria-img" />
+  </div>
+  <div class="container">
+    <div class="caixa">
+      <h1 class="txt-entre">LOGIN</h1>
+
+      <form class="form" @submit.prevent="login">
+        <div class="form-group">
+          <label for="CPF">CPF:</label>
+          <input
+            type="number"
+            id="cpf"
+            name="cpf"
+            v-model="cpf"
+            required
+            placeholder="Insira seu cpf:"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="cpf">Senha:</label>
+          <input
+            type="text"
+            id="senha"
+            name="senha"
+            v-model="senha"
+            required
+            placeholder="Informe o seu código: "
+          />
+        </div>
+        <button type="submit">Entrar</button>
+      </form>
+      <p>{{ message }}</p>
+      <router-link to="/Login" class="cliente">Cliente</router-link>
     </div>
-    <div class="container">
-        <div class="caixa">
-            <h1 class="txt-entre">LOGIN FUNCIONARIO</h1>
-
-        <form class="form" @submit.prevent="handleSignin">
-            <div class="form-group">
-                <label for="CPF">CPF:</label>
-                <input type="number" id="cpf" name="cpf" v-model="cpf" required placeholder="Insira seu cpf:" />
-            </div>
-
-                <div class="form-group">
-                    <label for="cpf">Código Funcio:</label>
-                    <input type="text" id="codigo" name="codigofunc" v-model="codigofunc" required placeholder="Informe o seu código: ">
-                </div>
-
-            <router-link to="/homeFuncio"><button type="submit" router-link="/homeFuncio" @click="entrar">Cadastrar</button></router-link>
-
-        </form>
-        <p>{{ message }}</p>
-        <router-link to="/logClient" class="cliente">Cliente</router-link>
-    </div>
-    </div>
+  </div>
 </template>
 
 <style scoped>
-
 .funcionario {
-    margin-left: 290px;
-    margin-top: -42px;
+  margin-left: 290px;
+  margin-top: -42px;
 }
 
 .footer {
-    background-color: #f3d7b6;
+  background-color: #f3d7b6;
 }
 
 .caixa {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 10px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
 }
 
-.cliente { 
+.cliente {
   width: 35px;
   height: 35px;
   margin-right: 50px;
   transition: background-color 0.3s ease;
-  transition: transform 0.3s ease-in-out; /* Transição suave para o efeito de pulsação */
+  transition: transform 0.3s ease-in-out;
+  /* Transição suave para o efeito de pulsação */
   cursor: pointer;
   border: none;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 .txt-entre {
-    margin-top: 10px;
-    color: #1b1b1b;
-    text-align: center;
-    font-size: 34px;
+  margin-top: 10px;
+  color: #1b1b1b;
+  text-align: center;
+  font-size: 34px;
 }
 
 .background {
@@ -106,25 +131,24 @@ body {
   z-index: -1;
 }
 
-
 .padaria-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.7);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
 }
 
 .container {
-    display: flex;
-    border-radius: 10px;
-    margin-left: 33%;
-    margin-top: 140px;
-    margin-bottom: 200px;
-    background-color: #f8cb98;
-    padding: 20px;
-    width: 540px;
-    height: 670px;
-    flex-direction: column;
+  display: flex;
+  border-radius: 10px;
+  margin-left: 33%;
+  margin-top: 140px;
+  margin-bottom: 200px;
+  background-color: #f8cb98;
+  padding: 20px;
+  width: 540px;
+  height: 670px;
+  flex-direction: column;
 }
 
 .form {
@@ -165,7 +189,8 @@ button {
 }
 
 .cliente:hover {
-  animation: pulsate 1.5s infinite; /* Ativa a animação de pulsação ao passar o mouse */
+  animation: pulsate 1.5s infinite;
+  /* Ativa a animação de pulsação ao passar o mouse */
 }
 
 button:hover {
@@ -177,9 +202,11 @@ button:hover {
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.1);
   }
+
   100% {
     transform: scale(1);
   }

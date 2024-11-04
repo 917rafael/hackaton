@@ -1,25 +1,27 @@
-
 <template>
   <header>
     <div class="nav-bar">
+      <router-link to="/"
+        ><img src="/src/assets/image/logo.png" alt="Logo" class="logo"
+      /></router-link>
 
-      <router-link to="/"><img src="/src/assets/image/logo.png" alt="Logo" class="logo"></router-link>
-
-    <nav>
-      <ul class="nav-links">
-        <li><router-link to="/" class="link">HOME</router-link></li>
-        <li><router-link to="/contato" class="link">CONTATO</router-link></li>
-        <li><router-link to="/estoque" class="link">MAIS</router-link></li>
-        <li><button class="btn-login"><router-link to="/Login" class="link-login">LOGIN</router-link></button></li>
-      </ul>
-    </nav>
-
+      <nav>
+        <ul class="nav-links">
+          <li><router-link to="/" class="link">HOME</router-link></li>
+          <li><router-link to="/contato" class="link">CONTATO</router-link></li>
+          <li><router-link to="/estoque" class="link">MAIS</router-link></li>
+          <li>
+            <button class="btn-login">
+              <router-link to="/login" class="link-login">LOGIN</router-link>
+            </button>
+          </li>
+        </ul>
+      </nav>
     </div>
   </header>
 </template>
 
 <style scoped>
-
 .nav-bar {
   display: flex;
   justify-content: space-between;
@@ -27,7 +29,6 @@
   padding: 10px 20px;
   background-color: rgba(59, 24, 3, 0.85);
 }
-
 
 .logo {
   width: 85px;
@@ -54,7 +55,6 @@
   color: #ff5722;
 }
 
-
 .btn-login {
   background-color: #ff5722;
   width: 90px;
@@ -63,7 +63,6 @@
   border-radius: 5px;
   margin-right: 20px;
   transition: 0.4s;
-  
 }
 
 .btn-login:hover {

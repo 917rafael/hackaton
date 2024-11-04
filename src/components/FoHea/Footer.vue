@@ -3,23 +3,28 @@
     <div class="footer-container">
       <!-- Adicione a logo da padaria com efeito de pulsação ao passar o mouse -->
       <div class="footer-logo">
-        <img src="@/assets/image/logo.png" alt="Logo da Padaria" class="logo">
+        <img src="@/assets/image/logo.png" alt="Logo da Padaria" class="logo" />
       </div>
-      
+
       <!-- Seção Sobre Nós -->
       <div class="footer-column">
         <h3>Sobre Nós</h3>
-        <p>Na nossa padaria, juntamos tradição e qualidade para oferecer os melhores pães e doces artesanais. Feitos com ingredientes frescos e muito amor.</p>
+        <p>
+          Na nossa padaria, juntamos tradição e qualidade para oferecer os melhores pães e doces
+          artesanais. Feitos com ingredientes frescos e muito amor.
+        </p>
       </div>
-      
+
       <!-- Seção Contato -->
       <div class="footer-column">
         <h3>Contato</h3>
-        <p><i class="fas fa-map-marker-alt"></i> 121 Rock Street, 21 Avenue, Nova York, NY 92103-9000</p>
+        <p>
+          <i class="fas fa-map-marker-alt"></i> 121 Rock Street, 21 Avenue, Nova York, NY 92103-9000
+        </p>
         <p><i class="fas fa-phone-alt"></i> (123) 456-7890</p>
         <p><i class="fas fa-envelope"></i> contato@padariaexemplo.com</p>
       </div>
-      
+
       <!-- Seção Horário de Funcionamento -->
       <div class="footer-column">
         <h3>Horário de Funcionamento</h3>
@@ -27,7 +32,7 @@
         <p>Sábado: 8h - 14h</p>
         <p>Domingo: Fechado</p>
       </div>
-      
+
       <!-- Seção Redes Sociais -->
       <div class="footer-column">
         <h3>Siga-nos</h3>
@@ -38,7 +43,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- Rodapé inferior -->
     <div class="footer-bottom">
       <p>&copy; 2024 Padaria Exemplo. Todos os direitos reservados.</p>
@@ -48,8 +53,8 @@
 
 <script>
 export default {
-  name: "Footer",
-};
+  name: 'Footer'
+}
 </script>
 
 <style scoped>
@@ -103,7 +108,8 @@ export default {
   color: #d35400;
 }
 
-.footer-column p, .footer-column a {
+.footer-column p,
+.footer-column a {
   font-size: 0.9em;
   margin-bottom: 8px;
   color: #555;

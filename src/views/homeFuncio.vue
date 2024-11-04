@@ -7,7 +7,6 @@ import Formulario from '@/components/formulario.vue'
 import Resultado from '@/components/resultado.vue'
 import { RouterLink } from 'vue-router'
 
-
 const usuarios = ref({})
 const mostrarResultado = ref(false)
 
@@ -19,7 +18,7 @@ function clone(usuario) {
 
 <template>
   <div class="background">
-    <img src="/src/assets/image/padaria-transformed.jpeg" alt="Padaria" class="padaria-img">
+    <img src="/src/assets/image/padaria-transformed.jpeg" alt="Padaria" class="padaria-img" />
   </div>
   <heade />
   <div class="nav">
@@ -30,7 +29,7 @@ function clone(usuario) {
     <button class="button" @click="salvar">Fornecedores</button>
     <button class="button" @click="salvar">Pedidos de Clientes</button>
   </div>
-  
+
   <div class="head"></div>
   <div class="container"></div>
   <formulario @adicionar="clone" />
@@ -41,7 +40,7 @@ function clone(usuario) {
 .nav {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; 
+  justify-content: center;
   gap: 15px;
   margin: 20px 0;
   margin-top: 30px;

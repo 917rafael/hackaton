@@ -1,43 +1,44 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import headers from '@/components/FoHea/header.vue'
 import ProductCard from '@/components/home/ProductCard.vue'
 import back from '@/assets/image/fundohome.jpg'
-import { products } from '@/data/cardapio';
-import { produtos } from '@/data/produtos';
-import Product from '@/components/Product/Produtc.vue';
-import sacola from '@/components/sacola.vue';
-
+import { products } from '@/data/cardapio'
+import { produtos } from '@/data/produtos'
+import Product from '@/components/Product/Produtc.vue'
+import sacola from '@/components/sacola.vue'
 
 import { useProductStore } from '@/store/productStore'
 const productStore = useProductStore()
-
 </script>
 
 <template>
   <headers />
 
-
-    <section class="hero" :style="{ backgroundImage: `url(${back})` }">
-      <div class="hero-text">
-        <h1>Whole Grain Goodness in Every Slice of Wheat Bread</h1>
-        <p class="hero-p"></p>
-        <button class="cta-button">Aprender Mais</button>
-      </div>
-      
-      <div class="products">
-        <product-card v-for="produto in produtos" :key="produto.id" :produto="produto" />
-      </div>    
-    </section>
-    <div class="product-main">
-    <div class="product-list">
-      <Product v-for="product in productStore.catalogProducts" :key="product.id" :product="product"/>
-    </div> 
-  </div>
-    
-    <div>
-      <sacola />
+  <section class="hero" :style="{ backgroundImage: `url(${back})` }">
+    <div class="hero-text">
+      <h1>Whole Grain Goodness in Every Slice of Wheat Bread</h1>
+      <p class="hero-p"></p>
+      <button class="cta-button">Aprender Mais</button>
     </div>
 
+    <div class="products">
+      <product-card v-for="produto in produtos" :key="produto.id" :produto="produto" />
+    </div>
+  </section>
+  <div class="product-main">
+    <div class="product-list">
+      <Product
+        v-for="product in productStore.catalogProducts"
+        :key="product.id"
+        :product="product"
+      />
+    </div>
+  </div>
+
+  <div>
+    <sacola />
+  </div>
 </template>
 
 <style scoped>
@@ -54,7 +55,7 @@ const productStore = useProductStore()
   gap: 10px;
 }
 
-.hero-p{
+.hero-p {
   color: white;
 }
 
@@ -112,7 +113,6 @@ const productStore = useProductStore()
   max-width: 60%;
   flex-wrap: wrap;
 }
-
 
 .product-main {
   display: flex;

@@ -6,8 +6,23 @@ defineProps({ pergunta: Object })
 
 <template>
   <div class="form__group">
-    <textarea v-if="pergunta.type === 'textarea'" class="form__field" :id="pergunta.id" :placeholder="pergunta.description" :minlength="pergunta.minlength":maxlength="pergunta.maxlength"></textarea>
-    <input v-else type="text" class="form__field" :name="pergunta.description" :placeholder="pergunta.description" :id="pergunta.id" required />
+    <textarea
+      v-if="pergunta.type === 'textarea'"
+      class="form__field"
+      :id="pergunta.id"
+      :placeholder="pergunta.description"
+      :minlength="pergunta.minlength"
+      :maxlength="pergunta.maxlength"
+    ></textarea>
+    <input
+      v-else
+      type="text"
+      class="form__field"
+      :name="pergunta.description"
+      :placeholder="pergunta.description"
+      :id="pergunta.id"
+      required
+    />
     <label :for="pergunta.id" class="form__label">{{ pergunta.description }}</label>
   </div>
 </template>
@@ -30,18 +45,20 @@ defineProps({ pergunta: Object })
   color: #333;
   padding: 7px 0;
   background: transparent;
-  transition: border-color 0.2s, border-width 0.2s;
-  resize: none; 
+  transition:
+    border-color 0.2s,
+    border-width 0.2s;
+  resize: none;
 }
 
 .form__field::placeholder {
-  color: transparent; 
+  color: transparent;
 }
 
 .form__field:placeholder-shown ~ .form__label {
   font-size: 1.3rem;
   cursor: text;
-  top: 20px; 
+  top: 20px;
 }
 
 .form__label {
@@ -59,7 +76,7 @@ defineProps({ pergunta: Object })
 .form__field:not(:placeholder-shown) ~ .form__label {
   font-size: 0.85rem;
   color: #11998e;
-  top: -15px; 
+  top: -15px;
   font-weight: 700;
 }
 
