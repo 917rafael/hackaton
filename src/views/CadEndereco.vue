@@ -4,43 +4,50 @@ import Footer from '@/components/FoHea/Footer.vue'
 import { ref } from 'vue'
 import { supabase } from '../lib/supabaseClient'
 
-const CEP = ref([]);
-const estado = ref([]);
-const cidade = ref([]);
-const rua = ref([]);
-const numero = ref([]);
-const tipoEndereco = ref([]);
-const infoAdic = ref([]);
+// Corrigir os tipos de ref para strings
+const cep = ref('');
+const estado = ref('');
+const cidade = ref('');
+const rua = ref('');
+const bairro = ref('');
+const numero = ref('');
+const tipoentrega = ref('');
+const informadic = ref('');
 const message = ref('');
 
 const insertData = async () => {
-  if (!CEP.value || !estado.value || !cidade.value || !rua.value || !numero.value || !tipoEndereco.value || !infoAdic.value ) {
-    message.value = 'Por favor, preencha todos os campos.'
+  // Verifica se todos os campos obrigatórios foram preenchidos
+  if (!cep.value || !estado.value || !cidade.value || !bairro.value 
+      || !rua.value || !numero.value || !tipoentrega.value) {
+    message.value = 'Por favor, preencha todos os campos obrigatórios.'
     return
   }
-  const { data: pessoaError } = await supabase.from('endereco').insert([
+
+  // Faz a requisição de inserção ao Supabase
+  // eslint-disable-next-line no-unused-vars
+  const { data, error } = await supabase.from('endereco').insert([
     {
-      CEP: CEP.value,
+      cep: cep.value,
       estado: estado.value,
       cidade: cidade.value,
+      bairro: bairro.value,
       rua: rua.value,
       numero: numero.value,
-      tipoEndereco: tipoEndereco.value,
-      infoAdic: infoAdic.value
-        
+      tipoentrega: tipoentrega.value,
+      informadic: informadic.value
     }
   ])
 
-  if (pessoaError) {
-    console.error('Erro ao inserir pessoa:', pessoaError.message)
-    message.value = `Erro ao inserir pessoa: ${pessoaError.message}`
+  // Tratamento de erro e mensagem de sucesso
+  if (error) {
+    console.error('Erro ao inserir endereço:', error.message)
+    message.value = `Erro ao inserir endereço: ${error.message}`
     return
   }
 
-  message.value = 'Pessoa inserida com sucesso!'
+  message.value = 'Endereço inserido com sucesso!'
 }
 </script>
-
 
 <template>
   <Header />
@@ -53,7 +60,7 @@ const insertData = async () => {
             <label for="cep">CEP</label>
             <div class="input-with-icon">
               <i class="fas fa-map"></i>
-              <input type="text" id="cep" v-model="CEP" placeholder="Digite seu CEP" required />
+              <input type="number" id="cep" v-model="cep" placeholder="Digite seu CEP" required />
             </div>
             <a href="#" class="cep-help">Não sei o meu CEP</a>
           </div>
@@ -98,18 +105,19 @@ const insertData = async () => {
           </div>
           <div class="form-group">
             <label for="deliveryType">Tipo de Entrega</label>
-            <select id="deliveryType" v-model="tipoEndereco" required>
+            <select id="deliveryType" v-model="tipoentrega" required>
               <option value="" disabled selected>Selecione uma opção</option>
-              <option value="home" >Entrega em Casa</option>
-              <option value="work">Entrega no Trabalho</option>
+              <option tipoentrega.value="casa">Entrega em Casa</option>
+              <option tipoentrega.value="trabalho">Entrega no Trabalho</option>
             </select>
           </div>
           <div class="form-group">
             <label for="additionalInfo">Informações Adicionais</label>
-            <textarea id="additionalInfo" v-model="infoAdic" placeholder="Instruções especiais (opcional)"></textarea>
+            <textarea id="additionalInfo" v-model="informadic" placeholder="Instruções especiais (opcional)"></textarea>
           </div>
           <button type="submit" class="btn-submit">Salvar Endereço</button>
         </form>
+        {{ message }}
       </div>
 
       <div class="order-summary">
