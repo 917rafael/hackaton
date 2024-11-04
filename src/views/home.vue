@@ -2,23 +2,22 @@
 import headers from '@/components/FoHea/header.vue'
 import ProductCard from '@/components/home/ProductCard.vue'
 import back from '@/assets/image/fundohome.jpg'
-import { produtos } from '@/data/produtos';
-import Product from '@/components/Product/Produtc.vue';
-import sacola from '@/components/sacola.vue';
+import { produtos } from '@/data/produtos'
+import Product from '@/components/Product/Produtc.vue'
+import sacola from '@/components/sacola.vue'
 import Fotter from '@/components/FoHea/Footer.vue'
-import { useProductStore } from '@/store/productStore';
-import { ref, computed } from 'vue';
+import { useProductStore } from '@/store/productStore'
+import { ref, computed } from 'vue'
 
-
-const productStore = useProductStore();
-const searchQuery = ref('');
+const productStore = useProductStore()
+const searchQuery = ref('')
 
 const filteredProducts = computed(() => {
-  if (!searchQuery.value) return productStore.catalogProducts;
-  return productStore.catalogProducts.filter(product =>
+  if (!searchQuery.value) return productStore.catalogProducts
+  return productStore.catalogProducts.filter((product) =>
     product.name.toLowerCase().includes(searchQuery.value.toLowerCase())
-  );
-});
+  )
+})
 </script>
 
 <template>
@@ -30,12 +29,12 @@ const filteredProducts = computed(() => {
       <p class="hero-p"></p>
       <button class="cta-button">Aprender Mais</button>
     </div>
-    
+
     <div class="products">
       <product-card v-for="produto in produtos" :key="produto.id" :produto="produto" />
-    </div>    
+    </div>
   </section>
-  
+
   <!-- Barra de Pesquisa com Estilo Aprimorado -->
   <div class="search-section">
     <hr class="divider" />
@@ -47,9 +46,9 @@ const filteredProducts = computed(() => {
   <div class="product-main">
     <div class="product-list">
       <Product v-for="product in filteredProducts" :key="product.id" :product="product" />
-    </div> 
+    </div>
   </div>
-  
+
   <div>
     <sacola />
   </div>
@@ -60,7 +59,6 @@ const filteredProducts = computed(() => {
 <style>
 body {
   background-image: url('../src/assets/image/FundoSite.png'); /* Use a imagem de fundo */
-  
 }
 </style>
 
@@ -73,9 +71,9 @@ body {
 }
 
 .div-product {
-  max-width: 800px; 
-  margin: 0 auto; 
-  padding: 10px; 
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 10px;
 }
 
 .product-list {

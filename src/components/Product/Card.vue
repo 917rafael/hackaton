@@ -1,31 +1,31 @@
 <script setup>
-import { computed, ref, defineEmits } from 'vue';
-import { products } from '@/data/cardapio';
-import { useSacolaStore } from '@/store/sacola.js';
+import { computed, ref, defineEmits } from 'vue'
+import { products } from '@/data/cardapio'
+import { useSacolaStore } from '@/store/sacola.js'
 
-const emit = defineEmits();
-const store = useSacolaStore();
-const props = defineProps(['productselected']);
-const options = ref([{ count: 0, price: 1.00 }]);
-const observation = ref('');
+const emit = defineEmits()
+const store = useSacolaStore()
+const props = defineProps(['productselected'])
+const options = ref([{ count: 0, price: 1.0 }])
+const observation = ref('')
 
 const totalPrice = computed(() =>
   options.value.reduce((total, option) => total + option.count * option.price, 0)
-);
+)
 
 const increaseCount = (index) => {
-  options.value[index].count++;
-};
+  options.value[index].count++
+}
 
 const decreaseCount = (index) => {
   if (options.value[index].count > 0) {
-    options.value[index].count--;
+    options.value[index].count--
   }
-};
+}
 
 const closeModal = () => {
-  emit('close');
-};
+  emit('close')
+}
 </script>
 
 <template>
@@ -47,7 +47,11 @@ const closeModal = () => {
                 <label class="option-label">{{ item.text }}</label>
               </div>
             </div>
-            <textarea class="observation-input" placeholder="Alguma observação?" v-model="observation"></textarea>
+            <textarea
+              class="observation-input"
+              placeholder="Alguma observação?"
+              v-model="observation"
+            ></textarea>
           </div>
         </div>
       </div>
@@ -215,7 +219,9 @@ const closeModal = () => {
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  transition: background-color 0.3s, transform 0.2s;
+  transition:
+    background-color 0.3s,
+    transform 0.2s;
 }
 
 .control-button:hover {
@@ -254,7 +260,9 @@ const closeModal = () => {
   cursor: pointer;
   font-size: 1rem;
   font-weight: bold;
-  transition: background-color 0.3s, transform 0.2s;
+  transition:
+    background-color 0.3s,
+    transform 0.2s;
 }
 
 .add-button:hover {

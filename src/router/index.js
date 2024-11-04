@@ -1,29 +1,28 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path:'/pedidosclient',
+      path: '/pedidosclient',
       name: 'pedidosclient',
       component: () => import('../views/PedidosClient.vue')
     },
     {
-      path:'/endereco',
+      path: '/endereco',
       name: 'endereco',
       component: () => import('../views/CadEndereco.vue')
-    },  
+    },
     {
-      path:'/Rendimento',
+      path: '/Rendimento',
       name: 'rendimento',
       component: () => import('../views/Rendimento.vue')
-    },  
+    },
     {
-      path:'/Estoque',
+      path: '/Estoque',
       name: 'estoque',
       component: () => import('../views/Estoque.vue')
-    },  
+    },
     {
       path: '/contato',
       name: 'contato',

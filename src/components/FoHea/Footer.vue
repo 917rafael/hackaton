@@ -2,19 +2,27 @@
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-logo">
-        <img src="@/assets/image/logo.png" alt="Logo da Padaria" class="logo">
+        <img src="@/assets/image/logo.png" alt="Logo da Padaria" class="logo" />
       </div>
 
       <div class="footer-column about">
         <h3>Sobre Nós</h3>
-        <p>Na nossa padaria, combinamos tradição e qualidade para oferecer os melhores pães e doces artesanais, feitos com ingredientes frescos e muito amor.</p>
-        <p>Nosso compromisso é com a excelência, proporcionando aos nossos clientes uma experiência única e saborosa.</p>
+        <p>
+          Na nossa padaria, combinamos tradição e qualidade para oferecer os melhores pães e doces
+          artesanais, feitos com ingredientes frescos e muito amor.
+        </p>
+        <p>
+          Nosso compromisso é com a excelência, proporcionando aos nossos clientes uma experiência
+          única e saborosa.
+        </p>
         <a href="#" class="read-more">Saiba Mais</a>
       </div>
 
       <div class="footer-column contact">
         <h3>Contato</h3>
-        <p><i class="fas fa-map-marker-alt"></i> 121 Rock Street, 21 Avenue, Nova York, NY 92103-9000</p>
+        <p>
+          <i class="fas fa-map-marker-alt"></i> 121 Rock Street, 21 Avenue, Nova York, NY 92103-9000
+        </p>
         <p><i class="fas fa-phone-alt"></i> (123) 456-7890</p>
         <p><i class="fas fa-envelope"></i> contato@padariaexemplo.com</p>
         <a href="#" class="contact-form-link">Fale Conosco</a>
@@ -65,8 +73,7 @@
     <div class="footer-bottom">
       <p>&copy; 2024 Padaria Exemplo. Todos os direitos reservados.</p>
       <div class="footer-links">
-        <a href="#">Política de Privacidade</a> | 
-        <a href="#">Termos de Uso</a> | 
+        <a href="#">Política de Privacidade</a> | <a href="#">Termos de Uso</a> |
         <a href="#">FAQ</a>
       </div>
     </div>
@@ -84,13 +91,13 @@
 
 <script>
 export default {
-  name: "Footer",
+  name: 'Footer',
   methods: {
     subscribe() {
-      alert("Obrigado por se inscrever na nossa newsletter!");
-    },
-  },
-};
+      alert('Obrigado por se inscrever na nossa newsletter!')
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -139,7 +146,9 @@ export default {
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .footer-column:hover {
@@ -235,7 +244,9 @@ export default {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
+  transition:
+    background-color 0.3s,
+    transform 0.3s;
 }
 
 .newsletter button:hover {
@@ -270,7 +281,9 @@ export default {
   text-decoration: underline;
 }
 
-.read-more, .contact-form-link, .social-share {
+.read-more,
+.contact-form-link,
+.social-share {
   display: inline-block;
   margin-top: 10px;
   color: #f39c12;
@@ -278,7 +291,9 @@ export default {
   transition: color 0.3s;
 }
 
-.read-more:hover, .contact-form-link:hover, .social-share:hover {
+.read-more:hover,
+.contact-form-link:hover,
+.social-share:hover {
   color: #ffcc00;
 }
 
@@ -293,17 +308,20 @@ export default {
   pointer-events: none; /* Para não interferir nas interações do footer */
 }
 
-.decoration-bread, .decoration-donut {
+.decoration-bread,
+.decoration-donut {
   width: 80px; /* Ajuste do tamanho das decorações */
 }
 
-.decoration-bread img, .decoration-donut img {
+.decoration-bread img,
+.decoration-donut img {
   width: 100%;
   opacity: 0.2; /* Opacidade reduzida para um fundo mais sutil */
   transition: opacity 0.3s;
 }
 
-.decoration-bread:hover img, .decoration-donut:hover img {
+.decoration-bread:hover img,
+.decoration-donut:hover img {
   opacity: 0.5; /* Aumenta a opacidade ao passar o mouse */
 }
 

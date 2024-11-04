@@ -7,7 +7,6 @@ import Formulario from '@/components/formulario.vue'
 import Resultado from '@/components/resultado.vue'
 import { RouterLink } from 'vue-router'
 
-
 const usuarios = ref({})
 const mostrarResultado = ref(false)
 
@@ -29,7 +28,7 @@ function clone(usuario) {
     <router-link to="/pedidosclient">
       <button class="button" @click="salvar">Pedidos dos Clientes</button>
     </router-link>
-    
+
     <button class="button" @click="salvar">Fornecedores</button>
 
     <button class="button" @click="salvar">Pedidos de Clientes</button>
@@ -45,7 +44,7 @@ function clone(usuario) {
 .nav {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; 
+  justify-content: center;
   gap: 15px;
   margin: 20px 0;
 }

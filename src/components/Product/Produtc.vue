@@ -2,17 +2,15 @@
 const props = defineProps({
   product: {
     type: Object,
-    required: true,
-  },
-});
+    required: true
+  }
+})
 import Card from './Card.vue'
-import { products } from '@/data/cardapio';
-import { sacola } from '@/data/sacola';
-import { ref, computed, reactive } from 'vue';
+import { products } from '@/data/cardapio'
+import { sacola } from '@/data/sacola'
+import { ref, computed, reactive } from 'vue'
 
-
-
-const isModalVisible = ref(false);
+const isModalVisible = ref(false)
 
 const productselected = ref([])
 
@@ -21,37 +19,33 @@ const suasacola = reactive({
   observacao: null,
   item: productselected.value
 })
-const observation = ref('');
+const observation = ref('')
 
 const toggleModal = (id) => {
-  const findproduct = products.find(product => product.id === id)
+  const findproduct = products.find((product) => product.id === id)
   productselected.value = [findproduct]
   isModalVisible.value = !isModalVisible.value
-};
-
-
-
+}
 </script>
 
 <template>
-    <div class="product-card" role="button" tabindex="0" @click="toggleModal(product.id)">
-  
-      <img :src="product.image" :alt="product.name" class="product-image" />
-  
-      <div class="product-info">
-        <h2 class="product-name">{{ product.name }}</h2>
-  
-        <div class="product-rating">
-          <span v-for="n in 5" :key="n" class="star" :class="{ 'filled': n <= product.rating }">★</span>
-          <span class="reviews"> {{ product.reviews }} avaliações</span>
-        </div>
-  
-        <div class="product-price">
-          <span v-if="product.oldPrice" class="old-price">R$ {{ product.oldPrice }}</span>
-          <span v-if="product.discount" class="discount">{{ product.discount }}%</span>
-        </div>
+  <div class="product-card" role="button" tabindex="0" @click="toggleModal(product.id)">
+    <img :src="product.image" :alt="product.name" class="product-image" />
 
-        <div class="current-price">
+    <div class="product-info">
+      <h2 class="product-name">{{ product.name }}</h2>
+
+      <div class="product-rating">
+        <span v-for="n in 5" :key="n" class="star" :class="{ filled: n <= product.rating }">★</span>
+        <span class="reviews"> {{ product.reviews }} avaliações</span>
+      </div>
+
+      <div class="product-price">
+        <span v-if="product.oldPrice" class="old-price">R$ {{ product.oldPrice }}</span>
+        <span v-if="product.discount" class="discount">{{ product.discount }}%</span>
+      </div>
+
+      <div class="current-price">
         <strong>R$ {{ product.currentPrice }}</strong>
       </div>
 
@@ -63,9 +57,8 @@ const toggleModal = (id) => {
 
   <Card v-if="isModalVisible" :productselected="productselected" @close="isModalVisible = false" />
   <div class="product-list">
-      <products v-for="product in products" :key="product.id" :product="product"/>
-    </div> 
-
+    <products v-for="product in products" :key="product.id" :product="product" />
+  </div>
 </template>
 <style scoped>
 .product-card {
@@ -75,11 +68,12 @@ const toggleModal = (id) => {
   overflow: hidden;
   max-width: 200px;
   margin: 0 auto;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   position: relative;
   padding: 10px;
   cursor: pointer;
-  
 }
 .product-card:focus {
   outline: 2px solid #007bff;

@@ -1,11 +1,46 @@
 <script setup>
-import Header from "@/components/FoHea/header.vue";
-import Footer from "@/components/FoHea/Footer.vue";
+import Header from '@/components/FoHea/header.vue'
+import Footer from '@/components/FoHea/Footer.vue'
+import { ref } from 'vue'
+import { supabase } from '../lib/supabaseClient'
 
-const handleSubmit = () => {
-  alert("Endereço salvo com sucesso!");
-};
+const CEP = ref([]);
+const estado = ref([]);
+const cidade = ref([]);
+const rua = ref([]);
+const numero = ref([]);
+const tipoEndereco = ref([]);
+const infoAdic = ref([]);
+const message = ref('');
+
+const insertData = async () => {
+  if (!CEP.value || !estado.value || !cidade.value || !rua.value || !numero.value || !tipoEndereco.value || !infoAdic.value ) {
+    message.value = 'Por favor, preencha todos os campos.'
+    return
+  }
+  const { data: pessoaError } = await supabase.from('endereco').insert([
+    {
+      CEP: CEP.value,
+      estado: estado.value,
+      cidade: cidade.value,
+      rua: rua.value,
+      numero: numero.value,
+      tipoEndereco: tipoEndereco.value,
+      infoAdic: infoAdic.value
+        
+    }
+  ])
+
+  if (pessoaError) {
+    console.error('Erro ao inserir pessoa:', pessoaError.message)
+    message.value = `Erro ao inserir pessoa: ${pessoaError.message}`
+    return
+  }
+
+  message.value = 'Pessoa inserida com sucesso!'
+}
 </script>
+
 
 <template>
   <Header />
@@ -13,19 +48,12 @@ const handleSubmit = () => {
     <div class="payment-container">
       <div class="address-form">
         <h1>Adicionar Endereço</h1>
-        <form @submit.prevent="handleSubmit">
-          <div class="form-group">
-            <label for="fullName">Nome Completo</label>
-            <div class="input-with-icon">
-              <i class="fas fa-user"></i>
-              <input type="text" id="fullName" placeholder="Nome completo conforme RG ou CNH" required />
-            </div>
-          </div>
+        <form @submit.prevent="insertData">
           <div class="form-group">
             <label for="cep">CEP</label>
             <div class="input-with-icon">
               <i class="fas fa-map"></i>
-              <input type="text" id="cep" placeholder="Digite seu CEP" required />
+              <input type="text" id="cep" v-model="CEP" placeholder="Digite seu CEP" required />
             </div>
             <a href="#" class="cep-help">Não sei o meu CEP</a>
           </div>
@@ -33,35 +61,35 @@ const handleSubmit = () => {
             <label for="state">Estado</label>
             <div class="input-with-icon">
               <i class="fas fa-map-marker-alt"></i>
-              <input type="text" id="state" placeholder="Estado" required />
+              <input type="text" id="state" v-model="estado" placeholder="Estado" required />
             </div>
           </div>
           <div class="form-group">
             <label for="city">Cidade</label>
             <div class="input-with-icon">
               <i class="fas fa-city"></i>
-              <input type="text" id="city" placeholder="Cidade" required />
+              <input type="text" id="city" v-model="cidade" placeholder="Cidade" required />
             </div>
           </div>
           <div class="form-group">
             <label for="neighborhood">Bairro</label>
             <div class="input-with-icon">
               <i class="fas fa-home"></i>
-              <input type="text" id="neighborhood" placeholder="Bairro" required />
+              <input type="text" id="neighborhood" v-model="bairro" placeholder="Bairro" required />
             </div>
           </div>
           <div class="form-group">
             <label for="street">Rua/Avenida</label>
             <div class="input-with-icon">
               <i class="fas fa-road"></i>
-              <input type="text" id="street" placeholder="Rua/Avenida" required />
+              <input type="text" id="street" v-model="rua" placeholder="Rua/Avenida" required />
             </div>
           </div>
           <div class="form-group">
             <label for="number">Número</label>
             <div class="input-with-icon">
               <i class="fas fa-sort-numeric-up"></i>
-              <input type="text" id="number" placeholder="Número" required />
+              <input type="text" id="number" v-model="numero" placeholder="Número" required />
             </div>
             <label class="no-number">
               <input type="checkbox" />
@@ -70,20 +98,20 @@ const handleSubmit = () => {
           </div>
           <div class="form-group">
             <label for="deliveryType">Tipo de Entrega</label>
-            <select id="deliveryType" required>
+            <select id="deliveryType" v-model="tipoEndereco" required>
               <option value="" disabled selected>Selecione uma opção</option>
-              <option value="home">Entrega em Casa</option>
+              <option value="home" >Entrega em Casa</option>
               <option value="work">Entrega no Trabalho</option>
             </select>
           </div>
           <div class="form-group">
             <label for="additionalInfo">Informações Adicionais</label>
-            <textarea id="additionalInfo" placeholder="Instruções especiais (opcional)"></textarea>
+            <textarea id="additionalInfo" v-model="infoAdic" placeholder="Instruções especiais (opcional)"></textarea>
           </div>
           <button type="submit" class="btn-submit">Salvar Endereço</button>
         </form>
       </div>
-      
+
       <div class="order-summary">
         <h2>Resumo da Compra</h2>
         <div class="summary-item">
@@ -133,7 +161,9 @@ const handleSubmit = () => {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   flex: 1 1 300px;
   min-width: 300px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 
 .address-form:hover,
@@ -189,7 +219,9 @@ const handleSubmit = () => {
   border-radius: 8px;
   font-size: 1em;
   color: #333;
-  transition: border-color 0.3s, background-color 0.3s;
+  transition:
+    border-color 0.3s,
+    background-color 0.3s;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -228,7 +260,9 @@ const handleSubmit = () => {
   border-radius: 8px;
   font-size: 1em;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+  transition:
+    background-color 0.3s,
+    transform 0.2s;
   width: 100%; /* O botão ocupa 100% da largura do contêiner */
   margin-top: 20px; /* Espaçamento superior */
 }
@@ -361,7 +395,8 @@ body {
   background-color: #e9ecef;
 }
 
-h1, h2 {
+h1,
+h2 {
   margin: 0;
   padding: 0;
 }
@@ -402,4 +437,3 @@ a:hover {
   animation: fadeIn 0.5s;
 }
 </style>
-  

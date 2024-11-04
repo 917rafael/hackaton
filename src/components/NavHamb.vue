@@ -1,21 +1,17 @@
 <!--esse componente são os dados da nav do home -->
 
-
 <script setup>
-import { ref } from 'vue';
-const isMenuOpen = ref(false);
+import { ref } from 'vue'
+const isMenuOpen = ref(false)
 const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value;
-};
+  isMenuOpen.value = !isMenuOpen.value
+}
 </script>
 
 <template>
   <aside>
-    <button class="hamburger" @click="toggleMenu">
-      &#9776;
-    </button>
+    <button class="hamburger" @click="toggleMenu">&#9776;</button>
     <div class="nav-bar" :class="{ open: isMenuOpen }">
-
       <div class="nav-item">Doces</div>
       <div class="nav-item">Salgados</div>
       <div class="nav-item">Pães</div>
@@ -24,24 +20,22 @@ const toggleMenu = () => {
 </template>
 
 <style scoped>
-
 @media (min-width: 768px) {
   .hamburger {
-    display: none; 
+    display: none;
   }
 
   .nav-bar {
-    display: flex; 
-    flex-direction: row; 
-    position: static; 
+    display: flex;
+    flex-direction: row;
+    position: static;
   }
 }
 
-
 @media (max-width: 767px) {
   .nav-bar {
-    display: none; 
-    flex-direction: column; 
+    display: none;
+    flex-direction: column;
     padding: 20px;
     background-color: white; /* Cor de fundo para a navegação */
     position: absolute; /* Posiciona a navegação em relação ao pai */
@@ -50,7 +44,9 @@ const toggleMenu = () => {
     width: 100%; /* Ocupa toda a largura disponível */
     z-index: 1000; /* Garante que a navegação fique sobre outros elementos */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Adiciona sombra para destaque */
-    transition: opacity 0.3s, visibility 0.3s; /* Transição suave para visibilidade */
+    transition:
+      opacity 0.3s,
+      visibility 0.3s; /* Transição suave para visibilidade */
     opacity: 0; /* Inicialmente invisível */
     visibility: hidden; /* Inicialmente invisível */
   }
