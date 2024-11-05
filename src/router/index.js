@@ -34,7 +34,7 @@ const router = createRouter({
     {
       path: '/CadastroFuncio',
       name: 'CadastroFuncio',
-      component: () => import('../views/CadastroFuncio.vue'),
+      component: () => import('../views/cadastroFuncio.vue'),
       meta: { requiresAuth: true, allowedCodes: [9876, 4576] } // Rota protegida
     },
     {

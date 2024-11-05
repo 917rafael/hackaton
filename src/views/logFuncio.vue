@@ -2,35 +2,27 @@
 import { ref } from 'vue'
 import { supabase } from '../lib/supabaseClient'
 
-const cpf = ref([])
-const senha = ref([])
-const error = ref('')
+const cpf = ref('');
+const senha = ref('');
+const error = ref('');
 
 const login = async () => {
+  console.log(cpf.value)
+  console.log(senha.value)
   const { data, error: loginError } = await supabase
-    .from('funcionario')
+    .from('usuario')
     .select('*')
     .eq('cpf', cpf.value)
     .eq('senha', senha.value)
     .single()
 
-  const { error: loginErrorClient } = await supabase
-    .from('cliente')
-    .select('*')
-    .eq('cpf', cpf.value)
-    .eq('senha', senha.value)
-    .single()
-
+  console.log({data, error})
   if (loginError || !data) {
     error.value = 'Credenciais inválidas!'
     return
+    
   }
-  if (loginError == false) {
-    if (loginErrorClient) {
-      error.value = 'Credenciais inválidas!'
-    }
-  }
- 
+  
 }
 
 /* funcao para logout
