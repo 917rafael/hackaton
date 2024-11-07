@@ -1,4 +1,4 @@
-import back from '@/assets/image/back.jpg'
+
 import pão from '@/assets/image/comidas/pao-frances.jpg'
 import coxinha from '@/assets/image/comidas/coxinha.jpg'
 import bolo from '@/assets/image/comidas/bolo-vulcão.jpg'
