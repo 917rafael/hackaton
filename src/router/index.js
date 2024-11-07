@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { authGuard } from '@/middleware/auth' // Importa o middleware
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/pedidosclient',
+      path:  '/pedidosclient',
       name: 'pedidosclient',
       component: () => import('../views/PedidosClient.vue')
     },
@@ -20,6 +21,7 @@ const router = createRouter({
     },
     {
       path: '/Estoque',
+      path: '/Estoque',
       name: 'estoque',
       component: () => import('../views/EstoquEE.vue')
     },
@@ -31,7 +33,8 @@ const router = createRouter({
     {
       path: '/homeFuncio',
       name: 'homeFuncio',
-      component: () => import('../views/homeFuncio.vue')
+      component: () => import('../views/homeFuncio.vue'),
+      meta: { requiresAuth: true } // Rota protegida
     },
     {
       path: '/',
@@ -42,19 +45,24 @@ const router = createRouter({
     {
       path: '/CadastroFuncio',
       name: 'CadastroFuncio',
-      component: () => import('../views/cadastroFuncio.vue')
+      component: () => import('../views/cadastroFuncio.vue'),
+      meta: { requiresAuth: true, allowedCodes: [9876, 4576] } // Rota protegida
     },
     {
-      path: '/logClient',
-      name: 'logClient',
-      component: () => import('../views/logClient.vue')
+      path: '/Cadastro',
+      name: 'Cadastro',
+      component: () => import('../views/CadastroClient.vue')
     },
     {
-      path: '/logFuncio',
-      name: 'logFuncio',
+      path: '/login',
+      name: 'login',
       component: () => import('../views/logFuncio.vue')
     }
   ]
 })
 
+// Aplica o middleware em cada rota
+// router.beforeEach(authGuard)
+
 export default router
+

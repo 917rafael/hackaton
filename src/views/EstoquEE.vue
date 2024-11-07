@@ -150,7 +150,7 @@ const closeModal = (event) => {
           Exibir no Catálogo
         </label>
 
-
+        <!-- Campo para upload de imagem -->
         <input type="file" @change="handleFileUpload" class="file-input" />
         <img
           v-if="newProduct.image"

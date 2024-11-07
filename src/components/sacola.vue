@@ -3,8 +3,9 @@
 import { ref } from 'vue'
 import { useSacolaStore } from '@/store/sacola.js'
 
-const store = useSacolaStore()
+const store = useSacolaStore() // Store da sacola
 
+// Controle de estado do carrinho (aberto/fechado)
 const isCartOpen = ref(false)
 
 const toggleCart = () => {
@@ -14,8 +15,9 @@ const toggleCart = () => {
 const addItem = (item) => {
   const product = store.sacola_cart.find((p) => p.id === item.id)
   if (product) {
-    product.quantity += 1 
-    } else {
+    product.quantity += 1
+  } else {
+    // Se o item não está na sacola, adicione-o com quantidade inicial 1
     store.sacola_cart.push({ ...item, quantity: 1 })
   }
 }

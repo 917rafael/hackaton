@@ -40,7 +40,7 @@ const usuario = reactive({
 <template>
   <div class="container">
     <main class="main">
-      <h1 class="h2">Registro de vendas - Padaria Santo Pão</h1>
+      <h1 class="h2">REGISTRO DE VENDAS</h1>
 
       <div class="nome">
         <label for="nome" class="form-label">Nome do Cliente:</label>
@@ -54,12 +54,12 @@ const usuario = reactive({
       </div>
 
       <div class="data">
-        <label for="data" class="form-label">Data:</label>
+        <label for="data" class="form-label">DATA:</label>
         <input type="date" class="form-control" id="data" v-model="usuario.data" />
       </div>
 
       <div class="hora">
-        <label for="hora" class="form-label">Hora:</label>
+        <label for="hora" class="form-label">HORA:</label>
         <input type="time" class="form-control" id="hora" v-model="usuario.hora" />
       </div>
 
@@ -132,7 +132,17 @@ body {
 
 /* Container Principal */
 .container {
-  background-color: #f4f4f4;
+  background-color: #f8cb98;
+  color: #333;
+  border-radius: 8px;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.main {
+  background-color: #f8cb98;
   color: #333;
   border-radius: 8px;
   max-width: 800px;

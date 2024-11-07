@@ -3,6 +3,7 @@
     <div class="footer-container">
       <div class="footer-logo">
         <img src="@/assets/image/logo.png" alt="Logo da Padaria" class="logo" />
+        <img src="@/assets/image/logo.png" alt="Logo da Padaria" class="logo" />
       </div>
 
       <div class="footer-column about">
@@ -20,6 +21,9 @@
 
       <div class="footer-column contact">
         <h3>Contato</h3>
+        <p>
+          <i class="fas fa-map-marker-alt"></i> 121 Rock Street, 21 Avenue, Nova York, NY 92103-9000
+        </p>
         <p>
           <i class="fas fa-map-marker-alt"></i> 121 Rock Street, 21 Avenue, Nova York, NY 92103-9000
         </p>

@@ -5,9 +5,11 @@ import { ref } from 'vue'
 import Heade from '@/components/FoHea/header.vue'
 import Formulario from '@/components/formulario.vue'
 import Resultado from '@/components/resultado.vue'
+import { useAuthStore } from '@/store/auth'
 import { RouterLink } from 'vue-router'
 
 const usuarios = ref({})
+const authStore = useAuthStore()
 const mostrarResultado = ref(false)
 
 function clone(usuario) {
@@ -17,8 +19,10 @@ function clone(usuario) {
 </script>
 
 <template>
+  <div class="background">
+    <img src="/src/assets/image/padaria-transformed.jpeg" alt="Padaria" class="padaria-img" />
+  </div>
   <heade />
-
   <div class="nav">
     <button class="button" @click="salvar">Produtos vendidos</button>
     <router-link to="/estoque">
@@ -33,9 +37,9 @@ function clone(usuario) {
 
     <button class="button" @click="salvar">Pedidos de Clientes</button>
   </div>
+
   <div class="head"></div>
   <div class="container"></div>
-
   <formulario @adicionar="clone" />
   <resultado v-if="mostrarResultado" :usuarios="usuarios" />
 </template>
@@ -47,10 +51,28 @@ function clone(usuario) {
   justify-content: center;
   gap: 15px;
   margin: 20px 0;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.padaria-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
 }
 
 .button {
-  background-color: rgba(59, 24, 3, 0.85);
+  background-color: rgba(59, 24, 3, 0.808);
   color: #fff;
   border: none;
   padding: 12px 24px;
@@ -63,7 +85,7 @@ function clone(usuario) {
 }
 
 .button:hover {
-  background-color: #ff4800c0;
+  background-color: #ff4800;
   transform: scale(1.05);
 }
 

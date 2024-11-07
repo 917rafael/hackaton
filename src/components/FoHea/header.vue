@@ -1,3 +1,11 @@
+<script setup>
+import { useAuthStore } from '@/store/auth';
+
+const authStore = useAuthStore();
+
+
+</script>
+
 <template>
   <header>
     <div class="nav-bar">
@@ -11,9 +19,17 @@
           <li><router-link to="/contato" class="link">CONTATO</router-link></li>
           <li><router-link to="/estoque" class="link">MAIS</router-link></li>
           <li>
-            <button class="btn-login">
-              <router-link to="/logClient" class="link-login">LOGIN</router-link>
+            <button class="btn-login" v-if="!authStore.access_token">
+              <router-link to="/login" class="link-login">LOGIN</router-link>
             </button>
+
+            <span v-if="authStore.access_token && authStore.user.user_metadata.tipo == 'funcionario'">
+              funcionário logado
+            </span>
+
+            <span v-if="authStore.access_token && authStore.user.user_metadata.tipo == 'cliente'">
+              cliente logado
+            </span>
           </li>
         </ul>
       </nav>
