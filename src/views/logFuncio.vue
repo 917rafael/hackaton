@@ -33,155 +33,255 @@ const LoginData = async () => {
     </div>
     <div class="container">
         <div class="caixa">
-            <h1 class="txt-entre">LOGIN FUNCIONARIO</h1>
+            <h1 class="txt-entre">LOGIN FUNCIONÁRIO</h1>
 
-        <form class="form" @submit.prevent="handleSignin">
-            <div class="form-group">
-                <label for="CPF">CPF:</label>
-                <input type="number" id="cpf" name="cpf" v-model="cpf" required placeholder="Insira seu cpf:" />
-            </div>
-
+            <form class="form" @submit.prevent="handleSignin">
                 <div class="form-group">
-                    <label for="cpf">Código Funcio:</label>
-                    <input type="text" id="codigo" name="codigofunc" v-model="codigofunc" required placeholder="Informe o seu código: ">
+                    <label for="CPF" class="input-label">CPF:</label>
+                    <input type="number" id="cpf" name="cpf" v-model="cpf" required placeholder="Insira seu CPF" class="input-field" />
                 </div>
 
-            <router-link to="/homeFuncio"><button type="submit" router-link="/homeFuncio" @click="entrar">Cadastrar</button></router-link>
+                <div class="form-group">
+                    <label for="codigofunc" class="input-label">Código Funcionário:</label>
+                    <input type="text" id="codigo" name="codigofunc" v-model="codigofunc" required placeholder="Informe seu código" class="input-field" />
+                </div>
 
-        </form>
-        <p>{{ message }}</p>
-        <router-link to="/logClient" class="cliente">Cliente</router-link>
-    </div>
+                <button type="submit" class="submit-btn">Entrar</button>
+
+                <p v-if="message" class="message">{{ message }}</p>
+            </form>
+
+            <router-link to="/logClient" class="cliente">Cliente</router-link>
+        </div>
     </div>
 </template>
 
 <style scoped>
-
-.funcionario {
-    margin-left: 290px;
-    margin-top: -42px;
-}
-
-.footer {
-    background-color: #f3d7b6;
-}
-
-.caixa {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 10px;
-}
-
-.cliente { 
-  width: 35px;
-  height: 35px;
-  margin-right: 50px;
-  transition: background-color 0.3s ease;
-  transition: transform 0.3s ease-in-out; /* Transição suave para o efeito de pulsação */
-  cursor: pointer;
-  border: none;
-}
-
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #2C3E50;
+    color: #ECEFF1;
+}
+
+/* Global */
+h1 {
+    font-weight: 600;
 }
 
 .txt-entre {
-    margin-top: 10px;
-    color: #1b1b1b;
+    color: #B0BEC5;
     text-align: center;
-    font-size: 34px;
+    font-size: 28px;
+    margin-bottom: 10px;
 }
 
-.background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
+/* Container */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    padding: 20px;
+    animation: fadeIn 1s ease-in-out;
 }
 
+.caixa {
+    width: 100%;
+    max-width: 480px;
+    background: #34495E;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    padding: 40px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
 
+.caixa:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.3);
+}
+
+/* Imagem de fundo */
 .padaria-img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: brightness(0.7);
+    filter: brightness(0.3);
+    z-index: -1;
 }
 
-.container {
-    display: flex;
-    border-radius: 10px;
-    margin-left: 33%;
-    margin-top: 140px;
-    margin-bottom: 200px;
-    background-color: #f8cb98;
-    padding: 20px;
-    width: 540px;
-    height: 670px;
-    flex-direction: column;
-}
-
+/* Estilo do formulário */
 .form {
-  margin-top: 75px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
 }
 
 .form-group {
-  margin-bottom: 20px;
-  width: 80%;
-  margin-left: 50px;
+    margin-bottom: 35px;
+    position: relative;
 }
 
-label {
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: #3a3a3a;
+/* Labels */
+.input-label {
+    font-size: 16px;
+    color: #B0BEC5;
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: block;
+    transition: all 0.3s ease-in-out;
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
 }
 
-input {
-  padding: 12px;
-  border: 1px solid #838282;
-  border-radius: 8px;
-  font-size: 16px;
-  width: 100%;
-  background-color: #f8d3d3;
+/* Inputs */
+.input-field {
+    padding: 18px 20px;
+    border: 2px solid #607D8B;
+    border-radius: 12px;
+    font-size: 16px;
+    width: 100%;
+    background-color: #263238;
+    color: #ECEFF1;
+    transition: all 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 10px;
+    position: relative;
 }
 
-button {
-  padding: 12px 50px;
-  background-color: #ff6600;
-  color: #fff;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  font-size: 18px;
-  width: 100%;
-  transition: background-color 0.3s ease;
+/* Efeito ao focar nos inputs */
+.input-field:focus {
+    border-color: #FF7043;
+    background-color: #37474F;
+    outline: none;
+    box-shadow: 0 0 8px rgba(255, 112, 67, 0.5);
+}
+
+/* Efeito flutuante no label */
+.input-field:focus + .input-label,
+.input-field:not(:placeholder-shown) + .input-label {
+    transform: translateY(-25px);
+    font-size: 14px;
+    color: #FF7043;
+}
+
+/* Botão de submit */
+.submit-btn {
+    padding: 18px 20px;
+    background-color: #FF7043;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+    margin-top: 20px;
+    transition: background-color 0.3s, transform 0.3s ease-in-out, box-shadow 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #FF5722;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.submit-btn:active {
+    transform: translateY(1px);
+}
+
+/* Ícone de funcionário */
+.cliente {
+    margin-top: 25px;
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    color: #B0BEC5;
+    text-decoration: none;
 }
 
 .cliente:hover {
-  animation: pulsate 1.5s infinite; /* Ativa a animação de pulsação ao passar o mouse */
+    color: #FF7043;
+    text-decoration: underline;
 }
 
-button:hover {
-  background-color: #ca4e1db9;
+/* Animação para fade-in */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-/* Animação de pulsação */
-@keyframes pulsate {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
+/* Responsividade para telas menores */
+@media (max-width: 1024px) {
+    .container {
+        padding: 30px;
+    }
+
+    .caixa {
+        padding: 45px;
+        max-width: 100%;
+    }
+
+    .txt-entre {
+        font-size: 26px;
+    }
+
+    .submit-btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    .caixa {
+        padding: 35px;
+    }
+
+    .txt-entre {
+        font-size: 24px;
+    }
+
+    .submit-btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+
+    .caixa {
+        padding: 25px;
+        max-width: 100%;
+    }
+
+    .txt-entre {
+        font-size: 22px;
+    }
+
+    .submit-btn {
+        font-size: 16px;
+        width: 100%;
+    }
 }
 </style>
