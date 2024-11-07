@@ -5,14 +5,25 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path:  '/pedidosclient',
+      name: 'pedidosclient',
+      component: () => import('../views/PedidosClient.vue')
+    },
+    {
+      path: '/endereco',
+      name: 'endereco',
+      component: () => import('../views/CadEndereco.vue')
+    },
+    {
       path: '/Rendimento',
       name: 'rendimento',
       component: () => import('../views/Rendimento.vue')
     },
     {
       path: '/Estoque',
+      path: '/Estoque',
       name: 'estoque',
-      component: () => import('../views/Estoque.vue')
+      component: () => import('../views/EstoquEE.vue')
     },
     {
       path: '/contato',
@@ -54,3 +65,4 @@ const router = createRouter({
 // router.beforeEach(authGuard)
 
 export default router
+

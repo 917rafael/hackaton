@@ -1,4 +1,4 @@
-import back from '@/assets/image/back.jpg'
+
 import pão from '@/assets/image/comidas/pao-frances.jpg'
 import coxinha from '@/assets/image/comidas/coxinha.jpg'
 import bolo from '@/assets/image/comidas/bolo-vulcão.jpg'
@@ -47,7 +47,7 @@ export const products = [
     currentPrice: 179.99,
     discount: 21,
     installments: '3x de R$ 59,99 sem juros no cartão de crédito',
-    text: 'Deseja Adicionar 1 kit de Sachês com Molhos? Kit Sachês (1 Catchup, 1 Maionese, 1 Mostarda) (R$ 1,00)',
+    //text: 'Deseja Adicionar 1 kit de Sachês com Molhos? Kit Sachês (1 Catchup, 1 Maionese, 1 Mostarda) (R$ 1,00)',
     count: 0,
     price: 1.0
   },
@@ -61,7 +61,7 @@ export const products = [
     currentPrice: 179.99,
     discount: 21,
     installments: '3x de R$ 59,99 sem juros no cartão de crédito',
-    text: 'Deseja Adicionar 1 kit de Sachês com Molhos? Kit Sachês (1 Catchup, 1 Maionese, 1 Mostarda) (R$ 1,00)',
+    // text: 'Deseja Adicionar 1 kit de Sachês com Molhos? Kit Sachês (1 Catchup, 1 Maionese, 1 Mostarda) (R$ 1,00)',
     count: 0,
     price: 1.0
   },
@@ -75,7 +75,7 @@ export const products = [
     currentPrice: 179.99,
     discount: 21,
     installments: '3x de R$ 59,99 sem juros no cartão de crédito',
-    text: 'Deseja Adicionar 1 kit de Sachês com Molhos? Kit Sachês (1 Catchup, 1 Maionese, 1 Mostarda) (R$ 1,00)',
+    //text: 'Deseja Adicionar 1 kit de Sachês com Molhos? Kit Sachês (1 Catchup, 1 Maionese, 1 Mostarda) (R$ 1,00)',
     count: 0,
     price: 1.0
   },
@@ -89,7 +89,7 @@ export const products = [
     currentPrice: 179.99,
     discount: 21,
     installments: '3x de R$ 59,99 sem juros no cartão de crédito',
-    text: 'Deseja Adicionar 1 kit de Sachês com Molhos? Kit Sachês (1 Catchup, 1 Maionese, 1 Mostarda) (R$ 1,00)',
+    //text: 'Deseja Adicionar 1 kit de Sachês com Molhos? Kit Sachês (1 Catchup, 1 Maionese, 1 Mostarda) (R$ 1,00)',
     count: 0,
     price: 1.0
   },
@@ -106,6 +106,112 @@ export const products = [
   },
   {
     id: 8,
+    name: 'Compre pão de queijo',
+    image: paoQ,
+    rating: 2,
+    reviews: 1,
+    oldPrice: 229.99,
+    currentPrice: 179.99,
+    discount: 21,
+    installments: '3x de R$ 59,99 sem juros no cartão de crédito'
+  },
+  {
+    id: 9,
+    name: 'Compre pão caraio',
+    image: pão,
+    rating: 4,
+    reviews: 1,
+    oldPrice: 229.99,
+    currentPrice: 179.99,
+    discount: 21,
+    installments: '3x de R$ 59,99 sem juros no cartão de crédito',
+    text: 'Deseja Adicionar',
+    count: 0,
+    price: 1.0
+  },
+  {
+    id: 10,
+    name: 'Compre sonho',
+    image: sonho,
+    rating: 2,
+    reviews: 1,
+    oldPrice: 229.99,
+    currentPrice: 179.99,
+    discount: 21,
+    installments: '3x de R$ 59,99 sem juros no cartão de crédito',
+    // text: 'Deseja Adicionar 1 kit de Sachês com Molhos? Kit Sachês (1 Catchup, 1 Maionese, 1 Mostarda) (R$ 1,00)',
+    count: 0,
+    price: 1.0
+  },
+  {
+    id: 11,
+    name: 'Compre Coxinha',
+    image: coxinha,
+    rating: 2,
+    reviews: 1,
+    oldPrice: 229.99,
+    currentPrice: 179.99,
+    discount: 21,
+    installments: '3x de R$ 59,99 sem juros no cartão de crédito',
+    //text: 'Deseja Adicionar 1 kit de Sachês com Molhos? Kit Sachês (1 Catchup, 1 Maionese, 1 Mostarda) (R$ 1,00)',
+    count: 0,
+    price: 1.0
+  },
+  {
+    id: 12,
+    name: 'Compre Bolo',
+    image: bolo,
+    rating: 2,
+    reviews: 1,
+    oldPrice: 229.99,
+    currentPrice: 179.99,
+    discount: 21,
+    installments: '3x de R$ 59,99 sem juros no cartão de crédito',
+    //  text: 'Deseja Adicionar 1 kit de Sachês com Molhos? Kit Sachês (1 Catchup, 1 Maionese, 1 Mostarda) (R$ 1,00)',
+    count: 0,
+    price: 1.0
+  },
+  {
+    id: 13,
+    name: 'Compre café',
+    image: café,
+    rating: 2,
+    reviews: 1,
+    oldPrice: 229.99,
+    currentPrice: 179.99,
+    discount: 21,
+    installments: '3x de R$ 59,99 sem juros no cartão de crédito',
+    //text: 'Deseja Adicionar 1 kit de Sachês com Molhos? Kit Sachês (1 Catchup, 1 Maionese, 1 Mostarda) (R$ 1,00)',
+    count: 0,
+    price: 1.0
+  },
+  {
+    id: 14,
+    name: 'Compre orelha de gato',
+    image: orelha,
+    rating: 2,
+    reviews: 1,
+    oldPrice: 229.99,
+    currentPrice: 179.99,
+    discount: 21,
+    installments: '3x de R$ 59,99 sem juros no cartão de crédito',
+    //text: 'Deseja Adicionar 1 kit de Sachês com Molhos? Kit Sachês (1 Catchup, 1 Maionese, 1 Mostarda) (R$ 1,00)',
+    count: 0,
+    price: 1.0
+  },
+  {
+    id: 15,
+    name: 'Compre salgadinhos de festa',
+    image: salgadinhos,
+    rating: 2,
+    reviews: 1,
+    oldPrice: 229.99,
+    currentPrice: 179.99,
+    discount: 21,
+    installments: '3x de R$ 59,99 sem juros no cartão de crédito'
+  },
+  {
+    id: 16,
     name: 'Compre pão de queijo',
     image: paoQ,
     rating: 2,

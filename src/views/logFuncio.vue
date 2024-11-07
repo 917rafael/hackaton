@@ -1,3 +1,4 @@
+<!-- eslint-disable no-unused-vars -->
 <script setup>
 import { ref } from 'vue'
 import { useAuthStore } from '@/store/auth';
@@ -248,6 +249,7 @@ body {
 .cliente:hover {
   animation: pulsate 1.5s infinite;
   /* Ativa a animação de pulsação ao passar o mouse */
+  background-color: #c9302c;
 }
 
 button:hover {
@@ -267,6 +269,8 @@ button:hover {
   100% {
     transform: scale(1);
   }
+  background-color: #c9302c;
 }
 </style>
+
 

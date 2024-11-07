@@ -1,3 +1,5 @@
+<!-- eslint-disable no-unused-vars -->
+<!-- eslint-disable no-undef -->
 <script setup>
 import { ref } from 'vue'
 import { useProductStore } from '@/store/productStore'
@@ -48,7 +50,6 @@ const toggleCatalog = (product) => {
   // product.catalog = !product.catalog;
 }
 
-// Função para lidar com upload de imagem, limitando a 2MB
 const handleFileUpload = (event) => {
   const file = event.target.files[0]
   if (file.size > 2 * 1024 * 1024) {
@@ -58,7 +59,6 @@ const handleFileUpload = (event) => {
   newProduct.value.image = URL.createObjectURL(file)
 }
 
-// Função para fechar o modal ao clicar fora dele
 const closeModal = (event) => {
   if (event.target.classList.contains('modal')) {
     showModal.value = false
@@ -99,7 +99,16 @@ const closeModal = (event) => {
             <span v-else>Sem imagem</span>
           </td>
           <td><input v-model="product.name" placeholder="Nome do Produto" /></td>
-          <td><input v-model="product.category" placeholder="Categoria" /></td>
+          <td>
+            <select v-model="newProduct.category" name="categoria">
+              <option value="categoria">sagado</option>
+              <option value="ac">sagado</option>
+              <option value="al">Alagoas</option>
+              <option value="am">Amazonas</option>
+              <option value="ap">Amapá</option>
+            </select>
+          </td>
+
           <td><input v-model="product.stock" type="number" placeholder="Estoque" /></td>
           <td><input v-model="product.price" type="number" step="0.01" placeholder="Preço" /></td>
           <td>
@@ -116,12 +125,20 @@ const closeModal = (event) => {
       </tbody>
     </table>
 
-    <!-- Modal para adicionar um novo produto -->
     <div v-if="showModal" class="modal" @click="closeModal">
       <div class="modal-content">
         <h2>Adicionar Produto</h2>
         <input v-model="newProduct.name" placeholder="Nome do Produto" />
-        <input v-model="newProduct.category" placeholder="Categoria" />
+        <td>
+          <select placeholder="categoria do produto" v-model="newProduct.category" name="estado">
+            <option value="estado">safafpa</option>
+            <option value="ac">sagado</option>
+            <option value="al">Alagoas</option>
+            <option value="am">Amazonas</option>
+            <option value="ap">Amapá</option>
+          </select>
+        </td>
+
         <input v-model="newProduct.stock" type="number" placeholder="Estoque" />
         <input v-model="newProduct.price" type="number" step="0.01" placeholder="Preço" />
 
@@ -152,7 +169,7 @@ const closeModal = (event) => {
 </template>
 
 <style scoped>
-/* Reset e fonte personalizada */
+
 * {
   margin: 0;
   padding: 0;
@@ -197,6 +214,16 @@ td {
   padding: 16px;
   text-align: left;
   border-bottom: 1px solid #eaeaea;
+}
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: #ffffff;
+  color: #000000;
+  margin-bottom: 16px;
 }
 
 th {

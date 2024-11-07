@@ -43,7 +43,7 @@ const usuario = reactive({
       <h1 class="h2">REGISTRO DE VENDAS</h1>
 
       <div class="nome">
-        <label for="nome" class="form-label">NOME :</label>
+        <label for="nome" class="form-label">Nome do Cliente:</label>
         <input
           type="text"
           class="form-control"
@@ -64,7 +64,7 @@ const usuario = reactive({
       </div>
 
       <div class="produto">
-        <label for="produto" class="form-label">PRODUTO:</label>
+        <label for="produto" class="form-label">Produto:</label>
         <input
           type="text"
           class="form-control"
@@ -75,7 +75,7 @@ const usuario = reactive({
       </div>
 
       <div class="quantidade">
-        <label for="quantidade" class="form-label">QUANTIDADE:</label>
+        <label for="quantidade" class="form-label">Quantidade:</label>
         <input
           type="number"
           class="form-control"
@@ -86,7 +86,7 @@ const usuario = reactive({
       </div>
 
       <div class="valor">
-        <label for="valor" class="form-label">VALOR UNITÁRIO:</label>
+        <label for="valor" class="form-label">Valor Unitário:</label>
         <input
           type="number"
           class="form-control"
@@ -97,7 +97,7 @@ const usuario = reactive({
       </div>
 
       <div class="desconto">
-        <label for="desconto" class="form-label">DESCONTO:</label>
+        <label for="desconto" class="form-label">Desconto:</label>
         <input
           type="text"
           class="form-control"
@@ -108,7 +108,7 @@ const usuario = reactive({
       </div>
 
       <div class="obs">
-        <label for="obs" class="form-label">OBSERVAÇÕES:</label>
+        <label for="obs" class="form-label">Obesrvações:</label>
         <input
           type="text"
           class="form-control"
