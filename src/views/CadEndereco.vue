@@ -107,8 +107,8 @@ const insertData = async () => {
             <label for="deliveryType">Tipo de Entrega</label>
             <select id="deliveryType" v-model="tipoentrega" required>
               <option value="" disabled selected>Selecione uma opção</option>
-              <option tipoentrega.value="casa">Entrega em Casa</option>
-              <option tipoentrega.value="trabalho">Entrega no Trabalho</option>
+              <option value="casa">Entrega em Casa</option>
+              <option value="trabalho">Entrega no Trabalho</option>
             </select>
           </div>
           <div class="form-group">
@@ -143,16 +143,20 @@ const insertData = async () => {
 </template>
 
 <style scoped>
+
+
+
+.input-with-icon input {
+  text-indent: 40px; /* Ajusta o início do texto digitado */
+}
 .payment-page {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 20px auto;
   padding: 30px;
-  background-color: #ffffff;
+  background-color: #fff;
   border-radius: 12px;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
   font-family: 'Arial', sans-serif;
-  margin-top: 25px;
-  margin-bottom: 25px;
 }
 
 .payment-container {
@@ -166,18 +170,16 @@ const insertData = async () => {
   background-color: #f9f9f9;
   padding: 25px;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   flex: 1 1 300px;
   min-width: 300px;
-  transition:
-    transform 0.2s,
-    box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .address-form:hover,
 .order-summary:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .input-with-icon {
@@ -190,15 +192,15 @@ const insertData = async () => {
 
 .input-with-icon i {
   position: absolute;
-  left: 10px;
+  left: 12px;
   top: 50%;
   transform: translateY(-50%);
-  color: #007bff; /* Cor do ícone */
+  color: #007bff;
 }
 
 .address-form h1,
 .order-summary h2 {
-  font-size: 2em;
+  font-size: 2.2em;
   color: #333;
   margin-bottom: 20px;
   text-align: center;
@@ -227,9 +229,7 @@ const insertData = async () => {
   border-radius: 8px;
   font-size: 1em;
   color: #333;
-  transition:
-    border-color 0.3s,
-    background-color 0.3s;
+  transition: border-color 0.3s, background-color 0.3s;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -268,11 +268,9 @@ const insertData = async () => {
   border-radius: 8px;
   font-size: 1em;
   cursor: pointer;
-  transition:
-    background-color 0.3s,
-    transform 0.2s;
+  transition: background-color 0.3s, transform 0.2s;
   width: 100%; /* O botão ocupa 100% da largura do contêiner */
-  margin-top: 20px; /* Espaçamento superior */
+  margin-top: 20px;
 }
 
 .btn-submit:hover,

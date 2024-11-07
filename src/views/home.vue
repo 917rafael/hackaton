@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import headers from '@/components/FoHea/header.vue'
 import ProductCard from '@/components/home/ProductCard.vue'
@@ -146,56 +147,56 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 40px; /* Espaçamento superior aumentado */
+  margin-top: 40px; 
 }
 
 .search-section {
   text-align: center;
-  margin: 60px 0; /* Aumentar a margem superior e inferior */
+  margin: 60px 0; 
   position: relative;
-  background-color: #ffffff; /* Cor de fundo mais clara */
-  padding: 20px; /* Espaçamento interno */
-  border-radius: 15px; /* Bordas arredondadas */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra mais suave */
-  transition: background-color 0.3s ease; /* Transição suave para a cor de fundo */
+  background-color: #ffffff;
+  padding: 20px; 
+  border-radius: 15px; 
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
+  transition: background-color 0.3s ease; 
 }
 
 .search-section:hover {
-  background-color: #5f4d2b; /* Mudar a cor de fundo ao passar o mouse */
+  background-color: #5f4d2b; 
 }
 
 .divider {
   width: 100%;
   height: 4px;
-  background: #ff9900; /* Cor da divisória */
+  background: #ff9900; 
   margin-bottom: 20px;
   border: none;
 }
 
 .search-bar {
   display: inline-block;
-  background-color: #ffffff; /* Fundo da barra de pesquisa */
-  padding: 10px; /* Espaçamento interno */
-  border-radius: 30px; /* Borda arredondada */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra */
+  background-color: #ffffff; 
+  padding: 10px; 
+  border-radius: 30px; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .search-bar input {
-  padding: 10px 20px; /* Espaçamento interno ajustado */
-  width: 300px; /* Largura da barra de pesquisa */
-  border: 2px solid #00796b; /* Borda da barra de pesquisa */
-  border-radius: 30px; /* Borda arredondada */
-  font-size: 16px; /* Tamanho da fonte */
-  outline: none; /* Remover contorno ao focar */
-  transition: border-color 0.3s; /* Transição suave para a borda */
+  padding: 10px 20px; 
+  width: 300px; 
+  border: 2px solid #00796b; 
+  border-radius: 30px; 
+  font-size: 16px; 
+  outline: none; 
+  transition: border-color 0.3s; 
 }
 
 .search-bar input::placeholder {
-  color: #aaa; /* Cor do texto do placeholder */
+  color: #aaa; 
 }
 
 .search-bar input:focus {
-  border-color: #ff5722; /* Cor da borda ao focar */
-  box-shadow: 0 0 5px rgba(255, 87, 34, 0.5); /* Sombra ao focar */
+  border-color: #ff5722; 
+  box-shadow: 0 0 5px rgba(255, 87, 34, 0.5); 
 }
 </style>

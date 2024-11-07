@@ -1,24 +1,21 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import { ref } from 'vue'
 import { useSacolaStore } from '@/store/sacola.js'
 
-const store = useSacolaStore() // Store da sacola
+const store = useSacolaStore()
 
-// Controle de estado do carrinho (aberto/fechado)
 const isCartOpen = ref(false)
 
-// Função para alternar a visibilidade do carrinho
 const toggleCart = () => {
   isCartOpen.value = !isCartOpen.value
 }
 
-// Funções para gerenciar os itens no carrinho
 const addItem = (item) => {
   const product = store.sacola_cart.find((p) => p.id === item.id)
   if (product) {
-    product.quantity += 1 // Aumenta a quantidade se o item já existe
-  } else {
-    // Adiciona o item com quantidade inicial 1 se não estiver no carrinho
+    product.quantity += 1 
+    } else {
     store.sacola_cart.push({ ...item, quantity: 1 })
   }
 }
@@ -27,12 +24,11 @@ const removeItem = (item) => {
   const product = store.sacola_cart.find((p) => p.id === item.id)
   if (product) {
     if (product.quantity > 1) {
-      product.quantity -= 1 // Diminui a quantidade se maior que 1
+      product.quantity -= 1 
     } else {
-      // Remove o item caso a quantidade seja 1
       const index = store.sacola_cart.indexOf(product)
       if (index !== -1) {
-        store.sacola_cart.splice(index, 1) // Remove o item do carrinho
+        store.sacola_cart.splice(index, 1) 
       }
     }
   }
@@ -42,14 +38,12 @@ const deleteItem = (index) => {
   store.sacola_cart.splice(index, 1)
 }
 
-// Calcular o total da compra
 const calculateTotal = () => {
   return store.sacola_cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)
 }
 </script>
 
 <template>
-  <!-- Botão da sacola flutuante -->
   <div class="cart-toggle-container">
     <button @click="toggleCart" class="cart-btn">
       <i class="fas fa-shopping-bag"></i>
@@ -57,7 +51,7 @@ const calculateTotal = () => {
     </button>
   </div>
 
-  <!-- Caixa do carrinho, animada com transição suave -->
+
   <div class="cart-box" :class="{ open: isCartOpen }">
     <div class="cart-header">
       <i class="fas fa-shopping-bag"></i>
@@ -65,10 +59,8 @@ const calculateTotal = () => {
       <button class="close-btn" @click="toggleCart">&times;</button>
     </div>
 
-    <!-- Separador criativo -->
     <div class="cart-divider"></div>
 
-    <!-- Lista de itens no carrinho -->
     <div v-if="store.sacola_cart.length > 0" class="cart-items">
       <div class="cart-item" v-for="(item, index) in store.sacola_cart" :key="item.id">
         <div class="item-info">
@@ -87,29 +79,28 @@ const calculateTotal = () => {
       </div>
     </div>
 
-    <!-- Mensagem caso o carrinho esteja vazio -->
     <div v-else class="empty-cart">
       <p>Sua sacola está vazia!</p>
     </div>
 
-    <!-- Separador criativo -->
     <div v-if="store.sacola_cart.length > 0" class="cart-divider"></div>
 
-    <!-- Total da compra -->
     <div v-if="store.sacola_cart.length > 0" class="cart-total">
       <span>Valor total desta compra</span>
       <span>R$ {{ calculateTotal() }}</span>
     </div>
 
-    <!-- Botão de fechar pedido -->
+
     <div v-if="store.sacola_cart.length > 0" class="checkout">
-      <button class="btn-finalize">FECHAR PEDIDO</button>
+      <router-link to="/endereco">  
+        <button class="btn-finalize">FECHAR PEDIDO</button>
+      </router-link>
     </div>
+  
   </div>
 </template>
 
 <style scoped>
-/* Botão da sacola flutuante */
 .cart-btn {
   background-color: #009688;
   color: white;
@@ -142,7 +133,6 @@ const calculateTotal = () => {
   animation: pulse 1s infinite;
 }
 
-/* Estilo da caixa do carrinho */
 .cart-box {
   background-color: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -160,7 +150,6 @@ const calculateTotal = () => {
   right: 20px;
 }
 
-/* Cabeçalho do carrinho */
 .cart-header {
   display: flex;
   justify-content: space-between;
@@ -233,13 +222,12 @@ const calculateTotal = () => {
   background-color: #00796b;
 }
 
-/* Carrinho vazio */
+
 .empty-cart {
   text-align: center;
   color: #666;
 }
 
-/* Total da compra */
 .cart-total {
   display: flex;
   justify-content: space-between;
@@ -247,7 +235,6 @@ const calculateTotal = () => {
   margin-top: 10px;
 }
 
-/* Botão de finalizar */
 .checkout {
   margin-top: 15px;
 }
@@ -268,7 +255,6 @@ const calculateTotal = () => {
   background-color: #00796b;
 }
 
-/* Responsividade para telas menores */
 @media (max-width: 768px) {
   .cart-box {
     width: 100%;

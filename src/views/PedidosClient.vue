@@ -1,3 +1,5 @@
+<!-- eslint-disable no-unused-vars -->
+<!-- eslint-disable no-undef -->
 <script setup>
 import { ref } from 'vue'
 import { useProductStore } from '@/store/productStore'
@@ -17,7 +19,6 @@ const newProduct = ref({
   image: null
 })
 
-// Função para abrir o modal
 const openModal = () => {
   showModal.value = true
   newProduct.value = {
@@ -31,24 +32,19 @@ const openModal = () => {
   }
 }
 
-// Função para adicionar um novo produto
 const saveProduct = () => {
   products.value.push({ ...newProduct.value, canEdit: false })
   showModal.value = false
 }
-
-// Função para excluir um produto
 const deleteProduct = (productId) => {
   products.value = products.value.filter((p) => p.id !== productId)
 }
 
-// Função para alternar o status de exibição no catálogo
 const toggleCatalog = (product) => {
   productStore.changeCatologVisibility(product.id)
   // product.catalog = !product.catalog;
 }
 
-// Função para lidar com upload de imagem, limitando a 2MB
 const handleFileUpload = (event) => {
   const file = event.target.files[0]
   if (file.size > 2 * 1024 * 1024) {
@@ -58,7 +54,6 @@ const handleFileUpload = (event) => {
   newProduct.value.image = URL.createObjectURL(file)
 }
 
-// Função para fechar o modal ao clicar fora dele
 const closeModal = (event) => {
   if (event.target.classList.contains('modal')) {
     showModal.value = false
@@ -112,8 +107,7 @@ const closeModal = (event) => {
       </tr>
     </tbody>
 
-    <!-- Modal para adicionar um novo produto -->
-    <div v-if="showModal" class="modal" @click="closeModal">
+   <div v-if="showModal" class="modal" @click="closeModal">
       <div class="modal-content">
         <h2>Adicionar Produto</h2>
         <input v-model="newProduct.name" placeholder="Nome do Produto" />
@@ -129,7 +123,6 @@ const closeModal = (event) => {
           Exibir no Catálogo
         </label>
 
-        <!-- Campo para upload de imagem -->
         <input type="file" @change="handleFileUpload" class="file-input" />
         <img
           v-if="newProduct.image"
@@ -148,7 +141,6 @@ const closeModal = (event) => {
 </template>
 
 <style scoped>
-/* Reset e fonte personalizada */
 * {
   margin: 0;
   padding: 0;

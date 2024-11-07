@@ -1,3 +1,4 @@
+<!-- eslint-disable no-unused-vars -->
 <script setup>
 import { ref } from 'vue'
 import { supabase } from '../lib/supabaseClient'
@@ -11,6 +12,7 @@ const LoginData = async () => {
     return
   }
 
+  // eslint-disable-next-line no-unused-vars
   const handleSignin = async () => {
     try {
       // Use the Supabase method to handle the signin

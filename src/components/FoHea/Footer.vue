@@ -91,7 +91,7 @@
 
 <script>
 export default {
-  name: 'Footer',
+  name: '/components/FoHea/Footer',
   methods: {
     subscribe() {
       alert('Obrigado por se inscrever na nossa newsletter!')

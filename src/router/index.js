@@ -21,7 +21,7 @@ const router = createRouter({
     {
       path: '/Estoque',
       name: 'estoque',
-      component: () => import('../views/Estoque.vue')
+      component: () => import('../views/EstoquEE.vue')
     },
     {
       path: '/contato',

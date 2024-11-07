@@ -1,3 +1,4 @@
+<!-- eslint-disable no-undef -->
 <script setup>
 import { ref } from 'vue'
 import { useProductStore } from '@/store/productStore'
@@ -48,7 +49,6 @@ const toggleCatalog = (product) => {
   // product.catalog = !product.catalog;
 }
 
-// Função para lidar com upload de imagem, limitando a 2MB
 const handleFileUpload = (event) => {
   const file = event.target.files[0]
   if (file.size > 2 * 1024 * 1024) {
@@ -58,7 +58,6 @@ const handleFileUpload = (event) => {
   newProduct.value.image = URL.createObjectURL(file)
 }
 
-// Função para fechar o modal ao clicar fora dele
 const closeModal = (event) => {
   if (event.target.classList.contains('modal')) {
     showModal.value = false
@@ -125,7 +124,6 @@ const closeModal = (event) => {
       </tbody>
     </table>
 
-    <!-- Modal para adicionar um novo produto -->
     <div v-if="showModal" class="modal" @click="closeModal">
       <div class="modal-content">
         <h2>Adicionar Produto</h2>
@@ -151,7 +149,7 @@ const closeModal = (event) => {
           Exibir no Catálogo
         </label>
 
-        <!-- Campo para upload de imagem -->
+
         <input type="file" @change="handleFileUpload" class="file-input" />
         <img
           v-if="newProduct.image"
@@ -170,7 +168,7 @@ const closeModal = (event) => {
 </template>
 
 <style scoped>
-/* Reset e fonte personalizada */
+
 * {
   margin: 0;
   padding: 0;

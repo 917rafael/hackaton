@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import Input from '@/components/input.vue'
 import headers from '@/components/FoHea/header.vue'
