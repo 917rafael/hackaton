@@ -107,13 +107,34 @@ body {
   font-size: 34px;
 }
 
-.background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
+/* Container */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    padding: 20px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.caixa {
+    width: 100%;
+    max-width: 480px;
+    background: #34495E;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    padding: 40px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.caixa:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.3);
 }
 
 .padaria-img {
@@ -141,36 +162,87 @@ body {
 }
 
 .form-group {
-  margin-bottom: 20px;
-  width: 80%;
-  margin-left: 50px;
+    margin-bottom: 35px;
+    position: relative;
 }
 
-label {
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: #3a3a3a;
+/* Labels */
+.input-label {
+    font-size: 16px;
+    color: #B0BEC5;
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: block;
+    transition: all 0.3s ease-in-out;
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
 }
 
-input {
-  padding: 12px;
-  border: 1px solid #838282;
-  border-radius: 8px;
-  font-size: 16px;
-  width: 100%;
-  background-color: #f8d3d3;
+/* Inputs */
+.input-field {
+    padding: 18px 20px;
+    border: 2px solid #607D8B;
+    border-radius: 12px;
+    font-size: 16px;
+    width: 100%;
+    background-color: #263238;
+    color: #ECEFF1;
+    transition: all 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 10px;
+    position: relative;
 }
 
-button {
-  padding: 12px 50px;
-  background-color: #ff6600;
-  color: #fff;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  font-size: 18px;
-  width: 100%;
-  transition: background-color 0.3s ease;
+/* Efeito ao focar nos inputs */
+.input-field:focus {
+    border-color: #FF7043;
+    background-color: #37474F;
+    outline: none;
+    box-shadow: 0 0 8px rgba(255, 112, 67, 0.5);
+}
+
+/* Efeito flutuante no label */
+.input-field:focus + .input-label,
+.input-field:not(:placeholder-shown) + .input-label {
+    transform: translateY(-25px);
+    font-size: 14px;
+    color: #FF7043;
+}
+
+/* Botão de submit */
+.submit-btn {
+    padding: 18px 20px;
+    background-color: #FF7043;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+    margin-top: 20px;
+    transition: background-color 0.3s, transform 0.3s ease-in-out, box-shadow 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #FF5722;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.submit-btn:active {
+    transform: translateY(1px);
+}
+
+/* Ícone de funcionário */
+.cliente {
+    margin-top: 25px;
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    color: #B0BEC5;
+    text-decoration: none;
 }
 
 .cliente:hover {
@@ -197,3 +269,4 @@ button:hover {
   }
 }
 </style>
+
