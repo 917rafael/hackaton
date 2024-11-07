@@ -1,62 +1,69 @@
 <script setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
 import { useProductStore } from '@/store/productStore'
-import Header from '@/components/FoHea/header.vue';
+import Header from '@/components/FoHea/header.vue'
 
 const productStore = useProductStore()
 
-
-const showModal = ref(false);
+const showModal = ref(false)
 
 const newProduct = ref({
   id: '',
   name: '',
   category: '',
   stock: 0,
-  price: 0.00,
+  price: 0.0,
   catalog: false,
-  image: null,
-});
+  image: null
+})
 
 // Função para abrir o modal
 const openModal = () => {
-  showModal.value = true;
-  newProduct.value = { id: Date.now(), name: '', category: '', stock: 0, price: 0.00, catalog: false, image: null };
-};
+  showModal.value = true
+  newProduct.value = {
+    id: Date.now(),
+    name: '',
+    category: '',
+    stock: 0,
+    price: 0.0,
+    catalog: false,
+    image: null
+  }
+}
 
 // Função para adicionar um novo produto
 const saveProduct = () => {
-  products.value.push({ ...newProduct.value, canEdit: false });
-  showModal.value = false;
-};
+  products.value.push({ ...newProduct.value, canEdit: false })
+  showModal.value = false
+}
 
 // Função para excluir um produto
 const deleteProduct = (productId) => {
-  products.value = products.value.filter(p => p.id !== productId);
-};
+  products.value = products.value.filter((p) => p.id !== productId)
+}
 
 // Função para alternar o status de exibição no catálogo
 const toggleCatalog = (product) => {
   productStore.changeCatologVisibility(product.id)
   // product.catalog = !product.catalog;
-};
+}
 
 // Função para lidar com upload de imagem, limitando a 2MB
 const handleFileUpload = (event) => {
-  const file = event.target.files[0];
+  const file = event.target.files[0]
   if (file.size > 2 * 1024 * 1024) {
-    alert('A imagem deve ser menor que 2MB.');
-    return;
+    alert('A imagem deve ser menor que 2MB.')
+    return
   }
-  newProduct.value.image = URL.createObjectURL(file);
-};
+  newProduct.value.image = URL.createObjectURL(file)
+}
 
 // Função para fechar o modal ao clicar fora dele
 const closeModal = (event) => {
   if (event.target.classList.contains('modal')) {
-    showModal.value = false;
+    showModal.value = false
   }
-};
+}
 </script>
 
 <template>
@@ -83,7 +90,12 @@ const closeModal = (event) => {
       <tbody>
         <tr v-for="product in productStore.products" :key="product.id">
           <td>
-            <img v-if="product.image" :src="product.image" alt="Imagem do Produto" class="table-product-image" />
+            <img
+              v-if="product.image"
+              :src="product.image"
+              alt="Imagem do Produto"
+              class="table-product-image"
+            />
             <span v-else>Sem imagem</span>
           </td>
           <td><input v-model="product.name" placeholder="Nome do Produto" /></td>
@@ -91,7 +103,8 @@ const closeModal = (event) => {
           <td><input v-model="product.stock" type="number" placeholder="Estoque" /></td>
           <td><input v-model="product.price" type="number" step="0.01" placeholder="Preço" /></td>
           <td>
-            <label class="switch">''
+            <label class="switch"
+              >''
               <input type="checkbox" v-model="product.catalog" />
               <span class="slider"></span>
             </label>
@@ -116,12 +129,18 @@ const closeModal = (event) => {
           <label class="switch">
             <input type="checkbox" v-model="newProduct.catalog" />
             <span class="slider"></span>
-          </label> Exibir no Catálogo
+          </label>
+          Exibir no Catálogo
         </label>
-        
+
         <!-- Campo para upload de imagem -->
-        <input type="file" @change="handleFileUpload" class="file-input"/>
-        <img v-if="newProduct.image" :src="newProduct.image" alt="Imagem do Produto" class="product-image-preview" />
+        <input type="file" @change="handleFileUpload" class="file-input" />
+        <img
+          v-if="newProduct.image"
+          :src="newProduct.image"
+          alt="Imagem do Produto"
+          class="product-image-preview"
+        />
 
         <div class="modal-actions">
           <button class="save-btn" @click="saveProduct">Salvar</button>
@@ -173,7 +192,8 @@ table {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
-th, td {
+th,
+td {
   padding: 16px;
   text-align: left;
   border-bottom: 1px solid #eaeaea;
@@ -246,7 +266,7 @@ td button:hover {
 
 .slider:before {
   position: absolute;
-  content: "";
+  content: '';
   height: 18px;
   width: 18px;
   left: 4px;
@@ -334,7 +354,8 @@ input:focus {
   gap: 10px;
 }
 
-.save-btn, .close-btn {
+.save-btn,
+.close-btn {
   flex: 1;
   padding: 12px;
   border-radius: 8px;

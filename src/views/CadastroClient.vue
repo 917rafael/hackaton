@@ -1,42 +1,69 @@
 <script setup>
-//import Footer from "@/components/FoHea/Footer.vue"
+import Footer from '@/components/FoHea/Footer.vue'
+import { ref } from 'vue'
+import { useAuthStore } from '@/store/auth';
+
+const nome = ref([])
+const email = ref([])
+const cpf = ref([])
+const senha = ref([])
+const message = ref('')
+const authStore = useAuthStore();
+
+const insertData = async () => {
+  try {
+    if (!nome.value || !email.value || !cpf.value || !senha.value) {
+      message.value = 'Por favor, preencha todos os campos.'
+      return
+    }
+    await authStore.signUp(email.value, senha.value, nome.value, cpf.value, 'cliente', null)
+    message.value = 'Cliente inserido com sucesso!'
+  } catch (e) {
+    console.error(e)
+    return e
+  }
+}
 </script>
 
 <template>
   <div class="background">
-    <img src="/src/assets/image/Fundocontato.jpg" alt="Padaria" class="padaria-img">
+    <img src="/src/assets/image/padaria.jpg" alt="Padaria" class="padaria-img" />
   </div>
   <div class="container">
-    <div class="caixa">
-      <h1 class="txt-entre">ENTRE OU CADASTRE-SE NA</h1>
-      <h1 class="txt-padaria">PADARIA TRADIÇÃO NO FORNO</h1>
+    <h1 class="entre">
+      ENTRE OU CADASTRE-SE NA
+      <h1 class="santo">PADARIA SANTO PÃO</h1>
+    </h1>
+    <h2>E APROVEITE TODAS AS NOSSAS PROMOÇÕES</h2>
 
-      <form class="form">
-        <div class="form-group">
-          <label for="nome" class="input-label">Nome:</label>
-          <input type="text" id="nome" name="nome" required placeholder="Insira seu nome" class="input-field">
-        </div>
+    <form @submit.prevent="insertData" class="form">
+      <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" v-model="nome" required placeholder="Insira seu nome:" />
+      </div>
 
-        <div class="form-group">
-          <label for="telefone" class="input-label">Contato:</label>
-          <input type="text" id="telefone" name="telefone" required placeholder="Número de telefone" class="input-field">
-        </div>
+      <div class="form-group">
+        <label for="cpf">CPF:</label>
+        <input type="number" id="cpf" name="cpf" v-model="cpf" required placeholder="Insira o seu CPF: " />
+      </div>
 
-        <div class="form-group">
-          <label for="data-nascimento" class="input-label">Data de Nascimento:</label>
-          <input type="date" id="data-nascimento" name="data-nascimento" required class="input-field">
-        </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="text" id="email" v-model="email" name="email" required placeholder="Insira o seu email:" />
+      </div>
 
-        <button type="submit" class="submit-btn">Cadastrar</button>
+      <div class="form-group">
+        <label for="senha">senha:</label>
+        <input type="text" id="senha" v-model="senha" name="senha" required placeholder="Insira uma senha:" />
+      </div>
 
-        <!-- Troca para login de Funcionário -->
-        <div class="funcionario">
-          <router-link to="/logFuncio">
-            <img src="/src/assets/image/funcionarios.png" alt="Ícone de Funcionário" class="funcio">
-          </router-link>
-        </div>
-      </form>
-    </div>
+      <button type="submit">Cadastrar</button>
+      <p>{{ message }}</p>
+    </form>
+  </div>
+
+  <div class="footer">
+    <Footer />
   </div>
 </template>
 

@@ -1,11 +1,11 @@
 @import '@fortawesome/fontawesome-free/css/all.min.css';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400;1,500&display=swap');
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 /* Estilos para navegadores baseados em WebKit (Chrome, Safari, Edge) */
 ::-webkit-scrollbar {
@@ -22,7 +22,9 @@
 ::-webkit-scrollbar-thumb {
   background-color: #000000; /* Cor neutra e suave para a barra de rolagem */
   border-radius: 5px; /* Bordas arredondadas */
-  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transições suaves para cor e sombra */
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease; /* Transições suaves para cor e sombra */
 }
 
 ::-webkit-scrollbar-thumb:hover {
