@@ -51,6 +51,6 @@ const router = createRouter({
 })
 
 // Aplica o middleware em cada rota
-router.beforeEach(authGuard)
+// router.beforeEach(authGuard)
 
 export default router

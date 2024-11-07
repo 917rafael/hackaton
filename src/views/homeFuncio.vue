@@ -5,9 +5,11 @@ import { ref } from 'vue'
 import Heade from '@/components/FoHea/header.vue'
 import Formulario from '@/components/formulario.vue'
 import Resultado from '@/components/resultado.vue'
+import { useAuthStore } from '@/store/auth'
 import { RouterLink } from 'vue-router'
 
 const usuarios = ref({})
+const authStore = useAuthStore()
 const mostrarResultado = ref(false)
 
 function clone(usuario) {

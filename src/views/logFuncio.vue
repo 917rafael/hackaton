@@ -1,28 +1,21 @@
 <script setup>
 import { ref } from 'vue'
-import { supabase } from '../lib/supabaseClient'
+import { useAuthStore } from '@/store/auth';
+import router from '@/router';
 
-const cpf = ref('');
+const authStore =  useAuthStore()
+
 const senha = ref('');
-const error = ref('');
+const email = ref('')
 
-const login = async () => {
-  console.log(cpf.value)
-  console.log(senha.value)
-  const { data, error: loginError } = await supabase
-    .from('usuario')
-    .select('*')
-    .eq('cpf', cpf.value)
-    .eq('senha', senha.value)
-    .single()
-
-  console.log({data, error})
-  if (loginError || !data) {
-    error.value = 'Credenciais inválidas!'
-    return
-    
+const login = async() => {
+  try {
+    await authStore.login(senha.value, email.value)
+    if (authStore.user.user_metadata.tipo == 'cliente') router.push({ name: 'home' })
+    else if (authStore.user.user_metadata.tipo == 'funcionario') router.push({ name: 'homeFuncio' })
+  } catch(e) {
+    console.log(e)
   }
-  
 }
 
 /* funcao para logout
@@ -42,14 +35,14 @@ const login = async () => {
 
       <form class="form" @submit.prevent="login">
         <div class="form-group">
-          <label for="CPF">CPF:</label>
+          <label for="CPF">EMAIL:</label>
           <input
-            type="number"
-            id="cpf"
-            name="cpf"
-            v-model="cpf"
+            type="text"
+            id="email"
+            name="email"
+            v-model="email"
             required
-            placeholder="Insira seu cpf:"
+            placeholder="Insira seu email:"
           />
         </div>
 

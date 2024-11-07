@@ -4,7 +4,7 @@ import { ref } from "vue";
 
 const senha = ref('');
 export const authGuard = async (to, from, next) => {
-  if (to.meta.requiresAuth ) {
+  if (to.meta.requiresAuth) {
     next({ name: 'login' })
   } else if (to.meta.allowedCodes) {
     const { data: funcionario, error } = await supabase

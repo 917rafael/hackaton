@@ -1,35 +1,27 @@
 <script setup>
 import Footer from '@/components/FoHea/Footer.vue'
 import { ref } from 'vue'
-import { supabase } from '../lib/supabaseClient'
+import { useAuthStore } from '@/store/auth';
 
 const nome = ref([])
 const email = ref([])
 const cpf = ref([])
 const senha = ref([])
 const message = ref('')
+const authStore = useAuthStore();
 
 const insertData = async () => {
-  if (!nome.value || !email.value || !cpf.value || !senha.value) {
-    message.value = 'Por favor, preencha todos os campos.'
-    return
-  }
-  const { pessoaError } = await supabase.from('cliente').insert([
-    {
-      cpf: cpf.value,
-      nome: nome.value,
-      email: email.value,
-      senha: senha.value
+  try {
+    if (!nome.value || !email.value || !cpf.value || !senha.value) {
+      message.value = 'Por favor, preencha todos os campos.'
+      return
     }
-  ])
-
-  if (pessoaError) {
-    console.error('Erro ao inserir pessoa:', pessoaError.message)
-    message.value = `Erro ao inserir pessoa: ${pessoaError.message}`
-    return
+    await authStore.signUp(email.value, senha.value, nome.value, cpf.value, 'cliente', null)
+    message.value = 'Cliente inserido com sucesso!'
+  } catch (e) {
+    console.error(e)
+    return e
   }
-
-  message.value = 'Pessoa inserida com sucesso!'
 }
 </script>
 
@@ -47,50 +39,22 @@ const insertData = async () => {
     <form @submit.prevent="insertData" class="form">
       <div class="form-group">
         <label for="nome">Nome:</label>
-        <input
-          type="text"
-          id="nome"
-          name="nome"
-          v-model="nome"
-          required
-          placeholder="Insira seu nome:"
-        />
+        <input type="text" id="nome" name="nome" v-model="nome" required placeholder="Insira seu nome:" />
       </div>
 
       <div class="form-group">
         <label for="cpf">CPF:</label>
-        <input
-          type="number"
-          id="cpf"
-          name="cpf"
-          v-model="cpf"
-          required
-          placeholder="Insira o seu CPF: "
-        />
+        <input type="number" id="cpf" name="cpf" v-model="cpf" required placeholder="Insira o seu CPF: " />
       </div>
 
       <div class="form-group">
         <label for="email">Email:</label>
-        <input
-          type="text"
-          id="email"
-          v-model="email"
-          name="email"
-          required
-          placeholder="Insira o seu email:"
-        />
+        <input type="text" id="email" v-model="email" name="email" required placeholder="Insira o seu email:" />
       </div>
 
       <div class="form-group">
         <label for="senha">senha:</label>
-        <input
-          type="text"
-          id="senha"
-          v-model="senha"
-          name="senha"
-          required
-          placeholder="Insira uma senha:"
-        />
+        <input type="text" id="senha" v-model="senha" name="senha" required placeholder="Insira uma senha:" />
       </div>
 
       <button type="submit">Cadastrar</button>

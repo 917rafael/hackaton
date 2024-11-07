@@ -1,33 +1,27 @@
 <script setup>
 import { ref } from 'vue'
-import { supabase } from '../lib/supabaseClient'
-const nome = ref([])
-const senha = ref([])
-const cargo = ref([])
-const cpf = ref([])
+import { useAuthStore } from '@/store/auth';
+
+const authStore = useAuthStore()
+const nome = ref('')
+const senha = ref('')
+const tipoFuncionario = ref('')
+const cpf = ref('')
+const email = ref('')
 const message = ref('')
 
 const insertData = async () => {
-  if (!nome.value || !senha.value || !cargo.value || !cpf.value) {
-    message.value = 'Por favor, preencha todos os campos.'
-    return
-  }
-  const { data: pessoaError } = await supabase.from('funcionario').insert([
-    {
-      nome: nome.value,
-      senha: senha.value,
-      cargo: cargo.value,
-      cpf: cpf.value
+  try {
+    if (!nome.value || !email.value || !cpf.value || !senha.value) {
+      message.value = 'Por favor, preencha todos os campos.'
+      return
     }
-  ])
-
-  if (pessoaError) {
-    console.error('Erro ao inserir pessoa:', pessoaError.message)
-    message.value = `Erro ao inserir pessoa: ${pessoaError.message}`
-    return
+    await authStore.signUp(email.value, senha.value, nome.value, cpf.value, 'funcionario', tipoFuncionario.value)
+    message.value = 'Funcionário inserido com sucesso!'
+  } catch (e) {
+    console.error(e)
+    return e
   }
-
-  message.value = 'Pessoa inserida com sucesso!'
 }
 </script>
 
@@ -68,6 +62,18 @@ const insertData = async () => {
       </div>
 
       <div class="form-group">
+        <label for="CPF">EMAIL:</label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          v-model="email"
+          required
+          placeholder="Insira o seu email: "
+        />
+      </div>
+
+      <div class="form-group">
         <label for="codigoFunc">Código Funcio:</label>
         <input
           type="text"
@@ -85,7 +91,7 @@ const insertData = async () => {
           type="text"
           id="Cargo"
           name="cargo"
-          v-model="cargo"
+          v-model="tipoFuncionario"
           required
           placeholder="Insira o seu cargo"
         />
