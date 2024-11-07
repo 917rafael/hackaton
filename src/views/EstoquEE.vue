@@ -1,3 +1,4 @@
+<!-- eslint-disable no-unused-vars -->
 <!-- eslint-disable no-undef -->
 <script setup>
 import { ref } from 'vue'
