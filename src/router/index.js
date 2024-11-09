@@ -53,10 +53,12 @@ const router = createRouter({
       name: 'Cadastro',
       component: () => import('../views/CadastroClient.vue')
     },
+    //login esta certo
+
     {
       path: '/login',
       name: 'login',
-      component: () => import('../views/logFuncio.vue')
+      component: () => import('../views/LogiN.vue')
     }
   ]
 })
