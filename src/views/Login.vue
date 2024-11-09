@@ -28,40 +28,44 @@ const login = async() => {
 
 <template>
   <div class="background">
-    <img src="/src/assets/image/Fundocontato.jpg" alt="Padaria" class="padaria-img">
+    <img src="/src/assets/image/Fundocontato.jpg" alt="Padaria" class="padaria-img" />
   </div>
   <div class="container">
     <div class="caixa">
-      <h1 class="txt-entre">ENTRE OU CADASTRE-SE NA</h1>
-      <h1 class="txt-padaria">PADARIA TRADIÇÃO NO FORNO</h1>
+      <h1 class="txt-entre">LOGIN</h1>
 
-      <form class="form">
+      <form class="form" @submit.prevent="login">
         <div class="form-group">
-          <label for="nome" class="input-label">Nome:</label>
-          <input type="text" id="nome" name="nome" required placeholder="Insira seu nome" class="input-field">
+          <label for="email" class="input-label">EMAIL:</label>
+          <input
+            type="text"
+            id="email"
+            name="email"
+            class="input-field"
+            v-model="email"
+            required
+            placeholder="Insira seu email:"
+          />
         </div>
 
         <div class="form-group">
-          <label for="telefone" class="input-label">Contato:</label>
-          <input type="text" id="telefone" name="telefone" required placeholder="Número de telefone" class="input-field">
+          <label for="senha" class="input-label">Senha:</label>
+          <input
+            type="text"
+            id="senha"
+            name="senha"
+            class="input-field"
+            v-model="senha"
+            required
+            placeholder="Informe o seu código: "
+          />
         </div>
-
-        <div class="form-group">
-          <label for="data-nascimento" class="input-label">Data de Nascimento:</label>
-          <input type="date" id="data-nascimento" name="data-nascimento" required class="input-field">
-        </div>
-
-        <button type="submit" class="submit-btn">Cadastrar</button>
-
-        <!-- Troca para login de Funcionário -->
-        <div class="funcionario">
-          <router-link to="/logFuncio">
-            <img src="/src/assets/image/funcionarios.png" alt="Ícone de Funcionário" class="funcio">
-          </router-link>
-        </div>
+        <button type="submit"  class="submit-btn">Entrar</button>
       </form>
+      <p>{{ message }}</p>
     </div>
   </div>
+
 </template>
 
 <style scoped>
@@ -219,22 +223,6 @@ h1 {
   transform: translateY(1px);
 }
 
-/* Ícone de funcionário */
-.funcionario {
-  margin-top: 25px;
-}
-
-.funcio {
-  width: 35px;
-  height: 35px;
-  cursor: pointer;
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.funcio:hover {
-  transform: scale(1.2);
-  filter: brightness(1.2);
-}
 
 /* Animação para fade-in */
 @keyframes fadeIn {

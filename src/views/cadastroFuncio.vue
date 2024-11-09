@@ -95,7 +95,7 @@ body {
   height: calc(100vh - 80px); /* Ajuste para o header */
   position: relative;
   padding: 20px;
-  margin-top: 8%;
+  margin-top: 4%;
 }
 
 /* Caixa de Formulário */
@@ -143,7 +143,7 @@ body {
 .padaria-img {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 110%;
   object-fit: cover;
   filter: brightness(0.4);
   z-index: -1;
