@@ -57,13 +57,13 @@ const insertData = async () => {
         </div>
 
         <div class="form-group">
-          <label for="codigoFunc">Código Funcio:</label>
-          <input type="text" id="codigo" name="codigo" v-model="codigo" required placeholder="Insira seu código" class="input-field" />
+          <label for="codigoFunc">Senha:</label>
+          <input type="password" id="codigo" name="codigo" v-model="codigo" required placeholder="Insira uma senha" class="input-field" />
         </div>
 
         <div class="form-group">
           <label for="cargo">Cargo:</label>
-          <input type="text" id="cargo" name="cargo" v-model="cargo" required placeholder="Insira seu cargo" class="input-field" />
+          <input type="text" id="cargo" name="tipoFuncionario" v-model="tipoFuncionario" required placeholder="Insira seu cargo" class="input-field" />
         </div>
 
         <button type="submit" class="submit-btn">Cadastrar</button>

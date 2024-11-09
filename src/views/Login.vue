@@ -51,13 +51,13 @@ const login = async() => {
         <div class="form-group">
           <label for="senha" class="input-label">Senha:</label>
           <input
-            type="text"
+            type="password"
             id="senha"
             name="senha"
             class="input-field"
             v-model="senha"
             required
-            placeholder="Informe o seu código: "
+            placeholder="Informe a sua senha: "
           />
         </div>
         <button type="submit"  class="submit-btn">Entrar</button>

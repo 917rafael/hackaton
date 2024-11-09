@@ -57,7 +57,7 @@ const insertData = async () => {
 
       <div class="form-group">
         <label for="senha">senha:</label>
-        <input type="text" id="senha" v-model="senha" name="senha" class="input-field" required placeholder="Insira uma senha:" />
+        <input type="password" id="senha" v-model="senha" name="senha" class="input-field" required placeholder="Insira uma senha:" />
       </div>
 
       <button type="submit" class="submit-btn">Cadastrar</button>
