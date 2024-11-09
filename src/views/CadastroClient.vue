@@ -63,12 +63,13 @@ const insertData = async () => {
       <button type="submit" class="submit-btn">Cadastrar</button>
       <p>{{ message }}</p>
     </form>
+        <router-link to="/cadastroFuncio" class="cliente">
+          <img src="/src/assets/image/funcionarios.png" alt="Ícone de Funcionário" class="funcio">
+        </router-link>
   </div>
   </div>
 
-  <div class="footer">
-    <Footer />
-  </div>
+
 </template>
 
 <style scoped>
