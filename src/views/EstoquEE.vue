@@ -1,14 +1,15 @@
-<!-- eslint-disable no-unused-vars -->
-<!-- eslint-disable no-undef -->
 <script setup>
 import { ref } from 'vue'
 import { useProductStore } from '@/store/productStore'
 import Header from '@/components/FoHea/header.vue'
 
+// Usando a store de produtos
 const productStore = useProductStore()
 
+// Estado para controle do modal
 const showModal = ref(false)
 
+// Novo produto para ser adicionado
 const newProduct = ref({
   id: '',
   name: '',
@@ -19,7 +20,7 @@ const newProduct = ref({
   image: null
 })
 
-// Função para abrir o modal
+// Função para abrir o modal de adicionar produto
 const openModal = () => {
   showModal.value = true
   newProduct.value = {
@@ -33,23 +34,23 @@ const openModal = () => {
   }
 }
 
-// Função para adicionar um novo produto
+// Função para salvar o novo produto
 const saveProduct = () => {
-  products.value.push({ ...newProduct.value, canEdit: false })
+  productStore.products.push({ ...newProduct.value, canEdit: false })
   showModal.value = false
 }
 
 // Função para excluir um produto
 const deleteProduct = (productId) => {
-  products.value = products.value.filter((p) => p.id !== productId)
+  productStore.products = productStore.products.filter((p) => p.id !== productId)
 }
 
 // Função para alternar o status de exibição no catálogo
 const toggleCatalog = (product) => {
   productStore.changeCatologVisibility(product.id)
-  // product.catalog = !product.catalog;
 }
 
+// Função para lidar com o upload da imagem do produto
 const handleFileUpload = (event) => {
   const file = event.target.files[0]
   if (file.size > 2 * 1024 * 1024) {
@@ -59,6 +60,7 @@ const handleFileUpload = (event) => {
   newProduct.value.image = URL.createObjectURL(file)
 }
 
+// Função para fechar o modal
 const closeModal = (event) => {
   if (event.target.classList.contains('modal')) {
     showModal.value = false
@@ -75,69 +77,70 @@ const closeModal = (event) => {
       <button class="add-product-btn" @click="openModal">+ Adicionar Produto</button>
     </div>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Imagem</th>
-          <th>Produto</th>
-          <th>Categoria</th>
-          <th>Estoque</th>
-          <th>Preço</th>
-          <th>Catálogo</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="product in productStore.products" :key="product.id">
-          <td>
-            <img
-              v-if="product.image"
-              :src="product.image"
-              alt="Imagem do Produto"
-              class="table-product-image"
-            />
-            <span v-else>Sem imagem</span>
-          </td>
-          <td><input v-model="product.name" placeholder="Nome do Produto" /></td>
-          <td>
-            <select v-model="newProduct.category" name="categoria">
-              <option value="categoria">sagado</option>
-              <option value="ac">sagado</option>
-              <option value="al">Alagoas</option>
-              <option value="am">Amazonas</option>
-              <option value="ap">Amapá</option>
-            </select>
-          </td>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Imagem</th>
+            <th>Produto</th>
+            <th>Categoria</th>
+            <th>Estoque</th>
+            <th>Preço</th>
+            <th>Catálogo</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="product in productStore.products" :key="product.id">
+            <td>
+              <img
+                v-if="product.image"
+                :src="product.image"
+                alt="Imagem do Produto"
+                class="table-product-image"
+              />
+              <span v-else>Sem imagem</span>
+            </td>
+            <td><input v-model="product.name" placeholder="Nome do Produto" /></td>
+            <td>
+              <select v-model="product.category" name="categoria">
+                <option value="salgado">Salgado</option>
+                <option value="ac">Açai</option>
+                <option value="al">Alagoas</option>
+                <option value="am">Amazonas</option>
+                <option value="ap">Amapá</option>
+              </select>
+            </td>
 
-          <td><input v-model="product.stock" type="number" placeholder="Estoque" /></td>
-          <td><input v-model="product.price" type="number" step="0.01" placeholder="Preço" /></td>
-          <td>
-            <label class="switch"
-              >''
-              <input type="checkbox" v-model="product.catalog" />
-              <span class="slider"></span>
-            </label>
-          </td>
-          <td>
-            <button class="delete-btn" @click="deleteProduct(product.id)">Excluir</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            <td><input v-model="product.stock" type="number" placeholder="Estoque" /></td>
+            <td><input v-model="product.price" type="number" step="0.01" placeholder="Preço" /></td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" v-model="product.catalog" />
+                <span class="slider"></span>
+              </label>
+            </td>
+            <td>
+              <button class="delete-btn" @click="deleteProduct(product.id)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <div v-if="showModal" class="modal" @click="closeModal">
       <div class="modal-content">
         <h2>Adicionar Produto</h2>
         <input v-model="newProduct.name" placeholder="Nome do Produto" />
-        <td>
-          <select placeholder="categoria do produto" v-model="newProduct.category" name="estado">
-            <option value="estado">safafpa</option>
-            <option value="ac">sagado</option>
-            <option value="al">Alagoas</option>
-            <option value="am">Amazonas</option>
-            <option value="ap">Amapá</option>
-          </select>
-        </td>
+        <select v-model="newProduct.category" name="estado">
+          <option value="salgado">Salgado</option>
+          <option value="ac">Açai</option>
+          <option value="al">Alagoas</option>
+          <option value="am">Amazonas</option>
+          <option value="ap">Amapá</option>
+        </select>
 
         <input v-model="newProduct.stock" type="number" placeholder="Estoque" />
         <input v-model="newProduct.price" type="number" step="0.01" placeholder="Preço" />
@@ -169,7 +172,6 @@ const closeModal = (event) => {
 </template>
 
 <style scoped>
-
 * {
   margin: 0;
   padding: 0;
@@ -201,6 +203,11 @@ h1 {
   color: #c45d4c;
 }
 
+.table-container {
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -215,16 +222,6 @@ td {
   text-align: left;
   border-bottom: 1px solid #eaeaea;
 }
-select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 14px;
-  background-color: #ffffff;
-  color: #000000;
-  margin-bottom: 16px;
-}
 
 th {
   background-color: #ffe5d4;
@@ -232,7 +229,8 @@ th {
   color: #c45d4c;
 }
 
-td input {
+td input,
+td select {
   width: 100%;
   padding: 8px;
   border: 1px solid #ddd;
@@ -241,16 +239,16 @@ td input {
 }
 
 td button {
-  background-color: #c45d4c;
-  color: white;
-  padding: 8px 12px;
-  border-radius: 5px;
+  background-color: transparent;
+  border: none;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 20px;
+  color: #c45d4c;
+  transition: color 0.3s ease;
 }
 
 td button:hover {
-  background-color: #a04b3a;
+  color: #a04b3a;
 }
 
 .add-product-btn {
@@ -354,7 +352,8 @@ h2 {
   text-align: center;
 }
 
-input {
+input,
+select {
   width: 100%;
   padding: 10px;
   margin-bottom: 16px;
@@ -419,10 +418,54 @@ input:focus {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
+.product-image-preview {
+  max-width: 100%;
+  max-height: 250px;
+  object-fit: contain;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
 .file-input {
   margin-top: 10px;
   padding: 10px;
   font-size: 14px;
   color: #555;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .stock-manager {
+    padding: 20px;
+  }
+
+  table {
+    display: block; /* Permite rolagem horizontal */
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
+
+  .modal-content {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .add-product-btn {
+    padding: 8px 16px;
+  }
+
+  .save-btn, .close-btn {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .table-product-image {
+    width: 80px;
+    height: 80px;
+  }
 }
 </style>

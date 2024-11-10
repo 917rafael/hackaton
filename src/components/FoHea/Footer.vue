@@ -28,7 +28,11 @@
         </p>
         <p><i class="fas fa-phone-alt"></i> (123) 456-7890</p>
         <p><i class="fas fa-envelope"></i> contato@padariaexemplo.com</p>
-        <a href="#" class="contact-form-link">Fale Conosco</a>
+        <router-link to="/contato"> 
+          <a class="contact-form-link">Fale Conosco</a>
+
+        </router-link>  
+      
       </div>
 
       <div class="footer-column hours">
