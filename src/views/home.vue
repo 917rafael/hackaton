@@ -9,6 +9,9 @@ import sacola from '@/components/sacola.vue'
 import Fotter from '@/components/FoHea/Footer.vue'
 import { useProductStore } from '@/store/productStore'
 import { ref, computed } from 'vue'
+import Slogan from "@/assets/image/tadica-removebg-preview.png"
+
+
 
 const productStore = useProductStore()
 const searchQuery = ref('')
@@ -26,7 +29,7 @@ const filteredProducts = computed(() => {
 
   <section class="hero" :style="{ backgroundImage: `url(${back})` }">
     <div class="hero-text">
-      <h1>Whole Grain Goodness in Every Slice of Wheat Bread</h1>
+      <img :src="Slogan" alt="Slogan" class="slogan-image" />
       <p class="hero-p"></p>
       <button class="cta-button">Aprender Mais</button>
     </div>
@@ -100,11 +103,10 @@ body {
   padding: 20px;
 }
 
-.hero-text h1 {
-  font-size: 48px;
-  margin-bottom: 20px;
-  font-weight: bold;
-  color: white;
+.slogan-image {
+  width: 100%;
+  max-width: 5000px; 
+  height: auto; 
 }
 
 .hero-text p {
