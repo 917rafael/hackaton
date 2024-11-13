@@ -1,29 +1,30 @@
 <script setup>
 import { ref } from "vue";
-import {supabase} from  '../lib/supabaseClient';
+import { supabase } from '../lib/supabaseClient';
 const codigofunc = ref([]);
 const cpf = ref([]);
 const message = ref('');
 
 const LoginData = async () => {
-  if (!cpf.value || !codigofunc.value  ) {
-    message.value = "Por favor, preencha todos os campos."
-    return
-  }
+    if (!cpf.value || !codigofunc.value) {
+        message.value = "Por favor, preencha todos os campos."
+        return
+    }
 
-  const handleSignin = async () => {
-  try {
-    // Use the Supabase method to handle the signin
-    const { error } = await supabase.auth.funcionario({
-      cpf: cpf.value,
-      codigofunc: codigofunc.value,
-    });
-    if (error) throw error;
-  } catch (error) {
-    alert(error.error_description || error.message);
-  }
-};
-  message.value = 'Pessoa inserida com sucesso!'}
+    const handleSignin = async () => {
+        try {
+            // Use the Supabase method to handle the signin
+            const { error } = await supabase.auth.funcionario({
+                cpf: cpf.value,
+                codigofunc: codigofunc.value,
+            });
+            if (error) throw error;
+        } catch (error) {
+            alert(error.error_description || error.message);
+        }
+    };
+    message.value = 'Pessoa inserida com sucesso!'
+}
 
 </script>
 
@@ -38,12 +39,14 @@ const LoginData = async () => {
             <form class="form" @submit.prevent="handleSignin">
                 <div class="form-group">
                     <label for="CPF" class="input-label">CPF:</label>
-                    <input type="number" id="cpf" name="cpf" v-model="cpf" required placeholder="Insira seu CPF" class="input-field" />
+                    <input type="text" id="cpf" name="cpf" v-model="cpf" required placeholder="Insira seu CPF"
+                        class="input-field" />
                 </div>
 
                 <div class="form-group">
                     <label for="codigofunc" class="input-label">Código Funcionário:</label>
-                    <input type="text" id="codigo" name="codigofunc" v-model="codigofunc" required placeholder="Informe seu código" class="input-field" />
+                    <input type="text" id="codigo" name="codigofunc" v-model="codigofunc" required
+                        placeholder="Informe seu código" class="input-field" />
                 </div>
 
                 <button type="submit" class="submit-btn">Entrar</button>
@@ -51,7 +54,10 @@ const LoginData = async () => {
                 <p v-if="message" class="message">{{ message }}</p>
             </form>
 
-            <router-link to="/logClient" class="cliente">Cliente</router-link>
+            <router-link to="/Login">
+                <img src="/src/assets/image/funcionarios.png" alt="Ícone de Funcionário" class="funcio">
+            </router-link>
+
         </div>
     </div>
 </template>
@@ -169,8 +175,8 @@ h1 {
 }
 
 /* Efeito flutuante no label */
-.input-field:focus + .input-label,
-.input-field:not(:placeholder-shown) + .input-label {
+.input-field:focus+.input-label,
+.input-field:not(:placeholder-shown)+.input-label {
     transform: translateY(-25px);
     font-size: 14px;
     color: #FF7043;
@@ -221,6 +227,7 @@ h1 {
         opacity: 0;
         transform: translateY(20px);
     }
+
     100% {
         opacity: 1;
         transform: translateY(0);
@@ -283,5 +290,30 @@ h1 {
         font-size: 16px;
         width: 100%;
     }
+}
+
+.funcio {
+    margin-top: 20px;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.funcio:hover {
+    transform: scale(1.2);
+    filter: brightness(1.2);
+}
+
+/* Efeitos de transição mais suaves para o botão e ícones */
+button,
+.funcio {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Hover e animação do ícone de funcionário */
+.funcio:hover {
+    transform: scale(1.2);
+    filter: brightness(1.2);
 }
 </style>
