@@ -60,7 +60,7 @@ const insertData = async () => {
 
         <div class="form-group">
           <label for="codigoFunc">Senha:</label>
-          <input type="password" id="codigo" name="codigo" v-model="codigo" required placeholder="Insira uma senha" class="input-field" />
+          <input type="password" id="codigo" name="senha" v-model="senha" required placeholder="Insira uma senha" class="input-field" />
         </div>
 
         <div class="form-group">
@@ -73,6 +73,7 @@ const insertData = async () => {
           <img src="/src/assets/image/funcionarios.png" alt="Ícone de Funcionário" class="funcio">
         </router-link>
       </form>
+      {{ message }}
     </div>
   </div>
 </template>
