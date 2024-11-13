@@ -1,4 +1,4 @@
-<!-- eslint-disable no-unused-vars -->
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import { ref } from 'vue'
 import { useAuthStore } from '@/store/auth';
@@ -7,7 +7,7 @@ import router from '@/router';
 const authStore =  useAuthStore()
 
 const senha = ref('');
-const email = ref('')
+const email = ref('');
 
 const login = async() => {
   try {
