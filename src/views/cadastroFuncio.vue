@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useAuthStore } from '@/store/auth';
+import Header from '@/components/FoHea/header.vue';
 
 const authStore = useAuthStore()
 const nome = ref('')
@@ -25,192 +26,288 @@ const insertData = async () => {
 }
 </script>
 
+
+
 <template>
+<Header />
+
   <div class="background">
     <img src="/src/assets/image/padaria.jpg" alt="Padaria" class="padaria-img" />
   </div>
   <div class="container">
-    <h1 class="entre">
-      ENTRE OU CADASTRE-SE NA
-      <h1 class="santo">PADARIA SANTO PÃO</h1>
-    </h1>
-    <h2>E APROVEITE TODAS AS NOSSAS PROMOÇÕES</h2>
+    <div class="caixa">
+      <h1 class="txt-entre">ENTRE OU CADASTRE-SE NA</h1>
+      <h1 class="txt-padaria">PADARIA SANTO PÃO</h1>
+      <h2 class="txt-promocoes">E APROVEITE TODAS AS NOSSAS PROMOÇÕES</h2>
 
-    <form class="form" @submit.prevent="insertData">
-      <div class="form-group">
-        <label for="nome">Nome:</label>
-        <input
-          type="text"
-          id="nome"
-          name="nome"
-          v-model="nome"
-          required
-          placeholder="Insira seu nome:"
-        />
-      </div>
+      <form class="form" @submit.prevent="insertData">
+        <div class="form-group">
+          <label for="nome">Nome:</label>
+          <input type="text" id="nome" name="nome" v-model="nome" required placeholder="Insira seu nome" class="input-field" />
+        </div>
 
-      <div class="form-group">
-        <label for="CPF">CPF:</label>
-        <input
-          type="number"
-          id="cpf"
-          name="cpf"
-          v-model="cpf"
-          required
-          placeholder="Insira o seu cpf: "
-        />
-      </div>
+        <div class="form-group">
+          <label for="cpf">CPF:</label>
+          <input type="number" id="cpf" name="cpf" v-model="cpf" required placeholder="Insira o seu CPF" class="input-field" />
+        </div>
 
-      <div class="form-group">
-        <label for="CPF">EMAIL:</label>
-        <input
-          type="text"
-          id="email"
-          name="email"
-          v-model="email"
-          required
-          placeholder="Insira o seu email: "
-        />
-      </div>
+        <div class="form-group">
+          <label for="email">EMAIL:</label>
+          <input type="email" id="email" name="email" v-model="email" required placeholder="Insira seu email" class="input-field" /> 
+        </div>
 
-      <div class="form-group">
-        <label for="codigoFunc">Código Funcio:</label>
-        <input
-          type="text"
-          id="codigo"
-          name="senha"
-          v-model="senha"
-          required
-          placeholder="Insira o seu código: "
-        />
-      </div>
+        <div class="form-group">
+          <label for="codigoFunc">Senha:</label>
+          <input type="password" id="codigo" name="senha" v-model="senha" required placeholder="Insira uma senha" class="input-field" />
+        </div>
 
-      <div class="form-group">
-        <label for="cargo">Cargo:</label>
-        <input
-          type="text"
-          id="Cargo"
-          name="cargo"
-          v-model="tipoFuncionario"
-          required
-          placeholder="Insira o seu cargo"
-        />
-      </div>
+        <div class="form-group">
+          <label for="cargo">Cargo:</label>
+          <input type="text" id="cargo" name="tipoFuncionario" v-model="tipoFuncionario" required placeholder="Insira seu cargo" class="input-field" />
+        </div>
 
-      <router-link to="/homeFuncio"></router-link
-      ><button type="submit" router-link="/homeFuncio" @click="entrar">Cadastrar</button>
-    </form>
-    <p>{{ message }}</p>
-    <!--</router-link>-->
-    <router-link to="/logClient" class="cliente">Cliente</router-link>
+        <button type="submit" class="submit-btn">Cadastrar</button>
+        <router-link to="/cadastro" class="cliente">
+          <img src="/src/assets/image/funcionarios.png" alt="Ícone de Funcionário" class="funcio">
+        </router-link>
+      </form>
+      {{ message }}
+    </div>
   </div>
 </template>
 
 <style scoped>
-.form {
-  margin-top: 30px;
-}
-
-.cliente {
-  text-align: center;
-  text-decoration: none;
-  margin-top: 10px;
-  padding: 12px;
-  background-color: #e24f4a;
-  color: #fff;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  font-size: 18px;
-  width: 42%;
-  transition: background-color 0.3s ease;
-}
-
+/* Corpo */
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
-}
-h2 {
-  color: #333;
-}
-.entre {
-  color: #d9534f;
-  text-align: center;
+  background-color: #2C3E50;
+  color: #ECEFF1;
+  overflow-x: hidden;
 }
 
-.santo {
-  color: #c9302c;
-}
-
-.background {
-  position: fixed;
-  top: 0;
-  left: 0;
+/* Container */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 80px); /* Ajuste para o header */
+  position: relative;
+  padding: 20px;
+  margin-top: 4%;
+}
+
+/* Caixa de Formulário */
+.caixa {
+  width: 100%;
+  max-width: 480px;
+  background: #34495E;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  padding: 40px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.caixa:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.3);
+}
+
+/* Títulos */
+.txt-entre {
+  color: #B0BEC5;
+  font-size: 24px;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.txt-padaria {
+  color: #FF7043;
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+.txt-promocoes {
+  color: #ECEFF1;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+/* Imagem de fundo */
+.padaria-img {
+  position: absolute;
+  width: 100%;
+  height: 110%;
+  object-fit: cover;
+  filter: brightness(0.4);
   z-index: -1;
 }
 
-.padaria-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.container {
+/* Estilo do formulário */
+.form {
   display: flex;
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 100%;
-  width: 40%;
-  background-color: #f4e1d2;
-  padding: 20px;
   flex-direction: column;
-  align-items: center;
+  margin-top: 30px;
 }
 
 .form-group {
-  margin-bottom: 20px;
-  width: 100%;
+  margin-bottom: 18px;
 }
 
+/* Labels */
 label {
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: #555;
+  font-size: 16px;
+  color: #B0BEC5;
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: block;
 }
 
-input {
-  padding: 12px;
-  border: 1px solid #838282;
-  border-radius: 8px;
+/* Inputs */
+.input-field {
+  padding: 14px 18px;
+  border: 2px solid #607D8B;
+  border-radius: 10px;
   font-size: 16px;
   width: 100%;
-  background-color: #f8d3d3;
+  background-color: #263238;
+  color: #ECEFF1;
+  transition: all 0.3s ease, box-shadow 0.3s ease;
 }
 
-button {
-  text-align: center;
-  text-decoration: none;
-  margin-top: 10px;
-  padding: 12px 100px;
-  background-color: #e24f4a;
-  color: #fff;
+.input-field:focus {
+  border-color: #FF7043;
+  background-color: #37474F;
+  outline: none;
+  box-shadow: 0 0 8px rgba(255, 112, 67, 0.5);
+}
+
+/* Botão de submit */
+.submit-btn {
+  padding: 16px 20px;
+  background-color: #FF7043;
+  color: white;
   border: none;
-  border-radius: 25px;
+  border-radius: 50px;
   cursor: pointer;
   font-size: 18px;
   width: 100%;
-  transition: background-color 0.3s ease;
+  margin-top: 20px;
+  transition: background-color 0.3s, transform 0.3s ease-in-out, box-shadow 0.3s ease;
 }
 
-.cliente:hover {
-  background-color: #c9302c;
+.submit-btn:hover {
+  background-color: #FF5722;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-button:hover {
-  background-color: #c9302c;
+/* Ícone de funcionário */
+.funcio {
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  margin-top: 15px;
 }
+
+.funcio:hover {
+  transform: scale(1.2);
+  filter: brightness(1.2);
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 1024px) {
+  .container {
+    padding: 30px;
+  }
+
+  .caixa {
+    padding: 35px;
+    max-width: 90%;
+  }
+
+  .txt-entre {
+    font-size: 22px;
+  }
+
+  .txt-padaria {
+    font-size: 30px;
+  }
+
+  .submit-btn {
+    width: 100%;
+  }
+
+  .funcio {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  .caixa {
+    padding: 30px;
+  }
+
+  .txt-entre {
+    font-size: 20px;
+  }
+
+  .txt-padaria {
+    font-size: 26px;
+  }
+
+  .submit-btn {
+    width: 100%;
+  }
+
+  .funcio {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 15px;
+  }
+
+  .caixa {
+    padding: 20px;
+    max-width: 100%;
+  }
+
+  .txt-entre {
+    font-size: 18px;
+  }
+
+  .txt-padaria {
+    font-size: 22px;
+  }
+
+  .submit-btn {
+    font-size: 16px;
+    width: 100%;
+  }
+
+  .funcio {
+    width: 24px;
+    height: 24px;
+  }
+}
+
 </style>
+
+

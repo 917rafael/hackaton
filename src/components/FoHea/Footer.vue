@@ -3,7 +3,6 @@
     <div class="footer-container">
       <div class="footer-logo">
         <img src="@/assets/image/logo.png" alt="Logo da Padaria" class="logo" />
-        <img src="@/assets/image/logo.png" alt="Logo da Padaria" class="logo" />
       </div>
 
       <div class="footer-column about">
@@ -29,7 +28,11 @@
         </p>
         <p><i class="fas fa-phone-alt"></i> (123) 456-7890</p>
         <p><i class="fas fa-envelope"></i> contato@padariaexemplo.com</p>
-        <a href="#" class="contact-form-link">Fale Conosco</a>
+        <router-link to="/contato"> 
+          <a class="contact-form-link">Fale Conosco</a>
+
+        </router-link>  
+      
       </div>
 
       <div class="footer-column hours">
@@ -79,15 +82,6 @@
       <div class="footer-links">
         <a href="#">Política de Privacidade</a> | <a href="#">Termos de Uso</a> |
         <a href="#">FAQ</a>
-      </div>
-    </div>
-
-    <div class="footer-decorations">
-      <div class="decoration-bread">
-        <img src="../assets/image/bread.png" alt="Pão" />
-      </div>
-      <div class="decoration-donut">
-        <img src="../assets/image/donut.png" alt="Donut" />
       </div>
     </div>
   </footer>
@@ -301,33 +295,6 @@ export default {
   color: #ffcc00;
 }
 
-.footer-decorations {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  pointer-events: none; /* Para não interferir nas interações do footer */
-}
-
-.decoration-bread,
-.decoration-donut {
-  width: 80px; /* Ajuste do tamanho das decorações */
-}
-
-.decoration-bread img,
-.decoration-donut img {
-  width: 100%;
-  opacity: 0.2; /* Opacidade reduzida para um fundo mais sutil */
-  transition: opacity 0.3s;
-}
-
-.decoration-bread:hover img,
-.decoration-donut:hover img {
-  opacity: 0.5; /* Aumenta a opacidade ao passar o mouse */
-}
 
 /* Animações */
 @keyframes pulsate {

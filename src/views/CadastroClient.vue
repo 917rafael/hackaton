@@ -2,11 +2,13 @@
 import Footer from '@/components/FoHea/Footer.vue'
 import { ref } from 'vue'
 import { useAuthStore } from '@/store/auth';
+import Header from '@/components/FoHea/header.vue';
 
-const nome = ref([])
-const email = ref([])
-const cpf = ref([])
-const senha = ref([])
+
+const nome = ref('')
+const email = ref('')
+const cpf = ref('')
+const senha = ref('')
 const message = ref('')
 const authStore = useAuthStore();
 
@@ -26,77 +28,60 @@ const insertData = async () => {
 </script>
 
 <template>
-  <div class="background">
-    <img src="/src/assets/image/padaria.jpg" alt="Padaria" class="padaria-img" />
-  </div>
-  <div class="container">
-    <h1 class="entre">
-      ENTRE OU CADASTRE-SE NA
-      <h1 class="santo">PADARIA SANTO PÃO</h1>
-    </h1>
-    <h2>E APROVEITE TODAS AS NOSSAS PROMOÇÕES</h2>
+  <Header />
+
+<div class="background">
+  <img src="/src/assets/image/padaria.jpg" alt="Padaria" class="padaria-img" />
+</div>
+<div class="container">
+  <div class="caixa">
+    <h1 class="txt-entre">ENTRE OU CADASTRE-SE NA</h1>
+    <h1 class="txt-padaria">PADARIA SANTO PÃO</h1>
+    <h2 class="txt-promocoes">E APROVEITE TODAS AS NOSSAS PROMOÇÕES</h2>
 
     <form @submit.prevent="insertData" class="form">
       <div class="form-group">
         <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" v-model="nome" required placeholder="Insira seu nome:" />
+        <input type="text" id="nome" name="nome" v-model="nome" class="input-field" required placeholder="Insira seu nome:" />
       </div>
 
       <div class="form-group">
         <label for="cpf">CPF:</label>
-        <input type="number" id="cpf" name="cpf" v-model="cpf" required placeholder="Insira o seu CPF: " />
+        <input type="number" id="cpf" name="cpf" v-model="cpf" class="input-field" required placeholder="Insira o seu CPF: " />
       </div>
 
       <div class="form-group">
         <label for="email">Email:</label>
-        <input type="text" id="email" v-model="email" name="email" required placeholder="Insira o seu email:" />
+        <input type="text" id="email" v-model="email" name="email" class="input-field" required placeholder="Insira o seu email:" />
       </div>
 
       <div class="form-group">
         <label for="senha">senha:</label>
-        <input type="text" id="senha" v-model="senha" name="senha" required placeholder="Insira uma senha:" />
+        <input type="password" id="senha" v-model="senha" name="senha" class="input-field" required placeholder="Insira uma senha:" />
       </div>
 
-      <button type="submit">Cadastrar</button>
+      <button type="submit" class="submit-btn">Cadastrar</button>
       <p>{{ message }}</p>
     </form>
+        <router-link to="/cadastroFuncio" class="cliente">
+          <img src="/src/assets/image/funcionarios.png" alt="Ícone de Funcionário" class="funcio">
+        </router-link>
+  </div>
   </div>
 
-  <div class="footer">
-    <Footer />
-  </div>
+
 </template>
 
 <style scoped>
+
 /* Corpo */
 body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
-  background-color: #2C3E50; /* Fundo escuro para o corpo */
+  background-color: #2C3E50;
   color: #ECEFF1;
-}
-
-/* Global */
-h1 {
-  font-weight: 600;
-}
-
-.txt-entre {
-  color: #B0BEC5; /* Cor suave para o texto */
-  text-align: center;
-  font-size: 28px;
-  margin-bottom: 10px;
-}
-
-.txt-padaria {
-  color: #FF7043; /* Laranja para o título */
-  text-align: center;
-  font-size: 36px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  margin-bottom: 20px;
+  overflow-x: hidden;
 }
 
 /* Container */
@@ -105,39 +90,60 @@ h1 {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 80px); /* Ajuste para o header */
   position: relative;
   padding: 20px;
-  animation: fadeIn 1s ease-in-out;
+  margin-top: 2%;
 }
 
+/* Caixa de Formulário */
 .caixa {
   width: 100%;
   max-width: 480px;
-  background: #34495E; /* Cor mais escura para o fundo */
-  border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  background: #34495E;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   padding: 40px;
   text-align: center;
   position: relative;
   z-index: 1;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .caixa:hover {
-  transform: translateY(-15px);
+  transform: translateY(-12px);
   box-shadow: 0 24px 50px rgba(0, 0, 0, 0.3);
+}
+
+/* Títulos */
+.txt-entre {
+  color: #B0BEC5;
+  font-size: 24px;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.txt-padaria {
+  color: #FF7043;
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+.txt-promocoes {
+  color: #ECEFF1;
+  font-size: 18px;
+  margin-bottom: 30px;
 }
 
 /* Imagem de fundo */
 .padaria-img {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.3);
+  filter: brightness(0.4);
   z-index: -1;
 }
 
@@ -149,40 +155,30 @@ h1 {
 }
 
 .form-group {
-  margin-bottom: 35px;
-  position: relative;
+  margin-bottom: 18px;
 }
 
 /* Labels */
-.input-label {
+label {
   font-size: 16px;
   color: #B0BEC5;
   font-weight: 500;
   margin-bottom: 8px;
   display: block;
-  transition: all 0.3s ease-in-out;
-  position: absolute;
-  left: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
 }
 
 /* Inputs */
 .input-field {
-  padding: 18px 20px;
+  padding: 14px 18px;
   border: 2px solid #607D8B;
-  border-radius: 12px;
+  border-radius: 10px;
   font-size: 16px;
   width: 100%;
   background-color: #263238;
   color: #ECEFF1;
   transition: all 0.3s ease, box-shadow 0.3s ease;
-  margin-top: 10px;
-  position: relative;
 }
 
-/* Efeito ao focar nos inputs */
 .input-field:focus {
   border-color: #FF7043;
   background-color: #37474F;
@@ -190,17 +186,9 @@ h1 {
   box-shadow: 0 0 8px rgba(255, 112, 67, 0.5);
 }
 
-/* Efeito flutuante no label */
-.input-field:focus + .input-label,
-.input-field:not(:placeholder-shown) + .input-label {
-  transform: translateY(-25px);
-  font-size: 14px;
-  color: #FF7043;
-}
-
 /* Botão de submit */
 .submit-btn {
-  padding: 18px 20px;
+  padding: 16px 20px;
   background-color: #FF7043;
   color: white;
   border: none;
@@ -218,37 +206,18 @@ h1 {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-.submit-btn:active {
-  transform: translateY(1px);
-}
-
 /* Ícone de funcionário */
-.funcionario {
-  margin-top: 25px;
-}
-
 .funcio {
   width: 35px;
   height: 35px;
   cursor: pointer;
   transition: transform 0.3s ease, filter 0.3s ease;
+  margin-top: 15px;
 }
 
 .funcio:hover {
   transform: scale(1.2);
   filter: brightness(1.2);
-}
-
-/* Animação para fade-in */
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* Responsividade para telas menores */
@@ -258,16 +227,16 @@ h1 {
   }
 
   .caixa {
-    padding: 45px;
-    max-width: 100%;
+    padding: 35px;
+    max-width: 90%;
   }
 
   .txt-entre {
-    font-size: 26px;
+    font-size: 22px;
   }
 
   .txt-padaria {
-    font-size: 32px;
+    font-size: 30px;
   }
 
   .submit-btn {
@@ -286,47 +255,18 @@ h1 {
   }
 
   .caixa {
-    padding: 35px;
+    padding: 30px;
   }
 
   .txt-entre {
-    font-size: 24px;
+    font-size: 20px;
   }
 
   .txt-padaria {
-    font-size: 28px;
+    font-size: 26px;
   }
 
   .submit-btn {
-    width: 100%;
-  }
-
-  .funcio {
-    width: 30px;
-    height: 30px;
-  }
-}
-
-@media (max-width: 480px) {
-  .container {
-    padding: 15px;
-  }
-
-  .caixa {
-    padding: 25px;
-    max-width: 100%;
-  }
-
-  .txt-entre {
-    font-size: 22px;
-  }
-
-  .txt-padaria {
-    font-size: 24px;
-  }
-
-  .submit-btn {
-    font-size: 16px;
     width: 100%;
   }
 
@@ -336,29 +276,32 @@ h1 {
   }
 }
 
-/* Efeitos de transição mais suaves para o botão e ícones */
-button, .funcio {
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
+@media (max-width: 480px) {
+  .container {
+    padding: 15px;
+  }
 
-/* Hover e animação do ícone de funcionário */
-.funcio:hover {
-  transform: scale(1.2);
-  filter: brightness(1.2);
-}
+  .caixa {
+    padding: 20px;
+    max-width: 100%;
+  }
 
-.submit-btn:hover {
-  background-color: #FF5722;
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
+  .txt-entre {
+    font-size: 18px;
+  }
 
-/* Modo noturno */
-body {
-  background-color: #2C3E50;
-}
+  .txt-padaria {
+    font-size: 22px;
+  }
 
-.container {
-  animation: fadeIn 1.2s ease-in-out;
+  .submit-btn {
+    font-size: 16px;
+    width: 100%;
+  }
+
+  .funcio {
+    width: 24px;
+    height: 24px;
+  }
 }
 </style>
