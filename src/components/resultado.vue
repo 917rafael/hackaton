@@ -18,7 +18,7 @@ const props = defineProps({
 
 <style scoped>
 .container {
-    color: #f8cb98;
+    color: rgb(255, 255, 255);
     background-color: rgb(102, 65, 16);
     border-radius: 6px;
     height: 375px;

@@ -6,16 +6,17 @@ defineProps(['produto'])
 
 <template>
   <div class="product-card">
-    <div class="price-circle">$ {{ produto.price }}</div>
+    <div class="price-circle">$ {{produto.price}}</div>
     <img :src="produto.img" alt="Bread 1" />
     <div class="product-info">
-      <p>{{ produto.description }}</p>
+      <p>{{produto.description}}</p>
       <button class="buy-button">Buy Now</button>
     </div>
   </div>
 </template>
 
 <style scoped>
+
 .product-card {
   margin-left: 5px;
   position: relative;
@@ -27,13 +28,15 @@ defineProps(['produto'])
   color: #333;
   width: 30%;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  transition: 0.5s;
+  transition: 0.5s
+
 }
 
 .product-card img {
   width: 100%;
   height: auto;
   display: block;
+  
 }
 
 .price-circle {
@@ -49,7 +52,7 @@ defineProps(['produto'])
 }
 
 .product-card:hover {
-  background-color: #beb5b5;
+    background-color: #beb5b5;
 }
 
 .product-info {
