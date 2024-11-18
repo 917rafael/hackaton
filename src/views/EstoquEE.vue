@@ -1,71 +1,114 @@
 <script setup>
-import { ref } from 'vue'
-import { useProductStore } from '@/store/productStore'
-import Header from '@/components/FoHea/header.vue'
+import { ref, onMounted } from 'vue';
+import { useProductStore } from '@/store/productStore';
+import Header from '@/components/FoHea/header.vue';
+import { supabase } from '@/lib/supabaseClient';
 
 // Usando a store de produtos
-const productStore = useProductStore()
+const productStore = useProductStore();
 
 // Estado para controle do modal
-const showModal = ref(false)
+const showModal = ref(false);
 
 // Novo produto para ser adicionado
 const newProduct = ref({
-  id: '',
   name: '',
   category: '',
   stock: 0,
   price: 0.0,
   catalog: false,
-  image: null
-})
+  image: null,
+});
 
-// Função para abrir o modal de adicionar produto
-const openModal = () => {
-  showModal.value = true
-  newProduct.value = {
-    id: Date.now(),
-    name: '',
-    category: '',
-    stock: 0,
-    price: 0.0,
-    catalog: false,
-    image: null
+// Função para carregar produtos do Supabase
+const fetchProducts = async () => {
+  const { data, error } = await supabase.from('products').select('*');
+  if (error) {
+    console.error('Erro ao buscar produtos:', error.message);
+  } else {
+    productStore.products = data;
   }
-}
+};
 
-// Função para salvar o novo produto
-const saveProduct = () => {
-  productStore.products.push({ ...newProduct.value, canEdit: false })
-  showModal.value = false
-}
+// Função para salvar o novo produto no Supabase
+const saveProduct = async () => {
+  const { data, error } = await supabase.from('products').insert(newProduct.value);
+  if (error) {
+    console.error('Erro ao salvar produto:', error.message);
+  } else {
+    productStore.products.push(data[0]);
+    closeModal();
+  }
+};
 
-// Função para excluir um produto
-const deleteProduct = (productId) => {
-  productStore.products = productStore.products.filter((p) => p.id !== productId)
-}
+// Função para excluir um produto do Supabase
+const deleteProduct = async (productId) => {
+  const { error } = await supabase.from('products').delete().eq('id', productId);
+  if (error) {
+    console.error('Erro ao excluir produto:', error.message);
+  } else {
+    productStore.products = productStore.products.filter((p) => p.id !== productId);
+  }
+};
 
-// Função para alternar o status de exibição no catálogo
-const toggleCatalog = (product) => {
-  productStore.changeCatologVisibility(product.id)
-}
-
-// Função para lidar com o upload da imagem do produto
+// Função para lidar com upload de imagem
 const handleFileUpload = (event) => {
-  const file = event.target.files[0]
+  const file = event.target.files[0];
   if (file.size > 2 * 1024 * 1024) {
-    alert('A imagem deve ser menor que 2MB.')
+    alert('A imagem deve ser menor que 2MB.');
+    return;
+  }
+  newProduct.value.image = URL.createObjectURL(file);
+};
+
+// Funções para controle do modal
+const openModal = () => {
+  showModal.value = true;
+};
+
+const closeModal = () => {
+  showModal.value = false;
+};
+
+// Carregar produtos ao montar o componente
+onMounted(fetchProducts);
+
+const nome = ref('');
+const categoria = ref('');
+const preco = ref(0);
+const estoque = ref('');
+const image = ref([]);
+const message = ref('');
+
+const insertData = async () => {
+  // Verifica se todos os campos obrigatórios foram preenchidos
+  if (!nome.value || !categoria.value || !preco.value || !estoque.value ) {
+    message.value = 'Por favor, preencha todos os campos obrigatórios.'
     return
   }
-  newProduct.value.image = URL.createObjectURL(file)
+
+  // Faz a requisição de inserção ao Supabase
+  // eslint-disable-next-line no-unused-vars
+  const { data, error } = await supabase.from('products').insert([
+    {
+      nome: nome.value,
+      categoria: categoria.value,
+      preco: preco.value,
+      estoque: estoque.value,
+      image: image.value
+    }
+  ])
+
+  // Tratamento de erro e mensagem de sucesso
+  if (error) {
+    console.error('Erro ao inserir produto:', error.message)
+    message.value = `Erro ao inserir produto: ${error.message}`
+    return
+  }
+
+  message.value = 'Produto inserido com sucesso!'
 }
 
-// Função para fechar o modal
-const closeModal = (event) => {
-  if (event.target.classList.contains('modal')) {
-    showModal.value = false
-  }
-}
 </script>
 
 <template>
@@ -111,7 +154,6 @@ const closeModal = (event) => {
                 <option value="ap">Amapá</option>
               </select>
             </td>
-
             <td><input v-model="product.stock" type="number" placeholder="Estoque" /></td>
             <td><input v-model="product.price" type="number" step="0.01" placeholder="Preço" /></td>
             <td>
@@ -130,20 +172,20 @@ const closeModal = (event) => {
       </table>
     </div>
 
-    <div v-if="showModal" class="modal" @click="closeModal">
+    <div v-if="showModal" class="modal" @click.self="closeModal">
       <div class="modal-content">
         <h2>Adicionar Produto</h2>
-        <input v-model="newProduct.name" placeholder="Nome do Produto" />
-        <select v-model="newProduct.category" name="estado">
+        <input v-model="nome" placeholder="Nome do Produto" />
+        <select v-model="categoria" name="estado">
           <option value="salgado">Salgado</option>
           <option value="ac">Açai</option>
           <option value="al">Alagoas</option>
           <option value="am">Amazonas</option>
           <option value="ap">Amapá</option>
         </select>
-
-        <input v-model="newProduct.stock" type="number" placeholder="Estoque" />
-        <input v-model="newProduct.price" type="number" step="0.01" placeholder="Preço" />
+        <input v-model="newProduct.stock" type="number" v-model="estoque" placeholder="Estoque" />
+        
+        <input v-model="newProduct.price" type="number" step="0.01" v-model="preco" placeholder="Preço" />
 
         <label class="catalog-label">
           <label class="switch">
@@ -153,8 +195,8 @@ const closeModal = (event) => {
           Exibir no Catálogo
         </label>
 
-        <!-- Campo para upload de imagem -->
-        <input type="file" @change="handleFileUpload" class="file-input" />
+        <input type="file" @change="handleFileUpload" 
+        class="file-input" />
         <img
           v-if="newProduct.image"
           :src="newProduct.image"
@@ -164,12 +206,13 @@ const closeModal = (event) => {
 
         <div class="modal-actions">
           <button class="save-btn" @click="saveProduct">Salvar</button>
-          <button class="close-btn" @click="showModal = false">Fechar</button>
+          <button class="close-btn" @click="closeModal">Fechar</button>
         </div>
       </div>
     </div>
   </section>
 </template>
+
 
 <style scoped>
 * {
