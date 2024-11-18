@@ -1,5 +1,5 @@
 <script setup>
-import Footer from '@/components/FoHea/Footer.vue'
+// import Footer from '@/components/FoHea/Footer.vue'
 import { ref } from 'vue'
 import { useAuthStore } from '@/store/auth';
 import Header from '@/components/FoHea/header.vue';
@@ -61,6 +61,7 @@ const insertData = async () => {
       </div>
 
       <button type="submit" class="submit-btn">Cadastrar</button>
+     
       <p>{{ message }}</p>
     </form>
         <router-link to="/cadastroFuncio" class="cliente">

@@ -14,6 +14,7 @@ const login = async() => {
     await authStore.login(senha.value, email.value)
     if (authStore.user.user_metadata.tipo == 'cliente') router.push({ name: 'home' })
     else if (authStore.user.user_metadata.tipo == 'funcionario') router.push({ name: 'homeFuncio' })
+  console.log(authStore.user.user_metadata.tipo)
   } catch(e) {
     console.log(e)
   }

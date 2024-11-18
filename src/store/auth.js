@@ -37,10 +37,11 @@ export const useAuthStore = defineStore('auth', () => {
             nome: nome,
             cpf: cpf,
             tipo: tipo,
-            tipoFuncionario: tipoFuncionario
+            tipoFuncionario: tipoFuncionario,
           }
         }
       })
+      console.log(nome, cpf,tipo,tipoFuncionario)
     } catch (e) {
       console.log(e)
       return e
