@@ -28,7 +28,9 @@ const authStore = useAuthStore();
             </span>
 
             <span v-if="authStore.access_token && authStore.user.user_metadata.tipo == 'cliente'">
-              cliente logado
+              
+                  <RouterLink to="/manipulation">cliente</RouterLink>
+
             </span>
           </li>
         </ul>

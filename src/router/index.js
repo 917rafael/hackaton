@@ -1,9 +1,33 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { authGuard } from '@/middleware/auth' // Importa o middleware
+// import { authGuard } from '@/middleware/auth' // Importa o middleware
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    
+    // {              rota destinada para a nav bar do perfil do funcionario
+    //   path:  '/',
+    //   name: '',
+    //   component: () => import('../views/MUDAR.vue')
+    // },
+     {
+         path:  '/configurações',
+         name: 'configuracoes ',
+         component: () => import('../views/Navbar-perfil/configuracoe.vue')
+     },
+     {
+         path:  '/notificações',
+        name: 'notificacoes ',
+         component: () => import('../views/Navbar-perfil/notificacoes.vue'),
+       },
+      
+      {
+        path:  '/manipulacao',
+        name: 'Manipulacao',
+        component: () => import('../views/Navbar-perfil/manipulacao.vue')
+      },
+      
+      
     {
       path:  '/pedidosclient',
       name: 'pedidosclient',
@@ -15,26 +39,20 @@ const router = createRouter({
       component: () => import('../views/CadEndereco.vue')
     },
     {
-      path: '/Rendimento',
+      path: '/rendimento',
       name: 'rendimento',
-      component: () => import('../views/Rendimento.vue')
+      component: () => import('../views/Navbar-perfil/Rendimento.vue')
     },
     {
-      path: '/Estoque',
       path: '/Estoque',
       name: 'estoque',
       component: () => import('../views/EstoquEE.vue')
     },
     {
-      path: '/contato',
-      name: 'contato',
-      component: () => import('../views/Contato.vue')
-    },
-    {
       path: '/homeFuncio',
       name: 'homeFuncio',
       component: () => import('../views/homeFuncio.vue'),
-      meta: { requiresAuth: true } // Rota protegida
+      //meta: { requiresAuth: true }  Rota protegida
     },
     {
       path: '/',
