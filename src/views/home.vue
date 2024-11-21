@@ -8,24 +8,20 @@ import Product from '@/components/Product/Produtc.vue'
 import sacola from '@/components/sacola.vue'
 import Fotter from '@/components/FoHea/Footer.vue'
 import { useProductStore } from '@/store/productStore'
-import Slogan from "@/assets/image/tadica-removebg-preview.png";
+import { ref, computed } from 'vue'
+import Slogan from "@/assets/image/tadica-removebg-preview.png"
 
-import { ref, onMounted } from 'vue';
-import { supabase } from '@/lib/supabaseClient';
 
-const productStore = useProductStore();
 
-// Carregar produtos no Supabase
-const fetchProducts = async () => {
-  const { data, error } = await supabase.from('products').select('*');
-  if (error) {
-    console.error('Erro ao buscar produtos:', error.message);
-  } else {
-    productStore.products = data;
-  }
-};
+const productStore = useProductStore()
+const searchQuery = ref('')
 
-onMounted(fetchProducts);
+const filteredProducts = computed(() => {
+  if (!searchQuery.value) return productStore.catalogProducts
+  return productStore.catalogProducts.filter((product) =>
+    product.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+  )
+})
 </script>
 
 <template>
