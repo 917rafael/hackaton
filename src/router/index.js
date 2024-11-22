@@ -4,32 +4,23 @@ import { createRouter, createWebHistory } from 'vue-router'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    
-    // {              rota destinada para a nav bar do perfil do funcionario
-    //   path:  '/',
-    //   name: '',
-    //   component: () => import('../views/MUDAR.vue')
-    // },
-     {
-         path:  '/configurações',
-         name: 'configuracoes ',
-         component: () => import('../views/Navbar-perfil/configuracoe.vue')
-     },
-     {
-         path:  '/notificações',
-        name: 'notificacoes ',
-         component: () => import('../views/Navbar-perfil/notificacoes.vue'),
-       },
-      
-      {
-        path:  '/manipulacao',
-        name: 'Manipulacao',
-        component: () => import('../views/Navbar-perfil/manipulacao.vue')
-      },
-      
-      
     {
-      path:  '/pedidosclient',
+      path: '/Perfil',
+      name: 'perfil',
+      component: () => import('../views/perfil.cleint/Perfil.vue')
+    },
+    {
+      path: '/configurações',
+      name: 'configuracoes ',
+      component: () => import('../views/Navbar-perfil/configuracoe.vue')
+    },
+    {
+      path: '/notificações',
+      name: 'notificacoes ',
+      component: () => import('../views/Navbar-perfil/notificacoes.vue')
+    },
+    {
+      path: '/pedidosclient',
       name: 'pedidosclient',
       component: () => import('../views/PedidosClient.vue')
     },
@@ -51,7 +42,7 @@ const router = createRouter({
     {
       path: '/homeFuncio',
       name: 'homeFuncio',
-      component: () => import('../views/homeFuncio.vue'),
+      component: () => import('../views/homeFuncio.vue')
       //meta: { requiresAuth: true }  Rota protegida
     },
     {
@@ -85,4 +76,3 @@ const router = createRouter({
 // router.beforeEach(authGuard)
 
 export default router
-
