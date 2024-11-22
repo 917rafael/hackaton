@@ -1,36 +1,14 @@
-<script setup>
-import { useAuthStore } from '@/store/auth';
-
-const authStore = useAuthStore();
-
-
-</script>
-
 <template>
   <header>
     <div class="nav-bar">
-      <router-link to="/"
-        ><img src="/src/assets/image/logo.png" alt="Logo" class="logo"
-      /></router-link>
+      <router-link to="/"><img src="/src/assets/image/Logo nova.png" alt="Logo" class="logo"></router-link>
 
       <nav>
         <ul class="nav-links">
           <li><router-link to="/" class="link">HOME</router-link></li>
           <li><router-link to="/contato" class="link">CONTATO</router-link></li>
           <li><router-link to="/estoque" class="link">MAIS</router-link></li>
-          <li>
-            <button class="btn-login" v-if="!authStore.access_token">
-              <router-link to="/login" class="link-login">LOGIN</router-link>
-            </button>
-
-            <span v-if="authStore.access_token && authStore.user.user_metadata.tipo == 'funcionario'">
-              funcionário logado
-            </span>
-
-            <span v-if="authStore.access_token && authStore.user.user_metadata.tipo == 'cliente'">
-              cliente logado
-            </span>
-          </li>
+          <li><button class="btn-login"><router-link to="/logClient" class="link-login">LOGIN</router-link></button></li>
         </ul>
       </nav>
     </div>
@@ -44,12 +22,15 @@ const authStore = useAuthStore();
   align-items: center;
   padding: 10px 20px;
   background-color: rgba(59, 24, 3, 0.85);
+  height: 100px; /* Definindo uma altura fixa para o cabeçalho */
 }
 
 .logo {
-  width: 85px;
+  max-width: 150px; /* Ajuste o tamanho máximo desejado */
+  max-height: 100px; /* Ajuste o tamanho máximo desejado */
+  width: auto;
   height: auto;
-  margin-left: 20px;
+  margin-left: 5px; 
 }
 
 .nav-links {
