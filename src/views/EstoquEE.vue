@@ -3,13 +3,9 @@ import { ref } from 'vue'
 import { useProductStore } from '@/store/productStore'
 import Header from '@/components/FoHea/header.vue'
 
-// Usando a store de produtos
 const productStore = useProductStore()
-
-// Estado para controle do modal
 const showModal = ref(false)
 
-// Novo produto para ser adicionado
 const newProduct = ref({
   id: '',
   name: '',
@@ -34,23 +30,19 @@ const openModal = () => {
   }
 }
 
-// Função para salvar o novo produto
 const saveProduct = () => {
   productStore.products.push({ ...newProduct.value, canEdit: false })
   showModal.value = false
 }
 
-// Função para excluir um produto
 const deleteProduct = (productId) => {
   productStore.products = productStore.products.filter((p) => p.id !== productId)
 }
 
-// Função para alternar o status de exibição no catálogo
-const toggleCatalog = (product) => {
-  productStore.changeCatologVisibility(product.id)
-}
+// const toggleCatalog = (product) => {
+//   productStore.changeCatologVisibility(product.id)
+// }
 
-// Função para lidar com o upload da imagem do produto
 const handleFileUpload = (event) => {
   const file = event.target.files[0]
   if (file.size > 2 * 1024 * 1024) {
@@ -60,7 +52,6 @@ const handleFileUpload = (event) => {
   newProduct.value.image = URL.createObjectURL(file)
 }
 
-// Função para fechar o modal
 const closeModal = (event) => {
   if (event.target.classList.contains('modal')) {
     showModal.value = false
@@ -433,14 +424,13 @@ input:focus {
   color: #555;
 }
 
-/* Responsividade para telas menores */
 @media (max-width: 768px) {
   .stock-manager {
     padding: 20px;
   }
 
   table {
-    display: block; /* Permite rolagem horizontal */
+    display: block; 
     width: 100%;
     overflow-x: auto;
   }
