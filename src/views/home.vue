@@ -7,22 +7,44 @@ import { produtos } from '@/data/produtos'
 import Product from '@/components/Product/Produtc.vue'
 import sacola from '@/components/sacola.vue'
 import Fotter from '@/components/FoHea/Footer.vue'
-import { useProductStore } from '@/store/productStore'
-import { ref, computed } from 'vue'
 import Slogan from "@/assets/image/tadica-removebg-preview.png"
+import Card from '@/components/Product/Card.vue'
+import { ref, computed, onMounted } from 'vue';
+import { supabase } from '@/lib/supabaseClient';
 
+const searchQuery = ref('');
+const products = ref([]);
 
+const isModalVisible = ref(false);
 
-const productStore = useProductStore()
-const searchQuery = ref('')
+// Alternar a exibição do modal com os detalhes do produto
+const toggleModal = () => {
+  isModalVisible.value = !isModalVisible.value;
+};
 
+// Carregar produtos do Supabase
+const fetchProducts = async () => {
+  const { data, error } = await supabase.from('products').select('*').eq('catalog', true);
+  if (error) {
+    console.error('Erro ao carregar produtos do catálogo:', error);
+  } else {
+    products.value = data;
+  }
+};
+
+// Filtrar produtos pela barra de pesquisa
 const filteredProducts = computed(() => {
-  if (!searchQuery.value) return productStore.catalogProducts
-  return productStore.catalogProducts.filter((product) =>
+  if (!searchQuery.value) return products.value;
+  return products.value.filter((product) =>
     product.name.toLowerCase().includes(searchQuery.value.toLowerCase())
-  )
-})
+  );
+});
+
+onMounted(() => {
+  fetchProducts();
+});
 </script>
+
 
 <template>
   <headers />
@@ -47,12 +69,14 @@ const filteredProducts = computed(() => {
     </div>
   </div>
 
-  <div class="product-main">
-    <div class="product-list">
+  <div class="product-main" >
+    <div class="product-list" @click="toggleModal" >
       <Product v-for="product in filteredProducts" :key="product.id" :product="product" />
     </div>
   </div>
-
+<div v-if="isModalVisible" >
+  <Card />
+</div>
   <div>
     <sacola />
   </div>

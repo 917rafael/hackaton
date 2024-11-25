@@ -1,13 +1,15 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
-import { computed, ref, defineEmits } from 'vue'
-import { products } from '@/data/cardapio'
+import { computed, ref, onMounted } from 'vue'
 import { useSacolaStore } from '@/store/sacola.js'
+import { supabase } from '@/lib/supabaseClient.js'
 
-const emit = defineEmits()
 const store = useSacolaStore()
 const props = defineProps(['productselected'])
 const options = ref([{ count: 0, price: 1.0 }])
 const observation = ref('')
+const products = ref([]);
+
 const acompanhamentos = ref([
   { name: 'Batata Frita', price: 5.0, count: 0, isRemovable: true },
 ])
@@ -43,17 +45,26 @@ const decreaseAcaiCount = (index) => {
   }
 }
 
-const closeModal = () => {
-  emit('close')
-}
+const fetchProducts = async () => {
+  const { data, error } = await supabase.from('products').select('*').eq('catalog', true);
+  if (error) {
+    console.error('Erro ao carregar produtos do catálogo:', error);
+  } else {
+    products.value = data;
+  }
+};
+
+onMounted(() => {
+  fetchProducts();
+});
 </script>
 
 <template>
-  <div class="modal-overlay" @click="closeModal">
+  <div class="modal-overlay" @click="toggleModal">
     <div class="modal-content" @click.stop>
       <div class="modal-header">
-        <h2>{{ productselected[0].name }}</h2>
-        <button class="close-button" @click="closeModal">&times;</button>
+        <h2>{{ products.name }}</h2>
+        <button class="close-button" @click="toggleModal">&times;</button>
       </div>
       <div class="modal-body">
         <div class="modal-body-content">
@@ -63,8 +74,8 @@ const closeModal = () => {
           </div>
           <div class="modal-options-content">
             <div class="modal-options">
-              <div v-for="(item, index) in products" :key="item.id" class="option">
-                <label class="option-label">{{ item.text }}</label>
+              <div class="option">
+                <label class="option-label">Deseja Adicionar 1 kit de Sachês com Molhos? Kit Sachês (1 Catchup, 1 Maionese, 1 Mostarda) (R$ 1,00)</label>
               </div>
             </div>
             <textarea

@@ -1,65 +1,37 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
+import { ref } from 'vue';
 const props = defineProps({
   product: {
     type: Object,
     required: true
   }
-})
+});
 
-import Card from './Card.vue'
-import { products } from '@/data/cardapio'
-import { sacola } from '@/data/sacola'
-import { ref, computed, reactive } from 'vue'
 
-const isModalVisible = ref(false)
-const productselected = ref([])
+const isModalVisible = ref(false);
 
-const suasacola = reactive({
-  qtd: 0,
-  observacao: null,
-  item: productselected.value
-})
+// Alternar a exibição do modal com os detalhes do produto
+const toggleModal = () => {
+  isModalVisible.value = !isModalVisible.value;
+};
 
-const observation = ref('')
-
-const toggleModal = (id) => {
-  const findproduct = products.find((product) => product.id === id)
-  productselected.value = [findproduct]
-  isModalVisible.value = !isModalVisible.value
-}
 </script>
 
 <template>
-  <div class="product-card" role="button" tabindex="0" @click="toggleModal(product.id)">
-    <img :src="product.image" :alt="product.name" class="product-image" />
+  <div class="product-card" @click="toggleModal">
+    <img :src="product.image_url" :alt="product.name" class="product-image" />
     <div class="product-info">
       <h2 class="product-name">{{ product.name }}</h2>
-
-      <div class="product-rating">
-        <span v-for="n in 5" :key="n" class="star" :class="{ filled: n <= product.rating }">★</span>
-        <span class="reviews"> {{ product.reviews }} avaliações</span>
-      </div>
-
-      <div class="product-price">
-        <span v-if="product.oldPrice" class="old-price">R$ {{ product.oldPrice }}</span>
-        <span v-if="product.discount" class="discount">{{ product.discount }}%</span>
-      </div>
-
-      <div class="current-price">
-        <strong>R$ {{ product.currentPrice }}</strong>
-      </div>
-
-      <div class="installments" v-if="product.installments">
-        {{ product.installments }}
-      </div>
+      <div class="product-category">Categoria: {{ product.category }}</div>
+      <div class="product-stock">Estoque: {{ product.stock }}</div>
+      <div class="product-price">R$ {{ product.price.toFixed(2) }}</div>
     </div>
   </div>
 
-  <Card v-if="isModalVisible" :productselected="productselected" @close="isModalVisible = false" />
-  <div class="product-list">
-    <products v-for="product in products" :key="product.id" :product="product" />
-  </div>
+
 </template>
+
 
 <style scoped>
 .product-card {
@@ -143,6 +115,7 @@ const toggleModal = (id) => {
   color: #777;
 }
 
+
 .product-list {
   display: flex;
   flex-wrap: wrap;
@@ -150,11 +123,13 @@ const toggleModal = (id) => {
   justify-content: center;
 }
 
+
 @media (max-width: 768px) {
   .product-card {
     width: 90%; /* O cartão ocupará 90% da largura da tela */
   }
 }
+
 
 @media (max-width: 480px) {
   .product-card {
@@ -171,3 +146,5 @@ const toggleModal = (id) => {
   }
 }
 </style>
+
+

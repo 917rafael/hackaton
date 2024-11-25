@@ -1,81 +1,145 @@
 <script setup>
-import { ref } from 'vue'
-import { useProductStore } from '@/store/productStore'
-import Header from '@/components/FoHea/header.vue'
+import { ref, onMounted } from 'vue';
+import { supabase } from '../lib/supabaseClient';
+import Header from '@/components/FoHea/header.vue';
+import Footer from '@/components/FoHea/Footer.vue';
 
-// Usando a store de produtos
-const productStore = useProductStore()
 
-// Estado para controle do modal
-const showModal = ref(false)
-
-// Novo produto para ser adicionado
+// Estado da aplicação
+const products = ref([]);
+const showModal = ref(false);
 const newProduct = ref({
-  id: '',
-  name: '',
+  nome: '',
   category: '',
-  stock: 0,
-  price: 0.0,
-  catalog: false,
-  image: null
-})
+  stock: '',
+  price: '',
+  catalog: '',
+  image_url: '',
+});
 
-// Função para abrir o modal de adicionar produto
-const openModal = () => {
-  showModal.value = true
-  newProduct.value = {
-    id: Date.now(),
-    name: '',
-    category: '',
-    stock: 0,
-    price: 0.0,
-    catalog: false,
-    image: null
+
+// Carregar produtos
+const fetchProducts = async () => {
+  const { data, error } = await supabase.from('products').select('*');
+  if (error) {
+    console.error('Erro ao buscar produtos:', error.message);
+  } else {
+    products.value = data;
   }
-}
+};
 
-// Função para salvar o novo produto
-const saveProduct = () => {
-  productStore.products.push({ ...newProduct.value, canEdit: false })
-  showModal.value = false
-}
 
-// Função para excluir um produto
-const deleteProduct = (productId) => {
-  productStore.products = productStore.products.filter((p) => p.id !== productId)
-}
+const handleFileUpload = async (event) => {
+  const file = event.target.files[0];
 
-// Função para alternar o status de exibição no catálogo
-const toggleCatalog = (product) => {
-  productStore.changeCatologVisibility(product.id)
-}
 
-// Função para lidar com o upload da imagem do produto
-const handleFileUpload = (event) => {
-  const file = event.target.files[0]
-  if (file.size > 2 * 1024 * 1024) {
-    alert('A imagem deve ser menor que 2MB.')
-    return
+  if (!file) {
+    alert('Por favor, selecione um arquivo.');
+    return;
   }
-  newProduct.value.image = URL.createObjectURL(file)
-}
 
-// Função para fechar o modal
-const closeModal = (event) => {
-  if (event.target.classList.contains('modal')) {
-    showModal.value = false
+
+  if (file.size > 2 * 1024 * 1024) { // Limite de 2MB
+    alert('A imagem deve ser menor que 2MB.');
+    return;
   }
-}
+
+
+  const fileName = `${Date.now()}_${file.name}`; // Nome único para evitar conflitos
+
+
+  // eslint-disable-next-line no-unused-vars
+  const { data, error } = await supabase.storage.from('product-images').upload(fileName, file);
+
+
+  if (error) {
+    console.error('Erro ao fazer upload da imagem:', error.message);
+    alert('Erro ao fazer upload da imagem.');
+    return;
+  }
+
+
+  // Recuperar URL pública da imagem
+  const { data: publicUrlData } = supabase.storage
+    .from('product-images')
+    .getPublicUrl(fileName);
+
+
+  if (publicUrlData) {
+    newProduct.value.image = publicUrlData.publicUrl; // Salvar URL pública no produto
+  } else {
+    console.error('Erro ao obter URL pública.');
+    alert('Erro ao obter URL pública da imagem.');
+  }
+};
+
+
+
+
+// Salvar produto no Supabase
+const insertData = async () => {
+  const { nome, category, stock, price, image_url, catalog } = newProduct.value;
+
+
+  if (!nome || !category || !stock || !price ) {
+    alert('Por favor, preencha todos os campos obrigatórios e adicione uma imagem.');
+    console.log(nome, category, stock, price, image_url)
+    return;
+  }
+
+
+  const { data, error } = await supabase.from('products').insert([
+    { name: nome, category, stock, price, image_url, catalog },
+  ]);
+
+
+  if (error) {
+    console.error('Erro ao inserir produto:', error.message);
+    alert('Erro ao inserir produto.');
+  } else {
+    alert('Produto adicionado com sucesso!');
+    products.value.push(data[0]);
+    closeModal();
+  }
+};
+
+
+// Excluir produto
+const deleteProduct = async (id) => {
+  const { error } = await supabase.from('products').delete().eq('id', id);
+
+
+  if (error) {
+    console.error('Erro ao excluir produto:', error.message);
+  } else {
+    products.value = products.value.filter((product) => product.id !== id);
+    alert('Produto excluído com sucesso!');
+  }
+};
+
+
+// Controle do modal
+const openModal = () => (showModal.value = true);
+const closeModal = () => {
+  showModal.value = false;
+  newProduct.value = { nome: '', category: '', stock: '', price: '', catalog: '', image_url: '' };
+};
+
+
+// Carregar produtos ao montar o componente
+onMounted(fetchProducts);
 </script>
 
-<template>
-  <Header />
 
-  <section class="stock-manager">
-    <div class="header">
+<template>
+<Header />
+  <div class="stock-manager">
+   
+    <header>
       <h1>Gerenciamento de Produtos</h1>
       <button class="add-product-btn" @click="openModal">+ Adicionar Produto</button>
-    </div>
+    </header>
+
 
     <div class="table-container">
       <table>
@@ -91,85 +155,61 @@ const closeModal = (event) => {
           </tr>
         </thead>
         <tbody>
-          <tr v-for="product in productStore.products" :key="product.id">
+          <tr v-for="product in products" :key="product.id">
             <td>
-              <img
-                v-if="product.image"
-                :src="product.image"
-                alt="Imagem do Produto"
-                class="table-product-image"
-              />
-              <span v-else>Sem imagem</span>
+              <img :src="product.image" alt="Imagem do Produto" class="table-product-image" />
             </td>
-            <td><input v-model="product.name" placeholder="Nome do Produto" /></td>
+            <td>{{ product.nome }}</td>
+            <td>{{ product.category }}</td>
+            <td>{{ product.stock }}</td>
+            <td>{{ product.price }}</td>
             <td>
-              <select v-model="product.category" name="categoria">
-                <option value="salgado">Salgado</option>
-                <option value="ac">Açai</option>
-                <option value="al">Alagoas</option>
-                <option value="am">Amazonas</option>
-                <option value="ap">Amapá</option>
-              </select>
-            </td>
-
-            <td><input v-model="product.stock" type="number" placeholder="Estoque" /></td>
-            <td><input v-model="product.price" type="number" step="0.01" placeholder="Preço" /></td>
-            <td>
-              <label class="switch">
-                <input type="checkbox" v-model="product.catalog" />
-                <span class="slider"></span>
-              </label>
+              <input type="checkbox" :checked="product.catalog" disabled />
             </td>
             <td>
-              <button class="delete-btn" @click="deleteProduct(product.id)">
-                <i class="fa fa-trash"></i>
-              </button>
+              <button class="delete-btn" @click="deleteProduct(product.id)">Excluir</button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <div v-if="showModal" class="modal" @click="closeModal">
+
+    <div v-if="showModal" class="modal" @click.self="closeModal">
       <div class="modal-content">
         <h2>Adicionar Produto</h2>
-        <input v-model="newProduct.name" placeholder="Nome do Produto" />
-        <select v-model="newProduct.category" name="estado">
+        <input v-model="newProduct.nome" placeholder="Nome do Produto" />
+        <select v-model="newProduct.category">
           <option value="salgado">Salgado</option>
-          <option value="ac">Açai</option>
-          <option value="al">Alagoas</option>
-          <option value="am">Amazonas</option>
-          <option value="ap">Amapá</option>
-        </select>
+          <option value="bebida">Bebida</option>
+          <option value="doce">Doce</option>
 
+
+        </select>
         <input v-model="newProduct.stock" type="number" placeholder="Estoque" />
         <input v-model="newProduct.price" type="number" step="0.01" placeholder="Preço" />
 
-        <label class="catalog-label">
-          <label class="switch">
-            <input type="checkbox" v-model="newProduct.catalog" />
-            <span class="slider"></span>
-          </label>
+
+        <label>
+          <input type="checkbox" v-model="newProduct.catalog" />
           Exibir no Catálogo
         </label>
 
-        <!-- Campo para upload de imagem -->
-        <input type="file" @change="handleFileUpload" class="file-input" />
-        <img
-          v-if="newProduct.image"
-          :src="newProduct.image"
-          alt="Imagem do Produto"
-          class="product-image-preview"
-        />
 
-        <div class="modal-actions">
-          <button class="save-btn" @click="saveProduct">Salvar</button>
-          <button class="close-btn" @click="showModal = false">Fechar</button>
-        </div>
+        <input type="file" @change="handleFileUpload" />
+        <img v-if="newProduct.image" :src="newProduct.image_url" alt="Prévia da Imagem" />
+
+
+        <button @click="insertData">Salvar</button>
+        <button @click="closeModal">Fechar</button>
       </div>
     </div>
-  </section>
+  </div>
+  <Footer />
 </template>
+
+
+
 
 <style scoped>
 * {
@@ -178,17 +218,20 @@ const closeModal = (event) => {
   box-sizing: border-box;
 }
 
+
 body {
   font-family: 'Poppins', sans-serif;
   background-color: #faf3e0;
   color: #333;
 }
 
+
 .stock-manager {
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 20px;
 }
+
 
 .header {
   display: flex;
@@ -197,16 +240,19 @@ body {
   margin-bottom: 25px;
 }
 
+
 h1 {
   font-size: 32px;
   font-weight: 700;
   color: #c45d4c;
 }
 
+
 .table-container {
   overflow-x: auto;
   margin-bottom: 20px;
 }
+
 
 table {
   width: 100%;
@@ -216,6 +262,7 @@ table {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
+
 th,
 td {
   padding: 16px;
@@ -223,11 +270,13 @@ td {
   border-bottom: 1px solid #eaeaea;
 }
 
+
 th {
   background-color: #ffe5d4;
   font-weight: 600;
   color: #c45d4c;
 }
+
 
 td input,
 td select {
@@ -238,6 +287,7 @@ td select {
   font-size: 14px;
 }
 
+
 td button {
   background-color: transparent;
   border: none;
@@ -247,9 +297,11 @@ td button {
   transition: color 0.3s ease;
 }
 
+
 td button:hover {
   color: #a04b3a;
 }
+
 
 .add-product-btn {
   background-color: #c45d4c;
@@ -260,9 +312,11 @@ td button:hover {
   transition: background-color 0.3s ease;
 }
 
+
 .add-product-btn:hover {
   background-color: #a04b3a;
 }
+
 
 .switch {
   position: relative;
@@ -271,11 +325,13 @@ td button:hover {
   height: 24px;
 }
 
+
 .switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
+
 
 .slider {
   position: absolute;
@@ -289,6 +345,7 @@ td button:hover {
   border-radius: 34px;
 }
 
+
 .slider:before {
   position: absolute;
   content: '';
@@ -301,13 +358,16 @@ td button:hover {
   border-radius: 50%;
 }
 
+
 input:checked + .slider {
   background-color: #c45d4c;
 }
 
+
 input:checked + .slider:before {
   transform: translateX(26px);
 }
+
 
 .modal {
   position: fixed;
@@ -323,6 +383,7 @@ input:checked + .slider:before {
   z-index: 1000;
 }
 
+
 .modal-content {
   background-color: #fff;
   padding: 40px;
@@ -333,6 +394,7 @@ input:checked + .slider:before {
   animation: slideIn 0.3s ease-out;
   position: relative;
 }
+
 
 @keyframes slideIn {
   from {
@@ -345,12 +407,14 @@ input:checked + .slider:before {
   }
 }
 
+
 h2 {
   font-size: 24px;
   color: #c45d4c;
   margin-bottom: 20px;
   text-align: center;
 }
+
 
 input,
 select {
@@ -362,9 +426,11 @@ select {
   font-size: 16px;
 }
 
+
 input:focus {
   border-color: #c45d4c;
 }
+
 
 .catalog-label {
   display: flex;
@@ -374,11 +440,13 @@ input:focus {
   color: #555;
 }
 
+
 .modal-actions {
   display: flex;
   justify-content: space-between;
   gap: 10px;
 }
+
 
 .save-btn,
 .close-btn {
@@ -390,23 +458,28 @@ input:focus {
   transition: background-color 0.3s ease;
 }
 
+
 .save-btn {
   background-color: #c45d4c;
   color: white;
 }
 
+
 .save-btn:hover {
   background-color: #a04b3a;
 }
+
 
 .close-btn {
   background-color: #ff6f61;
   color: white;
 }
 
+
 .close-btn:hover {
   background-color: #d96055;
 }
+
 
 .table-product-image {
   width: 100px;
@@ -418,6 +491,7 @@ input:focus {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
+
 .product-image-preview {
   max-width: 100%;
   max-height: 250px;
@@ -426,6 +500,7 @@ input:focus {
   margin-top: 20px;
 }
 
+
 .file-input {
   margin-top: 10px;
   padding: 10px;
@@ -433,11 +508,13 @@ input:focus {
   color: #555;
 }
 
+
 /* Responsividade para telas menores */
 @media (max-width: 768px) {
   .stock-manager {
     padding: 20px;
   }
+
 
   table {
     display: block; /* Permite rolagem horizontal */
@@ -445,23 +522,28 @@ input:focus {
     overflow-x: auto;
   }
 
+
   .table-container {
     overflow-x: auto;
   }
+
 
   .modal-content {
     width: 90%;
     padding: 20px;
   }
 
+
   .add-product-btn {
     padding: 8px 16px;
   }
+
 
   .save-btn, .close-btn {
     font-size: 14px;
     padding: 10px;
   }
+
 
   .table-product-image {
     width: 80px;
