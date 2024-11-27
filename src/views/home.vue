@@ -28,6 +28,7 @@ const filteredProducts = computed(() => {
   <headers />
 
   <section class="hero" :style="{ backgroundImage: `url(${back})` }">
+    
     <div class="hero-text">
       <img :src="Slogan" alt="Slogan" class="slogan-image" />
       <p class="hero-p"></p>
@@ -39,11 +40,10 @@ const filteredProducts = computed(() => {
     </div>
   </section>
 
-  <!-- Barra de Pesquisa com Estilo Aprimorado -->
   <div class="search-section">
     <hr class="divider" />
     <div class="search-bar">
-      <input type="text" v-model="searchQuery" placeholder="Pesquisar produtos..." />
+        <input type="text" v-model="searchQuery" placeholder="Pesquisar produtos..." />
     </div>
   </div>
 
@@ -62,16 +62,16 @@ const filteredProducts = computed(() => {
 
 <style>
 body {
-  background-image: url('../src/assets/image/FundoSite.png'); /* Use a imagem de fundo */
+  background-image: url('../src/assets/image/FundoSite.png'); 
 }
 </style>
 
 <style scoped>
 body {
-  background-image: url('@/assets/image/FundoSite.png'); /* Use a imagem de fundo */
-  background-size: cover; /* Faz a imagem cobrir toda a tela */
-  background-position: center; /* Centraliza a imagem */
-  background-repeat: no-repeat; /* Não repete a imagem */
+  background-image: url('@/assets/image/FundoSite.png'); 
+  background-size: cover;
+  background-position: center; 
+  background-repeat: no-repeat; 
 }
 
 .div-product {

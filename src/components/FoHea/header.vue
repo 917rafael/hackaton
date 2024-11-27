@@ -25,7 +25,7 @@ const authStore = useAuthStore();
             </button>
 
             <span v-if="authStore.access_token && authStore.user.user_metadata.tipo == 'funcionario'">
-              funcionário logado
+              <RouterLink to="/perfil">funcionario</RouterLink>
             </span>
 
             <span v-if="authStore.access_token && authStore.user.user_metadata.tipo == 'cliente'">
