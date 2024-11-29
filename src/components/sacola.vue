@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import { ref } from 'vue'
 import { useSacolaStore } from '@/store/sacola.js'
@@ -33,7 +34,7 @@ const deleteItem = (index) => {
 }
 
 const calculateTotal = () => {
-  return store.sacola_cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)
+  return store.sacola_cart.reduce((total, productselected) => total + productselected.price * productselected.quantity, 0).toFixed(2)
 }
 </script>
 
@@ -55,18 +56,18 @@ const calculateTotal = () => {
     <div class="cart-divider"></div>
 
     <div v-if="store.sacola_cart.length > 0" class="cart-items">
-      <div class="cart-item" v-for="(item, index) in store.sacola_cart" :key="item.id">
+      <div class="cart-item" v-for="(productselected, index) in store.sacola_cart" :key="productselected.id">
         <div class="item-info">
-          <span class="item-name">{{ item.name }}</span>
-          <span class="item-price">R$ {{ item.price.toFixed(2) }}</span>
+          <span class="item-name">{{ productselected.name }}</span>
+          <span class="item-price">R$ {{ productselected.price.toFixed(2) }}</span>
         </div>
 
         <div class="item-controls">
-          <button @click="removeItem(item)" class="btn-remove" aria-label="Remover item">
+          <button @click="removeItem(productselected)" class="btn-remove" aria-label="Remover item">
             <i class="fas fa-minus"></i>
           </button>
-          <span>{{ item.quantity }}</span>
-          <button @click="addItem(item)" class="btn-add" aria-label="Adicionar item">
+          <span>{{ productselected.quantity }}</span>
+          <button @click="addItem(productselected)" class="btn-add" aria-label="Adicionar item">
             <i class="fas fa-plus"></i>
           </button>
           <button @click="deleteItem(index)" class="btn-delete" aria-label="Deletar item">

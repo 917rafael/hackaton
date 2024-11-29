@@ -59,6 +59,12 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: () => import('../views/Login.vue')
+    },
+    {
+      path: '/product/:id',
+      name: 'product',
+      component: () => import('../components/Product/Card.vue'),
+      props: true, // Passa o ID do produto como prop
     }
   ]
 })

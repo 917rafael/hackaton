@@ -3,7 +3,7 @@
 import headers from '@/components/FoHea/header.vue'
 import ProductCard from '@/components/home/ProductCard.vue'
 import back from '@/assets/image/fundohome.jpg'
-import { produtos } from '@/data/produtos'
+import { produtos } from '@/data/produtos.js'
 import Product from '@/components/Product/Produtc.vue'
 import sacola from '@/components/sacola.vue'
 import Fotter from '@/components/FoHea/Footer.vue'
@@ -70,7 +70,7 @@ onMounted(() => {
   </div>
 
   <div class="product-main" >
-    <div class="product-list" @click="toggleModal" >
+    <div class="product-list" @click.self="toggleModal" >
       <Product v-for="product in filteredProducts" :key="product.id" :product="product" />
     </div>
   </div>

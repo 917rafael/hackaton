@@ -81,7 +81,7 @@ const insertData = async () => {
   const { nome, category, stock, price, image_url, catalog } = newProduct.value;
 
 
-  if (!nome || !category || !stock || !price ) {
+  if (!nome || !category || !stock || !price) {
     alert('Por favor, preencha todos os campos obrigatórios e adicione uma imagem.');
     console.log(nome, category, stock, price, image_url)
     return;
@@ -132,9 +132,9 @@ onMounted(fetchProducts);
 
 
 <template>
-<Header />
+  <Header />
   <div class="stock-manager">
-   
+
     <header>
       <h1>Gerenciamento de Produtos</h1>
       <button class="add-product-btn" @click="openModal">+ Adicionar Produto</button>
@@ -157,17 +157,22 @@ onMounted(fetchProducts);
         <tbody>
           <tr v-for="product in products" :key="product.id">
             <td>
-              <img :src="product.image" alt="Imagem do Produto" class="table-product-image" />
+              <img :src="product.image_url" :alt="product.name" class="table-product-image" />
             </td>
-            <td>{{ product.nome }}</td>
+            <td>{{ product.name }}</td>
             <td>{{ product.category }}</td>
             <td>{{ product.stock }}</td>
             <td>{{ product.price }}</td>
+
             <td>
-              <input type="checkbox" :checked="product.catalog" disabled />
+              <span class="toggle-button static" :class="{ active: product.catalog }">
+                {{ product.catalog ? "Sim" : "Não" }}
+              </span>
             </td>
             <td>
-              <button class="delete-btn" @click="deleteProduct(product.id)">Excluir</button>
+              <button class="delete-btn" @click="deleteProduct(product.id)">
+                <i class="fa fa-trash"></i>
+              </button>
             </td>
           </tr>
         </tbody>
@@ -190,14 +195,17 @@ onMounted(fetchProducts);
         <input v-model="newProduct.price" type="number" step="0.01" placeholder="Preço" />
 
 
-        <label>
-          <input type="checkbox" v-model="newProduct.catalog" />
-          Exibir no Catálogo
+        <label class="catalog-label">
+          <input type="checkbox" v-model="newProduct.catalog" class="hidden-checkbox" />
+          <span class="toggle-button" :class="{ active: newProduct.catalog }">
+            {{ newProduct.catalog ? "Exibir" : "Ocultar" }}
+          </span>
         </label>
 
 
+
         <input type="file" @change="handleFileUpload" />
-        <img v-if="newProduct.image" :src="newProduct.image_url" alt="Prévia da Imagem" />
+        <!-- <img :src="newProduct.image_url" :alt="newProduct.name" class="table-product-image" /> -->
 
 
         <button @click="insertData">Salvar</button>
@@ -359,12 +367,12 @@ td button:hover {
 }
 
 
-input:checked + .slider {
+input:checked+.slider {
   background-color: #c45d4c;
 }
 
 
-input:checked + .slider:before {
+input:checked+.slider:before {
   transform: translateX(26px);
 }
 
@@ -401,6 +409,7 @@ input:checked + .slider:before {
     opacity: 0;
     transform: translateY(-50px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -517,7 +526,8 @@ input:focus {
 
 
   table {
-    display: block; /* Permite rolagem horizontal */
+    display: block;
+    /* Permite rolagem horizontal */
     width: 100%;
     overflow-x: auto;
   }
@@ -539,7 +549,8 @@ input:focus {
   }
 
 
-  .save-btn, .close-btn {
+  .save-btn,
+  .close-btn {
     font-size: 14px;
     padding: 10px;
   }
@@ -549,5 +560,78 @@ input:focus {
     width: 80px;
     height: 80px;
   }
+
+  .hidden-checkbox {
+    display: none;
+  }
+
+  .toggle-button {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    color: white;
+    background-color: #ffe5d4;
+    border: 2px solid #c45d4c;
+  }
+
+  .toggle-button:hover {
+    background-color: #ffcbba;
+    color: #a04b3a;
+  }
+
+  .toggle-button.active {
+    background-color: #c45d4c;
+    color: white;
+  }
+
+  .toggle-button.static {
+    pointer-events: none;
+    opacity: 0.8;
+  }
+
+  .hidden-checkbox {
+  display: none;
+}
+
+.toggle-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+  background-color: #ffe5d4;
+  border: 2px solid transparent;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-button:hover {
+  background-color: #ffcbba;
+  border-color: #c45d4c;
+  color: #c45d4c;
+}
+
+.toggle-button.active {
+  background-color: #c45d4c;
+  color: white;
+  border-color: #a04b3a;
+  box-shadow: 0px 4px 12px rgba(196, 93, 76, 0.4);
+}
+
+.toggle-button:active {
+  transform: scale(0.95);
+}
+
+
 }
 </style>
