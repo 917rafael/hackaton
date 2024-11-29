@@ -147,7 +147,7 @@ const insertData = async () => {
 
 
 .input-with-icon input {
-  text-indent: 40px; /* Ajusta o início do texto digitado */
+  text-indent: 40px;
 }
 .payment-page {
   max-width: 1200px;
@@ -187,7 +187,7 @@ const insertData = async () => {
 }
 
 .input-with-icon input {
-  padding-left: 40px; /* Espaço para o ícone */
+  padding-left: 40px;
 }
 
 .input-with-icon i {
@@ -269,7 +269,7 @@ const insertData = async () => {
   font-size: 1em;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.2s;
-  width: 100%; /* O botão ocupa 100% da largura do contêiner */
+  width: 100%; 
   margin-top: 20px;
 }
 
@@ -313,7 +313,7 @@ const insertData = async () => {
 }
 
 .btn-final {
-  margin-top: 20px; /* Espaçamento entre o botão e o restante do resumo */
+  margin-top: 20px; 
 }
 
 @media (max-width: 1024px) {

@@ -1,63 +1,88 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import { ref } from 'vue';
 import Header from '@/components/FoHea/header.vue';
 
-// Dados do cliente
 const cliente = ref({
-  nome: 'João da Silva',
-  username: '@joaodapadaria',
-  email: 'joao@email.com',
-  membroDesde: '10 de Janeiro de 2022',
-  foto: 'https://via.placeholder.com/150', // Foto inicial do cliente
+  nome: '',
+  username: '',
+  email: '',
+  membroDesde: '',
+  foto: 'https://via.placeholder.com/150',
+  atividades: [
+    { data: '12 de Novembro de 2024', descricao: 'Compra de pães artesanais' },
+    { data: '30 de Outubro de 2024', descricao: 'Pedido de torta de maçã' },
+  ],
 });
 
-// Referência ao input de upload de arquivos
 const fileInputRef = ref(null);
+const mostrarMensagem = ref(null);
+const mensagemTipo = ref('');
+const senha = ref('');
+const confirmaSenha = ref('');
+const temaEscuro = ref(false);
 
-// Função para abrir o seletor de arquivos
 const abrirSeletorDeArquivos = () => {
-  fileInputRef.value.click(); // Simula o clique no input de arquivo
+  fileInputRef.value.click();
 };
 
-// Função para lidar com o upload da foto
 const carregarFoto = (event) => {
-  const arquivo = event.target.files[0]; // Obtém o arquivo selecionado
+  const arquivo = event.target.files[0];
   if (arquivo) {
     const leitor = new FileReader();
     leitor.onload = () => {
-      cliente.value.foto = leitor.result; // Atualiza a foto do cliente com a URL da imagem carregada
+      cliente.value.foto = leitor.result;
+      mostrarMensagem.value = 'Foto alterada com sucesso!';
+      mensagemTipo.value = 'success';
     };
-    leitor.readAsDataURL(arquivo); // Lê o arquivo como uma URL base64
+    leitor.readAsDataURL(arquivo);
+  } else {
+    mostrarMensagem.value = 'Erro ao carregar a foto. Tente novamente.';
+    mensagemTipo.value = 'error';
   }
+};
+
+const salvarAlteracoes = () => {
+  if (senha.value !== confirmaSenha.value) {
+    mostrarMensagem.value = 'As senhas não coincidem!';
+    mensagemTipo.value = 'error';
+  } else {
+    cliente.value.nome = cliente.value.nome.trim();
+    cliente.value.email = cliente.value.email.trim();
+    mostrarMensagem.value = 'Alterações salvas com sucesso!';
+    mensagemTipo.value = 'success';
+  }
+};
+
+const toggleModoEscuro = () => {
+  temaEscuro.value = !temaEscuro.value;
 };
 </script>
 
 <template>
   <Header />
-
-  <div class="container">
-    <!-- Perfil do Cliente -->
+  <div :class="['container', { 'modo-escuro': temaEscuro }]">
     <div class="perfil">
-      <img
-        class="perfil-img"
-        :src="cliente.foto"
-        alt="Foto do Cliente"
-      />
-      <h2 class="cliente-nome">{{ cliente.nome }}</h2>
-      <p class="cliente-username">{{ cliente.username }}</p>
-      <button class="upload-btn" @click="abrirSeletorDeArquivos">Alterar Foto</button>
-      <p class="info-text">Membro desde: {{ cliente.membroDesde }}</p>
-      <!-- Input de arquivo oculto -->
-      <input
-        type="file"
-        ref="fileInputRef"
-        accept="image/*"
-        style="display: none;"
-        @change="carregarFoto"
-      />
+      <div class="foto">
+        <img class="perfil-img" :src="cliente.foto" alt="Foto do Cliente" />
+        <button class="upload-btn" @click="abrirSeletorDeArquivos">
+          Alterar Foto
+        </button>
+        <input
+          type="file"
+          ref="fileInputRef"
+          accept="image/*"
+          style="display: none"
+          @change="carregarFoto"
+        />
+      </div>
+      <div class="informacoes">
+        <h2 class="cliente-nome">{{ cliente.nome }}</h2>
+        <p class="cliente-username">{{ cliente.username }}</p>
+        <p class="info-text">Membro desde: {{ cliente.membroDesde }}</p>
+      </div>
     </div>
 
-    <!-- Formulário de Edição -->
     <div class="infor">
       <h3>Editar Perfil</h3>
       <form class="formulario" @submit.prevent="salvarAlteracoes">
@@ -68,6 +93,7 @@ const carregarFoto = (event) => {
             id="nome"
             v-model="cliente.nome"
             placeholder="João da Silva"
+            required
           />
         </div>
         <div class="campo">
@@ -77,6 +103,7 @@ const carregarFoto = (event) => {
             id="email"
             v-model="cliente.email"
             placeholder="joao@email.com"
+            required
           />
         </div>
         <div class="campo">
@@ -84,7 +111,9 @@ const carregarFoto = (event) => {
           <input
             type="password"
             id="senha"
+            v-model="senha"
             placeholder="••••••••"
+            required
           />
         </div>
         <div class="campo">
@@ -92,214 +121,284 @@ const carregarFoto = (event) => {
           <input
             type="password"
             id="confirmaSenha"
+            v-model="confirmaSenha"
             placeholder="••••••••"
+            required
           />
         </div>
         <button type="submit" class="salvar-btn">Salvar Alterações</button>
       </form>
+      <div v-if="mostrarMensagem" :class="['mensagem', mensagemTipo]">
+        <span>{{ mostrarMensagem }}</span>
+      </div>
     </div>
+
+    <div class="historico">
+      <h3>Histórico de Atividades</h3>
+      <ul>
+        <li v-for="atividade in cliente.atividades" :key="atividade.data">
+          <span class="icone">
+            <i class="fas fa-bread-slice"></i>
+          </span>
+          <span class="data">{{ atividade.data }}</span>
+          <span class="descricao">{{ atividade.descricao }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <button class="modo-escuro-btn" @click="toggleModoEscuro">
+      <span v-if="temaEscuro">Modo Claro</span>
+      <span v-else>Modo Escuro</span>
+    </button>
   </div>
 </template>
 
 <style scoped>
-/* Container principal */
+
+.modo-escuro {
+  background-color: #121212;
+  color: white;
+}
+
+.modo-escuro .perfil, .modo-escuro .infor, .modo-escuro .historico {
+  background-color: #1e1e1e;
+}
+
+.modo-escuro .perfil-img {
+  border-color: white;
+}
+
+.modo-escuro .campo input {
+  background-color: #333;
+  border-color: #444;
+  color: white;
+}
+
 .container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: flex-start;
   gap: 2rem;
   padding: 2rem;
-  background: linear-gradient(135deg, #ffe4c4 0%, #fffaf0 100%);
+  background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
   min-height: 100vh;
-  animation: fadeIn 1s ease-in-out;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Estilo do card de perfil */
 .perfil {
-  background-color: #ffffff;
+  background-color: white;
+  width: 100%;
+  max-width: 380px;
   padding: 2rem;
   border-radius: 12px;
   text-align: center;
-  width: 100%;
-  max-width: 350px;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .perfil:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
-/* Foto de perfil */
+.foto {
+  position: relative;
+}
+
 .perfil-img {
-  width: 120px;
-  height: 120px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 1rem;
-  border: 3px solid #d2691e;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 4px solid #6c757d;
 }
 
-.perfil-img:hover {
-  transform: scale(1.1);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Nome do cliente */
-.cliente-nome {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #5a3921;
-  margin-bottom: 0.5rem;
-}
-
-/* Nome de usuário */
-.cliente-username {
-  color: #a0522d;
-  font-style: italic;
-  font-size: 1rem;
-}
-
-/* Botão de upload */
 .upload-btn {
-  background-color: #d2691e;
+  background-color: #6c757d;
   color: white;
   border: none;
-  padding: 0.75rem 1.5rem;
+  padding: 1rem 2rem;
   margin-top: 1rem;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
   font-size: 1rem;
+  transition: background-color 0.3s ease;
 }
 
 .upload-btn:hover {
-  background-color: #8b4513;
-  transform: scale(1.05);
+  background-color: #495057;
 }
 
-/* Informações adicionais */
-.info-text {
-  color: #5a3921;
-  font-size: 0.9rem;
+.informacoes {
   margin-top: 1rem;
 }
 
-/* Formulário */
+.cliente-nome {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.cliente-username {
+  font-size: 1.2rem;
+  color: #6c757d;
+}
+
+.info-text {
+  color: #888;
+}
+
 .infor {
-  background-color: #ffffff;
-  padding: 2rem;
+  background-color: white;
+  padding: 2.5rem;
   border-radius: 12px;
   width: 100%;
   max-width: 500px;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.infor:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
-}
-
 .infor h3 {
+  font-size: 1.6rem;
   margin-bottom: 1.5rem;
-  color: #5a3921;
-  font-size: 1.8rem;
+  color: #333;
   text-align: center;
-  font-weight: bold;
 }
 
-/* Campos do formulário */
 .formulario .campo {
   margin-bottom: 1.5rem;
 }
 
-.campo label {
-  display: block;
-  font-weight: bold;
-  color: #5a3921;
-  margin-bottom: 0.5rem;
-}
-
 .campo input {
   width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #d2b48c;
+  padding: 1rem;
+  border: 1px solid #ced4da;
   border-radius: 8px;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .campo input:focus {
-  outline: none;
-  border-color: #d2691e;
-  box-shadow: 0 0 5px rgba(210, 105, 30, 0.5);
+  border-color: #007bff;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
 }
 
 .salvar-btn {
-  background-color: #d2691e;
+  background-color: #007bff;
   color: white;
+  padding: 1rem 2rem;
   border: none;
-  padding: 0.75rem 1.5rem;
   border-radius: 8px;
+  font-size: 1.1rem;
   cursor: pointer;
-  width: 100%;
-  margin-top: 1rem;
-  font-size: 1.2rem;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 .salvar-btn:hover {
-  background-color: #8b4513;
-  transform: scale(1.05);
+  background-color: #0056b3;
 }
 
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.mensagem {
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 8px;
+  text-align: center;
 }
 
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .perfil,
-  .infor {
-    width: 100%;
-  }
-
-  .upload-btn,
-  .salvar-btn {
-    font-size: 0.9rem;
-    padding: 0.5rem 1rem;
-  }
+.mensagem.success {
+  background-color: #28a745;
+  color: white;
 }
 
-@media (max-width: 480px) {
-  .perfil-img {
-    width: 100px;
-    height: 100px;
-  }
+.mensagem.error {
+  background-color: #dc3545;
+  color: white;
+}
 
-  .cliente-nome {
-    font-size: 1.5rem;
-  }
+.historico {
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 550px;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 2rem;
+}
 
-  .infor h3 {
-    font-size: 1.5rem;
-  }
+.historico:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.historico h3 {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+  text-align: center;
+  font-weight: 600;
+}
+
+.historico ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.historico li {
+  font-size: 1.1rem;
+  color: #444;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.historico li:last-child {
+  border-bottom: none;
+}
+
+.historico li:hover {
+  background-color: #f8f9fa;
+  cursor: pointer;
+}
+
+.historico li span {
+  flex: 1;
+}
+
+.historico li .data {
+  font-weight: 500;
+  color: #007bff;
+}
+
+.historico li .descricao {
+  font-weight: 400;
+  color: #555;
+  margin-left: 1rem;
+}
+
+.historico li .icone {
+  font-size: 1.5rem;
+  color: #007bff;
+  display: flex;
+  align-items: center;
+}
+
+.modo-escuro-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-top: 2rem;
+  cursor: pointer;
+}
+
+.modo-escuro-btn:hover {
+  background-color: #0056b3;
 }
 </style>
-

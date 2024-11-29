@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
+import Header from '@/components/FoHea/header.vue';
 import { ref } from 'vue'
 import { useAuthStore } from '@/store/auth';
 import router from '@/router';
@@ -27,6 +28,8 @@ const login = async() => {
 </script>
 
 <template>
+<Header />
+
   <div class="background">
     <img src="/src/assets/image/Fundocontato.jpg" alt="Padaria" class="padaria-img" />
   </div>
@@ -69,30 +72,27 @@ const login = async() => {
 </template>
 
 <style scoped>
-/* Corpo */
 body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  background-color: #2C3E50; /* Fundo escuro para o corpo */
-  color: #ECEFF1;
+  background-color: #2C3E50;   color: #ECEFF1;
 }
 
-/* Global */
 h1 {
   font-weight: 600;
 }
 
 .txt-entre {
-  color: #B0BEC5; /* Cor suave para o texto */
+  color: #B0BEC5; 
   text-align: center;
   font-size: 28px;
   margin-bottom: 10px;
 }
 
 .txt-padaria {
-  color: #FF7043; /* Laranja para o título */
+  color: #FF7043; 
   text-align: center;
   font-size: 36px;
   font-weight: 700;
@@ -100,7 +100,6 @@ h1 {
   margin-bottom: 20px;
 }
 
-/* Container */
 .container {
   display: flex;
   justify-content: center;
@@ -115,7 +114,7 @@ h1 {
 .caixa {
   width: 100%;
   max-width: 480px;
-  background: #34495E; /* Cor mais escura para o fundo */
+  background: #34495E; 
   border-radius: 20px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   padding: 40px;
@@ -130,9 +129,8 @@ h1 {
   box-shadow: 0 24px 50px rgba(0, 0, 0, 0.3);
 }
 
-/* Imagem de fundo */
 .padaria-img {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -142,7 +140,6 @@ h1 {
   z-index: -1;
 }
 
-/* Estilo do formulário */
 .form {
   display: flex;
   flex-direction: column;
@@ -154,7 +151,6 @@ h1 {
   position: relative;
 }
 
-/* Labels */
 .input-label {
   font-size: 16px;
   color: #B0BEC5;
@@ -169,7 +165,6 @@ h1 {
   pointer-events: none;
 }
 
-/* Inputs */
 .input-field {
   padding: 18px 20px;
   border: 2px solid #607D8B;
@@ -183,7 +178,6 @@ h1 {
   position: relative;
 }
 
-/* Efeito ao focar nos inputs */
 .input-field:focus {
   border-color: #FF7043;
   background-color: #37474F;
@@ -191,7 +185,6 @@ h1 {
   box-shadow: 0 0 8px rgba(255, 112, 67, 0.5);
 }
 
-/* Efeito flutuante no label */
 .input-field:focus + .input-label,
 .input-field:not(:placeholder-shown) + .input-label {
   transform: translateY(-25px);
@@ -199,7 +192,6 @@ h1 {
   color: #FF7043;
 }
 
-/* Botão de submit */
 .submit-btn {
   padding: 18px 20px;
   background-color: #FF7043;
@@ -224,7 +216,6 @@ h1 {
 }
 
 
-/* Animação para fade-in */
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -236,7 +227,6 @@ h1 {
   }
 }
 
-/* Responsividade para telas menores */
 @media (max-width: 1024px) {
   .container {
     padding: 30px;
@@ -321,12 +311,10 @@ h1 {
   }
 }
 
-/* Efeitos de transição mais suaves para o botão e ícones */
 button, .funcio {
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-/* Hover e animação do ícone de funcionário */
 .funcio:hover {
   transform: scale(1.2);
   filter: brightness(1.2);
@@ -338,7 +326,6 @@ button, .funcio {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Modo noturno */
 body {
   background-color: #2C3E50;
 }
