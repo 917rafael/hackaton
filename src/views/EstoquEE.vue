@@ -58,15 +58,14 @@ const handleFileUpload = async (event) => {
     return;
   }
 
-
-  // Recuperar URL pública da imagem
+ // Recuperar URL pública da imagem
   const { data: publicUrlData } = supabase.storage
     .from('product-images')
     .getPublicUrl(fileName);
 
 
   if (publicUrlData) {
-    newProduct.value.image = publicUrlData.publicUrl; // Salvar URL pública no produto
+    newProduct.value.image_url = publicUrlData.publicUrl; // Salvar URL pública no produto
   } else {
     console.error('Erro ao obter URL pública.');
     alert('Erro ao obter URL pública da imagem.');
@@ -79,6 +78,9 @@ const handleFileUpload = async (event) => {
 // Salvar produto no Supabase
 const insertData = async () => {
   const { nome, category, stock, price, image_url, catalog } = newProduct.value;
+  
+  
+
 
 
   if (!nome || !category || !stock || !price) {
@@ -90,6 +92,7 @@ const insertData = async () => {
 
   const { data, error } = await supabase.from('products').insert([
     { name: nome, category, stock, price, image_url, catalog },
+    
   ]);
 
 
@@ -205,7 +208,7 @@ onMounted(fetchProducts);
 
 
         <input type="file" @change="handleFileUpload" />
-        <!-- <img :src="newProduct.image_url" :alt="newProduct.name" class="table-product-image" /> -->
+        <img :src="newProduct.image_url" :alt="newProduct.name" class="table-product-image" /> 
 
 
         <button @click="insertData">Salvar</button>
