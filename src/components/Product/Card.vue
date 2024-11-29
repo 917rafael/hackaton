@@ -1,15 +1,18 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
-import { computed, ref, onMounted, defineEmits } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { useSacolaStore } from '@/store/sacola.js'
-import { supabase } from '@/lib/supabaseClient.js'
+import { useProductStore } from '@/store/productStore.js'
 
 const store = useSacolaStore()
-const props = defineProps('productselected')
+const props = defineProps(['id'])
 const options = ref([{ count: 0, price: 1.0 }])
 const observation = ref('')
-const products = ref([]);
-const emit = defineEmits();
+// const products = ref([]);
+// const emit = defineEmits();
+const produto =  ref({})
+
+const productStore = useProductStore()
 
 const acompanhamentos = ref([
   { name: 'Batata Frita', price: 5.0, count: 0, isRemovable: true },
@@ -46,28 +49,20 @@ const decreaseAcaiCount = (index) => {
   }
 }
 
-const fetchProducts = async () => {
-  const { data, error } = await supabase.from('products').select('*');
-  if (error) {
-    console.error('Erro ao buscar produtos:', error.message);
-  } else {
-    products.value = data;
-  }
-};
 
-console.log(props.productselected)
+console.log(props.product)
 
 
 onMounted(() => {
-  fetchProducts();
+    produto.value = productStore.getProductById(props.id)
 });
 </script>
 
 <template>
-  <div class="modal-overlay" @click="toggleModal">
+  <div class="modal-overlay" @click="$router.push('/')">
     <div class="modal-content" @click.stop>
       <div class="modal-header">
-        <h2>{{products.name}}Não sei como faz essa jossa</h2>
+        <h2>{{produto.name}}</h2>
         <button class="close-button" @click="$router.push('/')">&times;</button>
       </div>
       <div class="modal-body">
@@ -119,7 +114,7 @@ onMounted(() => {
             <button @click="increaseCount(0)" class="control-button add">+</button>
           </div>
           <!-- Botão Adicionar ao Pedido -->
-          <button class="add-button" @click="store.addProduct(props.productselected)">
+          <button class="add-button" @click="store.addProduct(props.product)">
             Adicionar ao Pedido R$ {{ totalPrice.toFixed(2) }}
           </button>
 

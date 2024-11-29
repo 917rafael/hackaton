@@ -11,9 +11,11 @@ import Slogan from "@/assets/image/tadica-removebg-preview.png"
 import Card from '@/components/Product/Card.vue'
 import { ref, computed, onMounted } from 'vue';
 import { supabase } from '@/lib/supabaseClient';
+import { useProductStore } from '@/store/productStore'
 
 const searchQuery = ref('');
 const products = ref([]);
+const productStore = useProductStore()
 
 const isModalVisible = ref(false);
 
@@ -34,14 +36,14 @@ const fetchProducts = async () => {
 
 // Filtrar produtos pela barra de pesquisa
 const filteredProducts = computed(() => {
-  if (!searchQuery.value) return products.value;
-  return products.value.filter((product) =>
+  if (!searchQuery.value) return productStore.products;
+  return productStore.products.filter((product) =>
     product.name.toLowerCase().includes(searchQuery.value.toLowerCase())
   );
 });
 
-onMounted(() => {
-  fetchProducts();
+onMounted(async () => {
+  await productStore.fetchProducts()
 });
 </script>
 

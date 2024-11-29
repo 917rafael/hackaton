@@ -11,19 +11,11 @@ const props = defineProps({
 import Card from './Card.vue'
 // import { fetchProducts } from '@/data/produtos';
 import { products } from '@/data/cardapio'
-// import { sacola } from '@/data/sacola'
 import { ref, reactive, onMounted } from 'vue'
-import { supabase } from '@/lib/supabaseClient';
-
+// import { supabase } from '@/lib/supabaseClient';
+import { useProductStore } from '@/store/productStore.js'
 const isModalVisible = ref(false)
 const productselected = ref({})
-
-
-const suasacola = reactive({
-  qtd: 0,
-  observacao: null,
-  item: productselected.value
-})
 
 
 const toggleModal = (id) => {
@@ -31,18 +23,11 @@ const toggleModal = (id) => {
   productselected.value = findproduct
   isModalVisible.value = !isModalVisible.value
 }
+console.log('Produto recebido:', props.product.id);
 
-
-const fetchProducts = async () => {
-  const { data, error } = await supabase.from('products').select('*').eq('catalog', true);
-  if (error) {
-    console.error('Erro ao carregar produtos do catálogo:', error);
-  } else {
-    products.value = data;
-  }}
 
 onMounted(() => {
-  fetchProducts();
+  useProductStore();
 });
 
 </script>
@@ -75,6 +60,7 @@ onMounted(() => {
       <div class="installments" v-if="product.installments">
         {{ product.installments }}
       </div>
+
     </div>
   </div>
 
