@@ -6,7 +6,7 @@ Esse projeto foi desenvolvido durante o Hackaton 2024, com o objetivo de criar u
 
 ## Desenvolvedores
 
-[Higor do Amaral Fritz](https://github.com/HigorAmaral) + [Lucas de Souza](https://github.com/LucasdDeSouza) + [Rafael Pierger](https://github.com/917rafael) + [Matheus Liesenberg](https://github.com/matheusliesenberg) + [Matheus Silveira](https://github.com/mattusilveira)
+[Higor do Amaral Fritz](https://github.com/HigorAmaral)(tecnico de informática pela internet), [Lucas de Souza](https://github.com/LucasdDeSouza)(tecnico de informática pela internet), [Rafael Pierger](https://github.com/917rafael)(tecnico de informática pela internet), [Matheus Liesenberg](https://github.com/matheusliesenberg)(tecnico de informática pela internet) e [Matheus Silveira](https://github.com/mattusilveira)(tecnico de informática pela internet).
 
 # Pagina Login
 
