@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import { ref } from 'vue'
 import { useSacolaStore } from '@/store/sacola.js'
@@ -109,6 +110,7 @@ const calculateTotal = () => {
   position: fixed;
   bottom: 20px;
   right: 20px;
+  width: 80px;
   z-index: 1000;
   transition: background-color 0.3s ease;
 }
@@ -134,7 +136,6 @@ const calculateTotal = () => {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
   padding: 20px;
-  width: 380px;
   position: fixed;
   bottom: 80px;
   right: -380px;
@@ -155,6 +156,7 @@ const calculateTotal = () => {
   font-weight: bold;
   font-size: 22px;
   color: #6d4c41;
+  gap: 10px;
 }
 
 .close-btn {
@@ -270,6 +272,7 @@ const calculateTotal = () => {
 
   .cart-header {
     font-size: 18px;
+    
   }
 
   .cart-item {

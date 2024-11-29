@@ -1,7 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import { useProductStore } from '@/store/productStore'
-import Header from '@/components/FoHea/header.vue'
+import Header from '@/components/FoHea/HeaderMais.vue'
+
 
 const productStore = useProductStore()
 const showModal = ref(false)
@@ -311,7 +312,6 @@ input:checked + .slider:before {
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(6px);
-  z-index: 1000;
 }
 
 .modal-content {
