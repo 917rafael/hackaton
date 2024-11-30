@@ -1,41 +1,38 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
-import { ref } from 'vue'
-import { useSacolaStore } from '@/store/sacola.js'
+import { ref, onMounted } from 'vue';
+import { useSacolaStore } from '@/store/sacola.js';
 
-const store = useSacolaStore()
+const store = useSacolaStore();
 
-const isCartOpen = ref(false)
+const isCartOpen = ref(false);
 
 const toggleCart = () => {
-  isCartOpen.value = !isCartOpen.value
-}
+  isCartOpen.value = !isCartOpen.value;
+};
 
-const addItem = (item) => {
-  const product = store.sacola_cart.find((p) => p.id === item.id)
-  if (product) {
-    product.quantity += 1
-  } else {
-    store.sacola_cart.push({ ...item, quantity: 1 })
-  }
-}
+// Carregar sacola ao montar o componente
+onMounted(async () => {
+  await store.carregarSacola();
+});
 
-const removeItem = (item) => {
-  const product = store.sacola_cart.find((p) => p.id === item.id)
-  if (product && product.quantity > 1) {
-    product.quantity -= 1
-  } else {
-    store.sacola_cart = store.sacola_cart.filter(p => p.id !== item.id)
-  }
-}
+const addItem = async (products) => {
+  await store.adicionarProduto(products);
+};
 
-const deleteItem = (index) => {
-  store.sacola_cart.splice(index, 1)
-}
+const removeItem = async (products) => {
+  await store.removerProduto(products);
+};
+
+const deleteItem = async (index) => {
+  await store.excluirProduto(index);
+};
 
 const calculateTotal = () => {
-  return store.sacola_cart.reduce((total, productselected) => total + productselected.price * productselected.quantity, 0).toFixed(2)
-}
+  return store.sacola_cart
+    .reduce((total, productselected) => total + productselected.price * productselected.quantity, 0)
+    .toFixed(2);
+};
 </script>
 
 <template>
@@ -77,10 +74,7 @@ const calculateTotal = () => {
       </div>
     </div>
 
-    <div v-else class="empty-cart">
-      <p>Sua sacola está vazia!</p>
-    </div>
-
+    
     <div v-if="store.sacola_cart.length > 0" class="cart-divider"></div>
 
     <div v-if="store.sacola_cart.length > 0" class="cart-total">
@@ -93,6 +87,11 @@ const calculateTotal = () => {
         <button class="btn-finalize">FECHAR PEDIDO</button>
       </router-link>
     </div>
+
+    <div v-else class="empty-cart">
+      <p>Sua sacola está vazia!</p>
+    </div>
+
   </div>
 </template>
 

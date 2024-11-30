@@ -35,6 +35,7 @@ const fetchProducts = async () => {
     return products.value.filter((product) => product.catalog)
   })
 
+  
   // // Função para adicionar um novo produto
   // function addProduct(product) {
   //   products.value.push(product)

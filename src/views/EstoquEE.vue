@@ -58,7 +58,7 @@ const handleFileUpload = async (event) => {
     return;
   }
 
- // Recuperar URL pública da imagem
+  // Recuperar URL pública da imagem
   const { data: publicUrlData } = supabase.storage
     .from('product-images')
     .getPublicUrl(fileName);
@@ -78,10 +78,6 @@ const handleFileUpload = async (event) => {
 // Salvar produto no Supabase
 const insertData = async () => {
   const { nome, category, stock, price, image_url, catalog } = newProduct.value;
-  
-  
-
-
 
   if (!nome || !category || !stock || !price) {
     alert('Por favor, preencha todos os campos obrigatórios e adicione uma imagem.');
@@ -89,10 +85,9 @@ const insertData = async () => {
     return;
   }
 
-
   const { data, error } = await supabase.from('products').insert([
     { name: nome, category, stock, price, image_url, catalog },
-    
+
   ]);
 
 
@@ -110,7 +105,6 @@ const insertData = async () => {
 // Excluir produto
 const deleteProduct = async (id) => {
   const { error } = await supabase.from('products').delete().eq('id', id);
-
 
   if (error) {
     console.error('Erro ao excluir produto:', error.message);
@@ -208,7 +202,7 @@ onMounted(fetchProducts);
 
 
         <input type="file" @change="handleFileUpload" />
-        <img :src="newProduct.image_url" :alt="newProduct.name" class="table-product-image" /> 
+        <img :src="newProduct.image_url" :alt="newProduct.name" class="table-product-image" />
 
 
         <button @click="insertData">Salvar</button>
@@ -598,42 +592,42 @@ input:focus {
   }
 
   .hidden-checkbox {
-  display: none;
-}
+    display: none;
+  }
 
-.toggle-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 24px;
-  border-radius: 30px;
-  font-size: 14px;
-  font-weight: bold;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  color: white;
-  background-color: #ffe5d4;
-  border: 2px solid transparent;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
+  .toggle-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+    background-color: #ffe5d4;
+    border: 2px solid transparent;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
 
-.toggle-button:hover {
-  background-color: #ffcbba;
-  border-color: #c45d4c;
-  color: #c45d4c;
-}
+  .toggle-button:hover {
+    background-color: #ffcbba;
+    border-color: #c45d4c;
+    color: #c45d4c;
+  }
 
-.toggle-button.active {
-  background-color: #c45d4c;
-  color: white;
-  border-color: #a04b3a;
-  box-shadow: 0px 4px 12px rgba(196, 93, 76, 0.4);
-}
+  .toggle-button.active {
+    background-color: #c45d4c;
+    color: white;
+    border-color: #a04b3a;
+    box-shadow: 0px 4px 12px rgba(196, 93, 76, 0.4);
+  }
 
-.toggle-button:active {
-  transform: scale(0.95);
-}
+  .toggle-button:active {
+    transform: scale(0.95);
+  }
 
 
 }

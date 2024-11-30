@@ -10,11 +10,9 @@ import Fotter from '@/components/FoHea/Footer.vue'
 import Slogan from "@/assets/image/tadica-removebg-preview.png"
 import Card from '@/components/Product/Card.vue'
 import { ref, computed, onMounted } from 'vue';
-import { supabase } from '@/lib/supabaseClient';
 import { useProductStore } from '@/store/productStore'
 
 const searchQuery = ref('');
-const products = ref([]);
 const productStore = useProductStore()
 
 const isModalVisible = ref(false);
@@ -24,15 +22,6 @@ const toggleModal = () => {
   isModalVisible.value = !isModalVisible.value;
 };
 
-// Carregar produtos do Supabase
-const fetchProducts = async () => {
-  const { data, error } = await supabase.from('products').select('*').eq('catalog', true);
-  if (error) {
-    console.error('Erro ao carregar produtos do catálogo:', error);
-  } else {
-    products.value = data;
-  }
-};
 
 // Filtrar produtos pela barra de pesquisa
 const filteredProducts = computed(() => {

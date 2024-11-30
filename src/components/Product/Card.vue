@@ -10,6 +10,15 @@ const options = ref([{ count: 0, price: 1.0 }])
 const observation = ref('')
 // const products = ref([]);
 // const emit = defineEmits();
+
+
+// Ação para adicionar o produto à sacola
+const adicionarProduto = async (produto) => {
+  await store.adicionarProduto(produto);
+};
+
+
+
 const produto =  ref({})
 
 const productStore = useProductStore()
@@ -114,8 +123,8 @@ onMounted(() => {
             <button @click="increaseCount(0)" class="control-button add">+</button>
           </div>
           <!-- Botão Adicionar ao Pedido -->
-          <button class="add-button" @click="store.addProduct(props.product)">
-            Adicionar ao Pedido R$ {{ totalPrice.toFixed(2) }}
+          <button class="add-button"  @click="adicionarProduto(produto)" >
+            Adicionar ao Pedido R$ {{ produto.price }}
           </button>
 
         </div>
