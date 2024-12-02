@@ -1,26 +1,43 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { authGuard } from '@/middleware/auth' // Importa o middleware
+import { UseAuthGuard } from '@/middleware/auth' // Importa o middleware
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path:  '/pedidosclient',
+      path: '/Perfil',
+      name: 'perfil',
+      component: () => import('../views/perfil.cleint/Perfil.vue')
+    },
+    {
+      path: '/configurações',
+      name: 'configuracoes ',
+      component: () => import('../views/Navbar-perfil/configuracoe.vue')
+    },
+    {
+      path: '/notificações',
+      name: 'notificacoes ',
+      component: () => import('../views/Navbar-perfil/notificacoes.vue')
+    },
+    {
+      path: '/pedidosclient',
       name: 'pedidosclient',
       component: () => import('../views/PedidosClient.vue')
     },
     {
       path: '/endereco',
       name: 'endereco',
-      component: () => import('../views/CadEndereco.vue')
+      component: () => import('../views/CadEndereco.vue'),
+      meta: { requiresAuth: true } // Exige autenticação e tipo 'funcionario'
     },
     {
-      path: '/Rendimento',
+      path: '/rendimento',
       name: 'rendimento',
-      component: () => import('../views/Rendimento.vue')
+      component: () => import('../views/Rendimento.vue'),
+      meta: { requiresAuth: true, allowedTypes: ['funcionario'] } // Exige autenticação e tipo 'funcionario'
+
     },
     {
-      path: '/Estoque',
       path: '/Estoque',
       name: 'estoque',
       component: () => import('../views/EstoquEE.vue')
@@ -34,7 +51,7 @@ const router = createRouter({
       path: '/homeFuncio',
       name: 'homeFuncio',
       component: () => import('../views/homeFuncio.vue'),
-      meta: { requiresAuth: true } // Rota protegida
+      meta: { requiresAuth: true, allowedTypes: ['funcionario'] } // Exige autenticação e tipo 'funcionario'
     },
     {
       path: '/',
@@ -46,25 +63,29 @@ const router = createRouter({
       path: '/CadastroFuncio',
       name: 'CadastroFuncio',
       component: () => import('../views/cadastroFuncio.vue'),
-      meta: { requiresAuth: true, allowedCodes: [9876, 4576] } // Rota protegida
+      meta: { requiresAuth: true, allowedCodes: ['funcionario'] } 
     },
     {
       path: '/Cadastro',
       name: 'Cadastro',
       component: () => import('../views/CadastroClient.vue')
     },
-    //login esta certo
 
     {
       path: '/login',
       name: 'login',
       component: () => import('../views/Login.vue')
+    },
+    {
+      path: '/product/:id',
+      name: 'product',
+      component: () => import('../components/Product/Card.vue'),
+      props: true, 
     }
   ]
 })
 
 // Aplica o middleware em cada rota
-// router.beforeEach(authGuard)
+// router.beforeEach(UseAuthGuard)
 
 export default router
-

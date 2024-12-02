@@ -5,11 +5,11 @@ import { ref } from 'vue'
 import Heade from '@/components/FoHea/header.vue'
 import Formulario from '@/components/formulario.vue'
 import Resultado from '@/components/resultado.vue'
-import { useAuthStore } from '@/store/auth'
+// import { useAuthStore } from '@/store/auth'
 import { RouterLink } from 'vue-router'
 
 const usuarios = ref({})
-const authStore = useAuthStore()
+// const authStore = useAuthStore()
 const mostrarResultado = ref(false)
 
 function clone(usuario) {
@@ -28,13 +28,10 @@ function clone(usuario) {
     <router-link to="/estoque">
       <button class="button" @click="salvar">Manipulação de produtos/estoque</button>
     </router-link>
-
     <router-link to="/pedidosclient">
       <button class="button" @click="salvar">Pedidos dos Clientes</button>
     </router-link>
-
     <button class="button" @click="salvar">Fornecedores</button>
-
     <button class="button" @click="salvar">Pedidos de Clientes</button>
   </div>
 
@@ -93,7 +90,6 @@ function clone(usuario) {
   transform: scale(0.98);
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
   .nav {
     flex-direction: column;
@@ -105,7 +101,6 @@ function clone(usuario) {
     max-width: 300px;
   }
 }
-/**/
 
 .head {
   background-color: #f4e1d2;

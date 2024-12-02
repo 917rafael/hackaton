@@ -1,5 +1,5 @@
 <script setup>
-import Footer from '@/components/FoHea/Footer.vue'
+// import Footer from '@/components/FoHea/Footer.vue'
 import { ref } from 'vue'
 import { useAuthStore } from '@/store/auth';
 import Header from '@/components/FoHea/header.vue';
@@ -62,6 +62,8 @@ const insertData = async () => {
 
       <button type="submit" class="submit-btn">Cadastrar</button>
       <p>{{ message }}</p>
+      <button v-if="message == 'Cliente inserido com sucesso!'" type="button" class="login-btn" @click="$router.push('/login')">login</button>
+
     </form>
         <router-link to="/cadastroFuncio" class="cliente">
           <img src="/src/assets/image/funcionarios.png" alt="Ícone de Funcionário" class="funcio">
@@ -200,12 +202,25 @@ label {
   transition: background-color 0.3s, transform 0.3s ease-in-out, box-shadow 0.3s ease;
 }
 
-.submit-btn:hover {
+.submit-btn:hover && .login-btn:hover{
   background-color: #FF5722;
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
+.login-btn{
+  place-items: center;
+  padding: 11px 13px;
+  background-color: #FF7043;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 15px;
+  width: 35%;
+  margin: 10px auto;  
+  transition: background-color 0.3s, transform 0.3s ease-in-out, box-shadow 0.3s ease;
+}
 /* Ícone de funcionário */
 .funcio {
   width: 35px;
