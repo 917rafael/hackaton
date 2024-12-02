@@ -1,14 +1,13 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import headers from '@/components/FoHea/header.vue'
 import ProductCard from '@/components/home/ProductCard.vue'
-import back from '@/assets/image/fundohome.jpg'
 import { produtos } from '@/data/produtos.js'
 import Product from '@/components/Product/Product.vue'
 import sacola from '@/components/sacola.vue'
 import Fotter from '@/components/FoHea/Footer.vue'
 import { useProductStore } from '@/store/productStore'
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
-import { useProductStore } from '@/store/productStore'
 import fundoHome from '../assets/image/fundohome.jpg'
 import padaria from '../assets/image/padaria.jpg'
 import Card from '@/components/Product/Card.vue'
@@ -33,7 +32,7 @@ onBeforeUnmount(() => {
 })
 
 const productStore = useProductStore()
-
+const searchQuery = ref('')
 const isModalVisible = ref(false);
 
 // Alternar a exibição do modal com os detalhes do produto
