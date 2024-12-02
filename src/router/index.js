@@ -33,7 +33,7 @@ const router = createRouter({
     {
       path: '/rendimento',
       name: 'rendimento',
-      component: () => import('../views/Rendimento.vue'),
+      component: () => import('../views/Navbar-perfil/Rendimento.vue'),
       meta: { requiresAuth: true, allowedTypes: ['funcionario'] } // Exige autenticação e tipo 'funcionario'
 
     },
