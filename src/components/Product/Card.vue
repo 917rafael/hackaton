@@ -1,13 +1,28 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
-import { computed, ref, defineEmits } from 'vue'
-import { products } from '@/data/cardapio'
+import { computed, ref, onMounted } from 'vue'
 import { useSacolaStore } from '@/store/sacola.js'
+import { useProductStore } from '@/store/productStore.js'
 
-const emit = defineEmits()
 const store = useSacolaStore()
-const props = defineProps(['productselected'])
+const props = defineProps(['id'])
 const options = ref([{ count: 0, price: 1.0 }])
 const observation = ref('')
+// const products = ref([]);
+// const emit = defineEmits();
+
+
+// Ação para adicionar o produto à sacola
+const adicionarProduto = async (produto) => {
+  await store.adicionarProduto(produto);
+};
+
+
+
+const produto =  ref({})
+
+const productStore = useProductStore()
+
 const acompanhamentos = ref([
   { name: 'Batata Frita', price: 5.0, count: 0, isRemovable: true },
 ])
@@ -43,17 +58,21 @@ const decreaseAcaiCount = (index) => {
   }
 }
 
-const closeModal = () => {
-  emit('close')
-}
+
+console.log(props.id)
+
+
+onMounted(() => {
+    produto.value = productStore.getProductById(props.id)
+});
 </script>
 
 <template>
-  <div class="modal-overlay" @click="closeModal">
+  <div class="modal-overlay" @click="$router.push('/')">
     <div class="modal-content" @click.stop>
       <div class="modal-header">
-        <h2>{{ productselected[0].name }}</h2>
-        <button class="close-button" @click="closeModal">&times;</button>
+        <h2>{{produto.name}}</h2>
+        <button class="close-button" @click="$router.push('/')">&times;</button>
       </div>
       <div class="modal-body">
         <div class="modal-body-content">
@@ -63,8 +82,8 @@ const closeModal = () => {
           </div>
           <div class="modal-options-content">
             <div class="modal-options">
-              <div v-for="(item, index) in products" :key="item.id" class="option">
-                <label class="option-label">{{ item.text }}</label>
+              <div class="option">
+                <label class="option-label">Deseja Adicionar 1 kit de Sachês com Molhos? Kit Sachês (1 Catchup, 1 Maionese, 1 Mostarda) (R$ 1,00)</label>
               </div>
             </div>
             <textarea
@@ -104,9 +123,10 @@ const closeModal = () => {
             <button @click="increaseCount(0)" class="control-button add">+</button>
           </div>
           <!-- Botão Adicionar ao Pedido -->
-          <button class="add-button" @click="store.addProduct(props.productselected)">
-            Adicionar ao Pedido R$ {{ totalPrice.toFixed(2) }}
+          <button class="add-button"  @click="adicionarProduto(produto)" >
+            Adicionar ao Pedido R$ {{ produto.price }}
           </button>
+
         </div>
       </div>
     </div>

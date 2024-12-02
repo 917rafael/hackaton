@@ -2,14 +2,17 @@
 <script setup>
 import headers from '@/components/FoHea/header.vue'
 import ProductCard from '@/components/home/ProductCard.vue'
-import { produtos } from '@/data/produtos'
+import back from '@/assets/image/fundohome.jpg'
+import { produtos } from '@/data/produtos.js'
 import Product from '@/components/Product/Product.vue'
 import sacola from '@/components/sacola.vue'
 import Fotter from '@/components/FoHea/Footer.vue'
 import { useProductStore } from '@/store/productStore'
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { useProductStore } from '@/store/productStore'
 import fundoHome from '../assets/image/fundohome.jpg'
 import padaria from '../assets/image/padaria.jpg'
+import Card from '@/components/Product/Card.vue'
 import desenhoFunco from '@/assets/image/imagem.jpg'
 
 const images = ref([padaria, fundoHome, desenhoFunco])
@@ -31,15 +34,28 @@ onBeforeUnmount(() => {
 })
 
 const productStore = useProductStore()
-const searchQuery = ref('')
 
+const isModalVisible = ref(false);
+
+// Alternar a exibição do modal com os detalhes do produto
+const toggleModal = () => {
+  isModalVisible.value = !isModalVisible.value;
+};
+
+
+// Filtrar produtos pela barra de pesquisa
 const filteredProducts = computed(() => {
-  if (!searchQuery.value) return productStore.catalogProducts
-  return productStore.catalogProducts.filter((product) =>
+  if (!searchQuery.value) return productStore.products;
+  return productStore.products.filter((product) =>
     product.name.toLowerCase().includes(searchQuery.value.toLowerCase())
-  )
-})
+  );
+});
+
+onMounted(async () => {
+  await productStore.fetchProducts()
+});
 </script>
+
 
 <template>
   <headers />
@@ -76,12 +92,14 @@ const filteredProducts = computed(() => {
     </div>
   </div>
 
-  <div class="product-main">
-    <div class="product-list">
+  <div class="product-main" >
+    <div class="product-list" @click.self="toggleModal" >
       <Product v-for="product in filteredProducts" :key="product.id" :product="product" />
     </div>
   </div>
-
+<div v-if="isModalVisible" >
+  <Card />
+</div>
   <div>
     <sacola />
   </div>

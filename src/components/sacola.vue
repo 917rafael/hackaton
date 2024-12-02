@@ -1,40 +1,28 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
-import { ref } from 'vue'
-import { useSacolaStore } from '@/store/sacola.js'
+import { ref, onMounted } from 'vue';
+import { useSacolaStore } from '@/store/sacola.js';
 
-const store = useSacolaStore()
+const store = useSacolaStore();
 
-const isCartOpen = ref(false)
+const isCartOpen = ref(false);
 
 const toggleCart = () => {
-  isCartOpen.value = !isCartOpen.value
-}
+  isCartOpen.value = !isCartOpen.value;
+};
 
-const addItem = (item) => {
-  const product = store.sacola_cart.find((p) => p.id === item.id)
-  if (product) {
-    product.quantity += 1
-  } else {
-    store.sacola_cart.push({ ...item, quantity: 1 })
-  }
-}
-
-const removeItem = (item) => {
-  const product = store.sacola_cart.find((p) => p.id === item.id)
-  if (product && product.quantity > 1) {
-    product.quantity -= 1
-  } else {
-    store.sacola_cart = store.sacola_cart.filter(p => p.id !== item.id)
-  }
-}
-
-const deleteItem = (index) => {
-  store.sacola_cart.splice(index, 1)
-}
+// Carregar sacola ao montar o componente
+onMounted(async () => {
+  await store.carregarSacola();
+});
 
 const calculateTotal = () => {
-  return store.sacola_cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)
-}
+  return store.sacola_cart
+    .reduce((total, productselected) => total + productselected.price * productselected.quantity, 0)
+    .toFixed(2);
+};
+
+
 </script>
 
 <template>
@@ -55,29 +43,25 @@ const calculateTotal = () => {
     <div class="cart-divider"></div>
 
     <div v-if="store.sacola_cart.length > 0" class="cart-items">
-      <div class="cart-item" v-for="(item, index) in store.sacola_cart" :key="item.id">
+      <div class="cart-item" v-for="(productselected, index) in store.sacola_cart" :key="productselected.id">
         <div class="item-info">
-          <span class="item-name">{{ item.name }}</span>
-          <span class="item-price">R$ {{ item.price.toFixed(2) }}</span>
+          <span class="item-name">{{ productselected.name }}</span>
+          <span class="item-price">R$ {{ productselected.price.toFixed(2) }}</span>
         </div>
 
         <div class="item-controls">
-          <button @click="removeItem(item)" class="btn-remove" aria-label="Remover item">
+          <button @click="store.removerProduto(productselected)" class="btn-remove" aria-label="Remover item">
             <i class="fas fa-minus"></i>
           </button>
-          <span>{{ item.quantity }}</span>
-          <button @click="addItem(item)" class="btn-add" aria-label="Adicionar item">
+          <span>{{ productselected.quantity }}</span>
+          <button @click="store.adicionarProduto(productselected)" class="btn-add" aria-label="Adicionar item">
             <i class="fas fa-plus"></i>
           </button>
-          <button @click="deleteItem(index)" class="btn-delete" aria-label="Deletar item">
+          <button @click="store.excluirProduto(index)" class="btn-delete" aria-label="Deletar item">
             <i class="fas fa-trash"></i>
           </button>
         </div>
       </div>
-    </div>
-
-    <div v-else class="empty-cart">
-      <p>Sua sacola está vazia!</p>
     </div>
 
     <div v-if="store.sacola_cart.length > 0" class="cart-divider"></div>
@@ -88,12 +72,15 @@ const calculateTotal = () => {
     </div>
 
     <div v-if="store.sacola_cart.length > 0" class="checkout">
-      <router-link to="/endereco">
-        <button class="btn-finalize">FECHAR PEDIDO</button>
-      </router-link>
+      <button class="btn-finalize" @click="store.fecharPedido">FECHAR PEDIDO</button>
+    </div>
+
+    <div v-else class="empty-cart">
+      <p>Sua sacola está vazia!</p>
     </div>
   </div>
 </template>
+
 
 <style scoped>
 /* Botão da sacola */

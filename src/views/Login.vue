@@ -4,20 +4,21 @@ import Header from '@/components/FoHea/header.vue';
 import { ref } from 'vue'
 import { useAuthStore } from '@/store/auth';
 import router from '@/router';
-
 const authStore =  useAuthStore()
-
 const senha = ref('');
 const email = ref('');
 
 const login = async() => {
   try {
-    await authStore.login(senha.value, email.value)
+    await authStore.login(senha.value, email.value) && authStore.sincronizarSacola(authStore.user.id);
+    console.log(authStore.user.user_metadata.tipo)
     if (authStore.user.user_metadata.tipo == 'cliente') router.push({ name: 'home' })
     else if (authStore.user.user_metadata.tipo == 'funcionario') router.push({ name: 'homeFuncio' })
+  console.log(authStore.user.user_metadata.tipo)
   } catch(e) {
     console.log(e)
   }
+
 }
 
 /* funcao para logout
@@ -66,6 +67,7 @@ const login = async() => {
         <button type="submit"  class="submit-btn">Entrar</button>
       </form>
       <p>{{ message }}</p>
+      <button type="button" class="register-btn" @click="$router.push(`/cadastro`)">cadastre-se</button>
     </div>
   </div>
 
@@ -205,16 +207,29 @@ h1 {
   transition: background-color 0.3s, transform 0.3s ease-in-out, box-shadow 0.3s ease;
 }
 
-.submit-btn:hover {
+.submit-btn:hover && .register-btn:hover {
   background-color: #FF5722;
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-.submit-btn:active {
+.submit-btn:active && .register-btn:active {
   transform: translateY(1px);
 }
 
+.register-btn{
+  place-items: center;
+  padding: 11px 2px ;
+  background-color: #FF7043;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 12px;
+  width: 20%;
+  margin: 10px auto;  
+  transition: background-color 0.3s, transform 0.3s ease-in-out, box-shadow 0.3s ease;
+}
 
 @keyframes fadeIn {
   0% {
