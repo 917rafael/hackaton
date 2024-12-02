@@ -16,23 +16,13 @@ onMounted(async () => {
   await store.carregarSacola();
 });
 
-const addItem = async (products) => {
-  await store.adicionarProduto(products);
-};
-
-const removeItem = async (products) => {
-  await store.removerProduto(products);
-};
-
-const deleteItem = async (index) => {
-  await store.excluirProduto(index);
-};
-
 const calculateTotal = () => {
   return store.sacola_cart
     .reduce((total, productselected) => total + productselected.price * productselected.quantity, 0)
     .toFixed(2);
 };
+
+
 </script>
 
 <template>
@@ -60,21 +50,20 @@ const calculateTotal = () => {
         </div>
 
         <div class="item-controls">
-          <button @click="removeItem(productselected)" class="btn-remove" aria-label="Remover item">
+          <button @click="store.removerProduto(productselected)" class="btn-remove" aria-label="Remover item">
             <i class="fas fa-minus"></i>
           </button>
           <span>{{ productselected.quantity }}</span>
-          <button @click="addItem(productselected)" class="btn-add" aria-label="Adicionar item">
+          <button @click="store.adicionarProduto(productselected)" class="btn-add" aria-label="Adicionar item">
             <i class="fas fa-plus"></i>
           </button>
-          <button @click="deleteItem(index)" class="btn-delete" aria-label="Deletar item">
+          <button @click="store.excluirProduto(index)" class="btn-delete" aria-label="Deletar item">
             <i class="fas fa-trash"></i>
           </button>
         </div>
       </div>
     </div>
 
-    
     <div v-if="store.sacola_cart.length > 0" class="cart-divider"></div>
 
     <div v-if="store.sacola_cart.length > 0" class="cart-total">
@@ -83,17 +72,15 @@ const calculateTotal = () => {
     </div>
 
     <div v-if="store.sacola_cart.length > 0" class="checkout">
-      <router-link to="/endereco">
-        <button class="btn-finalize">FECHAR PEDIDO</button>
-      </router-link>
+      <button class="btn-finalize" @click="store.fecharPedido">FECHAR PEDIDO</button>
     </div>
 
     <div v-else class="empty-cart">
       <p>Sua sacola está vazia!</p>
     </div>
-
   </div>
 </template>
+
 
 <style scoped>
 /* Botão da sacola */

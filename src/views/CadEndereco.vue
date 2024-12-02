@@ -3,7 +3,8 @@ import Header from '@/components/FoHea/header.vue'
 import Footer from '@/components/FoHea/Footer.vue'
 import { ref } from 'vue'
 import { supabase } from '../lib/supabaseClient'
-
+import { useSacolaStore } from '../store/sacola'
+import router from '@/router/index'
 // Corrigir os tipos de ref para strings
 const cep = ref('');
 const estado = ref('');
@@ -14,6 +15,8 @@ const numero = ref('');
 const tipoentrega = ref('');
 const informadic = ref('');
 const message = ref('');
+
+const store = useSacolaStore();
 
 const insertData = async () => {
   // Verifica se todos os campos obrigatórios foram preenchidos
@@ -47,6 +50,25 @@ const insertData = async () => {
 
   message.value = 'Endereço inserido com sucesso!'
 }
+
+
+const finalizarPedido = async () => {
+  try {
+    // Lógica para registrar o pedido no banco...
+
+    // Limpar os itens da sacola do banco
+    const { data: user } = await supabase.auth.getUser();
+    await supabase.from('sacola').delete().eq('user_id', user.id);
+
+    // Atualizar a store
+    store.sacola_cart = [];
+    router.push({ name: 'home' });
+  } catch (error) {
+    console.error('Erro ao finalizar pedido:', error.message);
+  }
+
+};
+
 </script>
 
 <template>
@@ -124,7 +146,7 @@ const insertData = async () => {
         <h2>Resumo da Compra</h2>
         <div class="summary-item">
           <span>Produto</span>
-          <span>R$ 250,20</span>
+          <span>{{ store.totalSacola.value }}</span>
         </div>
         <div class="summary-item">
           <span>Frete</span>
@@ -134,7 +156,7 @@ const insertData = async () => {
           <span>Você Pagará</span>
           <span>R$ 250,20</span>
         </div>
-        <button type="submit" class="btn-final">Finalizar a Compra</button>
+        <button type="submit" class="btn-final" @click="finalizarPedido">Finalizar a Compra</button>
       </div>
     </div>
   </div>

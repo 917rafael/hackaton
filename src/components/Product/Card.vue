@@ -59,7 +59,7 @@ const decreaseAcaiCount = (index) => {
 }
 
 
-console.log(props.product)
+console.log(props.id)
 
 
 onMounted(() => {
