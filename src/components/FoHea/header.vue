@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import { useAuthStore } from '@/store/auth';
 
@@ -24,11 +25,13 @@ const authStore = useAuthStore();
             </button>
 
             <span v-if="authStore.access_token && authStore.user.user_metadata.tipo == 'funcionario'">
-              funcionário logado
+              <RouterLink to="/perfil">funcionario</RouterLink>
             </span>
 
             <span v-if="authStore.access_token && authStore.user.user_metadata.tipo == 'cliente'">
-              cliente logado
+              
+                  <RouterLink to="/perfil">cliente</RouterLink>
+
             </span>
           </li>
         </ul>

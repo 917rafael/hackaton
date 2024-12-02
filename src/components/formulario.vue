@@ -33,7 +33,7 @@ const usuario = reactive({
   quantidade: '',
   valor: '',
   desconto: '',
-  obs: ''
+  obs: '',
 })
 </script>
 

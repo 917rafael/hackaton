@@ -5,7 +5,22 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path:  '/pedidosclient',
+      path: '/Perfil',
+      name: 'perfil',
+      component: () => import('../views/perfil.cleint/Perfil.vue')
+    },
+    {
+      path: '/configurações',
+      name: 'configuracoes ',
+      component: () => import('../views/Navbar-perfil/configuracoe.vue')
+    },
+    {
+      path: '/notificações',
+      name: 'notificacoes ',
+      component: () => import('../views/Navbar-perfil/notificacoes.vue')
+    },
+    {
+      path: '/pedidosclient',
       name: 'pedidosclient',
       component: () => import('../views/PedidosClient.vue')
     },
@@ -16,7 +31,7 @@ const router = createRouter({
       meta: { requiresAuth: true } // Exige autenticação e tipo 'funcionario'
     },
     {
-      path: '/Rendimento',
+      path: '/rendimento',
       name: 'rendimento',
       component: () => import('../views/Rendimento.vue'),
       meta: { requiresAuth: true, allowedTypes: ['funcionario'] } // Exige autenticação e tipo 'funcionario'
@@ -25,8 +40,7 @@ const router = createRouter({
     {
       path: '/Estoque',
       name: 'estoque',
-      component: () => import('../views/EstoquEE.vue'),
-      meta: { requiresAuth: true, allowedTypes: ['funcionario'] } // Exige autenticação e tipo 'funcionario'
+      component: () => import('../views/EstoquEE.vue')
     },
     {
       path: '/contato',
@@ -75,4 +89,3 @@ const router = createRouter({
 // router.beforeEach(UseAuthGuard)
 
 export default router
-
