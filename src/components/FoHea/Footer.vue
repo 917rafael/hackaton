@@ -2,7 +2,7 @@
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-logo">
-        <img src="@/assets/image/logo.png" alt="Logo da Padaria" class="logo" />
+        <img src="/src/assets/image/Logo nova.png"  alt="Logo da Padaria" class="logo" />
       </div>
 
       <div class="footer-column about">
@@ -127,7 +127,7 @@ export default {
 }
 
 .logo {
-  width: 150px;
+  width: 250px;
   height: auto;
   transition: transform 0.3s ease-in-out;
 }
