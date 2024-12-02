@@ -1,4 +1,3 @@
-
 <script setup>
 import headers from '@/components/FoHea/header.vue'
 import ProductCard from '@/components/home/ProductCard.vue'
@@ -58,26 +57,22 @@ onMounted(async () => {
 
 
 <template>
-  <headers />
+  
 
   <section class="hero">
+    
     <!-- Carrossel com transição de slide -->
     <div class="carousel-container">
+
+      <headers />
+      
       <div class="carousel-slider" :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
         <img v-for="(image, index) in images" :key="index" :src="image" alt="Imagem do Carrossel" class="carousel-image" />
       </div>
     </div>
 
     <div class="tradicao">
-      <!-- <img src="../assets/image/tradicao2.png" alt=""> fazer alguma coisa aqui
-       
-      
-      
-      
-      
-      
-      
-      --> 
+      <!-- <img src="../assets/image/tradicao2.png" alt=""> -->
     </div>
 
     <div class="products">
@@ -108,17 +103,31 @@ onMounted(async () => {
 </template>
 
 <style scoped>
+/* Estilos para o cabeçalho fixo */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10; /* Garante que o header ficará sobre o carrossel */
+  background-color: transparent;
+  padding: 10px 20px;
+  box-sizing: border-box; /* Garantir que o padding não quebre o layout */
+  height: 100px; /* Defina uma altura fixa para o cabeçalho */
+  transition: 0.5s;
+}
+
 /* Fundo geral */
-body {
+ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-}
+} 
 
 /* Hero Section */
 .hero {
   position: relative;
-  height: 100vh;
+  height: 100vh; /* O carrossel ocupará toda a altura da tela */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -126,16 +135,15 @@ body {
   text-align: center;
   padding: 0;
   overflow: hidden;
+ 
 }
 
 /* Carrossel e transição suave */
 .carousel-container {
   position: absolute;
-  top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
   overflow: hidden;
 }
 

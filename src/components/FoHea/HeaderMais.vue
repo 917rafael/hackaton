@@ -61,11 +61,14 @@ header {
   right: 0;
   z-index: 1000;
   padding: 10px 20px;
+  
+  
+  background-color: rgb(83, 16, 16);
+
 }
 
-header.scrolled {
-  background-color: rgb(83, 16, 16);
-}
+/* header.scrolled {  
+} */
 
 .nav-bar {
   display: flex;

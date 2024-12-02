@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useProductStore } from '@/store/productStore';
 import { supabase } from '../lib/supabaseClient';
 import Header from '@/components/FoHea/header.vue';
 import Footer from '@/components/FoHea/Footer.vue';
@@ -385,7 +386,6 @@ input:checked+.slider:before {
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(6px);
-  z-index: 1000;
 }
 
 
