@@ -14,7 +14,7 @@ import Footer from '@/components/FoHea/Footer.vue'
     <div class="contato">
       <div class="info">
         <router-link to="/">
-          <img src="@/assets/image/logo.png" class="image-contato" alt="" />
+          <img src="/src/assets/image/Logo nova.png" class="image-contato" alt="" />
         </router-link>
 
         <h2>Contate-Nos</h2>
