@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import Input from '@/components/input.vue'
-import headers from '@/components/FoHea/headerMais.vue'
+import headers from '@/components/FoHea/HeaderMais.vue'
 import { perguntas } from '@/data/perguntas.js'
 import Footer from '@/components/FoHea/Footer.vue'
 </script>

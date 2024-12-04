@@ -1,12 +1,11 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useProductStore } from '@/store/productStore';
+//import { useProductStore } from '@/store/productStore';
 import { supabase } from '../lib/supabaseClient';
-import Header from '@/components/FoHea/headerMais.vue';
+import Header from '@/components/FoHea/HeaderMais.vue';
 import Footer from '@/components/FoHea/Footer.vue';
 
 
-// Estado da aplicação
 const products = ref([]);
 const showModal = ref(false);
 const newProduct = ref({
@@ -19,7 +18,6 @@ const newProduct = ref({
 });
 
 
-// Carregar produtos
 const fetchProducts = async () => {
   const { data, error } = await supabase.from('products').select('*');
   if (error) {
@@ -40,13 +38,13 @@ const handleFileUpload = async (event) => {
   }
 
 
-  if (file.size > 2 * 1024 * 1024) { // Limite de 2MB
+  if (file.size > 2 * 1024 * 1024) { 
     alert('A imagem deve ser menor que 2MB.');
     return;
   }
 
 
-  const fileName = `${Date.now()}_${file.name}`; // Nome único para evitar conflitos
+  const fileName = `${Date.now()}_${file.name}`; 
 
 
   // eslint-disable-next-line no-unused-vars
@@ -59,14 +57,13 @@ const handleFileUpload = async (event) => {
     return;
   }
 
-  // Recuperar URL pública da imagem
   const { data: publicUrlData } = supabase.storage
     .from('product-images')
     .getPublicUrl(fileName);
 
 
   if (publicUrlData) {
-    newProduct.value.image_url = publicUrlData.publicUrl; // Salvar URL pública no produto
+    newProduct.value.image_url = publicUrlData.publicUrl; 
   } else {
     console.error('Erro ao obter URL pública.');
     alert('Erro ao obter URL pública da imagem.');
@@ -76,7 +73,6 @@ const handleFileUpload = async (event) => {
 
 
 
-// Salvar produto no Supabase
 const insertData = async () => {
   const { nome, category, stock, price, image_url, catalog } = newProduct.value;
 
@@ -102,8 +98,6 @@ const insertData = async () => {
   }
 };
 
-
-// Excluir produto
 const deleteProduct = async (id) => {
   const { error } = await supabase.from('products').delete().eq('id', id);
 
@@ -116,7 +110,6 @@ const deleteProduct = async (id) => {
 };
 
 
-// Controle do modal
 const openModal = () => (showModal.value = true);
 const closeModal = () => {
   showModal.value = false;
@@ -124,7 +117,6 @@ const closeModal = () => {
 };
 
 
-// Carregar produtos ao montar o componente
 onMounted(fetchProducts);
 </script>
 
@@ -515,7 +507,6 @@ input:focus {
 }
 
 
-/* Responsividade para telas menores */
 @media (max-width: 768px) {
   .stock-manager {
     padding: 20px;
@@ -524,7 +515,6 @@ input:focus {
 
   table {
     display: block;
-    /* Permite rolagem horizontal */
     width: 100%;
     overflow-x: auto;
   }
