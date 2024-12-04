@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue';
 import { useProductStore } from '@/store/productStore';
 import { supabase } from '../lib/supabaseClient';
-import Header from '@/components/FoHea/header.vue';
+import Header from '@/components/FoHea/headerMais.vue';
 import Footer from '@/components/FoHea/Footer.vue';
 
 
