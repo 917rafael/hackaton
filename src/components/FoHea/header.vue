@@ -55,7 +55,6 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
-/* Cabeçalho fixo e transparente inicialmente */
 header {
   position: sticky; 
   top: 0;
@@ -66,20 +65,20 @@ header {
 }
 
 header.scrolled {
-  background-color: rgb(83, 16, 16);
+  background-color: #5d2f23;
+  height: 15%;
 }
 
 .nav-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;  padding: 10px 20px;
-  background-color: rgba(59, 24, 3, 0.85);
-  height: 100px; /* Definindo uma altura fixa para o cabeçalho */
+  height: 100px;
 }
 
 .logo {
-  max-width: 150px; /* Ajuste o tamanho máximo desejado */
-  max-height: 100px; /* Ajuste o tamanho máximo desejado */
+  max-width: 150px; 
+  max-height: 100px; 
   width: auto;
   height: auto;
   margin-left: 5px; 
@@ -105,7 +104,6 @@ header.scrolled {
   color: #ff5722;
 }
 
-/* Estilos do botão de login */
 .btn-login {
   background-color: #ff5722;
   width: 90px;

@@ -60,11 +60,8 @@ onMounted(async () => {
 
   <section class="hero">
     
-    <!-- Carrossel com transição de slide -->
     <div class="carousel-container">
-
       <headers />
-      
       <div class="carousel-slider" :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
         <img v-for="(image, index) in images" :key="index" :src="image" alt="Imagem do Carrossel" class="carousel-image" />
       </div>
@@ -102,31 +99,29 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-/* Estilos para o cabeçalho fixo */
 header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 10; /* Garante que o header ficará sobre o carrossel */
+  z-index: 10; 
   background-color: transparent;
   padding: 10px 20px;
-  box-sizing: border-box; /* Garantir que o padding não quebre o layout */
-  height: 100px; /* Defina uma altura fixa para o cabeçalho */
+  box-sizing: border-box; 
+  height: 100px; 
   transition: 0.5s;
 }
 
-/* Fundo geral */
+
  body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 } 
 
-/* Hero Section */
 .hero {
   position: relative;
-  height: 100vh; /* O carrossel ocupará toda a altura da tela */
+  height: 100vh; 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -137,7 +132,6 @@ header {
  
 }
 
-/* Carrossel e transição suave */
 .carousel-container {
   position: absolute;
   left: 0;
@@ -150,7 +144,7 @@ header {
   display: flex;
   width: 100%;
   height: 100%;
-  transition: transform 1s ease-in-out; /* Transição suave */
+  transition: transform 1s ease-in-out; 
 }
 
 .carousel-image {
@@ -160,7 +154,6 @@ header {
   flex-shrink: 0;
 }
 
-/* Cards de produtos */
 .products {
   display: flex;
   justify-content: space-between;
@@ -193,7 +186,6 @@ header {
   }
 }
 
-/* Seção de Pesquisa */
 .search-section {
   text-align: center;
   margin: 60px 0;
@@ -244,7 +236,6 @@ header {
   box-shadow: 0 0 5px rgba(255, 87, 34, 0.5);
 }
 
-/* Melhorias gerais */
 .product-main {
   display: flex;
   justify-content: center;
