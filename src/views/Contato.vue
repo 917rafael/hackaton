@@ -68,12 +68,12 @@ import Footer from '@/components/FoHea/Footer.vue'
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('@/assets/image/Fundocontato.jpg');
+  background-image: url('@/assets/image/carrossel-6.jpg');
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  filter: brightness(0.7);
+  filter: brightness(1.1);
   z-index: -1;
 }
 

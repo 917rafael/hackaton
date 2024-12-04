@@ -32,7 +32,7 @@ const login = async() => {
 <Header />
 
   <div class="background">
-    <img src="/src/assets/image/Fundocontato.jpg" alt="Padaria" class="padaria-img" />
+    <img src="/src/assets/image/carrossel-6.jpg" alt="Padaria" class="padaria-img" />
   </div>
   <div class="container">
     <div class="caixa">
@@ -138,7 +138,7 @@ h1 {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.3);
+  filter: brightness(0.8);
   z-index: -1;
 }
 

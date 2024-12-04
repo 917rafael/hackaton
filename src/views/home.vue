@@ -8,12 +8,13 @@ import sacola from '@/components/sacola.vue'
 import Fotter from '@/components/FoHea/Footer.vue'
 import { useProductStore } from '@/store/productStore'
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
-import fundoHome from '../assets/image/fundohome.jpg'
-import padaria from '../assets/image/padaria.jpg'
+import fundoHome from '../assets/image/carrossel-1.jpg'
+import padaria from '../assets/image/carrossel-4.jpg'
 import Card from '@/components/Product/Card.vue'
-import desenhoFunco from '@/assets/image/imagem.jpg'
+import desenhoFunco from '@/assets/image/carrossel-2.jpg'
+import imageCarrossel from '@/assets/image/carrossel-3.jpg'
 
-const images = ref([padaria, fundoHome, desenhoFunco])
+const images = ref([desenhoFunco, padaria, fundoHome, imageCarrossel])
 const currentIndex = ref(0)
 
 const nextImage = () => {
