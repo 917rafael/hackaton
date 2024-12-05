@@ -31,6 +31,7 @@ const fetchProducts = async () => {
 const handleFileUpload = async (event) => {
   const file = event.target.files[0];
 
+
   if (!file) {
     alert('Por favor, selecione um arquivo.');
     return;
@@ -67,10 +68,9 @@ const handleFileUpload = async (event) => {
     console.error('Erro ao obter URL pública.');
     alert('Erro ao obter URL pública da imagem.');
   }
-};
 
 
-
+}
 
 const insertData = async () => {
   const { nome, category, stock, price, image_url, catalog } = newProduct.value;

@@ -1,15 +1,11 @@
 <script setup>
-import Header from '@/components/FoHea/header.vue'
+import Header from '@/components/FoHea/HeaderMais.vue'
 import Footer from '@/components/FoHea/Footer.vue'
+import { ref } from 'vue'
 import { supabase } from '../lib/supabaseClient'
-import { useSacolaStore } from '@/store/sacola'
-import { calculateTotal } from '@/store/perfilStore'
+import { useSacolaStore } from '../store/sacola'
 import router from '@/router/index'
-import { onMounted, ref } from 'vue'
 
-const store = useSacolaStore();
-
-// Variáveis de estado
 const cep = ref('');
 const estado = ref('');
 const cidade = ref('');
@@ -19,112 +15,60 @@ const numero = ref('');
 const tipoentrega = ref('');
 const informadic = ref('');
 const message = ref('');
-const enderecoAtual = ref({});
-const isLoading = ref(false);
-const isSuccess = ref(false);
 
-// Função para obter o usuário autenticado
-const getUser = async () => {
-  const { data: user, error } = await supabase.auth.getUser();
-  if (error || !user) throw new Error('Usuário não autenticado.');
-  return user.user;
-};
+const store = useSacolaStore();
 
-// Função para salvar o endereço
 const insertData = async () => {
-  isLoading.value = true;
-  try {
-    if (!cep.value || !estado.value || !cidade.value || !bairro.value || !rua.value || !numero.value || !tipoentrega.value) {
-      message.value = 'Por favor, preencha todos os campos obrigatórios.';
-      isSuccess.value = false;
-      return;
-    }
-
-    const user = await getUser();
-    const { error } = await supabase.from('endereco').insert([
-      {
-        cep: cep.value,
-        estado: estado.value,
-        cidade: cidade.value,
-        bairro: bairro.value,
-        rua: rua.value,
-        numero: numero.value,
-        tipoentrega: tipoentrega.value,
-        informadic: informadic.value,
-        id_user: user.id,
-      },
-    ]);
-
-    if (error) {
-      message.value = `Erro ao salvar endereço: ${error.message}`;
-      isSuccess.value = false;
-      return;
-    }
-
-    message.value = 'Endereço salvo com sucesso!';
-    isSuccess.value = true;
-  } catch (error) {
-    console.error('Erro ao inserir dados:', error.message);
-    message.value = 'Ocorreu um erro inesperado. Tente novamente.';
-    isSuccess.value = false;
-  } finally {
-    isLoading.value = false;
+  if (!cep.value || !estado.value || !cidade.value || !bairro.value 
+      || !rua.value || !numero.value || !tipoentrega.value) {
+    message.value = 'Por favor, preencha todos os campos obrigatórios.'
+    return
   }
-};
 
-// Função para carregar o endereço
-const carregarEndereco = async () => {
-  try {
-    const user = await getUser();
+  // eslint-disable-next-line no-unused-vars
+  const { data, error } = await supabase.from('endereco').insert([
+    {
+      cep: cep.value,
+      estado: estado.value,
+      cidade: cidade.value,
+      bairro: bairro.value,
+      rua: rua.value,
+      numero: numero.value,
+      tipoentrega: tipoentrega.value,
+      informadic: informadic.value
+    }
+  ])
 
-    const { data: enderecos, error } = await supabase
-      .from('endereco')
-      .select('*')
-      .eq('id_user', user.id);
-
-    if (error) throw error;
-    enderecoAtual.value = enderecos?.[0] || {};
-  } catch (error) {
-    console.error('Erro ao carregar endereço:', error.message);
-    enderecoAtual.value = null;
+  if (error) {
+    console.error('Erro ao inserir endereço:', error.message)
+    message.value = `Erro ao inserir endereço: ${error.message}`
+    return
   }
-};
 
-// Função para finalizar o pedido
+  message.value = 'Endereço inserido com sucesso!'
+}
+
+
 const finalizarPedido = async () => {
-  isLoading.value = true;
   try {
-    const user = await getUser();
+
+    const { data: user } = await supabase.auth.getUser();
     await supabase.from('sacola').delete().eq('user_id', user.id);
+
     store.sacola_cart = [];
-    message.value = 'Pedido finalizado com sucesso!';
-    isSuccess.value = true;
     router.push({ name: 'home' });
   } catch (error) {
     console.error('Erro ao finalizar pedido:', error.message);
-    message.value = 'Erro ao finalizar o pedido. Tente novamente.';
-    isSuccess.value = false;
-  } finally {
-    isLoading.value = false;
   }
+
 };
 
-const total = calculateTotal(store.sacola_cart);
-
-// Carregar os dados quando o componente for montado
-onMounted(() => {
-  store.carregarSacola();
-  carregarEndereco();
-});
 </script>
-
-
 
 <template>
   <Header />
   <div class="payment-page">
     <div class="payment-container">
-      <!-- Formulário de Endereço -->
       <div class="address-form">
         <h1>Adicionar Endereço</h1>
         <form @submit.prevent="insertData">
@@ -187,81 +131,40 @@ onMounted(() => {
             <label for="additionalInfo">Informações Adicionais</label>
             <textarea id="additionalInfo" v-model="informadic" placeholder="Instruções especiais (opcional)"></textarea>
           </div>
-          <button type="submit" class="btn-submit" :disabled="isLoading">Salvar Endereço</button>
+          <button type="submit" class="btn-submit">Salvar Endereço</button>
         </form>
-        <div v-if="message" class="alert" :class="{ success: isSuccess, error: !isSuccess }">
-          {{ message }}
-        </div>
+        {{ message }}
       </div>
 
-      <!-- Resumo do Endereço Atual -->
       <div class="order-summary">
-        <h2>Endereço atual</h2>
+        <h2>Resumo da Compra</h2>
         <div class="summary-item">
-          <span>CEP:</span>
-          <span>{{ enderecoAtual?.cep || 'Não informado' }}</span>
-        </div>
-        <div class="summary-item">
-          <span>Estado:</span>
-          <span>{{ enderecoAtual?.estado || 'Não informado' }}</span>
+          <span>Produto</span>
+          <span>{{ store.totalSacola.value }}</span>
         </div>
         <div class="summary-item">
-          <span>Cidade:</span>
-          <span>{{ enderecoAtual?.cidade || 'Não informado' }}</span>
+          <span>Frete</span>
+          <span>R$ --,--</span>
         </div>
-        <div class="summary-item">
-          <span>Bairro:</span>
-          <span>{{ enderecoAtual?.bairro || 'Não informado' }}</span>
+        <div class="summary-total">
+          <span>Você Pagará</span>
+          <span>R$ 250,20</span>
         </div>
-        <div class="summary-item">
-          <span>Rua:</span>
-          <span>{{ enderecoAtual?.rua || 'Não informado' }}</span>
-        </div>
-        <div class="summary-item">
-          <span>Número:</span>
-          <span>{{ enderecoAtual?.numero || 'Não informado' }}</span>
-        </div>
-        <div class="summary-item">
-          <span>Informações Adicionais:</span>
-          <span>{{ enderecoAtual?.informadic || 'Não informado' }}</span>
-        </div>
-        <div class="summary-item">
-          <span>Tipo de entrega:</span>
-          <span>{{ enderecoAtual?.tipoentrega || 'Não informado' }}</span>
-        </div>
-        <button class="btn-final" @click="$router.push(`/perfil`)">Atualizar o meu endereço</button>
-      </div>
-
-      <!-- Resumo da Compra -->
-      <div class="historico">
-        <div class="order-summary">
-          <h2>Resumo da Compra</h2>
-          <div class="summary-item">
-            <span>Produto</span>
-            <span>{{ total }}</span>
-          </div>
-          <div class="summary-item">
-            <span>Frete</span>
-            <span>R$ --,--</span>
-          </div>
-          <div class="summary-item">
-            <span>Total</span>
-            <span>R$ {{ total }}</span>
-          </div>
-        </div>
-        <button class="btn-final" :disabled="isLoading" @click="finalizarPedido">Finalizar Pedido</button>
+        <button type="submit" class="btn-final" @click="finalizarPedido">Finalizar a Compra</button>
       </div>
     </div>
   </div>
+
   <Footer />
 </template>
 
-
 <style scoped>
+
+
+
 .input-with-icon input {
   text-indent: 40px;
 }
-
 .payment-page {
   max-width: 1200px;
   margin: 20px auto;
@@ -382,7 +285,7 @@ onMounted(() => {
   font-size: 1em;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.2s;
-  width: 100%;
+  width: 100%; 
   margin-top: 20px;
 }
 
@@ -426,7 +329,7 @@ onMounted(() => {
 }
 
 .btn-final {
-  margin-top: 20px;
+  margin-top: 20px; 
 }
 
 @media (max-width: 1024px) {
@@ -547,7 +450,6 @@ a:hover {
   from {
     opacity: 0;
   }
-
   to {
     opacity: 1;
   }

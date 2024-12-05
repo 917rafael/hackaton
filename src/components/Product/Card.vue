@@ -64,6 +64,7 @@ console.log(props.id)
 
 onMounted(() => {
     produto.value = productStore.getProductById(props.id)
+    totalPrice()
 });
 </script>
 
@@ -123,7 +124,7 @@ onMounted(() => {
             <button @click="increaseCount(0)" class="control-button add">+</button>
           </div>
           <!-- Botão Adicionar ao Pedido -->
-          <button class="add-button"  @click="adicionarProduto(produto) && $router.push(`/`)" >
+          <button class="add-button"  @click="adicionarProduto(produto)" >
             Adicionar ao Pedido R$ {{ produto.price }}
           </button>
 
