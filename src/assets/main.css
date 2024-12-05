@@ -1,15 +1,7 @@
 @import '@fortawesome/fontawesome-free/css/all.min.css';
-/* @import url('../assets/image/FundoSite.png'); */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-
-
-body {
-  background-color: #ffeee3;
-  background-image: url('../assets/image/FundoSite.png'); /* Caminho para a sua imagem */
-}
-
-*  {
+*{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -28,11 +20,9 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #000000;
-  border-radius: 5px;
-  transition:
-    background-color 0.3s ease,
-    box-shadow 0.3s ease;
+  background-color: #000000; /* Cor neutra e suave para a barra de rolagem */
+  border-radius: 5px; /* Bordas arredondadas */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transições suaves para cor e sombra */
 }
 
 ::-webkit-scrollbar-thumb:hover {

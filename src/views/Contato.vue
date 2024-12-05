@@ -1,8 +1,10 @@
 <script setup>
-import Input from '@/components/input.vue'
-import headers from '@/components/FoHea/HeaderMais.vue'
-import { perguntas } from '@/data/perguntas.js'
-import Footer from '@/components/FoHea/Footer.vue'
+import Input from '@/components/input.vue';
+import headers from '@/components/FoHea/header.vue';
+import { perguntas } from '@/data/perguntas.js';
+import Footer from '@/components/FoHea/Footer.vue';
+
+
 </script>
 
 <template>
@@ -10,11 +12,12 @@ import Footer from '@/components/FoHea/Footer.vue'
   <section class="hero">
     <div class="overlay"></div>
 
-    <div class="contato">
-      <div class="info">
-        <router-link to="/">
-          <img src="/src/assets/image/Logo nova.png" class="image-contato" alt="" />
-        </router-link>
+      <div class="contato">
+        
+        <div class="info">
+          <router-link to="/">
+            <img src="@/assets/image/logo.png" class="image-contato" alt="">
+          </router-link>
 
           <h2>Contate-Nos</h2>
           <p>665, Rua Tecnicos Agricola, +55 47 4002-8922</p>
