@@ -97,7 +97,6 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-
 header {
   position: fixed;
   top: 0;
@@ -110,7 +109,6 @@ header {
   height: 100px; 
   transition: 0.5s;
 }
-
  body {
   background-size: cover;
   background-position: center;
@@ -151,6 +149,7 @@ header {
   object-fit: cover;
   flex-shrink: 0;
 }
+
 
 .products {
   display: flex;
