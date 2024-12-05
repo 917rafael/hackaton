@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
+import Footer from '@/components/FoHea/Footer.vue';
 import Header from '@/components/FoHea/header.vue';
 import { ref } from 'vue'
 import { useAuthStore } from '@/store/auth';
@@ -12,7 +13,7 @@ const login = async() => {
   try {
     await authStore.login(senha.value, email.value) && authStore.sincronizarSacola(authStore.user.id);
     console.log(authStore.user.user_metadata.tipo)
-    if (authStore.user.user_metadata.tipo == 'cliente') router.push({ name: 'home' })
+    if (authStore.user.user_metadata.tipo == 'cliente') router.push(`/`)
     else if (authStore.user.user_metadata.tipo == 'funcionario') router.push({ name: 'homeFuncio' })
   console.log(authStore.user.user_metadata.tipo)
   } catch(e) {
@@ -70,7 +71,7 @@ const login = async() => {
       <button type="button" class="register-btn" @click="$router.push(`/cadastro`)">cadastre-se</button>
     </div>
   </div>
-
+<Footer />
 </template>
 
 <style scoped>
