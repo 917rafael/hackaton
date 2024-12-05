@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import Footer from '@/components/FoHea/Footer.vue';
-import Header from '@/components/FoHea/header.vue';
+import Header from '@/components/FoHea/HeaderMais.vue';
 import { ref } from 'vue'
 import { useAuthStore } from '@/store/auth';
 import router from '@/router';
@@ -13,7 +13,7 @@ const login = async() => {
   try {
     await authStore.login(senha.value, email.value) && authStore.sincronizarSacola(authStore.user.id);
     console.log(authStore.user.user_metadata.tipo)
-    if (authStore.user.user_metadata.tipo == 'cliente') router.push(`/`)
+    if (authStore.user.user_metadata.tipo == 'cliente') router.push({ name: 'home' })
     else if (authStore.user.user_metadata.tipo == 'funcionario') router.push({ name: 'homeFuncio' })
   console.log(authStore.user.user_metadata.tipo)
   } catch(e) {
@@ -33,7 +33,7 @@ const login = async() => {
 <Header />
 
   <div class="background">
-    <img src="/src/assets/image/carrossel-6.jpg" alt="Padaria" class="padaria-img" />
+    <img src="/src/assets/image/Fundocontato.jpg" alt="Padaria" class="padaria-img" />
   </div>
   <div class="container">
     <div class="caixa">
@@ -41,7 +41,6 @@ const login = async() => {
 
       <form class="form" @submit.prevent="login">
         <div class="form-group">
-          <label for="email" class="input-label">EMAIL:</label>
           <input
             type="text"
             id="email"
@@ -68,7 +67,7 @@ const login = async() => {
         <button type="submit"  class="submit-btn">Entrar</button>
       </form>
       <p>{{ message }}</p>
-      <button type="button" class="register-btn" @click="$router.push(`/cadastro`)">cadastre-se</button>
+      <button type="button" class="register-btn" @click="$router.push(`/Cadastro`)">cadastre-se</button>
     </div>
   </div>
 <Footer />
@@ -117,7 +116,7 @@ h1 {
 .caixa {
   width: 100%;
   max-width: 480px;
-  background: #34495E; 
+  background: #5D4037; 
   border-radius: 20px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   padding: 40px;
@@ -139,7 +138,7 @@ h1 {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.8);
+  filter: brightness(0.3);
   z-index: -1;
 }
 
@@ -170,11 +169,11 @@ h1 {
 
 .input-field {
   padding: 18px 20px;
-  border: 2px solid #607D8B;
+  border: 4px solid #ff7300;
   border-radius: 12px;
   font-size: 16px;
   width: 100%;
-  background-color: #263238;
+  background-color: #3f3127;
   color: #ECEFF1;
   transition: all 0.3s ease, box-shadow 0.3s ease;
   margin-top: 10px;
@@ -350,5 +349,3 @@ body {
   animation: fadeIn 1.2s ease-in-out;
 }
 </style>
-
-

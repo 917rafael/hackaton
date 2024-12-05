@@ -1,4 +1,3 @@
-
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import { useAuthStore } from '@/store/auth';
