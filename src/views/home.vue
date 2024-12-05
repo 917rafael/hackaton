@@ -22,7 +22,7 @@ const nextImage = () => {
 
 let interval = null
 onMounted(() => {
-  interval = setInterval(nextImage, 3000) // Troca a imagem a cada 3 segundos
+  interval = setInterval(nextImage, 3000) 
 })
 
 onBeforeUnmount(() => {
@@ -35,13 +35,11 @@ const productStore = useProductStore()
 const searchQuery = ref('')
 const isModalVisible = ref(false);
 
-// Alternar a exibição do modal com os detalhes do produto
 const toggleModal = () => {
   isModalVisible.value = !isModalVisible.value;
 };
 
 
-// Filtrar produtos pela barra de pesquisa
 const filteredProducts = computed(() => {
   if (!searchQuery.value) return productStore.products;
   return productStore.products.filter((product) =>
@@ -60,7 +58,6 @@ onMounted(async () => {
 
   <section class="hero">
     
-    <!-- Carrossel com transição de slide -->
     <div class="carousel-container">
 
       <headers />
@@ -102,31 +99,28 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-/* Estilos para o cabeçalho fixo */
+
 header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 10; /* Garante que o header ficará sobre o carrossel */
+  z-index: 10; 
   background-color: transparent;
   padding: 10px 20px;
-  box-sizing: border-box; /* Garantir que o padding não quebre o layout */
-  height: 100px; /* Defina uma altura fixa para o cabeçalho */
+  box-sizing: border-box; 
+  height: 100px; 
   transition: 0.5s;
 }
-
-/* Fundo geral */
  body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 } 
 
-/* Hero Section */
 .hero {
   position: relative;
-  height: 100vh; /* O carrossel ocupará toda a altura da tela */
+  height: 100vh; 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -137,7 +131,7 @@ header {
  
 }
 
-/* Carrossel e transição suave */
+
 .carousel-container {
   position: absolute;
   left: 0;
@@ -150,7 +144,7 @@ header {
   display: flex;
   width: 100%;
   height: 100%;
-  transition: transform 1s ease-in-out; /* Transição suave */
+  transition: transform 1s ease-in-out; 
 }
 
 .carousel-image {
@@ -160,7 +154,7 @@ header {
   flex-shrink: 0;
 }
 
-/* Cards de produtos */
+
 .products {
   display: flex;
   justify-content: space-between;
@@ -193,7 +187,6 @@ header {
   }
 }
 
-/* Seção de Pesquisa */
 .search-section {
   text-align: center;
   margin: 60px 0;
@@ -244,7 +237,7 @@ header {
   box-shadow: 0 0 5px rgba(255, 87, 34, 0.5);
 }
 
-/* Melhorias gerais */
+
 .product-main {
   display: flex;
   justify-content: center;
