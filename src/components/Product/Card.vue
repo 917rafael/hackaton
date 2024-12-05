@@ -63,6 +63,7 @@ console.log(props.id)
 
 onMounted(() => {
     produto.value = productStore.getProductById(props.id)
+    totalPrice()
 });
 </script>
 <template>

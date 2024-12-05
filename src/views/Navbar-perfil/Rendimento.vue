@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
-import Header from '@/components/FoHea/header.vue';
+import Header from '@/components/FoHea/HeaderMais.vue';
 import { ref, computed, onMounted, watch } from 'vue';
 import { Bar, Line } from 'vue-chartjs';
 import {

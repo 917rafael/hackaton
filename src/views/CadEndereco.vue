@@ -1,11 +1,11 @@
 <script setup>
-import Header from '@/components/FoHea/header.vue'
+import Header from '@/components/FoHea/HeaderMais.vue'
 import Footer from '@/components/FoHea/Footer.vue'
 import { ref } from 'vue'
 import { supabase } from '../lib/supabaseClient'
 import { useSacolaStore } from '../store/sacola'
 import router from '@/router/index'
-// Corrigir os tipos de ref para strings
+
 const cep = ref('');
 const estado = ref('');
 const cidade = ref('');
@@ -19,14 +19,12 @@ const message = ref('');
 const store = useSacolaStore();
 
 const insertData = async () => {
-  // Verifica se todos os campos obrigatórios foram preenchidos
   if (!cep.value || !estado.value || !cidade.value || !bairro.value 
       || !rua.value || !numero.value || !tipoentrega.value) {
     message.value = 'Por favor, preencha todos os campos obrigatórios.'
     return
   }
 
-  // Faz a requisição de inserção ao Supabase
   // eslint-disable-next-line no-unused-vars
   const { data, error } = await supabase.from('endereco').insert([
     {
@@ -41,7 +39,6 @@ const insertData = async () => {
     }
   ])
 
-  // Tratamento de erro e mensagem de sucesso
   if (error) {
     console.error('Erro ao inserir endereço:', error.message)
     message.value = `Erro ao inserir endereço: ${error.message}`
@@ -54,13 +51,10 @@ const insertData = async () => {
 
 const finalizarPedido = async () => {
   try {
-    // Lógica para registrar o pedido no banco...
 
-    // Limpar os itens da sacola do banco
     const { data: user } = await supabase.auth.getUser();
     await supabase.from('sacola').delete().eq('user_id', user.id);
 
-    // Atualizar a store
     store.sacola_cart = [];
     router.push({ name: 'home' });
   } catch (error) {

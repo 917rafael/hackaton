@@ -1,166 +1,139 @@
-<script setup>
-defineProps(['produto'])
+<script>
+export default {
+  name: "CarouselHeader",
+  data() {
+    return {
+      slides: [
+        {
+          title: "Tradição do Forno",
+          description: "Sabor e tradição em cada fatia do seu dia.",
+          image: "https://example.com/path-to-your-bread-image1.jpg",
+        },
+      ],
+      currentIndex: 0,
+    };
+  },
+  methods: {
+    nextSlide() {
+      this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+      this.updateCarousel();
+    },
+    prevSlide() {
+      this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+      this.updateCarousel();
+    },
+    updateCarousel() {
+      const carousel = this.$refs.carousel;
+      if (carousel) {
+        const offset = -this.currentIndex * 100;
+        carousel.style.transform = `translateX(${offset}%)`;
+      }
+    },
+  },
+  mounted() {
+    this.updateCarousel();
+  },
+};
 </script>
 
 <template>
-  <div class="promo-container">
-    <div class="product-card">
-      <div class="price-circle">R$ {{ produto.price }}</div>
-      <img :src="produto.img" alt="Promoção" class="product-image" />
-      <div class="product-info">
-        <h3 class="product-title">{{ produto.title }}</h3>
-        <p class="product-description">{{ produto.description }}</p>
-        <button class="buy-button">Comprar Agora</button>
+  <div class="carousel-container">
+    <div class="carousel" ref="carousel">
+      <div class="carousel-slide" v-for="(slide, index) in slides" :key="index">
+        <header class="bread-header" :style="{ backgroundImage: `url(${slide.image})` }">
+          <div class="bread-container">
+            <h1 class="bread-title">{{ slide.title }}</h1>
+            <div class="divider"></div> <!-- Linha divisória adicionada -->
+            <p class="bread-description">{{ slide.description }}</p>
+          </div>
+        </header>
       </div>
     </div>
+    <button class="carousel-control prev" @click="prevSlide">&#10094;</button>
+    <button class="carousel-control next" @click="nextSlide">&#10095;</button>
   </div>
 </template>
 
 <style scoped>
-.promo-container {
-  left: 100%;
-  display: flex;
-  flex-wrap: wrap; 
-  align-items: flex-start;
-  justify-content: flex-start; 
-  gap: 15px; 
-  padding: 20px 0;
-  margin: 0; 
-  padding-left: 5px; 
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+.divider {
+  height: 2px;
+  background-color: white;
+  margin: 10px 0;
 }
 
-.product-card {
-  left: 115%;
+
+.carousel-container {
   position: relative;
-  background: #fff8e7; 
-  border: 3px solid #d9a35b; 
-  border-radius: 15px;
   overflow: hidden;
+  width: 100%;
+  height: 300px;
+}
+
+.carousel {
+  display: flex;
+  transition: transform 0.5s ease;
+  height: 100%;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  height: 100%;
+}
+
+.bread-header {
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
   text-align: center;
-  width: 100%;
-  max-width: 300px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+.bread-container {
+  padding: 20px;
+  border-radius: 8px;
+  align-items: center;
+  text-align: center  ;
+  justify-content: center;
+  height: 100%;
 }
 
-.product-image {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-bottom: 2px solid #f2c98a;
+.bread-title {
+  font-family: "Lobster", sans-serif;
+  text-align: center  ;
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 0;
 }
 
-.price-circle {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background-color: #f4a261; 
-  color: #ffffff;
-  border-radius: 50%;
-  padding: 10px 15px;
+
+.bread-description {
   font-size: 1.2rem;
-  font-weight: bold;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  margin-top: 10px;
+  text-align: center;
 }
 
-.product-info {
-  padding: 20px 15px;
-}
-
-.product-title {
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: #a66127; 
-  margin-bottom: 10px;
-}
-
-.product-description {
-  font-size: 1rem;
-  color: #6b4f2b; 
-  margin-bottom: 20px;
-}
-
-.buy-button {
-  padding: 10px 20px;
-  background-color: #d97706; 
-  color: #ffffff;
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
   border: none;
-  font-size: 1rem;
-  font-weight: bold;
-  border-radius: 25px;
+  padding: 10px;
   cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10;
 }
 
-.buy-button:hover {
-  background-color: #b35c04;
-  transform: translateY(-2px);
+.carousel-control.prev {
+  left: 10px;
 }
 
-.buy-button:active {
-  transform: translateY(0);
-}
-
-@media (max-width: 768px) {
-  .promo-container {
-    gap: 10px;
-    padding-left: 5px; 
-  }
-
-  .product-card {
-    max-width: 45%; 
-  }
-
-  .price-circle {
-    font-size: 1rem;
-    padding: 8px 12px;
-  }
-
-  .product-title {
-    font-size: 1.2rem;
-  }
-
-  .product-description {
-    font-size: 0.9rem;
-  }
-
-  .buy-button {
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .promo-container {
-    flex-direction: column; 
-    gap: 15px;
-  }
-
-  .product-card {
-    max-width: 100%;
-  }
-
-  .price-circle {
-    font-size: 0.9rem;
-    padding: 6px 10px;
-  }
-
-  .product-title {
-    font-size: 1rem;
-  }
-
-  .product-description {
-    font-size: 0.8rem;
-  }
-
-  .buy-button {
-    font-size: 0.8rem;
-    padding: 8px 16px;
-  }
+.carousel-control.next {
+  right: 10px;
 }
 </style>

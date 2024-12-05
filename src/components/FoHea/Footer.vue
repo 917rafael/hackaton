@@ -15,8 +15,15 @@
       <!-- Seção Contato -->
       <div class="footer-column">
         <h3>Contato</h3>
-        <p><i class="fas fa-map-marker-alt"></i> 121 Rock Street, 21 Avenue, Nova York, NY 92103-9000</p>
-        <p><i class="fas fa-phone-alt"></i> (123) 456-7890</p>
+        <p>
+          <i class="fas fa-map-marker-alt"></i>
+          Colégio Agrícola, Araquari - SC, 89245-000
+        </p>
+        <p>
+          <i class="fas fa-map-marker-alt"></i> 
+          Colégio Agrícola, Araquari - SC, 89245-000
+        </p>
+        <p><i class="fas fa-phone-alt"></i> (47) 91234-5678</p>
         <p><i class="fas fa-envelope"></i> contato@padariaexemplo.com</p>
       </div>
       

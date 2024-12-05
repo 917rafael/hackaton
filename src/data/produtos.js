@@ -1,6 +1,6 @@
-import bread1 from '@/assets/image/backg.avif'
-import bread2 from '@/assets/image/back.jpg'
-import bread3 from '@/assets/image/backg.avif'
+import bread1 from '@/assets/image/comidas/coxinha.jpg'
+import bread2 from '@/assets/image/comidas/pao-queijo.jpg'
+import bread3 from '@/assets/image/comidas/salgadinhos.jpg'
 
 export const produtos = [
     {

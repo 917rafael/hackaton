@@ -189,7 +189,14 @@ export const useSacolaStore = defineStore('sacola', () => {
     }
   };
 
+ 
+
+  
+
+  
+
   return {
+    getUser,
     fecharPedido,
     sacola_cart,
     carregarSacola,

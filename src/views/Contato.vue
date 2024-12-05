@@ -1,10 +1,8 @@
 <script setup>
-import Input from '@/components/input.vue';
-import headers from '@/components/FoHea/header.vue';
-import { perguntas } from '@/data/perguntas.js';
-import Footer from '@/components/FoHea/Footer.vue';
-
-
+import Input from '@/components/input.vue'
+import headers from '@/components/FoHea/HeaderMais.vue'
+import { perguntas } from '@/data/perguntas.js'
+import Footer from '@/components/FoHea/Footer.vue'
 </script>
 
 <template>

@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
-import Header from '@/components/FoHea/header.vue';
+import Footer from '@/components/FoHea/Footer.vue';
+import Header from '@/components/FoHea/HeaderMais.vue';
 import { ref } from 'vue'
 import { useAuthStore } from '@/store/auth';
 import router from '@/router';
@@ -40,7 +41,6 @@ const login = async() => {
 
       <form class="form" @submit.prevent="login">
         <div class="form-group">
-          <label for="email" class="input-label">EMAIL:</label>
           <input
             type="text"
             id="email"
@@ -67,10 +67,10 @@ const login = async() => {
         <button type="submit"  class="submit-btn">Entrar</button>
       </form>
       <p>{{ message }}</p>
-      <button type="button" class="register-btn" @click="$router.push(`/cadastro`)">cadastre-se</button>
+      <button type="button" class="register-btn" @click="$router.push(`/Cadastro`)">cadastre-se</button>
     </div>
   </div>
-
+<Footer />
 </template>
 
 <style scoped>
@@ -116,7 +116,7 @@ h1 {
 .caixa {
   width: 100%;
   max-width: 480px;
-  background: #34495E; 
+  background: #5D4037; 
   border-radius: 20px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   padding: 40px;
@@ -169,11 +169,11 @@ h1 {
 
 .input-field {
   padding: 18px 20px;
-  border: 2px solid #607D8B;
+  border: 4px solid #ff7300;
   border-radius: 12px;
   font-size: 16px;
   width: 100%;
-  background-color: #263238;
+  background-color: #3f3127;
   color: #ECEFF1;
   transition: all 0.3s ease, box-shadow 0.3s ease;
   margin-top: 10px;
@@ -349,5 +349,3 @@ body {
   animation: fadeIn 1.2s ease-in-out;
 }
 </style>
-
-
