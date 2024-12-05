@@ -13,7 +13,7 @@ const login = async() => {
   try {
     await authStore.login(senha.value, email.value) && authStore.sincronizarSacola(authStore.user.id);
     console.log(authStore.user.user_metadata.tipo)
-    if (authStore.user.user_metadata.tipo == 'cliente') router.push({ name: 'home' })
+    if (authStore.user.user_metadata.tipo == 'cliente') router.push(`/`)
     else if (authStore.user.user_metadata.tipo == 'funcionario') router.push({ name: 'homeFuncio' })
   console.log(authStore.user.user_metadata.tipo)
   } catch(e) {

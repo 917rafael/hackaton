@@ -22,7 +22,7 @@ const nextImage = () => {
 
 let interval = null
 onMounted(() => {
-  interval = setInterval(nextImage, 3000) // Troca a imagem a cada 3 segundos
+  interval = setInterval(nextImage, 3000) 
 })
 
 onBeforeUnmount(() => {
@@ -35,13 +35,11 @@ const productStore = useProductStore()
 const searchQuery = ref('')
 const isModalVisible = ref(false);
 
-// Alternar a exibição do modal com os detalhes do produto
 const toggleModal = () => {
   isModalVisible.value = !isModalVisible.value;
 };
 
 
-// Filtrar produtos pela barra de pesquisa
 const filteredProducts = computed(() => {
   if (!searchQuery.value) return productStore.products;
   return productStore.products.filter((product) =>
@@ -111,8 +109,6 @@ header {
   height: 100px; 
   transition: 0.5s;
 }
-
-
  body {
   background-size: cover;
   background-position: center;
@@ -153,6 +149,7 @@ header {
   object-fit: cover;
   flex-shrink: 0;
 }
+
 
 .products {
   display: flex;
