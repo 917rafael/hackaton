@@ -1,7 +1,10 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import Header from '@/components/FoHea/header.vue';
+import { supabase } from '@/lib/supabaseClient';
+import { useSacolaStore } from '@/store/sacola';
+
 
 const cliente = ref({
   nome: '',
@@ -57,6 +60,30 @@ const salvarAlteracoes = () => {
 const toggleModoEscuro = () => {
   temaEscuro.value = !temaEscuro.value;
 };
+
+
+// const { data: { user } } = await supabase.auth.getUser()
+// const users = {
+//    id: user.id,
+//    nome: user.user_metadata.nome,
+//    email: user.email,
+// };
+// console.log(users.nome)
+
+const newEmail = ref('')
+const newPassword = ref('')
+
+const newInfo = async () => { 
+const { data, error } = await supabase.auth.updateUser({
+  email: newEmail.value,
+  password: newPassword.value,
+})   
+}
+// console.log(users.nome)
+
+onMounted(() => {
+  newInfo()
+});
 </script>
 
 <template>
@@ -65,66 +92,46 @@ const toggleModoEscuro = () => {
     <div class="perfil">
       <div class="foto">
         <img class="perfil-img" :src="cliente.foto" alt="Foto do Cliente" />
+      </div>
+        
+      <div>
         <button class="upload-btn" @click="abrirSeletorDeArquivos">
           Alterar Foto
         </button>
-        <input
-          type="file"
-          ref="fileInputRef"
-          accept="image/*"
-          style="display: none"
-          @change="carregarFoto"
-        />
+        <input type="file" ref="fileInputRef" accept="image/*" style="display: none" @change="carregarFoto" />
       </div>
-      <div class="informacoes">
-        <h2 class="cliente-nome">{{ cliente.nome }}</h2>
-        <p class="cliente-username">{{ cliente.username }}</p>
+      <!-- <div class="informacoes">
+        <h2 class="cliente-nome">{{ users.nome }}</h2>
+        <p class="cliente-username">{{ users.email }}</p>
         <p class="info-text">Membro desde: {{ cliente.membroDesde }}</p>
+      </div>-->
+      
+      <div class="informacoes">
+        <h2 class="cliente-nome">Nome:</h2>
+        <p class="cliente-username">Email:</p>
+        <p class="info-text">Membro desde: 29/09/2024</p>
       </div>
-    </div>
+      
+    </div> 
 
     <div class="infor">
       <h3>Editar Perfil</h3>
       <form class="formulario" @submit.prevent="salvarAlteracoes">
         <div class="campo">
           <label for="nome">Nome Completo</label>
-          <input
-            type="text"
-            id="nome"
-            v-model="cliente.nome"
-            placeholder="João da Silva"
-            required
-          />
+          <input type="text" id="nome" v-model="cliente.nome" placeholder="João da Silva" required />
         </div>
         <div class="campo">
           <label for="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            v-model="cliente.email"
-            placeholder="joao@email.com"
-            required
-          />
+          <input type="email" id="email" v-model="newEmail" placeholder="joao@email.com" required />
         </div>
         <div class="campo">
           <label for="senha">Senha</label>
-          <input
-            type="password"
-            id="senha"
-            v-model="senha"
-            placeholder="••••••••"
-            required
-          />
+          <input type="password" id="senha" v-model="newPassword" placeholder="••••••••" required />
         </div>
         <div class="campo">
           <label for="confirmaSenha">Confirmar Senha</label>
-          <input
-            type="password"
-            id="confirmaSenha"
-            v-model="confirmaSenha"
-            placeholder="••••••••"
-            required
-          />
+          <input type="password" id="confirmaSenha" v-model="confirmaSenha" placeholder="••••••••" required />
         </div>
         <button type="submit" class="salvar-btn">Salvar Alterações</button>
       </form>
@@ -132,19 +139,19 @@ const toggleModoEscuro = () => {
         <span>{{ mostrarMensagem }}</span>
       </div>
     </div>
-
     <div class="historico">
-      <h3>Histórico de Atividades</h3>
-      <ul>
-        <li v-for="atividade in cliente.atividades" :key="atividade.data">
-          <span class="icone">
-            <i class="fas fa-bread-slice"></i>
-          </span>
-          <span class="data">{{ atividade.data }}</span>
-          <span class="descricao">{{ atividade.descricao }}</span>
-        </li>
-      </ul>
-    </div>
+        <h3>Histórico de Atividades</h3>
+        <ul>
+          <li v-for="atividade in cliente.atividades" :key="atividade.data">
+            <span class="icone">
+              <i class="fas fa-bread-slice"></i>
+            </span>
+            <span class="data">{{ atividade.data }}</span>
+            <span class="descricao">{{ atividade.descricao }}</span>
+          </li>
+        </ul>
+      </div>
+    
 
     <button class="modo-escuro-btn" @click="toggleModoEscuro">
       <span v-if="temaEscuro">Modo Claro</span>
@@ -154,13 +161,14 @@ const toggleModoEscuro = () => {
 </template>
 
 <style scoped>
-
 .modo-escuro {
   background-color: #121212;
   color: white;
 }
 
-.modo-escuro .perfil, .modo-escuro .infor, .modo-escuro .historico {
+.modo-escuro .perfil,
+.modo-escuro .infor,
+.modo-escuro .historico {
   background-color: #1e1e1e;
 }
 
@@ -400,5 +408,65 @@ const toggleModoEscuro = () => {
 
 .modo-escuro-btn:hover {
   background-color: #0056b3;
+}
+
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+
+.summary-item span {
+  font-size: 1em;
+  color: #444;
+}
+
+.summary-total {
+  font-size: 1.4em;
+  font-weight: 600;
+  color: #333;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #ccc;
+}
+
+
+
+.order-summary {
+  margin-top: 20px;
+}
+
+.order-summary h2 {
+  font-size: 1.8em;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+
+
+
+
+.btn-final {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  width: 100%;
+  margin-top: 20px;
+}
+
+
+.btn-final:hover {
+  background-color: #0056b3;
+  transform: scale(1.02);
 }
 </style>

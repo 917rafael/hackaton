@@ -12,37 +12,32 @@
         </router-link>
       </li>
       <li>
-        <router-link to="/manipulacao" class="sidebar-menu-item">
-          <span class="icon">
+        <!--<router-link to="/manipulacao" class="sidebar-menu-item">-->
+        <span class="icon">
             <i class="fas fa-users"></i>
           </span>
           <span class="label">Manipulação de Funcionários</span>
-        </router-link>
+        <!-- </router-link> -->
       </li>
       <li>
-        <router-link to="/notificacoes" class="sidebar-menu-item">
+        <!--<router-link to="/notificacoes" class="sidebar-menu-item">-->
           <span class="icon">
             <i class="fas fa-bell"></i>
           </span>
           <span class="label">Notificações</span>
-        </router-link>
+        <!--</router-link>-->
       </li>
       <li>
-        <router-link to="/configuracoes" class="sidebar-menu-item">
+        <!--<router-link to="/configuracoes" class="sidebar-menu-item">-->
           <span class="icon">
             <i class="fas fa-cogs"></i>
           </span>
           <span class="label">Configurações</span>
-        </router-link>
+        <!--</router-link>-->
       </li>
     </ul>
   </aside>
 </template>
-
-<script setup>
-// Não há necessidade de lógica JavaScript aqui por enquanto,
-// já que a navegação é controlada pelo Vue Router diretamente.
-</script>
 
 <style scoped>
 .sidebar {

@@ -21,7 +21,6 @@ export const useAuthStore = defineStore('auth', () => {
   const verificarSessao = async () => {
     const token = carregarToken();
     if (token) {
-      // Se o token estiver armazenado, autentica o usuário
       const { data: userData, error } = await supabase.auth.setAuth(token);
       if (error) {
         console.error('Erro ao verificar a sessão:', error.message);

@@ -1,8 +1,12 @@
 @import '@fortawesome/fontawesome-free/css/all.min.css';
+/* @import url('../assets/image/FundoSite.png'); */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400;1,500&display=swap');
+
+
 
 body {
   background-color: #ffeee3;
+  background-image: url('../assets/image/FundoSite.png'); /* Caminho para a sua imagem */
 }
 
 *  {
@@ -27,9 +31,7 @@ body {
   background-color: #000000;
   border-radius: 5px;
   transition:
-   
     background-color 0.3s ease,
-   
     box-shadow 0.3s ease;
 }
 
