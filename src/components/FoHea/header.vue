@@ -77,6 +77,7 @@ header.scrolled {
   height: 100px; /* Definindo uma altura fixa para o cabeçalho */
 }
 
+
 .logo {
   max-width: 150px; /* Ajuste o tamanho máximo desejado */
   max-height: 100px; /* Ajuste o tamanho máximo desejado */
@@ -105,7 +106,8 @@ header.scrolled {
   color: #ff5722;
 }
 
-/* Estilos do botão de login */
+
+
 .btn-login {
   background-color: #ff5722;
   width: 90px;
@@ -114,6 +116,7 @@ header.scrolled {
   border-radius: 5px;
   margin-right: 20px;
   transition: 0.4s;
+  
 }
 
 .btn-login:hover {

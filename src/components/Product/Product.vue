@@ -74,7 +74,7 @@ onMounted(() => {
 .product-card {
   background-color: #fff;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0.5, 0.5, 0.6);
   overflow: hidden;
   width: 250px;
   /* Largura fixa para o cartão */
@@ -111,17 +111,15 @@ onMounted(() => {
 }
 
 .product-name {
-  font-size: 1.1em;
-  font-weight: bold;
+  font-size: 1em;
+  margin-bottom: 8px;
   color: #333;
-  margin-bottom: 10px;
 }
 
 .product-rating {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .star {
@@ -134,19 +132,18 @@ onMounted(() => {
 
 .reviews {
   margin-left: 8px;
-  font-size: 0.9em;
+  font-size: 0.8em;
   color: #777;
 }
 
 .product-price {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .old-price {
-  font-size: 0.9em;
+  font-size: 0.8em;
   color: #999;
   text-decoration: line-through;
   margin-right: 5px;
@@ -154,19 +151,18 @@ onMounted(() => {
 
 .discount {
   color: green;
-  font-size: 1em;
-  font-weight: bold;
+  font-size: 0.8em;
 }
 
 .current-price {
-  font-size: 1.3em;
+  font-size: 1.2em;
   color: #007bff;
   font-weight: bold;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 .installments {
-  font-size: 0.9em;
+  font-size: 0.8em;
   color: #777;
 }
 

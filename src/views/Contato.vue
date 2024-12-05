@@ -1,9 +1,10 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
-import Input from '@/components/input.vue'
-import headers from '@/components/FoHea/header.vue'
-import { perguntas } from '@/data/perguntas.js'
-import Footer from '@/components/FoHea/Footer.vue'
+import Input from '@/components/input.vue';
+import headers from '@/components/FoHea/header.vue';
+import { perguntas } from '@/data/perguntas.js';
+import Footer from '@/components/FoHea/Footer.vue';
+
+
 </script>
 
 <template>
@@ -17,37 +18,40 @@ import Footer from '@/components/FoHea/Footer.vue'
           <img src="/src/assets/image/Logo nova.png" class="image-contato" alt="" />
         </router-link>
 
-        <h2>Contate-Nos</h2>
-        <p>665, Rua Tecnicos Agricola, +55 47 4002-8922</p>
-        <p>Seg - Sex: 9h - 20h</p>
-        <p>Sáb - Dom: 9h - 12h</p>
-        <p><a href="mailto:email@exemplo.com">email@exemplo.com</a></p>
-
-        <div>
-          <h2>Siga-nos</h2>
+          <h2>Contate-Nos</h2>
+          <p>665, Rua Tecnicos Agricola, +55 47 4002-8922</p>
+          <p>Seg - Sex: 9h - 20h</p>
+          <p>Sáb - Dom: 9h - 12h</p>
+          <p><a href="mailto:email@exemplo.com">email@exemplo.com</a></p>
+         
+          <div>
+            <h2>Siga-nos</h2>
+              
+          </div>
+        
         </div>
-      </div>
 
-      <div class="contate">
-        <Input v-for="pergunta in perguntas" :key="pergunta.id" :pergunta="pergunta" />
-        <button class="custom-button">Enviar</button>
+        <div class="contate">
+          <Input v-for="pergunta in perguntas" :key="pergunta.id" :pergunta="pergunta" />
+          <button class="custom-button">Enviar</button>
+        </div> 
+
       </div>
+    </section>
+    <div class='footer'>
+      <Footer />
     </div>
-  </section>
-  <div class="footer">
-    <Footer />
-  </div>
 </template>
 
 <style scoped>
-.image-contato {
+.image-contato{
   width: 190px;
 }
 
-.social h2 {
+.social h2{
   font-size: 22px;
   margin-bottom: 15px;
-  color: #11998e;
+  color: #11998e; 
 }
 
 .hero {
@@ -59,7 +63,7 @@ import Footer from '@/components/FoHea/Footer.vue'
   text-align: center;
   padding: 20px;
   overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5); 
 }
 
 .overlay {
@@ -73,14 +77,14 @@ import Footer from '@/components/FoHea/Footer.vue'
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  filter: brightness(0.7);
-  z-index: -1;
+  filter: brightness(0.7); 
+  z-index: -1; 
 }
 
 .contato {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: wrap; 
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
@@ -89,7 +93,7 @@ import Footer from '@/components/FoHea/Footer.vue'
   border-radius: 8px;
   padding: 30px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  margin-bottom: 20px; 
 }
 
 .info {
@@ -103,7 +107,7 @@ import Footer from '@/components/FoHea/Footer.vue'
 .info h2 {
   font-size: 22px;
   margin-bottom: 15px;
-  color: #11998e;
+  color: #11998e; 
 }
 
 .info p {
@@ -132,9 +136,7 @@ import Footer from '@/components/FoHea/Footer.vue'
   background-color: #11998e;
   color: #ffffff;
   cursor: pointer;
-  transition:
-    background-color 0.3s ease,
-    transform 0.2s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
   margin-top: 20px;
 }
 

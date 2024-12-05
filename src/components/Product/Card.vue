@@ -37,12 +37,11 @@ const totalPrice = computed(() => {
 
 // Funções de controle de quantidade
 const increaseCount = (index) => {
-  options.value[index].count++
-}
-
+  options.value[index].count++;
+};
 const decreaseCount = (index) => {
   if (options.value[index].count > 0) {
-    options.value[index].count--
+    options.value[index].count--;
   }
 }
 
@@ -66,7 +65,6 @@ onMounted(() => {
     produto.value = productStore.getProductById(props.id)
 });
 </script>
-
 <template>
   <div class="modal-overlay" @click="$router.push('/')">
     <div class="modal-content" @click.stop>
@@ -132,279 +130,166 @@ onMounted(() => {
     </div>
   </div>
 </template>
-
 <style scoped>
-/* --------------  Modal Overlay -------------- */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7); /* Fundo mais escuro para dar mais contraste */
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  animation: fadeIn 0.3s ease;
 }
-
-/* --------------  Modal Content -------------- */
 .modal-content {
-  background-color: #f2e1c6; /* Tom de bege amarelado para dar aconchego */
-  padding: 35px 45px;
-  border-radius: 15px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
   width: 90%;
-  max-width: 850px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  animation: slideIn 0.4s ease-out;
-  font-family: 'Nunito', sans-serif;
+  max-width: 800px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   position: relative;
-  overflow: hidden;
 }
-
-/* --------------  Modal Header -------------- */
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #b69b5c; /* Dourado mais suave */
-  padding-bottom: 12px;
-  margin-bottom: 18px;
+  border-bottom: 3px solid #d32f2f;
+  padding-bottom: 15px;
 }
-
 .modal-header h2 {
-  color: #3c2c1f; /* Marrom escuro */
-  font-size: 2rem;
-  font-weight: 700;
+  color: #d32f2f;
+  font-size: 1.6rem;
+  font-weight: bold;
 }
-
 .close-button {
   background: none;
   border: none;
-  font-size: 34px;
+  font-size: 28px;
   cursor: pointer;
-  color: #d95c5c;
-  transition: transform 0.2s ease-in-out;
+  color: #d32f2f;
 }
-
-.close-button:hover {
-  transform: scale(1.1);
-}
-
-/* --------------  Modal Body -------------- */
 .modal-body {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
+  margin-top: 20px;
 }
-
 .modal-body-content {
   display: flex;
-  gap: 25px;
-  flex: 1;
-  justify-content: space-between;
+  gap: 20px;
 }
-
+.modal-options-content {
+  flex: 2;
+  background-color: #f7f7f7;
+  padding: 15px;
+  border-radius: 8px;
+}
 .modal-image {
-  flex-basis: 45%;
+  flex: 1;
   text-align: center;
-  background-color: #f9e4c5; /* Beige suave */
-  padding: 18px;
-  border-radius: 12px;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+  background-color: #f1f1f1;
+  padding: 15px;
+  border-radius: 8px;
 }
-
 .modal-image img {
   width: 100%;
   border-radius: 8px;
-  object-fit: cover;
-  transition: transform 0.2s ease;
 }
-
-.modal-image:hover {
-  transform: scale(1.05);
-}
-
 .image-description {
-  font-size: 1rem;
-  color: #7e5e3e;
-  margin-top: 12px;
-  font-style: italic;
+  font-size: 0.95rem;
+  color: #333;
+  margin-top: 10px;
+  line-height: 1.5;
 }
-
-/* --------------  Modal Options -------------- */
-.modal-options-content {
-  flex-basis: 50%;
-  background-color: #fce2b2; /* Amarelo suave com toque dourado */
-  padding: 22px;
-  border-radius: 10px;
-  box-shadow: 0 2px 18px rgba(0, 0, 0, 0.1);
-}
-
 .option {
-  margin-bottom: 18px;
+  margin-bottom: 15px;
 }
-
 .option-label {
-  font-size: 1.3rem;
-  color: #3c2c1f; /* Cor marrom escuro */
-  font-weight: 600;
+  font-size: 1rem;
+  color: #444;
 }
-
-/* --------------  Observation Input -------------- */
 .observation-input {
   width: 100%;
-  padding: 14px;
-  border: 1px solid #b69b5c;
-  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
   resize: none;
-  margin-top: 18px;
-  font-size: 1.1rem;
-  color: #3c2c1f;
-  transition: border-color 0.3s ease;
+  margin-top: 10px;
 }
-
-.observation-input:focus {
-  border-color: #e6a800;
-  outline: none;
-}
-
-/* --------------  Acompanhamentos -------------- */
-.acompanhamentos {
-  margin-top: 20px;
-}
-
-.acompanhamento-option {
-  margin-bottom: 18px;
-}
-
-.acompanhamento-option .option-label {
-  font-size: 1.2rem;
-  color: #3c2c1f;
-}
-
-/* --------------  Botões de Contagem e Acompanhamento -------------- */
-.option-controls {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.control-button {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: 1px solid #b69b5c;
-  font-size: 1.2rem;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-.increment {
-  background-color: #76b041;
-  color: white;
-}
-
-.increment:hover {
-  background-color: #6a9e39;
-}
-
-.decrement {
-  background-color: #d36e6e;
-  color: white;
-}
-
-.decrement:hover {
-  background-color: #e74c3c;
-}
-
-/* --------------  Modal Footer -------------- */
 .modal-footer {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #ddd;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 18px;
-  border-top: 1px solid #b69b5c;
 }
-
 .footer-controls {
   display: flex;
   align-items: center;
-  gap: 22px;
+  gap: 20px;
 }
-
-.add-button {
-  background: linear-gradient(135deg, #f0a500 0%, #f39c12 100%);
-  color: white;
-  padding: 12px 35px;
-  font-size: 1.4rem;
-  border-radius: 50px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
+.option-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #f3f3f3;
+  padding: 10px;
+  border-radius: 8px;
+}
+.control-text {
+  font-size: 1rem;
+  color: #666;
+  margin-right: 10px;
+}
+.control-button {
+  width: 120px;
+  height: 40px;
+  background-color: #eee;
   border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  transition: background-color 0.3s;
 }
-
+.control-button:hover {
+  background-color: #ddd;
+}
+.increment {
+  background-color: #4caf50;
+  color: white;
+}
+.increment:hover {
+  background-color: #45a047;
+}
+.decrement {
+  background-color: #f44336;
+  color: white;
+}
+.decrement:hover {
+  background-color: #e53935;
+}
+.option-count {
+  font-size: 1.2rem;
+  margin: 0 15px;
+}
+.add-button {
+  background-color: #d32f2f;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
 .add-button:hover {
-  background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
-  transform: translateY(-2px);
-}
-
-.add-button:active {
-  transform: translateY(0);
-}
-
-/* --------------  Responsividade -------------- */
-@media (max-width: 768px) {
-  .modal-body-content {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .modal-image {
-    width: 100%;
-  }
-
-  .modal-options-content {
-    width: 100%;
-  }
-
-  .footer-controls {
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .add-button {
-    width: 100%;
-    margin-left: 0;
-  }
-}
-
-/* --------------  Animações -------------- */
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes slideIn {
-  0% {
-    transform: translateY(-20px);
-  }
-  100% {
-    transform: translateY(0);
-  }
+  background-color: #c62828;
 }
 </style>

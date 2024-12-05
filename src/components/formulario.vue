@@ -2,25 +2,20 @@
 
 <script setup>
 import InputForm from '@/components/input.vue'
-import { reactive } from 'vue'
+import { reactive } from 'vue';
+
 
 const emit = defineEmits(['adicinar'])
 
 function salvar() {
-  if (
-    usuario.nome === '' ||
-    usuario.data === '' ||
-    usuario.hora === '' ||
-    usuario.produto === '' ||
-    usuario.quantidade === '' ||
-    usuario.valor === '' ||
-    usuario.desconto === ''
-  ) {
-    alert('Por favor preencha todos os campos!!!')
-    return
-  } else if (usuario.senha !== usuario.confirmacao) {
+  if (usuario.nome === '' || usuario.data === '' || usuario.hora === '' || usuario.produto === '' || usuario.quantidade === '' || usuario.valor === '' || usuario.desconto === '')
+    { alert('Por favor preencha todos os campos!!!')
+    return;
+  }
+  else if (usuario.senha !== usuario.confirmacao) {
     alert('Crendencias Inválidas')
-  } else {
+  }
+  else {
     emit('adicionar', { ...usuario })
   }
 }
@@ -35,90 +30,64 @@ const usuario = reactive({
   desconto: '',
   obs: '',
 })
+
 </script>
 
 <template>
   <div class="container">
     <main class="main">
-      <h1 class="h2">REGISTRO DE VENDAS</h1>
+      <h1 class="h2">Registro de vendas - Padaria Santo Pão</h1>
 
       <div class="nome">
         <label for="nome" class="form-label">Nome do Cliente:</label>
-        <input
-          type="text"
-          class="form-control"
-          id="nome"
-          v-model="usuario.nome"
-          placeholder="Digite o nome do cliente"
-        />
+        <input type="text" class="form-control" id="nome" v-model="usuario.nome"
+          placeholder="Digite o nome do cliente" />
       </div>
 
       <div class="data">
-        <label for="data" class="form-label">DATA:</label>
+        <label for="data" class="form-label">Data:</label>
         <input type="date" class="form-control" id="data" v-model="usuario.data" />
       </div>
 
       <div class="hora">
-        <label for="hora" class="form-label">HORA:</label>
+        <label for="hora" class="form-label">Hora:</label>
         <input type="time" class="form-control" id="hora" v-model="usuario.hora" />
       </div>
 
       <div class="produto">
         <label for="produto" class="form-label">Produto:</label>
-        <input
-          type="text"
-          class="form-control"
-          id="produto"
-          v-model="usuario.produto"
-          placeholder="Digite o nome do produto"
-        />
+        <input type="text" class="form-control" id="produto" v-model="usuario.produto"
+          placeholder="Digite o nome do produto" />
       </div>
 
       <div class="quantidade">
         <label for="quantidade" class="form-label">Quantidade:</label>
-        <input
-          type="number"
-          class="form-control"
-          id="quantidade"
-          v-model="usuario.quantidade"
-          placeholder="Digite a quantidade de produtos "
-        />
+        <input type="number" class="form-control" id="quantidade" v-model="usuario.quantidade"
+          placeholder="Digite a quantidade de produtos " />
       </div>
 
       <div class="valor">
         <label for="valor" class="form-label">Valor Unitário:</label>
-        <input
-          type="number"
-          class="form-control"
-          id="valor"
-          v-model="usuario.valor"
-          placeholder="Insira o valor do produto"
-        />
+        <input type="number" class="form-control" id="valor" v-model="usuario.valor"
+          placeholder="Insira o valor do produto" />
       </div>
 
       <div class="desconto">
         <label for="desconto" class="form-label">Desconto:</label>
-        <input
-          type="text"
-          class="form-control"
-          id="desconto"
-          v-model="usuario.desconto"
-          placeholder="Coloque o seu desconto "
-        />
+        <input type="text" class="form-control" id="desconto" v-model="usuario.desconto"
+          placeholder="Coloque o seu desconto " />
       </div>
 
       <div class="obs">
         <label for="obs" class="form-label">Obesrvações:</label>
-        <input
-          type="text"
-          class="form-control"
-          v-model="usuario.obs"
-          placeholder="Digite sua obs "
-        />
+        <input type="text" class="form-control" v-model="usuario.obs" placeholder="Digite sua obs " />
       </div>
       <button class="button" @click="salvar">Enviar dados</button>
     </main>
+
   </div>
+
+
 </template>
 
 <style scoped>
@@ -132,17 +101,7 @@ body {
 
 /* Container Principal */
 .container {
-  background-color: #f8cb98;
-  color: #333;
-  border-radius: 8px;
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.main {
-  background-color: #f8cb98;
+  background-color: #f4f4f4;
   color: #333;
   border-radius: 8px;
   max-width: 800px;
@@ -184,10 +143,11 @@ body {
   font-size: 16px;
 }
 
-input[type='text'],
-input[type='number'],
-input[type='date'],
-input[type='time'] {
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="time"] {
   width: calc(100% - 22px); /* Ajuste para compensar o padding e border */
   padding: 10px;
   border: 1px solid #ccc;
@@ -219,7 +179,7 @@ input[type='time'] {
   .form-control {
     font-size: 14px;
   }
-
+  
   .button {
     width: 100%;
     padding: 15px;

@@ -40,12 +40,22 @@ const router = createRouter({
     {
       path: '/Estoque',
       name: 'estoque',
-      component: () => import('../views/EstoquEE.vue')
-    },
+      component: () => import('../views/Estoque.vue')
+    },  
     {
       path: '/contato',
       name: 'contato',
       component: () => import('../views/Contato.vue')
+    },
+    {
+      path: '/teste',
+      name: 'teste',
+      component: () => import('../views/teste.vue')
+    },
+    {
+      path: '/teste2',
+      name: 'teste2',
+      component: () => import('../views/teste2.vue')
     },
     {
       path: '/homeFuncio',

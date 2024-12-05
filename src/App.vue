@@ -1,6 +1,6 @@
 <template>
-  <main>
-    <RouterView />
-  </main>
+   <main>
+      <RouterView />
+    </main>
 </template>
 
