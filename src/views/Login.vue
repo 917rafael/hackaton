@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
+import Footer from '@/components/FoHea/Footer.vue';
 import Header from '@/components/FoHea/header.vue';
 import { ref } from 'vue'
 import { useAuthStore } from '@/store/auth';
@@ -70,7 +71,7 @@ const login = async() => {
       <button type="button" class="register-btn" @click="$router.push(`/cadastro`)">cadastre-se</button>
     </div>
   </div>
-
+<Footer />
 </template>
 
 <style scoped>

@@ -1,9 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { UseAuthGuard } from '@/middleware/auth' // Importa o middleware
+//import { UseAuthGuard } from '@/middleware/auth' // Importa o middleware
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: '/pagamento',
+      name: 'pagamento',
+      component: () => import('../views/pagamento.vue')
+    },
     {
       path: '/Perfil',
       name: 'perfil',

@@ -11,7 +11,6 @@ const toggleCart = () => {
   isCartOpen.value = !isCartOpen.value;
 };
 
-// Carregar sacola ao montar o componente
 onMounted(async () => {
   await store.carregarSacola();
 });
@@ -122,7 +121,7 @@ const total = computed(() => calculateTotal(store.sacola_cart));
   padding: 20px;
   position: fixed;
   bottom: 80px;
-  right: -380px;
+  right: -37%;
   transition: right 0.5s ease-in-out;
   z-index: 999;
   max-height: 60vh;
