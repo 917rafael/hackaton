@@ -123,7 +123,7 @@ onMounted(() => {
             <button @click="increaseCount(0)" class="control-button add">+</button>
           </div>
           <!-- Botão Adicionar ao Pedido -->
-          <button class="add-button"  @click="adicionarProduto(produto)" >
+          <button class="add-button"  @click="adicionarProduto(produto) && $router.push(`/`)" >
             Adicionar ao Pedido R$ {{ produto.price }}
           </button>
 
