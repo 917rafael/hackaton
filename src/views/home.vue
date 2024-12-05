@@ -8,12 +8,13 @@ import sacola from '@/components/sacola.vue'
 import Fotter from '@/components/FoHea/Footer.vue'
 import { useProductStore } from '@/store/productStore'
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
-import fundoHome from '../assets/image/fundohome.jpg'
-import padaria from '../assets/image/padaria.jpg'
+import fundoHome from '../assets/image/carrossel-1.jpg'
+import padaria from '../assets/image/carrossel-4.jpg'
 import Card from '@/components/Product/Card.vue'
-import desenhoFunco from '@/assets/image/imagem.jpg'
+import desenhoFunco from '@/assets/image/carrossel-2.jpg'
+import imageCarrossel from '@/assets/image/carrossel-3.jpg'
 
-const images = ref([padaria, fundoHome, desenhoFunco])
+const images = ref([desenhoFunco, padaria, fundoHome, imageCarrossel])
 const currentIndex = ref(0)
 
 const nextImage = () => {
@@ -22,7 +23,7 @@ const nextImage = () => {
 
 let interval = null
 onMounted(() => {
-  interval = setInterval(nextImage, 3000) // Troca a imagem a cada 3 segundos
+  interval = setInterval(nextImage, 3000) 
 })
 
 onBeforeUnmount(() => {
@@ -35,13 +36,11 @@ const productStore = useProductStore()
 const searchQuery = ref('')
 const isModalVisible = ref(false);
 
-// Alternar a exibição do modal com os detalhes do produto
 const toggleModal = () => {
   isModalVisible.value = !isModalVisible.value;
 };
 
 
-// Filtrar produtos pela barra de pesquisa
 const filteredProducts = computed(() => {
   if (!searchQuery.value) return productStore.products;
   return productStore.products.filter((product) =>
@@ -111,8 +110,6 @@ header {
   height: 100px; 
   transition: 0.5s;
 }
-
-
  body {
   background-size: cover;
   background-position: center;
@@ -153,6 +150,7 @@ header {
   object-fit: cover;
   flex-shrink: 0;
 }
+
 
 .products {
   display: flex;

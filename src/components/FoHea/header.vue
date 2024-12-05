@@ -94,9 +94,10 @@ header.scrolled {
 }
 
 .link {
+  font-weight: bold;
   text-decoration: none;
   color: #fff;
-  font-size: 14pt;
+  font-size: 18pt;
   transition: 0.5s;
 }
 
@@ -119,9 +120,10 @@ header.scrolled {
 }
 
 .link-login {
+  font-weight: bold;
   text-decoration: none;
   color: #fff;
-  font-size: 13pt;
+  font-size: 15pt;
   display: block;
   text-align: center;
   line-height: 35px;

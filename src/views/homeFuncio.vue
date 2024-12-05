@@ -28,6 +28,11 @@ function clone(usuario) {
     <router-link to="/estoque">
       <button class="button" @click="salvar">Manipulação de produtos/estoque</button>
     </router-link>
+
+    <router-link to="/rendimento">
+      <button class="button" @click="salvar">Rendimento</button>
+    </router-link>
+    
     <router-link to="/pedidosclient">
       <button class="button" @click="salvar">Pedidos dos Clientes</button>
     </router-link>

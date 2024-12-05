@@ -1,8 +1,8 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useSacolaStore } from '@/store/sacola.js';
-
+import { calculateTotal } from '@/store/perfilStore';
 const store = useSacolaStore();
 
 const isCartOpen = ref(false);
@@ -11,16 +11,13 @@ const toggleCart = () => {
   isCartOpen.value = !isCartOpen.value;
 };
 
-// Carregar sacola ao montar o componente
 onMounted(async () => {
   await store.carregarSacola();
 });
 
-const calculateTotal = () => {
-  return store.sacola_cart
-    .reduce((total, productselected) => total + productselected.price * productselected.quantity, 0)
-    .toFixed(2);
-};
+const total = computed(() => calculateTotal(store.sacola_cart));
+
+
 
 
 </script>
@@ -68,7 +65,7 @@ const calculateTotal = () => {
 
     <div v-if="store.sacola_cart.length > 0" class="cart-total">
       <span>Valor total desta compra</span>
-      <span>R$ {{ calculateTotal() }}</span>
+      <span>R$ {{ total }}</span>
     </div>
 
     <div v-if="store.sacola_cart.length > 0" class="checkout">
@@ -124,7 +121,7 @@ const calculateTotal = () => {
   padding: 20px;
   position: fixed;
   bottom: 80px;
-  right: -380px;
+  right: -37%;
   transition: right 0.5s ease-in-out;
   z-index: 999;
   max-height: 60vh;
