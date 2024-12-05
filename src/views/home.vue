@@ -59,9 +59,7 @@ onMounted(async () => {
   <section class="hero">
     
     <div class="carousel-container">
-
       <headers />
-      
       <div class="carousel-slider" :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
         <img v-for="(image, index) in images" :key="index" :src="image" alt="Imagem do Carrossel" class="carousel-image" />
       </div>
@@ -99,7 +97,6 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-
 header {
   position: fixed;
   top: 0;
@@ -130,7 +127,6 @@ header {
   overflow: hidden;
  
 }
-
 
 .carousel-container {
   position: absolute;
@@ -236,7 +232,6 @@ header {
   border-color: #ff5722;
   box-shadow: 0 0 5px rgba(255, 87, 34, 0.5);
 }
-
 
 .product-main {
   display: flex;
