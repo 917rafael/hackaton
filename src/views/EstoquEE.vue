@@ -194,13 +194,15 @@ onMounted(fetchProducts);
 
 
 
-        <input type="file" @change="handleFileUpload" />
+        <input type="file" @change="handleFileUpload" class="escolhe-img">
         <img :src="newProduct.image_url" :alt="newProduct.name" class="table-product-image" />
 
+        <div class="button"> 
+          <button @click="insertData" class="salva">Salvar</button>
+          <button @click="closeModal" class="salva">Fechar</button>
+        </div>
 
-        <button @click="insertData">Salvar</button>
-        <button @click="closeModal">Fechar</button>
-      </div>
+        </div>
     </div>
   </div>
   <Footer />
@@ -210,6 +212,86 @@ onMounted(fetchProducts);
 
 
 <style scoped>
+
+.escolhe-img {
+  margin-top: 2%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  background-color: #ffe5d4; /* Cor de fundo suave */
+  color: #c45d4c; /* Cor do texto em tom forte */
+  border: 2px solid #c45d4c; /* Cor da borda */
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  text-transform: uppercase; /* Tornar o texto em maiúsculas para um toque mais forte */
+}
+
+.escolhe-img:hover {
+  background-color: #ffcbba; /* Cor de fundo mais intensa no hover */
+  border-color: #a04b3a; /* Borda mais escura ao passar o mouse */
+  color: #fff; /* Cor do texto branca no hover */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2); /* Aumenta a sombra no hover para dar mais ênfase */
+}
+
+.escolhe-img:active {
+  transform: scale(0.98); /* Efeito de clique suave */
+}
+
+.escolhe-img:focus {
+  outline: none;
+  box-shadow: 0px 0px 6px rgba(196, 93, 76, 0.4); /* Foco com sombra suave */
+}
+
+.escolhe-img i { 
+  margin-right: 10px; /* Espaçamento entre o ícone e o texto */
+  font-size: 18px; /* Tamanho do ícone */
+}
+
+
+
+
+.button{
+  margin-left: 6%;
+  margin-top: 5%;
+}
+
+.salva {
+  margin-left: 10%;
+  display: inline-block;
+  padding: 10px 24px; /* Um pouco mais de espaço para dar destaque */
+  border-radius: 25px; /* Arredondamento suave */
+  font-size: 16px; /* Tamanho da fonte ligeiramente maior */
+  font-weight: 600; /* Peso da fonte para dar mais destaque */
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, transform 0.2s; /* Suaviza o efeito de hover e o clique */
+  color: white;
+  background-color: #c45d4c; /* Cor de fundo suave */
+  border: 2px solid #a04b3a; /* Cor da borda mais escura */
+  box-shadow: 0px 4px 12px rgba(196, 93, 76, 0.3); /* Sombra sutil para um efeito mais moderno */
+}
+
+.salva:hover {
+  background-color: #a04b3a; /* Escurece o fundo quando o mouse está sobre o botão */
+  border-color: #8a3c2b; /* Borda mais escura para dar ênfase */
+  color: #fff; /* Mantém a cor do texto branca */
+  box-shadow: 0px 6px 16px rgba(196, 93, 76, 0.4); /* Aumenta a sombra para o efeito de hover */
+}
+
+.salva:active {
+  transform: scale(0.98); /* Efeito de clique com redução no tamanho */
+}
+
+.salva:focus {
+  outline: none; /* Remove o contorno padrão do foco */
+  box-shadow: 0px 0px 6px rgba(196, 93, 76, 0.5); /* Foco com uma sombra suave */
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -373,7 +455,7 @@ input:checked+.slider:before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(26, 25, 25, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -382,7 +464,8 @@ input:checked+.slider:before {
 
 
 .modal-content {
-  background-color: #fff;
+  margin-top: 7%;
+  background-color: #d6d1d1;
   padding: 40px;
   border-radius: 12px;
   width: 480px;
@@ -621,4 +704,41 @@ input:focus {
 
 
 }
+
+.toggle-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+  background-color: #ffe5d4;
+  border: 2px solid transparent;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-button:hover {
+  background-color: #ffcbba;
+  border-color: #c45d4c;
+  color: #c45d4c;
+}
+
+.toggle-button.active {
+  background-color: #c45d4c;
+  color: white;
+  border-color: #a04b3a;
+  box-shadow: 0px 4px 12px rgba(196, 93, 76, 0.4);
+}
+
+.toggle-button:active {
+  transform: scale(0.95);
+}
+
+
+
 </style>
