@@ -2,7 +2,7 @@
 // import Footer from '@/components/FoHea/Footer.vue'
 import { ref } from 'vue'
 import { useAuthStore } from '@/store/auth';
-import Header from '@/components/FoHea/header.vue';
+import Header from '@/components/FoHea/HeaderMais.vue';
 
 
 const nome = ref('')
@@ -41,22 +41,19 @@ const insertData = async () => {
 
     <form @submit.prevent="insertData" class="form">
       <div class="form-group">
-        <label for="nome">Nome:</label>
         <input type="text" id="nome" name="nome" v-model="nome" class="input-field" required placeholder="Insira seu nome:" />
       </div>
 
       <div class="form-group">
-        <label for="cpf">CPF:</label>
         <input type="number" id="cpf" name="cpf" v-model="cpf" class="input-field" required placeholder="Insira o seu CPF: " />
       </div>
 
       <div class="form-group">
-        <label for="email">Email:</label>
         <input type="text" id="email" v-model="email" name="email" class="input-field" required placeholder="Insira o seu email:" />
       </div>
 
       <div class="form-group">
-        <label for="senha">senha:</label>
+
         <input type="password" id="senha" v-model="senha" name="senha" class="input-field" required placeholder="Insira uma senha:" />
       </div>
 
@@ -101,7 +98,7 @@ body {
 /* Caixa de Formulário */
 .caixa {
   width: 100%;
-  max-width: 480px;
+  max-width: 510px;
   background: #34495E;
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);

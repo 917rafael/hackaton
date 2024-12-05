@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import Footer from '@/components/FoHea/Footer.vue';
-import Header from '@/components/FoHea/header.vue';
+import Header from '@/components/FoHea/HeaderMais.vue';
 import { ref } from 'vue'
 import { useAuthStore } from '@/store/auth';
 import router from '@/router';

@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useAuthStore } from '@/store/auth';
-import Header from '@/components/FoHea/header.vue';
+import Header from '@/components/FoHea/HeaderMais.vue';
 import Footer from '@/components/FoHea/Footer.vue';
 
 const authStore = useAuthStore()
@@ -11,7 +11,6 @@ const tipoFuncionario = ref('')
 const cpf = ref('')
 const email = ref('')
 const message = ref('')
-
 const insertData = async () => {
   try {
     if (!nome.value || !email.value || !cpf.value || !senha.value) {
@@ -44,27 +43,22 @@ const insertData = async () => {
 
       <form class="form" @submit.prevent="insertData">
         <div class="form-group">
-          <label for="nome">Nome:</label>
           <input type="text" id="nome" name="nome" v-model="nome" required placeholder="Digite seu nome" class="input-field" />
         </div>
 
         <div class="form-group">
-          <label for="cpf">CPF:</label>
           <input type="number" id="cpf" name="cpf" v-model="cpf" required placeholder="Digite seu CPF" class="input-field" />
         </div>
 
         <div class="form-group">
-          <label for="email">Email:</label>
           <input type="email" id="email" name="email" v-model="email" required placeholder="Digite seu email" class="input-field" />
         </div>
 
         <div class="form-group">
-          <label for="senha">Senha:</label>
           <input type="password" id="senha" name="senha" v-model="senha" required placeholder="Digite sua senha" class="input-field" />
         </div>
 
         <div class="form-group">
-          <label for="cargo">Cargo:</label>
           <input type="text" id="cargo" name="cargo" v-model="cargo" required placeholder="Qual o seu cargo?" class="input-field" />
         </div>
 
