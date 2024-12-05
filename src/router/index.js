@@ -15,16 +15,6 @@ const router = createRouter({
       component: () => import('../views/perfil.cleint/Perfil.vue')
     },
     {
-      path: '/configurações',
-      name: 'configuracoes ',
-      component: () => import('../views/Navbar-perfil/configuracoe.vue')
-    },
-    {
-      path: '/notificações',
-      name: 'notificacoes ',
-      component: () => import('../views/Navbar-perfil/notificacoes.vue')
-    },
-    {
       path: '/pedidosclient',
       name: 'pedidosclient',
       component: () => import('../views/PedidosClient.vue')

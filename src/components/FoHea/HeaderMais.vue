@@ -26,7 +26,7 @@ onBeforeUnmount(() => {
 <template>
   <header :class="{ scrolled: isScrolled }">
     <div class="nav-bar">
-      <router-link to="/"><img src="/src/assets/image/logo.png" alt="Logo" class="logo" /></router-link>
+      <router-link to="/"><img src="/src/assets/image/Logo nova.png" alt="Logo" class="logo" /></router-link>
 
       <nav>
         <ul class="nav-links">
@@ -77,9 +77,11 @@ header {
 }
 
 .logo {
-  width: 85px;
+  max-width: 150px; 
+  max-height: 100px; 
+  width: auto;
   height: auto;
-  margin-left: 20px;
+  margin-left: 5px; 
 }
 
 /* Links de navegação */
