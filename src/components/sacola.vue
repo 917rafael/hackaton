@@ -1,43 +1,28 @@
-
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { useSacolaStore } from '@/store/sacola.js';
 
-// Controle de estado do carrinho (aberto/fechado)
+const store = useSacolaStore();
+
 const isCartOpen = ref(false);
 
-// abertura/fechamento
 const toggleCart = () => {
   isCartOpen.value = !isCartOpen.value;
 };
 
-// Dados do carrinho 
-const cart = ref([]);
-
-// Funções para gerenciar os itens no carrinho
-const addItem = (item) => {
-  item.quantity++;
-};
-
-
-
-function teste (){
-  console.log(sacola.value)
-};
-
-const removeItem = (item) => {
-  if (item.quantity > 1) {
-    item.quantity--;
-  }
-};
-
-const deleteItem = (index) => {
-  cart.value.splice(index, 1);
-};
+onMounted(async () => {
+  await store.carregarSacola();
+});
 
 // Calcular o total da compra
 const calculateTotal = () => {
-  return cart.value.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+  return store.sacola_cart
+    .reduce((total, productselected) => total + productselected.price * productselected.quantity, 0)
+    .toFixed(2);
 };
+
+
 </script>
 
 <template>
@@ -60,28 +45,26 @@ const calculateTotal = () => {
     <!-- Separador criativo -->
     <div class="cart-divider"></div>
 
-    <!-- Lista de itens no carrinho -->
-    <div v-if="cart.length" class="cart-items">
-      <div class="cart-item" v-for="(item, index) in cart" :key="item.id">
+    <div v-if="store.sacola_cart.length > 0" class="cart-items">
+      <div class="cart-item" v-for="(productselected, index) in store.sacola_cart" :key="productselected.id">
         <div class="item-info">
-          <span class="item-name">{{ item.name }}</span>
-          <span class="item-price">R$ {{ item.price.toFixed(2) }}</span>
+          <span class="item-name">{{ productselected.name }}</span>
+          <span class="item-price">R$ {{ productselected.price.toFixed(2) }}</span>
         </div>
         <div class="item-controls">
-          <button @click="removeItem(item)" class="btn-remove"><i class="fas fa-minus"></i></button>
-          <span>{{ item.quantity }}</span>
-          <button @click="addItem(item)" class="btn-add"><i class="fas fa-plus"></i></button>
-          <button @click="deleteItem(index)" class="btn-delete"><i class="fas fa-trash"></i></button>
+          <button @click="store.removerProduto(productselected)" class="btn-remove" aria-label="Remover item">
+            <i class="fas fa-minus"></i>
+          </button>
+          <span>{{ productselected.quantity }}</span>
+          <button @click="store.adicionarProduto(productselected)" class="btn-add" aria-label="Adicionar item">
+            <i class="fas fa-plus"></i>
+          </button>
+          <button @click="store.excluirProduto(index)" class="btn-delete" aria-label="Deletar item">
+            <i class="fas fa-trash"></i>
+          </button>
         </div>
       </div>
     </div>
-
-    <!-- Mensagem caso o carrinho esteja vazio -->
-    <div v-else class="empty-cart">
-      <p>Sua sacola está vazia!</p>
-
-      <button @click="teste">teste</button>
-    </div> 
 
     <!-- Separador criativo -->
 
@@ -93,12 +76,16 @@ const calculateTotal = () => {
       <span>R$ {{ calculateTotal() }}</span>
     </div>
 
-    <!-- Botão de fechar pedido -->
-    <div v-if="cart.length" class="checkout">
-      <button class="btn-finalize">FECHAR PEDIDO</button>
+    <div v-if="store.sacola_cart.length > 0" class="checkout">
+      <button class="btn-finalize" @click="store.fecharPedido">FECHAR PEDIDO</button>
+    </div>
+
+    <div v-else class="empty-cart">
+      <p>Sua sacola está vazia!</p>
     </div>
   </div>
 </template>
+
 
 <style scoped>
 /* Botão da sacola flutuante */
@@ -114,6 +101,7 @@ const calculateTotal = () => {
   position: fixed;
   bottom: 20px;
   right: 20px;
+  width: 80px;
   z-index: 1000;
   transition: background-color 0.3s ease;
 }
@@ -153,10 +141,9 @@ const calculateTotal = () => {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
   padding: 20px;
-  width: 320px;
   position: fixed;
   bottom: 80px;
-  right: -400px;
+  right: -37%;
   transition: right 0.5s ease-in-out;
   z-index: 999;
 }
@@ -171,8 +158,9 @@ const calculateTotal = () => {
   justify-content: space-between;
   align-items: center;
   font-weight: bold;
-  font-size: 18px;
-  color: #009688;
+  font-size: 22px;
+  color: #6d4c41;
+  gap: 10px;
 }
 
 .close-btn {
@@ -282,6 +270,40 @@ const calculateTotal = () => {
 }
 
 .btn-finalize:hover {
-  background-color: #00796b;
+  background-color: #e64a19;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .cart-box {
+    width: 100%;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    padding: 15px;
+    border-radius: 0;
+  }
+
+  .cart-header {
+    font-size: 18px;
+    
+  }
+
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .item-info,
+  .item-controls {
+    width: 100%;
+    text-align: left;
+  }
+
+  .btn-remove,
+  .btn-add,
+  .btn-delete {
+    font-size: 24px;
+  }
 }
 </style>

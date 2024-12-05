@@ -1,21 +1,41 @@
-
-
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
-import { computed, ref } from 'vue';
-import { products } from '@/data/cardapio';
+import { computed, ref, onMounted } from 'vue'
+import { useSacolaStore } from '@/store/sacola.js'
+import { useProductStore } from '@/store/productStore.js'
+
+const store = useSacolaStore()
+const props = defineProps(['id'])
+const options = ref([{ count: 0, price: 1.0 }])
+const observation = ref('')
+// const products = ref([]);
+// const emit = defineEmits();
 
 
-const props = defineProps(['productselected'])
-const options = ref([
-  {
-    text: 'Deseja Adicionar 1 kit de Sachês com Molhos? Kit Sachês (1 Catchup, 1 Maionese, 1 Mostarda) (R$ 1,00)',
-    count: 0,
-    price: 1.00,
-  },
-]);
-const totalPrice = computed(() =>
-  options.value.reduce((total, option) => total + option.count * option.price, 0)
-);
+// Ação para adicionar o produto à sacola
+const adicionarProduto = async (produto) => {
+  await store.adicionarProduto(produto);
+};
+
+
+
+const produto =  ref({})
+
+const productStore = useProductStore()
+
+const acompanhamentos = ref([
+  { name: 'Batata Frita', price: 5.0, count: 0, isRemovable: true },
+])
+
+const totalPrice = computed(() => {
+  let total = options.value.reduce((total, option) => total + option.count * option.price, 0)
+  acompanhamentos.value.forEach(item => {
+    total += item.count * item.price
+  })
+  return total
+})
+
+// Funções de controle de quantidade
 const increaseCount = (index) => {
   options.value[index].count++;
 };
@@ -23,49 +43,93 @@ const decreaseCount = (index) => {
   if (options.value[index].count > 0) {
     options.value[index].count--;
   }
-};
+}
+
+const increaseAcaiCount = (index) => {
+  if (acompanhamentos.value[index].isRemovable === false) return;
+  acompanhamentos.value[index].count++
+}
+
+const decreaseAcaiCount = (index) => {
+  if (acompanhamentos.value[index].count > 0 && acompanhamentos.value[index].isRemovable === false) return;
+  if (acompanhamentos.value[index].count > 0) {
+    acompanhamentos.value[index].count--
+  }
+}
+
+
+console.log(props.id)
+
+
+onMounted(() => {
+    produto.value = productStore.getProductById(props.id)
+    totalPrice()
+});
 </script>
 <template>
-  <div  class="modal-overlay" @click="closeModal">
- 
- <div class="modal-content" @click.stop>
-   <div class="modal-header">
-     <h2>{{ productselected[0].name }}</h2>
-     <button class="close-button" @click="$emit('close')">&times;</button>
-   </div>
-   <div class="modal-body">
-     <div class="modal-body-content">
-       <div class="modal-image">
-         <img src="/src/assets/image/comidas/coxinha.jpg" alt="Descrição da imagem" />
-         <p class="image-description">
-           Experimente o nosso Combo de 10 Mini Coxinhas...
-         </p>
-       </div>
-       <div class="modal-options-content">
-         <div class="modal-options">
-           <div v-for="item in products" :key="item.id" :item="item" class="option">
-             <label class="option-label">{{ item.text }}</label>
-           </div>
-         </div>
-         <textarea class="observation-input" placeholder="Alguma observação?" v-model="observation"></textarea>
-       </div>
-     </div>
-   </div>
-   <div class="modal-footer">
-     <div class="footer-controls">
-       <div class="option-controls">
-         <span class="control-text">Quantidade de kits:</span>
-         <button @click="decreaseCount(0)" class="control-button decrement">− Remover</button>
-         <span class="option-count">{{ options[0].count }}</span>
-         <button @click="increaseCount(0)" class="control-button increment">+ Adicionar</button>
-       
-       </div>
-       <button class="add-button" @click="addToCart(product.id)" >Adicionar ao Pedido R$ {{ totalPrice.toFixed(2) }}</button>
-     </div>
-   
-   </div>
- </div>
-</div>
+  <div class="modal-overlay" @click="$router.push('/')">
+    <div class="modal-content" @click.stop>
+      <div class="modal-header">
+        <h2>{{produto.name}}</h2>
+        <button class="close-button" @click="$router.push('/')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body-content">
+          <div class="modal-image">
+            <img src="/src/assets/image/comidas/coxinha.jpg" alt="Descrição da imagem" />
+            <p class="image-description">Experimente o nosso Combo de 10 Mini Coxinhas...</p>
+          </div>
+          <div class="modal-options-content">
+            <div class="modal-options">
+              <div class="option">
+                <label class="option-label">Deseja Adicionar 1 kit de Sachês com Molhos? Kit Sachês (1 Catchup, 1 Maionese, 1 Mostarda) (R$ 1,00)</label>
+              </div>
+            </div>
+            <textarea
+              class="observation-input"
+              placeholder="Alguma observação? (máx. 200 caracteres)"
+              v-model="observation"
+              maxlength="200"
+            ></textarea>
+
+            <!-- Acompanhamentos -->
+            <div class="acompanhamentos">
+              <div v-for="(item, index) in acompanhamentos" :key="index" class="acompanhamento-option">
+                <label class="option-label">{{ item.name }} (R$ {{ item.price.toFixed(2) }})</label>
+                <div class="option-controls">
+                  <button 
+                    v-if="item.isRemovable !== false"
+                    @click="decreaseAcaiCount(index)" 
+                    class="control-button decrement">−</button>
+                  <span class="option-count">{{ item.count }}</span>
+                  <button 
+                    v-if="item.isRemovable !== false"
+                    @click="increaseAcaiCount(index)" 
+                    class="control-button increment">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="footer-controls">
+          <!-- Quantidade de Kits -->
+          <div class="option-controls">
+            <span class="control-text">Quantidade de kits:</span>
+            <button @click="decreaseCount(0)" class="control-button remove">−</button>
+            <span class="option-count">{{ options[0].count }}</span>
+            <button @click="increaseCount(0)" class="control-button add">+</button>
+          </div>
+          <!-- Botão Adicionar ao Pedido -->
+          <button class="add-button"  @click="adicionarProduto(produto)" >
+            Adicionar ao Pedido R$ {{ produto.price }}
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 <style scoped>
 .modal-overlay {

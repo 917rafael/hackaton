@@ -1,122 +1,244 @@
 <script setup>
 import headers from '@/components/FoHea/header.vue'
 import ProductCard from '@/components/home/ProductCard.vue'
-import back from '@/assets/image/fundohome.jpg'
-import { products } from '@/data/cardapio';
-import { produtos } from '@/data/produtos';
-import Product from '@/components/Product/Produtc.vue';
-import sacola from '@/components/sacola.vue';
-
-
+import { produtos } from '@/data/produtos.js'
+import Product from '@/components/Product/Product.vue'
+import sacola from '@/components/sacola.vue'
+import Fotter from '@/components/FoHea/Footer.vue'
 import { useProductStore } from '@/store/productStore'
-const productStore = useProductStore()
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import fundoHome from '../assets/image/fundohome.jpg'
+import padaria from '../assets/image/padaria.jpg'
+import Card from '@/components/Product/Card.vue'
+import desenhoFunco from '@/assets/image/imagem.jpg'
 
+const images = ref([padaria, fundoHome, desenhoFunco])
+const currentIndex = ref(0)
+
+const nextImage = () => {
+  currentIndex.value = (currentIndex.value + 1) % images.value.length
+}
+
+let interval = null
+onMounted(() => {
+  interval = setInterval(nextImage, 3000) // Troca a imagem a cada 3 segundos
+})
+
+onBeforeUnmount(() => {
+  if (interval) {
+    clearInterval(interval)
+  }
+})
+
+const productStore = useProductStore()
+const searchQuery = ref('')
+const isModalVisible = ref(false);
+
+// Alternar a exibição do modal com os detalhes do produto
+const toggleModal = () => {
+  isModalVisible.value = !isModalVisible.value;
+};
+
+
+// Filtrar produtos pela barra de pesquisa
+const filteredProducts = computed(() => {
+  if (!searchQuery.value) return productStore.products;
+  return productStore.products.filter((product) =>
+    product.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+  );
+});
+
+onMounted(async () => {
+  await productStore.fetchProducts()
+});
 </script>
 
+
 <template>
-  <headers />
+  
 
-
-    <section class="hero" :style="{ backgroundImage: `url(${back})` }">
-      <div class="hero-text">
-        <h1>Whole Grain Goodness in Every Slice of Wheat Bread</h1>
-        <p class="hero-p"></p>
-        <button class="cta-button">Aprender Mais</button>
+  <section class="hero">
+    
+    <div class="carousel-container">
+      <headers />
+      <div class="carousel-slider" :style="{ transform: `translateX(-$,{currentIndex     * 100}%)` }">
+        <img v-for="(image, index) in images" :key="index" :src="image" alt="Imagem do Carrossel" class="carousel-image" />
       </div>
-      
-      <div class="products">
-        <product-card v-for="produto in produtos" :key="produto.id" :produto="produto" />
-      </div>    
-    </section>
-    <div class="product-main">
-    <div class="product-list">
-      <Product v-for="product in productStore.catalogProducts" :key="product.id" :product="product"/>
-    </div> 
-  </div>
-    
-    <div>
-      <sacola />
     </div>
-    
+
+    <div class="tradicao">
+      <!-- <img src="../assets/image/tradicao2.png" alt=""> -->
+    </div>
+
+    <div class="products">
+      <product-card v-for="produto in produtos" :key="produto.id" :produto="produto" />
+    </div>
+  </section>
+
+  <div class="search-section">
+    <hr class="divider" />
+    <div class="search-bar">
+      <input type="text" v-model="searchQuery" placeholder="Pesquisar produtos..." />
+    </div>
+  </div>
+
+  <div class="product-main" >
+    <div class="product-list" @click.self="toggleModal" >
+      <Product v-for="product in filteredProducts" :key="product.id" :product="product" />
+    </div>
+  </div>
+<div v-if="isModalVisible" >
+  <Card />
+</div>
+  <div>
+    <sacola />
+  </div>
+
+  <Fotter />
 </template>
 
 <style scoped>
-.div-product {
-  max-width: 800px; /*a largura desejada */
-  margin: 0 auto; /*centralizar a div */
-  padding: 10px; /*separar a lista de produtos da borda */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10; 
+  background-color: transparent;
+  padding: 10px 20px;
+  box-sizing: border-box; 
+  height: 100px; 
+  transition: 0.5s;
 }
 
-.product-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  column-gap: 10px;
-  gap: 10px;
-}
 
-.hero-p{
-  color: white;
-}
+ body {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+} 
 
 .hero {
   position: relative;
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
+  height: 100vh; 
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 20px;
+  padding: 0;
+  overflow: hidden;
+ 
 }
 
-.hero-text h1 {
-  font-size: 48px;
-  margin-bottom: 20px;
-  font-weight: bold;
-  color: white;
+.carousel-container {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
-.hero-text p {
-  font-size: 18px;
-  margin-bottom: 20px;
+.carousel-slider {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 1s ease-in-out; 
 }
 
-.cta-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #ff5722;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  border-radius: 25px;
-  transition: 0.3s;
-}
-
-.cta-button:hover {
-  padding: 15px 30px;
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  flex-shrink: 0;
 }
 
 .products {
   display: flex;
   justify-content: space-between;
   margin-top: 40px;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .product-list {
-  gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
   padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 60%;
-  flex-wrap: wrap;
 }
 
+@media (max-width: 768px) {
+  .product-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .product-list {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-button {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+}
+
+.search-section {
+  text-align: center;
+  margin: 60px 0;
+  position: relative;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.search-section:hover {
+  background-color: #5f4d2b;
+}
+
+.divider {
+  width: 100%;
+  height: 4px;
+  background: #ff9900;
+  margin-bottom: 20px;
+  border: none;
+}
+
+.search-bar {
+  display: inline-block;
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar input {
+  padding: 10px 20px;
+  width: 300px;
+  border: 2px solid #00796b;
+  border-radius: 30px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.search-bar input::placeholder {
+  color: #aaa;
+}
+
+.search-bar input:focus {
+  border-color: #ff5722;
+  box-shadow: 0 0 5px rgba(255, 87, 34, 0.5);
+}
 
 .product-main {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 40px;
 }
 </style>
