@@ -6,7 +6,7 @@
       </div>
 
       <div class="footer-column about">
-        <h3>Sobre Nós</h3>
+        <h3>Sobre Nós</h3> 
         <p>
           Na nossa padaria, combinamos tradição e qualidade para oferecer os melhores pães e doces
           artesanais, feitos com ingredientes frescos e muito amor.
